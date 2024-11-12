@@ -1,7 +1,7 @@
 import { Text, ScrollView, StyleSheet } from "react-native";
 import { Link } from 'expo-router';
 
-export default function Index() {
+export default function HomePage() {
 	return (
 		<>
 			<ScrollView
