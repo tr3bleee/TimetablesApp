@@ -50,8 +50,8 @@ const Group0124dScreen: React.FC = () => {
 				const currentDate = new Date();
 				const dayOfWeek = currentDate.getDay();
 				const startOfWeek = new Date(currentDate);
-				startOfWeek.setDate(currentDate.getDate() - dayOfWeek + 1);
-				const startDate = startOfWeek.toISOString().split("T")[0];
+				startOfWeek.setDate(currentDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+				const startDate = startOfWeek.toLocaleDateString('en-CA');
 
 				const response = await axios.post(
 					"https://schedule.mstimetables.ru/api/publications/group/lessons",
