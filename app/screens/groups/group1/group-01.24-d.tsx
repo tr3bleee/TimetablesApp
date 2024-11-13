@@ -118,8 +118,8 @@ const Group0124dScreen: React.FC = () => {
 		return (
 			<View style={styles.item}>
 				<Text style={styles.title}>{subjectName}</Text>
-				<Text style={styles.text}>Начало: {item.startTime}</Text>
-				<Text style={styles.text}>Конец: {item.endTime}</Text>
+				<Text style={styles.text}>Начало пары: {item.startTime}</Text>
+				<Text style={styles.text}>Конец пары: {item.endTime}</Text>
 				<Text style={styles.text}>Преподаватель: {teacherNames}</Text>
 			</View>
 		);
