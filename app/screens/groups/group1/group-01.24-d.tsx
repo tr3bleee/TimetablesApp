@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 	dayTitle: {
 		fontSize: 20,
 		fontWeight: "bold",
-		color: "blue",
+		color: "#007AFF",
 	},
 	message: {
 		marginTop: 10,
