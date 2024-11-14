@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { View } from 'react-native';
 import { useNavigation } from 'expo-router';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { View } from 'react-native';
+import { ScheduleView } from '../../components/ScheduleView';
 import { getGroupSchedule } from '../services/api/scheduleApi';
 import { GroupData } from '../types/schedule';
-import { ScheduleView } from '../components/ScheduleView';
 
 interface Props {
   groupId: number;

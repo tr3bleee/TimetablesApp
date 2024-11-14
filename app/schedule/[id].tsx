@@ -1,6 +1,6 @@
-import GroupScheduleScreen from '../screens/GroupScheduleScreen';
 import { useLocalSearchParams } from 'expo-router';
-import { GROUPS } from '../constants/groups';
+import { GROUPS } from '../../constants/groups';
+import GroupScheduleScreen from '../screens/GroupScheduleScreen';
 
 export default function SchedulePage() {
   const { id } = useLocalSearchParams();

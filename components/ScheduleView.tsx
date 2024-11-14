@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, SectionList, StyleSheet } from 'react-native';
-import { GroupData, Lesson } from '../types/schedule';
-import { DAYS_OF_WEEK } from '../utils/dateUtils';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { GroupData, Lesson } from '../app/types/schedule';
+import { DAYS_OF_WEEK } from '../app/utils/dateUtils';
 import { LessonCard } from './LessonCard';
 
 interface Props {

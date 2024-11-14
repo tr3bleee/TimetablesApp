@@ -1,7 +1,7 @@
-import { Text, ScrollView, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
-import { GROUPS } from "../constants/groups";
-import type { GroupInfo } from "../constants/groups";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import type { GroupInfo } from "../../constants/groups";
+import { GROUPS } from "../../constants/groups";
 
 interface GroupedGroups {
 	[key: number]: GroupInfo[];
