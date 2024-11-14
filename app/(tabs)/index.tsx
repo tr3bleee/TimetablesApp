@@ -1,7 +1,7 @@
 import { Text, ScrollView, StyleSheet } from "react-native";
 import { Link } from 'expo-router';
 
-export default function Index() {
+export default function HomePage() {
 	return (
 		<>
 			<ScrollView
@@ -21,9 +21,8 @@ export default function Index() {
 					01-24 Д.ОФ 9
 				</Link>
 				<Link
-					href="/"
+					href="/screens/groups/group1/group-01.24-isip"
 					style={styles.linkGroup}
-					onPress={() => console.log("Pressed")}
 				>
 					01-24 ИСИП.ОФ 9
 				</Link>
@@ -126,8 +125,9 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		width: 235,
 		padding: 10,
-		backgroundColor: "#6200ee",
-		borderRadius: 5,
+		backgroundColor: "#007AFF",
+		borderRadius: 10,
+		overflow: 'hidden',
 		textAlign: "center",
 		color: "#ffffff",
 		fontSize: 16,
