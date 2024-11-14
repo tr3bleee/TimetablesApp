@@ -1,13 +1,14 @@
-import { Link } from "expo-router";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
 import type { GroupInfo } from "../../constants/groups";
 import { GROUPS } from "../../constants/groups";
+import { useRouter } from 'expo-router';
 
 interface GroupedGroups {
 	[key: number]: GroupInfo[];
 }
 
 export default function HomePage() {
+	const router = useRouter();
 	const groupedGroups = GROUPS.reduce((acc: GroupedGroups, group) => {
 		if (!acc[group.category]) {
 			acc[group.category] = [];
@@ -25,13 +26,18 @@ export default function HomePage() {
 				<View key={category}>
 					<Text style={styles.numberGroup}>Группа {category}:</Text>
 					{groups.map((group: GroupInfo) => (
-						<Link
+						<Pressable 
 							key={group.id}
-							href={`/schedule/${group.id}`}
-							style={styles.linkGroup}
+							style={({ pressed }) => [
+								styles.linkGroup,
+								{ opacity: pressed ? 0.7 : 1 }
+							]}
+							onPress={() => router.push(`/schedule/${group.id}`)}
 						>
-							{group.name}
-						</Link>
+							<Text style={styles.linkText}>
+								{group.name}
+							</Text>
+						</Pressable>
 					))}
 				</View>
 			))}
@@ -60,6 +66,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "#007AFF",
 		borderRadius: 10,
 		overflow: "hidden",
+	},
+	linkText: {
 		textAlign: "center",
 		color: "#ffffff",
 		fontSize: 16,
