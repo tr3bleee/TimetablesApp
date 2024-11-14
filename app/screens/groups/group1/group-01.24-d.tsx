@@ -50,8 +50,10 @@ const Group0124dScreen: React.FC = () => {
 				const currentDate = new Date();
 				const dayOfWeek = currentDate.getDay();
 				const startOfWeek = new Date(currentDate);
-				startOfWeek.setDate(currentDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
-				const startDate = startOfWeek.toLocaleDateString('en-CA');
+				startOfWeek.setDate(
+					currentDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+				);
+				const startDate = startOfWeek.toLocaleDateString("en-CA");
 
 				const response = await axios.post(
 					"https://schedule.mstimetables.ru/api/publications/group/lessons",
@@ -104,9 +106,18 @@ const Group0124dScreen: React.FC = () => {
 		{}
 	);
 
-	const sections = Object.keys(groupedLessons || {}).map((day) => ({
+	// Sort each day's lessons by `lesson`, and additionally by `startTime` as a fallback
+	const sortedSections = Object.keys(groupedLessons || {}).map((day) => ({
 		title: daysOfWeek[parseInt(day) - 1],
-		data: groupedLessons ? groupedLessons[parseInt(day)] : [],
+		data: (groupedLessons ? groupedLessons[parseInt(day)] : []).sort((a, b) => {
+			if (a.lesson !== b.lesson) {
+				return a.lesson - b.lesson;
+			}
+			if (a.startTime !== b.startTime) {
+				return a.startTime.localeCompare(b.startTime);
+			}
+			return a.endTime.localeCompare(b.endTime);
+		}),
 	}));
 
 	const renderLesson = ({ item }: { item: Lesson }) => {
@@ -137,7 +148,7 @@ const Group0124dScreen: React.FC = () => {
 						{data.startDate ? data.startDate.split("T")[0] : "N/A"}
 					</Text>
 					<SectionList
-						sections={sections}
+						sections={sortedSections}
 						renderItem={renderLesson}
 						keyExtractor={(item) => item.id}
 						renderSectionHeader={({ section: { title } }) => (

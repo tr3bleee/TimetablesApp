@@ -21,9 +21,8 @@ export default function HomePage() {
 					01-24 Д.ОФ 9
 				</Link>
 				<Link
-					href="/"
+					href="/screens/groups/group1/group-01.24-isip"
 					style={styles.linkGroup}
-					onPress={() => console.log("Pressed")}
 				>
 					01-24 ИСИП.ОФ 9
 				</Link>
