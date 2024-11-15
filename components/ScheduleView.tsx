@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { SectionList, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { GroupData, Lesson } from '../app/types/schedule';
 import { DAYS_OF_WEEK } from '../app/utils/dateUtils';
 import { LessonCard } from './LessonCard';
@@ -11,7 +11,11 @@ interface Props {
 }
 
 export const ScheduleView: React.FC<Props> = ({ data, loading, error }) => {
-  if (loading) return <Text style={styles.message}>Загрузка...</Text>;
+  if (loading) return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+  );
   if (error) return <Text style={styles.error}>Ошибка: {error}</Text>;
   if (!data?.lessons || data.lessons.length === 0) return null;
 
