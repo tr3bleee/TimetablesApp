@@ -1,9 +1,27 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function TabLayout() {
+  const router = useRouter();
+
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: '#007AFF' }}>
+    <Tabs screenOptions={{ 
+      tabBarActiveTintColor: '#007AFF',
+      headerRight: () => (
+        <TouchableOpacity 
+          onPress={() => router.push('/info')}
+          style={{ marginRight: 15 }}
+        >
+          <Ionicons
+            name="information-circle-outline"
+            size={24}
+            color="#007AFF"
+          />
+        </TouchableOpacity>
+      ),
+    }}>
       <Tabs.Screen
         name="index"
         options={{

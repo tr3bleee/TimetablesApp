@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Lesson } from '../types/schedule';
+import { Lesson } from '../app/types/schedule';
 
 interface Props {
   lesson: Lesson;
