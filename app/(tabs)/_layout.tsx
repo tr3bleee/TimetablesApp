@@ -48,12 +48,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="reviews"
+        name="settings"
         options={{
-          title: 'Отзывы',
+          title: 'Настройки',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-              name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
+              name={focused ? 'settings' : 'settings-outline'}
               size={24}
               color={color}
             />
