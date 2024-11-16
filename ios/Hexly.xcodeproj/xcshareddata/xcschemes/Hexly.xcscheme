@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "timetablesapp.app"
-               BlueprintName = "timetablesapp"
-               ReferencedContainer = "container:timetablesapp.xcodeproj">
+               BuildableName = "Hexly.app"
+               BlueprintName = "Hexly"
+               ReferencedContainer = "container:Hexly.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "timetablesappTests.xctest"
-               BlueprintName = "timetablesappTests"
-               ReferencedContainer = "container:timetablesapp.xcodeproj">
+               BuildableName = "HexlyTests.xctest"
+               BlueprintName = "HexlyTests"
+               ReferencedContainer = "container:Hexly.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "timetablesapp.app"
-            BlueprintName = "timetablesapp"
-            ReferencedContainer = "container:timetablesapp.xcodeproj">
+            BuildableName = "Hexly.app"
+            BlueprintName = "Hexly"
+            ReferencedContainer = "container:Hexly.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "timetablesapp.app"
-            BlueprintName = "timetablesapp"
-            ReferencedContainer = "container:timetablesapp.xcodeproj">
+            BuildableName = "Hexly.app"
+            BlueprintName = "Hexly"
+            ReferencedContainer = "container:Hexly.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

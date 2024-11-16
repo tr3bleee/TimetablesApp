@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "timetables-app",
-    "slug": "timetables-app",
+    "name": "Hexly",
+    "slug": "hexly",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "hexly",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "dev.tr3ble.timetables"
+      "bundleIdentifier": "dev.tr3ble.hexly"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "dev.tr3ble.timetables"
+      "package": "dev.tr3ble.hexly"
     },
     "web": {
       "bundler": "metro",
