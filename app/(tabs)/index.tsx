@@ -1,7 +1,8 @@
-import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Pressable, Platform } from "react-native";
 import type { GroupInfo } from "../../constants/groups";
 import { GROUPS } from "../../constants/groups";
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 interface GroupedGroups {
 	[key: number]: GroupInfo[];
@@ -23,22 +24,29 @@ export default function HomePage() {
 			contentContainerStyle={styles.contentContainer}
 		>
 			{Object.entries(groupedGroups).map(([category, groups]) => (
-				<View key={category}>
-					<Text style={styles.numberGroup}>Группа {category}:</Text>
-					{groups.map((group: GroupInfo) => (
-						<Pressable 
-							key={group.id}
-							style={({ pressed }) => [
-								styles.linkGroup,
-								{ opacity: pressed ? 0.7 : 1 }
-							]}
-							onPress={() => router.push(`/schedule/${group.id}`)}
-						>
-							<Text style={styles.linkText}>
-								{group.name}
-							</Text>
-						</Pressable>
-					))}
+				<View key={category} style={styles.categoryContainer}>
+					<Text style={styles.categoryTitle}>Группа {category}</Text>
+					<View style={styles.groupsGrid}>
+						{groups.map((group: GroupInfo) => (
+							<Pressable 
+								key={group.id}
+								style={({ pressed }) => [
+									styles.groupCard,
+									{ opacity: pressed ? 0.9 : 1 }
+								]}
+								onPress={() => router.push(`/schedule/${group.id}`)}
+							>
+								<Ionicons name="people-outline" size={24} color="#2563eb" />
+								<Text style={styles.groupName}>{group.name}</Text>
+								<Ionicons 
+									name="chevron-forward" 
+									size={20} 
+									color="#94a3b8"
+									style={styles.arrow}
+								/>
+							</Pressable>
+						))}
+					</View>
 				</View>
 			))}
 		</ScrollView>
@@ -48,28 +56,50 @@ export default function HomePage() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginTop: 5,
+		backgroundColor: '#f8fafc',
 	},
 	contentContainer: {
-		flexGrow: 1,
-		alignItems: "center",
+		padding: 16,
 	},
-	numberGroup: {
-		fontWeight: "bold",
-		fontSize: 18,
-		margin: 10,
+	categoryContainer: {
+		marginBottom: 24,
 	},
-	linkGroup: {
-		marginBottom: 10,
-		width: 235,
-		padding: 10,
-		backgroundColor: "#007AFF",
-		borderRadius: 10,
-		overflow: "hidden",
+	categoryTitle: {
+		fontSize: 20,
+		fontWeight: '700',
+		color: '#1e293b',
+		marginBottom: 12,
+		paddingLeft: 4,
 	},
-	linkText: {
-		textAlign: "center",
-		color: "#ffffff",
+	groupsGrid: {
+		gap: 12,
+	},
+	groupCard: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		backgroundColor: '#ffffff',
+		padding: 16,
+		borderRadius: 12,
+		...Platform.select({
+			ios: {
+				shadowColor: '#000',
+				shadowOffset: { width: 0, height: 2 },
+				shadowOpacity: 0.1,
+				shadowRadius: 4,
+			},
+			android: {
+				elevation: 3,
+			},
+		}),
+	},
+	groupName: {
+		flex: 1,
 		fontSize: 16,
+		fontWeight: '500',
+		color: '#334155',
+		marginLeft: 12,
+	},
+	arrow: {
+		marginLeft: 8,
 	},
 });
