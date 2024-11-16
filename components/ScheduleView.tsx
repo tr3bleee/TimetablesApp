@@ -15,7 +15,7 @@ interface Props {
 export const ScheduleView: React.FC<Props> = ({ data, loading, error, isNextWeek }) => {
   if (loading) return (
     <View style={styles.centerContainer}>
-      <ActivityIndicator size="large" color="#2563eb" />
+      <ActivityIndicator size="large" color="#7f61dd" />
     </View>
   );
 
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   dayTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2563eb',
+    color: '#7f61dd',
   },
   dayDate: {
     fontSize: 14,

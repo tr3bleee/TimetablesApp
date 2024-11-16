@@ -25,7 +25,7 @@ export default function InfoScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.logoContainer}>
-          <Ionicons name="calendar" size={48} color="#2563eb" />
+          <Ionicons name="calendar" size={48} color="#7f61dd" />
         </View>
         <Text style={styles.appName}>Расписание для Хекслет</Text>
         <Text style={styles.version}>Версия 1.0.0</Text>
@@ -34,7 +34,7 @@ export default function InfoScreen() {
       <View style={styles.content}>
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Ionicons name="person-circle-outline" size={24} color="#2563eb" />
+            <Ionicons name="person-circle-outline" size={24} color="#7f61dd" />
             <Text style={styles.cardTitle}>Разработчик</Text>
           </View>
           <Text style={styles.developerName}>Новиков Никита</Text>
@@ -46,7 +46,7 @@ export default function InfoScreen() {
 
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Ionicons name="link-outline" size={24} color="#2563eb" />
+            <Ionicons name="link-outline" size={24} color="#7f61dd" />
             <Text style={styles.cardTitle}>Ссылки</Text>
           </View>
           <View style={styles.linksContainer}>
@@ -55,7 +55,7 @@ export default function InfoScreen() {
               onPress={openGithub}
               activeOpacity={0.7}
             >
-              <Ionicons name="logo-github" size={24} color="#2563eb" />
+              <Ionicons name="logo-github" size={24} color="#7f61dd" />
               <Text style={styles.linkText}>GitHub</Text>
             </TouchableOpacity>
 
@@ -64,7 +64,7 @@ export default function InfoScreen() {
               onPress={openTelegram}
               activeOpacity={0.7}
             >
-              <Ionicons name="paper-plane" size={24} color="#2563eb" />
+              <Ionicons name="paper-plane" size={24} color="#7f61dd" />
               <Text style={styles.linkText}>Telegram</Text>
             </TouchableOpacity>
           </View>
@@ -164,6 +164,6 @@ const styles = StyleSheet.create({
   linkText: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#2563eb',
+    color: '#7f61dd',
   },
 });

@@ -8,7 +8,7 @@ export default function TabLayout() {
 
   return (
     <Tabs screenOptions={{ 
-      tabBarActiveTintColor: '#007AFF',
+      tabBarActiveTintColor: '#7f61dd',
       tabBarStyle: {
         height: Platform.OS === 'android' ? 64 : 84,
         paddingBottom: Platform.OS === 'android' ? 12 : 30,
@@ -29,7 +29,7 @@ export default function TabLayout() {
           <Ionicons
             name="information-circle-outline"
             size={24}
-            color="#007AFF"
+            color="#7f61dd"
           />
         </TouchableOpacity>
       ),

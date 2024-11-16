@@ -36,7 +36,7 @@ export default function HomePage() {
 								]}
 								onPress={() => router.push(`/schedule/${group.id}`)}
 							>
-								<Ionicons name="people-outline" size={24} color="#2563eb" />
+								<Ionicons name="people-outline" size={24} color="#7f61dd" />
 								<Text style={styles.groupName}>{group.name}</Text>
 								<Ionicons 
 									name="chevron-forward" 

@@ -32,7 +32,7 @@ const GroupScheduleScreen: React.FC<Props> = ({ groupId, groupName }) => {
           <Ionicons
             name={isNextWeek ? 'arrow-back-circle-outline' : 'arrow-forward-circle-outline'}
             size={24}
-            color="#007AFF"
+            color="#7f61dd"
           />
         </TouchableOpacity>
       ),

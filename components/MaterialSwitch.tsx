@@ -42,7 +42,7 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
       style={[
         styles.switch,
         {
-          backgroundColor: selected ? '#2563eb' : '#e2e8f0',
+          backgroundColor: selected ? '#7f61dd' : '#e2e8f0',
           opacity: disabled ? 0.5 : 1,
         },
       ]}>
