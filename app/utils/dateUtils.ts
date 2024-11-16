@@ -15,3 +15,19 @@ export const DAYS_OF_WEEK = [
   "Суббота",
   "Воскресенье",
 ];
+
+export const getWeekDates = (startDate: string): string[] => {
+  const start = new Date(startDate);
+  const weekDates = [];
+  
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(start);
+    date.setDate(start.getDate() + i);
+    weekDates.push(date.toLocaleDateString('ru-RU', { 
+      day: 'numeric',
+      month: 'numeric' 
+    }));
+  }
+  
+  return weekDates;
+};

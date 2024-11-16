@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { Lesson } from '../app/types/schedule';
+import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
   lesson: Lesson;
@@ -11,28 +12,85 @@ export const LessonCard: React.FC<Props> = ({ lesson }) => {
   const teacherNames = lesson.teachers.map(teacher => teacher.fio).join(", ") || "Без преподавателя";
 
   return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{subjectName}</Text>
-      <Text style={styles.text}>Начало пары: {lesson.startTime}</Text>
-      <Text style={styles.text}>Конец пары: {lesson.endTime}</Text>
-      <Text style={styles.text}>Преподаватель: {teacherNames}</Text>
+    <View style={styles.container}>
+      <View style={styles.timeContainer}>
+        <Text style={styles.lessonNumber}>#{lesson.lesson}</Text>
+        <View style={styles.timeInfo}>
+          <Text style={styles.time}>{lesson.startTime}</Text>
+          <Ionicons name="arrow-forward" size={12} color="#94a3b8" />
+          <Text style={styles.time}>{lesson.endTime}</Text>
+        </View>
+      </View>
+      
+      <View style={styles.contentContainer}>
+        <Text style={styles.subjectName}>{subjectName}</Text>
+        <View style={styles.teacherInfo}>
+          <Ionicons name="person-outline" size={16} color="#64748b" />
+          <Text style={styles.teacherName}>{teacherNames}</Text>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: "#fff",
-    padding: 15,
-    marginVertical: 4,
-    borderRadius: 5,
+  container: {
+    backgroundColor: '#ffffff',
+    marginHorizontal: 16,
+    marginVertical: 8,
+    borderRadius: 12,
+    overflow: 'hidden',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
+  timeContainer: {
+    backgroundColor: '#f1f5f9',
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  text: {
+  lessonNumber: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#64748b',
+  },
+  timeInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  time: {
+    fontSize: 14,
+    color: '#64748b',
+    fontWeight: '500',
+  },
+  contentContainer: {
+    padding: 16,
+    gap: 8,
+  },
+  subjectName: {
     fontSize: 16,
+    fontWeight: '600',
+    color: '#1e293b',
+  },
+  teacherInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  teacherName: {
+    fontSize: 14,
+    color: '#64748b',
+    flex: 1,
   },
 });

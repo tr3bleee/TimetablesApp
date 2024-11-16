@@ -28,7 +28,7 @@ export default function TabLayout() {
           title: 'Расписание',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-              name={focused ? 'home' : 'home-outline'}
+            name={focused ? 'calendar' : 'calendar-outline'}     
               size={24}
               color={focused ? color : 'black'} 
             />
@@ -41,7 +41,7 @@ export default function TabLayout() {
           title: 'Отзывы',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-              name={focused ? 'star' : 'star-outline'}
+            name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
               size={28}
               color={focused ? color : 'black'} 
             />
