@@ -9,9 +9,10 @@ interface Props {
   data: GroupData | null;
   loading: boolean;
   error: string | null;
+  isNextWeek: boolean;
 }
 
-export const ScheduleView: React.FC<Props> = ({ data, loading, error }) => {
+export const ScheduleView: React.FC<Props> = ({ data, loading, error, isNextWeek }) => {
   if (loading) return (
     <View style={styles.centerContainer}>
       <ActivityIndicator size="large" color="#2563eb" />
@@ -54,7 +55,7 @@ export const ScheduleView: React.FC<Props> = ({ data, loading, error }) => {
         <View style={styles.groupInfo}>
           <Text style={styles.groupName}>{data?.group?.name || "N/A"}</Text>
           <Text style={styles.dateInfo}>
-            Неделя с {new Date(data?.startDate || '').toLocaleDateString('ru-RU')}
+            {isNextWeek ? 'Следующая неделя' : 'Текущая неделя'} с {new Date(data?.startDate || '').toLocaleDateString('ru-RU')}
           </Text>
         </View>
       </View>
