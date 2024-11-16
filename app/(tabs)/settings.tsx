@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, StyleSheet, Switch, ScrollView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { MaterialSwitchListItem } from '../../components/MaterialSwitchListItem';
 
 export default function Settings() {
   const [showCabinetNumbers, setShowCabinetNumbers] = useState(true);
@@ -43,46 +43,38 @@ export default function Settings() {
     <ScrollView style={styles.container}>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Расписание</Text>
-        <View style={styles.settingItem}>
-          <Text style={styles.settingLabel}>Показывать номера кабинетов</Text>
-          <Switch
-            value={showCabinetNumbers}
-            onValueChange={(value) => {
-              setShowCabinetNumbers(value);
-              saveSettings('showCabinetNumbers', value);
-            }}
-          />
-        </View>
-        <View style={styles.settingItem}>
-          <Text style={styles.settingLabel}>Показывать имена преподавателей</Text>
-          <Switch
-            value={showTeacherNames}
-            onValueChange={(value) => {
-              setShowTeacherNames(value);
-              saveSettings('showTeacherNames', value);
-            }}
-          />
-        </View>
-        <View style={styles.settingItem}>
-          <Text style={styles.settingLabel}>Компактный режим</Text>
-          <Switch
-            value={compactMode}
-            onValueChange={(value) => {
-              setCompactMode(value);
-              saveSettings('compactMode', value);
-            }}
-          />
-        </View>
-        <View style={styles.settingItem}>
-          <Text style={styles.settingLabel}>Показывать номера уроков</Text>
-          <Switch
-            value={showLessonNumbers}
-            onValueChange={(value) => {
-              setShowLessonNumbers(value);
-              saveSettings('showLessonNumbers', value);
-            }}
-          />
-        </View>
+        <MaterialSwitchListItem
+          title="Показывать номера кабинетов"
+          selected={showCabinetNumbers}
+          onPress={() => {
+            setShowCabinetNumbers(!showCabinetNumbers);
+            saveSettings('showCabinetNumbers', !showCabinetNumbers);
+          }}
+        />
+        <MaterialSwitchListItem
+          title="Показывать имена преподавателей"
+          selected={showTeacherNames}
+          onPress={() => {
+            setShowTeacherNames(!showTeacherNames);
+            saveSettings('showTeacherNames', !showTeacherNames);
+          }}
+        />
+        <MaterialSwitchListItem
+          title="Компактный режим"
+          selected={compactMode}
+          onPress={() => {
+            setCompactMode(!compactMode);
+            saveSettings('compactMode', !compactMode);
+          }}
+        />
+        <MaterialSwitchListItem
+          title="Показывать номера уроков"
+          selected={showLessonNumbers}
+          onPress={() => {
+            setShowLessonNumbers(!showLessonNumbers);
+            saveSettings('showLessonNumbers', !showLessonNumbers);
+          }}
+        />
       </View>
     </ScrollView>
   );
@@ -94,32 +86,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8fafc',
   },
   section: {
-    backgroundColor: '#ffffff',
-    marginVertical: 8,
-    paddingVertical: 8,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#e2e8f0',
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
     color: '#64748b',
+    marginBottom: 8,
     paddingHorizontal: 16,
-    paddingVertical: 8,
-  },
-  settingItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#ffffff',
-  },
-  settingLabel: {
-    fontSize: 16,
-    color: '#1e293b',
-    flex: 1,
-    marginRight: 16,
   },
 });
