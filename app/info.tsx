@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { Text, View, StyleSheet, Linking, TouchableOpacity } from "react-native";
+import React, { useLayoutEffect } from 'react';
+import { Text, View, StyleSheet, Linking, TouchableOpacity, Platform } from "react-native";
 import { useNavigation } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,6 +9,7 @@ export default function InfoScreen() {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'О приложении',
+      headerShadowVisible: false,
     });
   }, [navigation]);
 
@@ -22,12 +23,20 @@ export default function InfoScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>О приложении</Text>
+      <View style={styles.header}>
+        <View style={styles.logoContainer}>
+          <Ionicons name="calendar" size={48} color="#2563eb" />
+        </View>
+        <Text style={styles.appName}>Расписание для Хекслет</Text>
         <Text style={styles.version}>Версия 1.0.0</Text>
-        
-        <View style={styles.developerSection}>
-          <Text style={styles.sectionTitle}>Разработчик</Text>
+      </View>
+
+      <View style={styles.content}>
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Ionicons name="person-circle-outline" size={24} color="#2563eb" />
+            <Text style={styles.cardTitle}>Разработчик</Text>
+          </View>
           <Text style={styles.developerName}>Новиков Никита</Text>
           <Text style={styles.description}>
             Студент Хекслет Колледж{'\n'}
@@ -35,16 +44,30 @@ export default function InfoScreen() {
           </Text>
         </View>
 
-        <View style={styles.linksSection}>
-          <TouchableOpacity style={styles.linkButton} onPress={openGithub}>
-            <Ionicons name="logo-github" size={24} color="#007AFF" />
-            <Text style={styles.linkText}>GitHub</Text>
-          </TouchableOpacity>
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Ionicons name="link-outline" size={24} color="#2563eb" />
+            <Text style={styles.cardTitle}>Ссылки</Text>
+          </View>
+          <View style={styles.linksContainer}>
+            <TouchableOpacity 
+              style={styles.linkButton} 
+              onPress={openGithub}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="logo-github" size={24} color="#2563eb" />
+              <Text style={styles.linkText}>GitHub</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.linkButton} onPress={openTelegram}>
-            <Ionicons name="paper-plane" size={24} color="#007AFF" />
-            <Text style={styles.linkText}>Telegram</Text>
-          </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.linkButton} 
+              onPress={openTelegram}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="paper-plane" size={24} color="#2563eb" />
+              <Text style={styles.linkText}>Telegram</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -54,56 +77,93 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f8fafc',
   },
-  content: {
-    padding: 20,
+  header: {
     alignItems: 'center',
+    paddingVertical: 32,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e8f0',
   },
-  title: {
+  logoContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 20,
+    backgroundColor: '#eff6ff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  appName: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    fontWeight: '700',
+    color: '#1e293b',
+    marginBottom: 4,
   },
   version: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 30,
+    fontSize: 15,
+    color: '#64748b',
   },
-  developerSection: {
+  content: {
+    padding: 16,
+    gap: 16,
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    padding: 16,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
+  },
+  cardHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    gap: 8,
+    marginBottom: 16,
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1e293b',
   },
   developerName: {
-    fontSize: 18,
-    marginBottom: 5,
+    fontSize: 17,
+    fontWeight: '500',
+    color: '#334155',
+    marginBottom: 4,
   },
   description: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#666',
-    lineHeight: 22,
+    fontSize: 15,
+    color: '#64748b',
+    lineHeight: 20,
   },
-  linksSection: {
+  linksContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 20,
+    gap: 12,
   },
   linkButton: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 10,
+    justifyContent: 'center',
     gap: 8,
+    backgroundColor: '#eff6ff',
+    padding: 12,
+    borderRadius: 12,
   },
   linkText: {
     fontSize: 16,
-    color: '#007AFF',
+    fontWeight: '500',
+    color: '#2563eb',
   },
 });
