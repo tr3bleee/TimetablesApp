@@ -10,6 +10,7 @@ interface Props {
 export const LessonCard: React.FC<Props> = ({ lesson }) => {
   const subjectName = lesson.subject ? lesson.subject.name : "Без предмета";
   const teacherNames = lesson.teachers.map(teacher => teacher.fio).join(", ") || "Без преподавателя";
+  const cabinetName = lesson.cabinet ? lesson.cabinet.name : "Кабинет не указан";
 
   return (
     <View style={styles.container}>
@@ -24,9 +25,15 @@ export const LessonCard: React.FC<Props> = ({ lesson }) => {
       
       <View style={styles.contentContainer}>
         <Text style={styles.subjectName}>{subjectName}</Text>
-        <View style={styles.teacherInfo}>
-          <Ionicons name="person-outline" size={16} color="#64748b" />
-          <Text style={styles.teacherName}>{teacherNames}</Text>
+        <View style={styles.infoRow}>
+          <View style={styles.teacherInfo}>
+            <Ionicons name="person-outline" size={16} color="#64748b" />
+            <Text style={styles.teacherName}>{teacherNames}</Text>
+          </View>
+          <View style={styles.cabinetInfo}>
+            <Ionicons name="location-outline" size={16} color="#64748b" />
+            <Text style={styles.cabinetName}>{cabinetName}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -76,12 +83,15 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 16,
-    gap: 8,
+    gap: 12,
   },
   subjectName: {
     fontSize: 16,
     fontWeight: '600',
     color: '#1e293b',
+  },
+  infoRow: {
+    gap: 12,
   },
   teacherInfo: {
     flexDirection: 'row',
@@ -92,5 +102,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#64748b',
     flex: 1,
+  },
+  cabinetInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  cabinetName: {
+    fontSize: 14,
+    color: '#64748b',
   },
 });
