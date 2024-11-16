@@ -5,6 +5,14 @@ export interface Subject {
   publication: null | object;
 }
 
+export interface Cabinet {
+  id: number;
+  name: string;
+  shortName: string;
+  ignore: boolean;
+  publication: null | object;
+}
+
 export interface Lesson {
   id: string;
   weekday: number;
@@ -13,6 +21,7 @@ export interface Lesson {
   endTime: string;
   teachers: Array<{ fio: string }>;
   subject: Subject | null;
+  cabinet: Cabinet | null;
 }
 
 export interface GroupData {
