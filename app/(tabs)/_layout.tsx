@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function TabLayout() {
@@ -9,6 +9,18 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={{ 
       tabBarActiveTintColor: '#007AFF',
+      tabBarStyle: {
+        height: Platform.OS === 'android' ? 64 : 84,
+        paddingBottom: Platform.OS === 'android' ? 12 : 30,
+        paddingTop: 5,
+        backgroundColor: '#ffffff',
+        borderTopWidth: 1,
+        borderTopColor: '#e2e8f0',
+      },
+      tabBarLabelStyle: {
+        fontSize: 12,
+        fontWeight: '500',
+      },
       headerRight: () => (
         <TouchableOpacity 
           onPress={() => router.push('/info')}
@@ -28,9 +40,9 @@ export default function TabLayout() {
           title: 'Расписание',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-            name={focused ? 'calendar' : 'calendar-outline'}     
+              name={focused ? 'calendar' : 'calendar-outline'}     
               size={24}
-              color={focused ? color : 'black'} 
+              color={color}
             />
           ),
         }}
@@ -41,9 +53,9 @@ export default function TabLayout() {
           title: 'Отзывы',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-            name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
-              size={28}
-              color={focused ? color : 'black'} 
+              name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
+              size={24}
+              color={color}
             />
           ),
         }}
