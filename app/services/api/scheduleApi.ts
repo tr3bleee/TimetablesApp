@@ -2,18 +2,16 @@ import axios from 'axios';
 import { API_BASE_URL, PUBLICATION_ID, headers } from './config';
 import { GroupData } from '../../types/schedule';
 import { logNetworkRequest, logNetworkResponse, logNetworkError } from '../../utils/logger';
+import { getStartOfWeekDate } from '../../utils/dateUtils';
 
 export const getGroupSchedule = async (groupId: number, nextWeek: boolean = false): Promise<GroupData> => {
-  const currentDate = new Date();
-  const dayOfWeek = currentDate.getDay();
-  const startOfWeek = new Date(currentDate);
-  startOfWeek.setDate(currentDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+  let startDate = getStartOfWeekDate();
   
   if (nextWeek) {
-    startOfWeek.setDate(startOfWeek.getDate() + 7);
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + 7);
+    startDate = date.toLocaleDateString('en-CA');
   }
-  
-  const startDate = startOfWeek.toLocaleDateString('en-CA');
 
   const url = `${API_BASE_URL}/publications/group/lessons`;
   const body = {
