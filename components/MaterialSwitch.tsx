@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Pressable, StyleSheet, View } from 'react-native';
+import { Animated, Pressable, StyleSheet, View, Switch, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 interface MaterialSwitchProps {
@@ -34,6 +34,17 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
     if (typeof icon === 'function') return icon();
     return <Ionicons name={icon as any} size={14} color="#fff" />;
   };
+
+  if (Platform.OS === 'ios') {
+    return (
+      <Switch
+        value={selected}
+        onValueChange={onPress}
+        disabled={disabled}
+        trackColor={{ false: '#e2e8f0', true: '#7f61dd' }}
+      />
+    );
+  }
 
   return (
     <Pressable
