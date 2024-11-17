@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginVertical: 8,
     borderRadius: 12,
-    overflow: 'hidden',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
