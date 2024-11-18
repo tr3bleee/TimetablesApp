@@ -4,11 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import HomePage from "./index";
 import Settings from "./settings";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
 const Tab = createMaterialBottomTabNavigator();
 
 function MaterialTabs() {
 	return (
+		<>
+			<ExpoStatusBar style="dark" />
 			<Tab.Navigator
 				initialRouteName="index"
 				activeColor="#7f61dd"
@@ -52,6 +55,7 @@ function MaterialTabs() {
 					}}
 				/>
 			</Tab.Navigator>
+		</>
 	);
 }
 

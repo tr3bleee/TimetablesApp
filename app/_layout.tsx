@@ -3,12 +3,14 @@ import { Stack } from "expo-router";
 import { TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+  
 export default function RootLayout() {
   const router = useRouter();
 
   return (
     <PaperProvider>
+      <ExpoStatusBar style="dark" />
       <Stack>
         <Stack.Screen 
           name="(tabs)" 

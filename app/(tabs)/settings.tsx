@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { MaterialSwitchListItem } from '../../components/MaterialSwitchListItem';
 
 export default function Settings() {
@@ -40,8 +41,10 @@ export default function Settings() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.section}>
+    <>
+      <ExpoStatusBar style="dark" />
+      <ScrollView style={styles.container}>
+        <View style={styles.section}>
         <Text style={styles.sectionTitle}>Расписание</Text>
         <MaterialSwitchListItem
           title="Показывать номера кабинетов"
@@ -76,7 +79,8 @@ export default function Settings() {
           }}
         />
       </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 }
 
@@ -93,6 +97,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#64748b',
     marginBottom: 8,
-    paddingHorizontal: 16,
-  },
-});
+			paddingHorizontal: 16,
+		},
+	});

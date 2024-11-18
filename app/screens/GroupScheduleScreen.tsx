@@ -5,6 +5,7 @@ import { ScheduleView } from '../../components/ScheduleView';
 import { getGroupSchedule } from '../services/api/scheduleApi';
 import { GroupData } from '../types/schedule';
 import { Ionicons } from '@expo/vector-icons';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
 interface Props {
   groupId: number;
@@ -58,14 +59,17 @@ const GroupScheduleScreen: React.FC<Props> = ({ groupId, groupName }) => {
   }, [groupId]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScheduleView 
+    <>
+      <ExpoStatusBar style="dark" />
+      <View style={{ flex: 1 }}>
+        <ScheduleView 
         data={data}
         loading={loading}
         error={error}
         isNextWeek={isNextWeek}
-      />
-    </View>
+        />
+      </View>
+    </>
   );
 };
 

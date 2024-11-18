@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useNavigation, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
 export default function InfoScreen() {
 	const navigation = useNavigation();
@@ -30,6 +31,7 @@ export default function InfoScreen() {
 
 	return (
 		<>
+			<ExpoStatusBar style="dark" />			
 			<Stack.Screen
 				options={{
 					headerTintColor: "#7f61dd",

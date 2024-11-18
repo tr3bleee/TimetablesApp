@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, Text, View, Pressable, Platform } from "react-n
 import type { GroupInfo } from "../../constants/groups";
 import { GROUPS } from "../../constants/groups";
 import { useRouter } from 'expo-router';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
 
 interface GroupedGroups {
@@ -19,8 +20,10 @@ export default function HomePage() {
 	}, {} as GroupedGroups);
 
 	return (
-		<ScrollView
-			style={styles.container}
+		<>
+			<ExpoStatusBar style="dark" />
+			<ScrollView
+				style={styles.container}
 			contentContainerStyle={styles.contentContainer}
 		>
 			{Object.entries(groupedGroups).map(([category, groups]) => (
@@ -48,8 +51,9 @@ export default function HomePage() {
 						))}
 					</View>
 				</View>
-			))}
-		</ScrollView>
+				))}
+			</ScrollView>
+		</>
 	);
 }
 
