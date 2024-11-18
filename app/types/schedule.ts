@@ -13,15 +13,33 @@ export interface Cabinet {
   publication: null | object;
 }
 
+export interface Subgroup {
+  id: number;
+  name: string;
+  order: number;
+}
+
+export interface UnionGroup {
+  id: string;
+  group: {
+    id: number;
+    name: string;
+  };
+  subgroup: Subgroup;
+  divisionId: number;
+  countDivisions: number;
+}
+
 export interface Lesson {
   id: string;
   weekday: number;
   lesson: number;
   startTime: string;
   endTime: string;
-  teachers: Array<{ fio: string }>;
+  teachers: Array<{ id: number; fio: string }>;
   subject: Subject | null;
   cabinet: Cabinet | null;
+  unionGroups: UnionGroup[];
 }
 
 export interface GroupData {

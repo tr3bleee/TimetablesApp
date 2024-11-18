@@ -42,6 +42,25 @@ export const LessonCard: React.FC<Props> = ({ lesson }) => {
   const teacherNames = lesson.teachers.map(teacher => teacher.fio).join(", ") || "Без преподавателя";
   const cabinetName = lesson.cabinet ? lesson.cabinet.name : "Кабинет не указан";
 
+  const isLanguageLesson = lesson.subject?.name === "Иностранный язык";
+  const hasMultipleSubgroups = isLanguageLesson && lesson.unionGroups?.length > 1;
+  const subgroupsInfo = hasMultipleSubgroups 
+    ? lesson.unionGroups
+        .sort((a, b) => (a.subgroup?.order ?? 0) - (b.subgroup?.order ?? 0))
+        .map((ug, index) => {
+          const teacher = lesson.teachers[index];
+          
+          const cabinets = lesson.cabinet?.name.split(', ') || [];
+          const cabinet = cabinets[index] || lesson.cabinet?.name || 'Кабинет не указан';
+
+          return {
+            subgroup: ug.subgroup?.name || `Подгруппа ${index + 1}`,
+            teacher: teacher?.fio || 'Без преподавателя',
+            cabinet: cabinet.trim()
+          };
+        })
+    : null;
+
   return (
     <View style={[styles.container, settings.compactMode && styles.compactContainer]}>
       <View style={[styles.timeContainer, settings.compactMode && styles.compactTimeContainer]}>
@@ -57,20 +76,43 @@ export const LessonCard: React.FC<Props> = ({ lesson }) => {
       
       <View style={[styles.contentContainer, settings.compactMode && styles.compactContentContainer]}>
         <Text style={styles.subjectName}>{subjectName}</Text>
-        <View style={styles.infoRow}>
-          {settings.showTeacherNames && (
-            <View style={styles.teacherInfo}>
-              <Ionicons name="person-outline" size={16} color="#64748b" />
-              <Text style={styles.teacherName}>{teacherNames}</Text>
-            </View>
-          )}
-          {settings.showCabinetNumbers && (
-            <View style={styles.cabinetInfo}>
-              <Ionicons name="location-outline" size={16} color="#64748b" />
-              <Text style={styles.cabinetName}>{cabinetName}</Text>
-            </View>
-          )}
-        </View>
+        
+        {hasMultipleSubgroups ? (
+          <View style={styles.subgroupsContainer}>
+            {subgroupsInfo?.map((info, index) => (
+              <View key={index} style={styles.subgroupInfo}>
+                <Text style={styles.subgroupName}>{info.subgroup}</Text>
+                {settings.showTeacherNames && (
+                  <View style={styles.teacherInfo}>
+                    <Ionicons name="person-outline" size={16} color="#64748b" />
+                    <Text style={styles.teacherName}>{info.teacher}</Text>
+                  </View>
+                )}
+                {settings.showCabinetNumbers && (
+                  <View style={styles.cabinetInfo}>
+                    <Ionicons name="location-outline" size={16} color="#64748b" />
+                    <Text style={styles.cabinetName}>{info.cabinet}</Text>
+                  </View>
+                )}
+              </View>
+            ))}
+          </View>
+        ) : (
+          <View style={styles.infoRow}>
+            {settings.showTeacherNames && (
+              <View style={styles.teacherInfo}>
+                <Ionicons name="person-outline" size={16} color="#64748b" />
+                <Text style={styles.teacherName}>{teacherNames}</Text>
+              </View>
+            )}
+            {settings.showCabinetNumbers && (
+              <View style={styles.cabinetInfo}>
+                <Ionicons name="location-outline" size={16} color="#64748b" />
+                <Text style={styles.cabinetName}>{cabinetName}</Text>
+              </View>
+            )}
+          </View>
+        )}
       </View>
     </View>
   );
@@ -157,5 +199,20 @@ const styles = StyleSheet.create({
   },
   compactContentContainer: {
     padding: 8,
+  },
+  subgroupsContainer: {
+    gap: 8,
+  },
+  subgroupInfo: {
+    gap: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    backgroundColor: '#f8fafc',
+    borderRadius: 8,
+  },
+  subgroupName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#64748b',
   },
 });

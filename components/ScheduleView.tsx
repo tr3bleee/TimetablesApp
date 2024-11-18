@@ -39,7 +39,29 @@ export const ScheduleView: React.FC<Props> = ({ data, loading, error, isNextWeek
     if (!acc[lesson.weekday]) {
       acc[lesson.weekday] = [];
     }
-    acc[lesson.weekday].push(lesson);
+
+    const existingLessonIndex = acc[lesson.weekday].findIndex(
+      existing => 
+        existing.lesson === lesson.lesson && 
+        existing.subject?.id === lesson.subject?.id &&
+        existing.startTime === lesson.startTime
+    );
+
+    if (existingLessonIndex !== -1 && lesson.subject?.name === "Иностранный язык") {
+      const existingLesson = acc[lesson.weekday][existingLessonIndex];
+      acc[lesson.weekday][existingLessonIndex] = {
+        ...existingLesson,
+        id: `${existingLesson.id}-${lesson.id}`,
+        teachers: [...existingLesson.teachers, ...lesson.teachers],
+        unionGroups: [...existingLesson.unionGroups, ...lesson.unionGroups],
+        cabinet: {
+          ...existingLesson.cabinet!,
+          name: `${existingLesson.cabinet?.name || ''}, ${lesson.cabinet?.name || ''}`
+        }
+      };
+    } else {
+      acc[lesson.weekday].push(lesson);
+    }
     return acc;
   }, {}) || {};
 
