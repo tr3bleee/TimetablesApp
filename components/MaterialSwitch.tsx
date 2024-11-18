@@ -1,323 +1,92 @@
-import { useEffect, useState } from 'react';
-import { Platform, StyleSheet, View, Switch } from 'react-native';
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-} from 'react-native-gesture-handler';
-import { Icon, useTheme } from 'react-native-paper';
-import { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
-import Animated, {
-  Extrapolate,
-  interpolate,
-  interpolateColor,
-  runOnJS,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import React from 'react';
+import { Animated, Pressable, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-type SwitchProps = {
+interface MaterialSwitchProps {
   selected: boolean;
   onPress: () => void;
-  fluid?: boolean;
-  switchOnIcon?: IconSource;
-  switchOffIcon?: IconSource;
   disabled?: boolean;
-};
+  fluid?: boolean;
+  switchOnIcon?: string | (() => React.ReactNode);
+  switchOffIcon?: string | (() => React.ReactNode);
+}
 
-export const MaterialSwitch = ({
+export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
   selected,
   onPress,
+  disabled = false,
+  fluid = false,
   switchOnIcon,
   switchOffIcon,
-  disabled,
-}: SwitchProps) => {
-  const theme = useTheme();
+}) => {
+  const translateX = React.useRef(new Animated.Value(selected ? 20 : 0)).current;
 
-  // iOS native switch
-  if (Platform.OS === 'ios') {
-    return (
-      <Switch
-        value={selected}
-        onValueChange={onPress}
-        disabled={disabled}
-        trackColor={{
-          true: theme.colors.primary,
-          false: theme.colors.surfaceVariant,
-        }}
-        ios_backgroundColor={theme.colors.surfaceVariant}
-      />
-    );
-  }
+  React.useEffect(() => {
+    Animated.spring(translateX, {
+      toValue: selected ? 20 : 0,
+      useNativeDriver: true,
+      bounciness: fluid ? 20 : 0,
+    }).start();
+  }, [selected, fluid]);
 
-  const position = useSharedValue(selected ? 10 : -10);
-  const handleHeight = useSharedValue(selected ? 24 : 16);
-  const handleWidth = useSharedValue(selected ? 24 : 16);
-  const [active, setActive] = useState(selected);
-  const [isPressed, setIsPressed] = useState(false);
-
-  const iconOnStyle = useAnimatedStyle(() => ({
-    position: 'absolute',
-    opacity: interpolate(
-      position.value,
-      [-10, 10],
-      [0, 1],
-      Extrapolate.CLAMP
-    ),
-  }));
-
-  const iconOffStyle = useAnimatedStyle(() => ({
-    position: 'absolute',
-    opacity: interpolate(
-      position.value,
-      [-10, 10],
-      [1, 0],
-      Extrapolate.CLAMP
-    ),
-  }));
-
-  const pan = Gesture.Pan()
-    .activateAfterLongPress(100)
-    .onTouchesUp(() => setIsPressed(false))
-    .runOnJS(true)
-    .hitSlop(disabled ? -30 : 0)
-    .onStart(() => {
-      setIsPressed(true);
-      handleHeight.value = withTiming(28, { duration: 160 });
-      handleWidth.value = withTiming(28, { duration: 160 });
-    })
-    .onChange((event) => {
-      if (position.value + event.translationX / 10 < -10) {
-        position.value = -10;
-        return;
-      }
-      if (position.value + event.translationX / 10 > 10) {
-        position.value = 10;
-        return;
-      }
-      position.value += event.translationX / 10;
-    })
-    .onEnd(() => {
-      setIsPressed(false);
-      if (position.value > 0) {
-        position.value = withTiming(10);
-        handleHeight.value = withTiming(24, { duration: 160 });
-        handleWidth.value = withTiming(24, { duration: 160 }, (finished) => {
-          'worklet';
-          if (finished && !active) {
-            runOnJS(callbackFunction)();
-          }
-        });
-        return;
-      }
-
-      if (position.value < 0) {
-        position.value = withTiming(-10);
-        handleHeight.value = withTiming(16, { duration: 160 });
-        handleWidth.value = withTiming(16, { duration: 160 }, (finished) => {
-          'worklet';
-          if (finished && active) {
-            runOnJS(callbackFunction)();
-          }
-        });
-        return;
-      }
-    });
-
-  const handleStyle = useAnimatedStyle(() =>
-    disabled
-      ? {
-          transform: [{ translateX: active ? 10 : -10 }],
-          height: active ? 24 : 16,
-          width: active ? 24 : 16,
-          marginVertical: 'auto',
-          minHeight: switchOffIcon ? 24 : 16,
-          minWidth: switchOffIcon ? 24 : 16,
-          opacity: active ? 1 : 0.36,
-          backgroundColor: active
-            ? theme.colors.surface
-            : theme.colors.onSurface,
-          borderRadius: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }
-      : {
-          transform: [{ translateX: position.value }],
-          opacity: 1,
-          height: handleHeight.value,
-          width: handleWidth.value,
-          marginVertical: 'auto',
-          minHeight: switchOffIcon ? 24 : 16,
-          minWidth: switchOffIcon ? 24 : 16,
-          backgroundColor: interpolateColor(
-            position.value,
-            [-10, 10],
-            [theme.colors.outline, theme.colors.onPrimary]
-          ),
-          borderRadius: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }
-  );
-
-  const trackStyle = useAnimatedStyle(() =>
-    disabled
-      ? {
-          borderWidth: 2,
-          borderRadius: 16,
-          justifyContent: 'center',
-          height: 32,
-          width: 52,
-          opacity: 0.12,
-          backgroundColor: active
-            ? theme.colors.onSurface
-            : theme.colors.surfaceVariant,
-          borderColor: theme.colors.onSurface,
-        }
-      : {
-          alignItems: 'center',
-          opacity: 1,
-          backgroundColor: interpolateColor(
-            position.value,
-            [-10, 10],
-            [theme.colors.surfaceVariant, theme.colors.primary]
-          ),
-          borderColor: interpolateColor(
-            position.value,
-            [-10, 10],
-            [theme.colors.outline, theme.colors.primary]
-          ),
-          borderWidth: 2,
-          borderRadius: 16,
-          justifyContent: 'center',
-          height: 32,
-          width: 52,
-        }
-  );
-
-  const handleOutlineStyle = useAnimatedStyle(() => ({
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    position: 'absolute',
-    transform: [{ translateX: position.value }],
-    backgroundColor: !isPressed
-      ? 'transparent'
-      : interpolateColor(
-          position.value,
-          [-10, 10],
-          [theme.colors.onSurface, theme.colors.primary]
-        ),
-    alignItems: 'center',
-    opacity: 0.18,
-    justifyContent: 'center',
-  }));
-
-  const callbackFunction = () => {
-    onPress();
-    setIsPressed(false);
+  const renderIcon = (icon: string | (() => React.ReactNode) | undefined) => {
+    if (!icon) return null;
+    if (typeof icon === 'function') return icon();
+    return <Ionicons name={icon as any} size={14} color="#fff" />;
   };
-
-  const changeSwitch = (withCallback: boolean) => {
-    if (active) {
-      handleHeight.value = withTiming(16, { duration: 100 });
-      handleWidth.value = withTiming(16, { duration: 100 });
-      position.value = withTiming(
-        -10,
-        { duration: 250 },
-        withCallback
-          ? (finished) => {
-              'worklet';
-              if (finished) {
-                runOnJS(callbackFunction)();
-              }
-            }
-          : undefined
-      );
-      setActive(false);
-    } else {
-      handleHeight.value = withTiming(24, { duration: 100 });
-      handleWidth.value = withTiming(24, { duration: 100 });
-      position.value = withTiming(
-        10,
-        { duration: 250 },
-        withCallback
-          ? (finished) => {
-              'worklet';
-              if (finished) {
-                runOnJS(callbackFunction)();
-              }
-            }
-          : undefined
-      );
-      setActive(true);
-    }
-  };
-
-  useEffect(() => {
-    if (active !== selected) {
-      changeSwitch(false);
-    }
-    handleHeight.value = withTiming(selected ? 24 : 16);
-    handleWidth.value = withTiming(selected ? 24 : 16);
-  }, [selected]);
 
   return (
-    <View style={{ borderRadius: 20, backgroundColor: theme.colors.surface }}>
-      <View style={styles.stateOuter}>
-        <Animated.View style={handleOutlineStyle} key={3} />
-      </View>
-      <GestureHandlerRootView>
-        <GestureDetector gesture={pan}>
-          <Animated.View style={trackStyle} key={1}>
-            <View
-              style={{
-                justifyContent: 'center',
-                height: 32,
-                width: 52,
-                alignItems: 'center',
-              }}
-            />
-          </Animated.View>
-        </GestureDetector>
-      </GestureHandlerRootView>
-      <View style={styles.stateOuter} pointerEvents="none">
-        <Animated.View style={handleStyle} key={2}>
-          {switchOnIcon ? (
-            <Animated.View style={iconOnStyle}>
-              <Icon
-                source={switchOnIcon}
-                size={16}
-                color={
-                  disabled
-                    ? theme.colors.onSurface
-                    : theme.colors.onPrimaryContainer
-                }
-              />
-            </Animated.View>
-          ) : null}
-          {switchOffIcon ? (
-            <Animated.View style={iconOffStyle}>
-              <Icon
-                source={switchOffIcon}
-                size={16}
-                color={theme.colors.surface}
-              />
-            </Animated.View>
-          ) : null}
-        </Animated.View>
-      </View>
-    </View>
+    <Pressable
+      onPress={onPress}
+      disabled={disabled}
+      style={[
+        styles.switch,
+        selected ? styles.switchOn : styles.switchOff,
+        disabled && styles.disabled,
+      ]}>
+      <Animated.View
+        style={[
+          styles.thumb,
+          {
+            transform: [{ translateX }],
+          },
+        ]}>
+        {selected ? renderIcon(switchOnIcon) : renderIcon(switchOffIcon)}
+      </Animated.View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  stateOuter: {
-    justifyContent: 'center',
-    height: 32,
-    width: 52,
+  switch: {
+    width: 44,
+    height: 24,
+    borderRadius: 12,
+    padding: 2,
+  },
+  switchOn: {
+    backgroundColor: '#7f61dd',
+  },
+  switchOff: {
+    backgroundColor: '#e2e8f0',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  thumb: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
     alignItems: 'center',
-    position: 'absolute',
+    justifyContent: 'center',
   },
 });

@@ -24,18 +24,19 @@ export const MaterialSwitchListItem: React.FC<MaterialSwitchListItemProps> = ({
   listStyle,
 }) => {
   return (
-    <Pressable onPress={onPress}>
-      <View style={[styles.container, listStyle]}>
-        <Text style={styles.title}>{title}</Text>
-        <MaterialSwitch
-          selected={selected}
-          onPress={onPress}
-          disabled={disabled}
-          fluid={fluid}
-          switchOnIcon={switchOnIcon}
-          switchOffIcon={switchOffIcon}
-        />
-      </View>
+    <Pressable
+      onPress={onPress}
+      style={[styles.container, listStyle]}
+      disabled={disabled}>
+      <Text style={styles.title}>{title}</Text>
+      <MaterialSwitch
+        selected={selected}
+        onPress={onPress}
+        disabled={disabled}
+        fluid={fluid}
+        switchOnIcon={switchOnIcon}
+        switchOffIcon={switchOffIcon}
+      />
     </Pressable>
   );
 };
