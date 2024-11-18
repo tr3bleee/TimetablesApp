@@ -42,10 +42,10 @@ export const LessonCard: React.FC<Props> = ({ lesson }) => {
   const teacherNames = lesson.teachers.map(teacher => teacher.fio).join(", ") || "Без преподавателя";
   const cabinetName = lesson.cabinet ? lesson.cabinet.name : "Кабинет не указан";
 
-  const isLanguageLesson = lesson.subject?.name === "Иностранный язык";
-  const hasMultipleSubgroups = isLanguageLesson && lesson.unionGroups?.length > 1;
+  const hasMultipleSubgroups = lesson.unionGroups?.some(ug => ug.subgroup) && lesson.unionGroups?.length > 1;
   const subgroupsInfo = hasMultipleSubgroups 
     ? lesson.unionGroups
+        .filter(ug => ug.subgroup)
         .sort((a, b) => (a.subgroup?.order ?? 0) - (b.subgroup?.order ?? 0))
         .map((ug, index) => {
           const teacher = lesson.teachers[index];
