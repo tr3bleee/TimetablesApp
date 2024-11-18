@@ -1,10 +1,9 @@
 import { Tabs } from "expo-router";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Platform, StyleSheet } from "react-native";
+import { Platform } from "react-native";
 import HomePage from "./index";
 import Settings from "./settings";
-import { BlurView } from "expo-blur";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -76,25 +75,12 @@ export default function TabLayout() {
 					bottom: 0,
 					left: 0,
 					right: 0,
-					backgroundColor: "transparent",
+					backgroundColor: "#ffffff",
 				},
 				tabBarLabelStyle: {
 					fontSize: 12,
 					fontWeight: "500",
-				},
-				tabBarBackground: () => (
-					<BlurView
-						tint="light"
-						intensity={50}
-						style={{
-							position: "absolute",
-							top: 0,
-							left: 0,
-							right: 0,
-							bottom: 0,
-						}}
-					/>
-				),
+				}
 			}}
 		>
 			<Tabs.Screen
@@ -126,15 +112,3 @@ export default function TabLayout() {
 		</Tabs>
 	);
 }
-
-const styles = StyleSheet.create({
-	blurContainer: {
-		flex: 1,
-		padding: 20,
-		margin: 16,
-		textAlign: "center",
-		justifyContent: "center",
-		overflow: "hidden",
-		borderRadius: 20,
-	},
-});
