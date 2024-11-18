@@ -47,7 +47,7 @@ export const ScheduleView: React.FC<Props> = ({ data, loading, error, isNextWeek
         existing.startTime === lesson.startTime
     );
 
-    if (existingLessonIndex !== -1 && lesson.subject?.name === "Иностранный язык") {
+    if (existingLessonIndex !== -1) {
       const existingLesson = acc[lesson.weekday][existingLessonIndex];
       acc[lesson.weekday][existingLessonIndex] = {
         ...existingLesson,
