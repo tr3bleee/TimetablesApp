@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { Pressable, StyleSheet, Text, ViewStyle } from 'react-native';
 import { MaterialSwitch } from './MaterialSwitch';
 
 interface MaterialSwitchListItemProps {
