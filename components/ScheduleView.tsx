@@ -1,7 +1,7 @@
 import React from 'react';
 import { SectionList, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { GroupData, Lesson } from '../app/types/schedule';
-import { DAYS_OF_WEEK, getWeekDates } from '../app/utils/dateUtils';
+import { GroupData, Lesson } from '@/app/types/schedule';
+import { DAYS_OF_WEEK, getWeekDates } from '@/app/utils/dateUtils';
 import { LessonCard } from './LessonCard';
 import { Ionicons } from '@expo/vector-icons';
 

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { MaterialSwitchListItem } from '../../components/MaterialSwitchListItem';
+import { MaterialSwitchListItem } from '@/components/MaterialSwitchListItem';
 
 export default function Settings() {
   const [showCabinetNumbers, setShowCabinetNumbers] = useState(true);

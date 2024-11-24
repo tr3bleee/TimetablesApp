@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text, View, Pressable, Platform } from "react-native";
-import type { GroupInfo } from "../../constants/groups";
-import { GROUPS } from "../../constants/groups";
+import type { GroupInfo } from "@/constants/groups";
+import { GROUPS } from "@/constants/groups";
 import { useRouter } from 'expo-router';
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
