@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { Lesson } from '@/app/types/schedule';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 
 interface Props {
   lesson: Lesson;
@@ -11,6 +12,15 @@ interface Props {
 
 export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
   const theme = useTheme();
+  const router = useRouter();
+
+  const handleTeacherPress = (teacherId: number) => {
+    router.push(`/teacher/${teacherId}`);
+  };
+
+  const handleGroupPress = (groupId: number) => {
+    router.push(`/schedule/${groupId}`);
+  };
 
   const getSubjectIcon = () => {
     if (!lesson.subject) return 'help-circle-outline';
@@ -175,9 +185,14 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
             {subgroup.teacher && (
               <View style={styles.teachersContainer}>
                 <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
-                <Text style={[styles.teachers, { color: theme.colors.secondaryText }]}>
-                  {subgroup.teacher.fio}
-                </Text>
+                <TouchableOpacity
+                  onPress={() => handleTeacherPress(subgroup.teacher.id)}
+                  activeOpacity={0.7}
+                >
+                  <Text style={[styles.teacherLink, { color: theme.colors.primary }]}>
+                    {subgroup.teacher.fio}
+                  </Text>
+                </TouchableOpacity>
               </View>
             )}
             {subgroup.cabinet && (
@@ -236,9 +251,23 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
               {!isTeacherSchedule && lesson.teachers.length > 0 && (
                 <View style={styles.teachersContainer}>
                   <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
-                  <Text style={[styles.teachers, { color: theme.colors.secondaryText }]}>
-                    {lesson.teachers.map(t => t.fio).join(', ')}
-                  </Text>
+                  <View style={styles.teachersWrapper}>
+                    {lesson.teachers.map((teacher, index) => (
+                      <React.Fragment key={teacher.id}>
+                        <TouchableOpacity
+                          onPress={() => handleTeacherPress(teacher.id)}
+                          activeOpacity={0.7}
+                        >
+                          <Text style={[styles.teacherLink, { color: theme.colors.primary }]}>
+                            {teacher.fio}
+                          </Text>
+                        </TouchableOpacity>
+                        {index < lesson.teachers.length - 1 && (
+                          <Text style={{ color: theme.colors.secondaryText }}>, </Text>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </View>
                 </View>
               )}
               
@@ -254,9 +283,23 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
               {isTeacherSchedule && lesson.unionGroups.length > 0 && (
                 <View style={styles.groupsContainer}>
                   <Ionicons name="people-outline" size={14} color={theme.colors.secondaryText} />
-                  <Text style={[styles.groups, { color: theme.colors.secondaryText }]}>
-                    {lesson.unionGroups.map(g => g.group.name).join(', ')}
-                  </Text>
+                  <View style={styles.groupsWrapper}>
+                    {lesson.unionGroups.map((group, index) => (
+                      <React.Fragment key={group.group.id}>
+                        <TouchableOpacity
+                          onPress={() => handleGroupPress(group.group.id)}
+                          activeOpacity={0.7}
+                        >
+                          <Text style={[styles.groupLink, { color: theme.colors.primary }]}>
+                            {group.group.name}
+                          </Text>
+                        </TouchableOpacity>
+                        {index < lesson.unionGroups.length - 1 && (
+                          <Text style={{ color: theme.colors.secondaryText }}>, </Text>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </View>
                 </View>
               )}
             </>
@@ -332,9 +375,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
   },
-  teachers: {
-    fontSize: 14,
+  teachersWrapper: {
     flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  teacherLink: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
   locationContainer: {
     flexDirection: 'row',
@@ -349,9 +397,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
   },
-  groups: {
-    fontSize: 14,
+  groupsWrapper: {
     flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  groupLink: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
   subgroupsContainer: {
     marginTop: 8,
