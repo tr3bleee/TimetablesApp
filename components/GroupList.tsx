@@ -10,11 +10,7 @@ import {
   Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
-interface GroupInfo {
-  id: number;
-  name: string;
-}
+import { GroupInfo } from '@/constants/groups';
 
 interface GroupListProps {
   groups: GroupInfo[];
@@ -25,13 +21,20 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const filteredGroups = useMemo(() => {
-    if (!searchQuery.trim()) return groups;
-    
+  const groupedAndFilteredGroups = useMemo(() => {
     const query = searchQuery.toLowerCase();
-    return groups.filter(group => 
-      group.name.toLowerCase().includes(query)
-    );
+    const filtered = query
+      ? groups.filter(group => group.name.toLowerCase().includes(query))
+      : groups;
+
+    return filtered.reduce((acc, group) => {
+      const category = `${group.category} группа`;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(group);
+      return acc;
+    }, {} as Record<string, GroupInfo[]>);
   }, [groups, searchQuery]);
 
   const handleSearch = (text: string) => {
@@ -65,7 +68,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#7f61dd" />
         </View>
-      ) : filteredGroups.length === 0 ? (
+      ) : Object.keys(groupedAndFilteredGroups).length === 0 ? (
         <View style={styles.emptyContainer}>
           <Ionicons name="school" size={48} color="#94a3b8" />
           <Text style={styles.emptyText}>Группы не найдены</Text>
@@ -76,26 +79,33 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.groupsGrid}>
-            {filteredGroups.map((group) => (
-              <TouchableOpacity
-                key={group.id}
-                style={styles.groupItem}
-                onPress={() => onSelectGroup(group)}
-                activeOpacity={0.7}
-              >
-                <View style={styles.groupContent}>
-                  <View style={styles.iconContainer}>
-                    <Ionicons name="people" size={24} color="#7f61dd" />
-                  </View>
-                  <Text style={styles.groupName}>{group.name}</Text>
-                  <View style={styles.arrowContainer}>
-                    <Ionicons name="chevron-forward" size={20} color="#64748b" />
-                  </View>
+          {Object.entries(groupedAndFilteredGroups)
+            .sort(([a], [b]) => parseInt(a) - parseInt(b))
+            .map(([category, categoryGroups]) => (
+              <View key={category} style={styles.categoryContainer}>
+                <Text style={styles.categoryTitle}>{category}</Text>
+                <View style={styles.groupsGrid}>
+                  {categoryGroups.map((group) => (
+                    <TouchableOpacity
+                      key={group.id}
+                      style={styles.groupItem}
+                      onPress={() => onSelectGroup(group)}
+                      activeOpacity={0.7}
+                    >
+                      <View style={styles.groupContent}>
+                        <View style={styles.iconContainer}>
+                          <Ionicons name="people" size={24} color="#7f61dd" />
+                        </View>
+                        <Text style={styles.groupName}>{group.name}</Text>
+                        <View style={styles.arrowContainer}>
+                          <Ionicons name="chevron-forward" size={20} color="#64748b" />
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  ))}
                 </View>
-              </TouchableOpacity>
+              </View>
             ))}
-          </View>
         </ScrollView>
       )}
     </View>
@@ -163,6 +173,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 8,
     paddingBottom: 20,
+  },
+  categoryContainer: {
+    marginBottom: 24,
+  },
+  categoryTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1e293b',
+    marginBottom: 12,
+    paddingLeft: 4,
   },
   groupsGrid: {
     gap: 12,
