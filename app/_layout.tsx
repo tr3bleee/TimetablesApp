@@ -46,6 +46,15 @@ export default function RootLayout() {
             },
           }}
         />
+        <Stack.Screen 
+          name="teacher"
+          options={{
+            title: 'Преподаватели',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="people-outline" size={size} color={color} />
+            ),
+          }}
+        />
       </Stack>
     </PaperProvider>
   );

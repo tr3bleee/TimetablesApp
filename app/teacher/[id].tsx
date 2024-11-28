@@ -3,12 +3,12 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ScheduleView } from '@/components/ScheduleView';
 import { useSchedule } from '@/app/hooks/useSchedule';
-import { GROUPS } from '@/constants/groups';
+import { TEACHERS } from '@/constants/teachers';
 import { WeekSelector } from '@/components/WeekSelector';
 
-export default function SchedulePage() {
+export default function TeacherSchedulePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const group = GROUPS.find(g => g.id === parseInt(id));
+  const teacher = TEACHERS.find(t => t.id === parseInt(id));
   
   const {
     schedule,
@@ -17,7 +17,7 @@ export default function SchedulePage() {
     isNextWeek,
     handleWeekChange
   } = useSchedule({
-    type: 'group',
+    type: 'teacher',
     id: parseInt(id)
   });
 
@@ -25,14 +25,14 @@ export default function SchedulePage() {
     <View style={styles.container}>
       <Stack.Screen 
         options={{
-          title: group?.name || `Группа ${id}`,
+          title: teacher?.fio || `Преподаватель ${id}`,
           headerTintColor: '#7f61dd',
           headerTitleStyle: {
             color: '#1e293b',
             fontSize: 18,
             fontWeight: '600',
           },
-          headerBackTitle: 'Группы',
+          headerBackTitle: 'Преподаватели',
         }}
       />
       <WeekSelector
@@ -44,6 +44,7 @@ export default function SchedulePage() {
         loading={loading}
         error={error}
         isNextWeek={isNextWeek}
+        isTeacherSchedule
       />
     </View>
   );
@@ -54,4 +55,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f8fafc',
   },
-});
+}); 
