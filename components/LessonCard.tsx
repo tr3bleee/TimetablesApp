@@ -9,9 +9,31 @@ import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 interface Props {
   lesson: Lesson;
   isTeacherSchedule?: boolean;
+  isNextWeek?: boolean;
 }
 
-export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
+const isCurrentLesson = (lesson: Lesson, isNextWeek: boolean = false): boolean => {
+  const now = new Date();
+  const currentWeekday = now.getDay() || 7; // Convert Sunday (0) to 7 to match API format
+  
+  // If lesson is for next week, or different weekday, it's not current
+  if (isNextWeek || currentWeekday !== lesson.weekday) {
+    return false;
+  }
+
+  const [startHour, startMinute] = lesson.startTime.split(':').map(Number);
+  const [endHour, endMinute] = lesson.endTime.split(':').map(Number);
+  
+  const lessonStart = new Date();
+  lessonStart.setHours(startHour, startMinute, 0);
+  
+  const lessonEnd = new Date();
+  lessonEnd.setHours(endHour, endMinute, 0);
+  
+  return now >= lessonStart && now <= lessonEnd;
+};
+
+export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextWeek }) => {
   const theme = useTheme();
   const router = useRouter();
   const { settings } = useScheduleSettings();
@@ -230,15 +252,22 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
             №{lesson.lesson}
           </Text>
         )}
-        <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
-          {lesson.startTime}
-        </Text>
-        <Text style={[styles.timeDivider, { color: theme.colors.secondaryText }]}>
-          —
-        </Text>
-        <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
-          {lesson.endTime}
-        </Text>
+        <View style={styles.timeWrapper}>
+          <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
+            {lesson.startTime}
+          </Text>
+          <Text style={[styles.timeDivider, { color: theme.colors.secondaryText }]}>
+            —
+          </Text>
+          <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
+            {lesson.endTime}
+          </Text>
+          {isCurrentLesson(lesson, isNextWeek) && (
+            <Text style={[styles.currentIndicator, { color: '#22c55e' }]}>
+              Сейчас
+            </Text>
+          )}
+        </View>
       </View>
       
       <View style={styles.contentContainer}>
@@ -355,6 +384,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginRight: 4,
   },
+  timeWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   time: {
     fontSize: 14,
     fontWeight: '500',
@@ -434,5 +468,10 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     marginVertical: 8,
+  },
+  currentIndicator: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginLeft: 8,
   },
 });
