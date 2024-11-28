@@ -93,7 +93,11 @@ export const ScheduleView: React.FC<Props> = ({
     <SectionList
       sections={sortedSections}
       renderItem={({ item }) => (
-        <LessonCard lesson={item} isTeacherSchedule={isTeacherSchedule} />
+        <LessonCard 
+          lesson={item} 
+          isTeacherSchedule={isTeacherSchedule}
+          isNextWeek={isNextWeek}
+        />
       )}
       renderSectionHeader={({ section: { title, date } }) => (
         <View style={[styles.sectionHeader, {
