@@ -7,8 +7,6 @@ interface CustomColors {
   accent: string;
   card: string;
   icon: string;
-  error: string;
-  success: string;
 }
 
 export interface CustomMD3Theme extends MD3Theme {

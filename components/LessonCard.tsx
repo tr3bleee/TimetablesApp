@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 import { Lesson } from '@/app/types/schedule';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
-import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
+import React from 'react';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 interface Subgroup {
   group?: {
@@ -168,7 +168,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       <View style={styles.subgroupsContainer}>
         {subgroups.map((subgroup, index) => (
           <View key={index} style={[styles.subgroupItem, { 
-            backgroundColor: theme.colors.surfaceVariant 
+            backgroundColor: theme.colors.primaryContainer 
           }]}>
             <Text style={[styles.subgroupTitle, { color: theme.colors.primary }]}>
               {subgroup.subgroupNumber}
@@ -210,7 +210,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       }
     ]}>
       <View style={[styles.timeContainer, {
-        backgroundColor: theme.colors.surfaceVariant,
+        backgroundColor: theme.colors.primaryContainer,
         borderBottomColor: theme.colors.outline,
         padding: settings.compactMode ? 8 : 12,
       }]}>
@@ -220,17 +220,17 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
           </Text>
         )}
         <View style={styles.timeWrapper}>
-          <Text style={[styles.time, { color: theme.colors.onSurface }]}>
+          <Text style={[styles.time, { color: theme.colors.onSurfaceVariant }]}>
             {lesson.startTime}
           </Text>
-          <Text style={[styles.timeDivider, { color: theme.colors.onSurface }]}>
+          <Text style={[styles.timeDivider, { color: theme.colors.onSurfaceVariant }]}>
             —
           </Text>
-          <Text style={[styles.time, { color: theme.colors.onSurface }]}>
+          <Text style={[styles.time, { color: theme.colors.onSurfaceVariant }]}>
             {lesson.endTime}
           </Text>
           {isCurrentLesson(lesson, isNextWeek) && (
-            <Text style={[styles.currentIndicator, { color: theme.colors.primary }]}>
+            <Text style={[styles.currentIndicator, { color: '#22c55e' }]}>
               Сейчас
             </Text>
           )}
@@ -238,7 +238,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       </View>
       
       <View style={styles.contentContainer}>
-        <View style={[styles.iconContainer, { backgroundColor: theme.colors.surfaceVariant }]}>
+        <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
           <Ionicons 
             name={getSubjectIcon()} 
             size={24} 
@@ -248,7 +248,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
         
         <View style={styles.infoContainer}>
           <Text style={[styles.subject, { 
-            color: theme.colors.onSurface,
+            color: theme.colors.onSurfaceVariant,
             fontSize: settings.compactMode ? 14 : 16,
           }]}>
             {lesson.subject?.name || 'Нет предмета'}
