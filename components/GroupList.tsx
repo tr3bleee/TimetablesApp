@@ -49,7 +49,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.searchContainer, { 
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.outline
+        borderColor: theme.colors.border
       }]}>
         <Ionicons name="search" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput
@@ -93,28 +93,30 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
                 <Text style={[styles.categoryTitle, { color: theme.colors.onSurface }]}>
                   {category}
                 </Text>
-                <View style={styles.groupsGrid}>
+                <View style={styles.groupsContainer}>
                   {categoryGroups.map((group) => (
                     <TouchableOpacity
                       key={group.id}
                       style={[styles.groupItem, {
                         backgroundColor: theme.colors.surface,
-                        borderColor: theme.colors.outline
+                        borderColor: theme.colors.border
                       }]}
                       onPress={() => onSelectGroup(group)}
                       activeOpacity={0.7}
                     >
-                      <View style={styles.groupContent}>
-                        <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
-                          <Ionicons name="people" size={24} color={theme.colors.primary} />
+                      <View style={styles.groupInfo}>
+                        <View style={[styles.avatarContainer, { backgroundColor: theme.colors.accent }]}>
+                          <Ionicons 
+                            name="people" 
+                            size={24} 
+                            color={theme.colors.primary} 
+                          />
                         </View>
-                        <Text style={[styles.groupName, { color: theme.colors.onSurface }]}>
+                        <Text style={[styles.groupName, { color: theme.colors.text }]}>
                           {group.name}
                         </Text>
-                        <View style={styles.arrowContainer}>
-                          <Ionicons name="chevron-forward" size={20} color={theme.colors.onSurfaceVariant} />
-                        </View>
                       </View>
+                      <Ionicons name="chevron-forward" size={20} color={theme.colors.secondaryText} />
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -193,19 +195,19 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1e293b',
     marginBottom: 12,
     paddingLeft: 4,
   },
-  groupsGrid: {
-    gap: 12,
+  groupsContainer: {
+    gap: 8,
   },
   groupItem: {
-    backgroundColor: '#ffffff',
-    borderRadius: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 12,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
-    overflow: 'hidden',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -218,27 +220,22 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  groupContent: {
+  groupInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 14,
     gap: 12,
+    flex: 1,
   },
-  iconContainer: {
+  avatarContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#f3f0ff',
     justifyContent: 'center',
     alignItems: 'center',
   },
   groupName: {
-    flex: 1,
     fontSize: 16,
-    color: '#1e293b',
-    fontWeight: '600',
-  },
-  arrowContainer: {
-    marginLeft: 'auto',
+    fontWeight: '500',
+    flex: 1,
   },
 }); 

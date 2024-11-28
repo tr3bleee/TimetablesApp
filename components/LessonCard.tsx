@@ -205,8 +205,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       styles.container, 
       { 
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.outline,
-        padding: settings.compactMode ? 8 : 12,
+        borderColor: theme.colors.border,
       }
     ]}>
       <View style={[styles.timeContainer, {
@@ -324,7 +323,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 16,
     marginTop: 12,
-    borderRadius: 16,
+    borderRadius: 12,
     borderWidth: 1,
     overflow: 'hidden',
     ...Platform.select({
