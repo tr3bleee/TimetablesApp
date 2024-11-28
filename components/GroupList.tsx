@@ -49,7 +49,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.searchContainer, { 
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.border
+        borderColor: theme.colors.border,
       }]}>
         <Ionicons name="search" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput

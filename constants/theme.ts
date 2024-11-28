@@ -14,6 +14,8 @@ export const lightTheme: CustomMD3Theme = {
     card: '#ffffff',
     icon: '#7f61dd',
     accent: '#f3f0ff',
+    primaryContainer: '#f3f0ff',
+    onPrimaryContainer: '#1e293b',
   },
 } as CustomMD3Theme;
 
@@ -22,15 +24,15 @@ export const darkTheme: CustomMD3Theme = {
   colors: {
     ...MD3DarkTheme.colors,
     primary: '#a585ff',
-    background: '#121212',
-    surface: '#1e1e1e',
+    background: '#000000',
+    surface: '#111111',
     text: '#ffffff',
     secondaryText: '#b4b4b4',
-    border: '#323232',
-    card: '#1a1a1a',
+    border: '#222222',
+    card: '#111111',
     icon: '#a585ff',
-    accent: '#201736',
-    primaryContainer: '#201736',
+    accent: '#150d24',
+    primaryContainer: '#150d24',
     onPrimaryContainer: '#b4b4b4',
   },
 } as CustomMD3Theme;
