@@ -4,6 +4,7 @@ import { Lesson } from '@/app/types/schedule';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
+import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 
 interface Props {
   lesson: Lesson;
@@ -13,6 +14,7 @@ interface Props {
 export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
   const theme = useTheme();
   const router = useRouter();
+  const { settings } = useScheduleSettings();
 
   const handleTeacherPress = (teacherId: number) => {
     router.push(`/teacher/${teacherId}`);
@@ -210,17 +212,24 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
   };
 
   return (
-    <View style={[styles.container, { 
-      backgroundColor: theme.colors.surface,
-      borderColor: theme.colors.border
-    }]}>
+    <View style={[
+      styles.container, 
+      { 
+        backgroundColor: theme.colors.surface,
+        borderColor: theme.colors.border,
+        padding: settings.compactMode ? 8 : 12,
+      }
+    ]}>
       <View style={[styles.timeContainer, {
         backgroundColor: theme.colors.accent,
-        borderBottomColor: theme.colors.border
+        borderBottomColor: theme.colors.border,
+        padding: settings.compactMode ? 8 : 12,
       }]}>
-        <Text style={[styles.lessonNumber, { color: theme.colors.primary }]}>
-          №{lesson.lesson}
-        </Text>
+        {settings.showLessonNumbers && (
+          <Text style={[styles.lessonNumber, { color: theme.colors.primary }]}>
+            №{lesson.lesson}
+          </Text>
+        )}
         <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
           {lesson.startTime}
         </Text>
@@ -242,13 +251,16 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
         </View>
         
         <View style={styles.infoContainer}>
-          <Text style={[styles.subject, { color: theme.colors.text }]}>
+          <Text style={[styles.subject, { 
+            color: theme.colors.text,
+            fontSize: settings.compactMode ? 14 : 16,
+          }]}>
             {lesson.subject?.name || 'Нет предмета'}
           </Text>
           
           {!shouldShowSubgroups ? (
             <>
-              {!isTeacherSchedule && lesson.teachers.length > 0 && (
+              {!isTeacherSchedule && settings.showTeacherNames && lesson.teachers.length > 0 && (
                 <View style={styles.teachersContainer}>
                   <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
                   <View style={styles.teachersWrapper}>
@@ -271,7 +283,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
                 </View>
               )}
               
-              {lesson.cabinet && (
+              {settings.showCabinetNumbers && lesson.cabinet && (
                 <View style={styles.locationContainer}>
                   <Ionicons name="location-outline" size={14} color={theme.colors.secondaryText} />
                   <Text style={[styles.location, { color: theme.colors.secondaryText }]}>

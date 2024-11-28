@@ -6,14 +6,12 @@ import { MaterialSwitchListItem } from '@/components/MaterialSwitchListItem';
 import { useColorScheme } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useThemeContext } from '@/app/contexts/ThemeContext';
+import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 
 export default function Settings() {
   const theme = useTheme();
   const { isDarkTheme, useSystemTheme, toggleTheme, toggleSystemTheme } = useThemeContext();
-  const [showCabinetNumbers, setShowCabinetNumbers] = useState(true);
-  const [showTeacherNames, setShowTeacherNames] = useState(true);
-  const [compactMode, setCompactMode] = useState(false);
-  const [showLessonNumbers, setShowLessonNumbers] = useState(true);
+  const { settings, updateSettings } = useScheduleSettings();
 
   return (
     <>
@@ -42,35 +40,23 @@ export default function Settings() {
           </Text>
           <MaterialSwitchListItem
             title="Показывать номера кабинетов"
-            selected={showCabinetNumbers}
-            onPress={() => {
-              setShowCabinetNumbers(!showCabinetNumbers);
-              saveSettings('showCabinetNumbers', !showCabinetNumbers);
-            }}
+            selected={settings.showCabinetNumbers}
+            onPress={() => updateSettings('showCabinetNumbers', !settings.showCabinetNumbers)}
           />
           <MaterialSwitchListItem
             title="Показывать имена преподавателей"
-            selected={showTeacherNames}
-            onPress={() => {
-              setShowTeacherNames(!showTeacherNames);
-              saveSettings('showTeacherNames', !showTeacherNames);
-            }}
+            selected={settings.showTeacherNames}
+            onPress={() => updateSettings('showTeacherNames', !settings.showTeacherNames)}
           />
           <MaterialSwitchListItem
             title="Компактный режим"
-            selected={compactMode}
-            onPress={() => {
-              setCompactMode(!compactMode);
-              saveSettings('compactMode', !compactMode);
-            }}
+            selected={settings.compactMode}
+            onPress={() => updateSettings('compactMode', !settings.compactMode)}
           />
           <MaterialSwitchListItem
             title="Показывать номера уроков"
-            selected={showLessonNumbers}
-            onPress={() => {
-              setShowLessonNumbers(!showLessonNumbers);
-              saveSettings('showLessonNumbers', !showLessonNumbers);
-            }}
+            selected={settings.showLessonNumbers}
+            onPress={() => updateSettings('showLessonNumbers', !settings.showLessonNumbers)}
           />
         </View>
       </ScrollView>

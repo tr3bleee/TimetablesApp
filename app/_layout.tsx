@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { lightTheme, darkTheme } from '@/constants/theme';
 import { ThemeProvider, useThemeContext } from '@/app/contexts/ThemeContext';
+import { ScheduleSettingsProvider } from '@/app/contexts/ScheduleSettingsContext';
 
 const RootLayoutNav = () => {
   const router = useRouter();
@@ -64,7 +65,9 @@ const RootLayoutNav = () => {
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <RootLayoutNav />
+      <ScheduleSettingsProvider>
+        <RootLayoutNav />
+      </ScheduleSettingsProvider>
     </ThemeProvider>
   );
 }
