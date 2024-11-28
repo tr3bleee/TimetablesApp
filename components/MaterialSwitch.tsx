@@ -1,6 +1,7 @@
 import React from 'react';
 import { Animated, Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from 'react-native-paper';
 
 interface MaterialSwitchProps {
   selected: boolean;
@@ -19,6 +20,7 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
   switchOnIcon,
   switchOffIcon,
 }) => {
+  const theme = useTheme();
   const translateX = React.useRef(new Animated.Value(selected ? 20 : 0)).current;
 
   React.useEffect(() => {
@@ -41,7 +43,7 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
       disabled={disabled}
       style={[
         styles.switch,
-        selected ? styles.switchOn : styles.switchOff,
+        selected ? { backgroundColor: theme.colors.primary } : { backgroundColor: theme.colors.border },
         disabled && styles.disabled,
       ]}>
       <Animated.View
@@ -49,6 +51,7 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
           styles.thumb,
           {
             transform: [{ translateX }],
+            backgroundColor: theme.colors.surface,
           },
         ]}>
         {selected ? renderIcon(switchOnIcon) : renderIcon(switchOffIcon)}
@@ -64,12 +67,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 2,
   },
-  switchOn: {
-    backgroundColor: '#7f61dd',
-  },
-  switchOff: {
-    backgroundColor: '#e2e8f0',
-  },
   disabled: {
     opacity: 0.5,
   },
@@ -77,7 +74,6 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: '#fff',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {

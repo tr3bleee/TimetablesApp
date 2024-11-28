@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 import { Lesson } from '@/app/types/schedule';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from 'react-native-paper';
 
 interface Props {
   lesson: Lesson;
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
+  const theme = useTheme();
+
   const getSubjectIcon = () => {
     if (!lesson.subject) return 'help-circle-outline';
 
@@ -121,7 +124,6 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
       return 'reader-outline';
     }
 
-    // По умолчанию
     return 'book-outline';
   };
 
@@ -134,104 +136,98 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
       return null;
     }
 
+    let subgroups = [];
+
     // Если есть явные подгруппы, используем их
     if (hasExplicitSubgroups) {
-      const subgroups = lesson.unionGroups
-        .filter(group => group.subgroup?.name) // Фильтруем только группы с явными подгруппами
+      subgroups = lesson.unionGroups
+        .filter(group => group.subgroup?.name)
         .sort((a, b) => {
-          // Сортируем по номеру подгруппы
           const numA = parseInt(a.subgroup?.name?.match(/\d+/)?.[0] || '0');
           const numB = parseInt(b.subgroup?.name?.match(/\d+/)?.[0] || '0');
           return numA - numB;
         })
-        .map((group, index) => {
-          const teacher = lesson.teachers[index] || lesson.teachers[0];
-          const cabinet = Array.isArray(lesson.cabinet) ? lesson.cabinet[index] : lesson.cabinet;
-          return {
-            group,
-            teacher,
-            subgroupNumber: group.subgroup?.name || '',
-            cabinet
-          };
-        });
-
-      return (
-        <View style={styles.subgroupsContainer}>
-          {subgroups.map((subgroup, index) => (
-            <View key={index} style={styles.subgroupItem}>
-              <Text style={styles.subgroupTitle}>{subgroup.subgroupNumber}</Text>
-              {subgroup.teacher && (
-                <View style={styles.teachersContainer}>
-                  <Ionicons name="person-outline" size={14} color="#64748b" />
-                  <Text style={styles.teachers}>{subgroup.teacher.fio}</Text>
-                </View>
-              )}
-              {subgroup.cabinet && (
-                <View style={styles.locationContainer}>
-                  <Ionicons name="location-outline" size={14} color="#64748b" />
-                  <Text style={styles.location}>{subgroup.cabinet.name}</Text>
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
-      );
+        .map((group, index) => ({
+          group,
+          teacher: lesson.teachers[index] || lesson.teachers[0],
+          subgroupNumber: group.subgroup?.name || '',
+          cabinet: Array.isArray(lesson.cabinet) ? lesson.cabinet[index] : lesson.cabinet
+        }));
     }
-
     // Если есть несколько преподавателей, разделяем по ним
-    if (hasMultipleTeachers) {
-      const teacherSubgroups = lesson.teachers.map((teacher, index) => ({
+    else if (hasMultipleTeachers) {
+      subgroups = lesson.teachers.map((teacher, index) => ({
         teacher,
-        subgroupNumber: index + 1,
+        subgroupNumber: `Подгруппа ${index + 1}`,
         cabinet: Array.isArray(lesson.cabinet) ? lesson.cabinet[index] : lesson.cabinet
       }));
-
-      return (
-        <View style={styles.subgroupsContainer}>
-          {teacherSubgroups.map((subgroup, index) => (
-            <View key={index} style={styles.subgroupItem}>
-              <Text style={styles.subgroupTitle}>
-                {`Подгруппа ${subgroup.subgroupNumber}`}
-              </Text>
-              <View style={styles.teachersContainer}>
-                <Ionicons name="person-outline" size={14} color="#64748b" />
-                <Text style={styles.teachers}>{subgroup.teacher.fio}</Text>
-              </View>
-              {subgroup.cabinet && (
-                <View style={styles.locationContainer}>
-                  <Ionicons name="location-outline" size={14} color="#64748b" />
-                  <Text style={styles.location}>{subgroup.cabinet.name}</Text>
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
-      );
     }
 
-    return null;
+    return (
+      <View style={styles.subgroupsContainer}>
+        {subgroups.map((subgroup, index) => (
+          <View key={index} style={[styles.subgroupItem, { 
+            backgroundColor: theme.colors.accent 
+          }]}>
+            <Text style={[styles.subgroupTitle, { color: theme.colors.primary }]}>
+              {subgroup.subgroupNumber}
+            </Text>
+            {subgroup.teacher && (
+              <View style={styles.teachersContainer}>
+                <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
+                <Text style={[styles.teachers, { color: theme.colors.secondaryText }]}>
+                  {subgroup.teacher.fio}
+                </Text>
+              </View>
+            )}
+            {subgroup.cabinet && (
+              <View style={styles.locationContainer}>
+                <Ionicons name="location-outline" size={14} color={theme.colors.secondaryText} />
+                <Text style={[styles.location, { color: theme.colors.secondaryText }]}>
+                  {subgroup.cabinet.name}
+                </Text>
+              </View>
+            )}
+          </View>
+        ))}
+      </View>
+    );
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.timeContainer}>
-        <Text style={styles.lessonNumber}>№{lesson.lesson}</Text>
-        <Text style={styles.time}>{lesson.startTime}</Text>
-        <Text style={styles.timeDivider}>—</Text>
-        <Text style={styles.time}>{lesson.endTime}</Text>
+    <View style={[styles.container, { 
+      backgroundColor: theme.colors.surface,
+      borderColor: theme.colors.border
+    }]}>
+      <View style={[styles.timeContainer, {
+        backgroundColor: theme.colors.accent,
+        borderBottomColor: theme.colors.border
+      }]}>
+        <Text style={[styles.lessonNumber, { color: theme.colors.primary }]}>
+          №{lesson.lesson}
+        </Text>
+        <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
+          {lesson.startTime}
+        </Text>
+        <Text style={[styles.timeDivider, { color: theme.colors.secondaryText }]}>
+          —
+        </Text>
+        <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
+          {lesson.endTime}
+        </Text>
       </View>
       
       <View style={styles.contentContainer}>
-        <View style={styles.iconContainer}>
+        <View style={[styles.iconContainer, { backgroundColor: theme.colors.accent }]}>
           <Ionicons 
             name={getSubjectIcon()} 
             size={24} 
-            color="#7f61dd" 
+            color={theme.colors.primary} 
           />
         </View>
         
         <View style={styles.infoContainer}>
-          <Text style={styles.subject}>
+          <Text style={[styles.subject, { color: theme.colors.text }]}>
             {lesson.subject?.name || 'Нет предмета'}
           </Text>
           
@@ -239,8 +235,8 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
             <>
               {!isTeacherSchedule && lesson.teachers.length > 0 && (
                 <View style={styles.teachersContainer}>
-                  <Ionicons name="person-outline" size={14} color="#64748b" />
-                  <Text style={styles.teachers}>
+                  <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
+                  <Text style={[styles.teachers, { color: theme.colors.secondaryText }]}>
                     {lesson.teachers.map(t => t.fio).join(', ')}
                   </Text>
                 </View>
@@ -248,15 +244,17 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
               
               {lesson.cabinet && (
                 <View style={styles.locationContainer}>
-                  <Ionicons name="location-outline" size={14} color="#64748b" />
-                  <Text style={styles.location}>{lesson.cabinet.name}</Text>
+                  <Ionicons name="location-outline" size={14} color={theme.colors.secondaryText} />
+                  <Text style={[styles.location, { color: theme.colors.secondaryText }]}>
+                    {lesson.cabinet.name}
+                  </Text>
                 </View>
               )}
 
               {isTeacherSchedule && lesson.unionGroups.length > 0 && (
                 <View style={styles.groupsContainer}>
-                  <Ionicons name="people-outline" size={14} color="#64748b" />
-                  <Text style={styles.groups}>
+                  <Ionicons name="people-outline" size={14} color={theme.colors.secondaryText} />
+                  <Text style={[styles.groups, { color: theme.colors.secondaryText }]}>
                     {lesson.unionGroups.map(g => g.group.name).join(', ')}
                   </Text>
                 </View>
@@ -273,12 +271,10 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
     marginHorizontal: 16,
     marginTop: 12,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
     overflow: 'hidden',
     ...Platform.select({
       ios: {
@@ -296,25 +292,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
-    backgroundColor: '#f8fafc',
     borderBottomWidth: 1,
-    borderBottomColor: '#e2e8f0',
     gap: 8,
   },
   lessonNumber: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#7f61dd',
     marginRight: 4,
   },
   time: {
     fontSize: 14,
-    color: '#64748b',
     fontWeight: '500',
   },
   timeDivider: {
     fontSize: 14,
-    color: '#94a3b8',
   },
   contentContainer: {
     flexDirection: 'row',
@@ -325,7 +316,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#f3f0ff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -336,7 +326,6 @@ const styles = StyleSheet.create({
   subject: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1e293b',
   },
   teachersContainer: {
     flexDirection: 'row',
@@ -345,7 +334,6 @@ const styles = StyleSheet.create({
   },
   teachers: {
     fontSize: 14,
-    color: '#64748b',
     flex: 1,
   },
   locationContainer: {
@@ -355,7 +343,6 @@ const styles = StyleSheet.create({
   },
   location: {
     fontSize: 14,
-    color: '#64748b',
   },
   groupsContainer: {
     flexDirection: 'row',
@@ -364,7 +351,6 @@ const styles = StyleSheet.create({
   },
   groups: {
     fontSize: 14,
-    color: '#64748b',
     flex: 1,
   },
   subgroupsContainer: {
@@ -372,7 +358,6 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   subgroupItem: {
-    backgroundColor: '#f8fafc',
     borderRadius: 12,
     padding: 12,
     gap: 8,
@@ -380,11 +365,9 @@ const styles = StyleSheet.create({
   subgroupTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#7f61dd',
   },
   divider: {
     height: 1,
-    backgroundColor: '#e2e8f0',
     marginVertical: 8,
   },
 });

@@ -4,13 +4,17 @@ import { TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-  
-export default function RootLayout() {
+import { lightTheme, darkTheme } from '@/constants/theme';
+import { ThemeProvider, useThemeContext } from '@/app/contexts/ThemeContext';
+
+const RootLayoutNav = () => {
   const router = useRouter();
+  const { isDarkTheme } = useThemeContext();
+  const theme = isDarkTheme ? darkTheme : lightTheme;
 
   return (
-    <PaperProvider>
-      <ExpoStatusBar style="dark" />
+    <PaperProvider theme={theme}>
+      <ExpoStatusBar style={isDarkTheme ? 'light' : 'dark'} />
       <Stack>
         <Stack.Screen 
           name="(tabs)" 
@@ -20,7 +24,10 @@ export default function RootLayout() {
               android: 'Хекслет Колледж'
             }),
             headerTitleStyle: {
-              color: '#1e293b',
+              color: theme.colors.text,
+            },
+            headerStyle: {
+              backgroundColor: theme.colors.surface,
             },
             headerRight: () => (
               <TouchableOpacity 
@@ -30,7 +37,7 @@ export default function RootLayout() {
                 <Ionicons
                   name="information-circle-outline"
                   size={24}
-                  color="#7f61dd"
+                  color={theme.colors.primary}
                 />
               </TouchableOpacity>
             ),
@@ -39,23 +46,25 @@ export default function RootLayout() {
         <Stack.Screen 
           name="info"
           options={{
-            headerTintColor: "#7f61dd",
+            headerTintColor: theme.colors.primary,
             headerBackTitle: "Расписание",
             headerTitleStyle: {
-              color: "#1e293b",
+              color: theme.colors.text,
             },
-          }}
-        />
-        <Stack.Screen 
-          name="teacher"
-          options={{
-            title: 'Преподаватели',
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="people-outline" size={size} color={color} />
-            ),
+            headerStyle: {
+              backgroundColor: theme.colors.surface,
+            },
           }}
         />
       </Stack>
     </PaperProvider>
+  );
+};
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutNav />
+    </ThemeProvider>
   );
 }

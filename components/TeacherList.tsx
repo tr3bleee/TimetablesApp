@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TeacherInfo } from '@/app/types/teacher';
+import { useTheme } from 'react-native-paper';
 
 interface TeacherListProps {
   teachers: TeacherInfo[];
@@ -17,6 +18,7 @@ interface TeacherListProps {
 }
 
 export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeacher }) => {
+  const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,53 +39,63 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#64748b" style={styles.searchIcon} />
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.searchContainer, {
+        backgroundColor: theme.colors.surface,
+        borderColor: theme.colors.border
+      }]}>
+        <Ionicons name="search" size={20} color={theme.colors.secondaryText} style={styles.searchIcon} />
         <TextInput
-          style={styles.searchInput}
+          style={[styles.searchInput, { color: theme.colors.text }]}
           placeholder="Поиск преподавателя..."
           value={searchQuery}
           onChangeText={handleSearch}
-          placeholderTextColor="#94a3b8"
+          placeholderTextColor={theme.colors.secondaryText}
         />
         {searchQuery.length > 0 && (
           <TouchableOpacity 
             onPress={() => setSearchQuery('')}
             style={styles.clearButton}
           >
-            <Ionicons name="close-circle" size={20} color="#94a3b8" />
+            <Ionicons name="close-circle" size={20} color={theme.colors.secondaryText} />
           </TouchableOpacity>
         )}
       </View>
 
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#7f61dd" />
+          <ActivityIndicator size="large" color={theme.colors.primary} />
         </View>
       ) : filteredTeachers.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="people" size={48} color="#94a3b8" />
-          <Text style={styles.emptyText}>Преподаватели не найдены</Text>
+          <Ionicons name="people" size={48} color={theme.colors.secondaryText} />
+          <Text style={[styles.emptyText, { color: theme.colors.secondaryText }]}>
+            Преподаватели не найдены
+          </Text>
         </View>
       ) : (
         <ScrollView style={styles.list}>
           {filteredTeachers.map((teacher) => (
             <TouchableOpacity
               key={teacher.id}
-              style={styles.teacherItem}
+              style={[styles.teacherItem, {
+                backgroundColor: theme.colors.surface,
+                borderColor: theme.colors.border
+              }]}
               onPress={() => onSelectTeacher(teacher)}
               activeOpacity={0.7}
             >
               <View style={styles.teacherInfo}>
-                <View style={styles.avatarContainer}>
-                  <Text style={styles.avatarText}>
+                <View style={[styles.avatarContainer, { backgroundColor: theme.colors.accent }]}>
+                  <Text style={[styles.avatarText, { color: theme.colors.primary }]}>
                     {teacher.fio.split(' ').map(word => word[0]).join('')}
                   </Text>
                 </View>
-                <Text style={styles.teacherName}>{teacher.fio}</Text>
+                <Text style={[styles.teacherName, { color: theme.colors.text }]}>
+                  {teacher.fio}
+                </Text>
               </View>
-              <Ionicons name="chevron-forward" size={20} color="#64748b" />
+              <Ionicons name="chevron-forward" size={20} color={theme.colors.secondaryText} />
             </TouchableOpacity>
           ))}
         </ScrollView>

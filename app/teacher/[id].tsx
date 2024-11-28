@@ -5,10 +5,12 @@ import { ScheduleView } from '@/components/ScheduleView';
 import { useSchedule } from '@/app/hooks/useSchedule';
 import { TEACHERS } from '@/constants/teachers';
 import { WeekSelector } from '@/components/WeekSelector';
+import { useTheme } from 'react-native-paper';
 
 export default function TeacherSchedulePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const teacher = TEACHERS.find(t => t.id === parseInt(id));
+  const theme = useTheme();
   
   const {
     schedule,
@@ -22,15 +24,18 @@ export default function TeacherSchedulePage() {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Stack.Screen 
         options={{
           title: teacher?.fio || `Преподаватель ${id}`,
-          headerTintColor: '#7f61dd',
+          headerTintColor: theme.colors.primary,
           headerTitleStyle: {
-            color: '#1e293b',
+            color: theme.colors.text,
             fontSize: 18,
             fontWeight: '600',
+          },
+          headerStyle: {
+            backgroundColor: theme.colors.surface,
           },
           headerBackTitle: 'Преподаватели',
         }}
@@ -53,6 +58,5 @@ export default function TeacherSchedulePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
   },
 }); 

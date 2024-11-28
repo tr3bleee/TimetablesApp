@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, ViewStyle } from 'react-native';
 import { MaterialSwitch } from './MaterialSwitch';
+import { useTheme } from 'react-native-paper';
 
 interface MaterialSwitchListItemProps {
   title: string;
@@ -23,12 +24,18 @@ export const MaterialSwitchListItem: React.FC<MaterialSwitchListItemProps> = ({
   switchOffIcon,
   listStyle,
 }) => {
+  const theme = useTheme();
+
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.container, listStyle]}
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.surface },
+        listStyle
+      ]}
       disabled={disabled}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, { color: theme.colors.text }]}>{title}</Text>
       <MaterialSwitch
         selected={selected}
         onPress={onPress}
@@ -47,11 +54,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
-    backgroundColor: '#fff',
   },
   title: {
     fontSize: 16,
-    color: '#334155',
     flex: 1,
     marginRight: 16,
   },

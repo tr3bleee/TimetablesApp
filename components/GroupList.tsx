@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { GroupInfo } from '@/constants/groups';
+import { useTheme } from 'react-native-paper';
 
 interface GroupListProps {
   groups: GroupInfo[];
@@ -18,6 +19,7 @@ interface GroupListProps {
 }
 
 export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) => {
+  const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,34 +46,39 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#64748b" style={styles.searchIcon} />
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.searchContainer, { 
+        backgroundColor: theme.colors.surface,
+        borderColor: theme.colors.border
+      }]}>
+        <Ionicons name="search" size={20} color={theme.colors.secondaryText} style={styles.searchIcon} />
         <TextInput
-          style={styles.searchInput}
+          style={[styles.searchInput, { color: theme.colors.text }]}
           placeholder="Поиск группы..."
           value={searchQuery}
           onChangeText={handleSearch}
-          placeholderTextColor="#94a3b8"
+          placeholderTextColor={theme.colors.secondaryText}
         />
         {searchQuery.length > 0 && (
           <TouchableOpacity 
             onPress={() => setSearchQuery('')}
             style={styles.clearButton}
           >
-            <Ionicons name="close-circle" size={20} color="#94a3b8" />
+            <Ionicons name="close-circle" size={20} color={theme.colors.secondaryText} />
           </TouchableOpacity>
         )}
       </View>
 
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#7f61dd" />
+          <ActivityIndicator size="large" color={theme.colors.primary} />
         </View>
       ) : Object.keys(groupedAndFilteredGroups).length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="school" size={48} color="#94a3b8" />
-          <Text style={styles.emptyText}>Группы не найдены</Text>
+          <Ionicons name="school" size={48} color={theme.colors.secondaryText} />
+          <Text style={[styles.emptyText, { color: theme.colors.secondaryText }]}>
+            Группы не найдены
+          </Text>
         </View>
       ) : (
         <ScrollView 
@@ -83,22 +90,29 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
             .sort(([a], [b]) => parseInt(a) - parseInt(b))
             .map(([category, categoryGroups]) => (
               <View key={category} style={styles.categoryContainer}>
-                <Text style={styles.categoryTitle}>{category}</Text>
+                <Text style={[styles.categoryTitle, { color: theme.colors.text }]}>
+                  {category}
+                </Text>
                 <View style={styles.groupsGrid}>
                   {categoryGroups.map((group) => (
                     <TouchableOpacity
                       key={group.id}
-                      style={styles.groupItem}
+                      style={[styles.groupItem, {
+                        backgroundColor: theme.colors.surface,
+                        borderColor: theme.colors.border
+                      }]}
                       onPress={() => onSelectGroup(group)}
                       activeOpacity={0.7}
                     >
                       <View style={styles.groupContent}>
-                        <View style={styles.iconContainer}>
-                          <Ionicons name="people" size={24} color="#7f61dd" />
+                        <View style={[styles.iconContainer, { backgroundColor: theme.colors.accent }]}>
+                          <Ionicons name="people" size={24} color={theme.colors.primary} />
                         </View>
-                        <Text style={styles.groupName}>{group.name}</Text>
+                        <Text style={[styles.groupName, { color: theme.colors.text }]}>
+                          {group.name}
+                        </Text>
                         <View style={styles.arrowContainer}>
-                          <Ionicons name="chevron-forward" size={20} color="#64748b" />
+                          <Ionicons name="chevron-forward" size={20} color={theme.colors.secondaryText} />
                         </View>
                       </View>
                     </TouchableOpacity>
@@ -115,7 +129,6 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
   },
   searchContainer: {
     flexDirection: 'row',

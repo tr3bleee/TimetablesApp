@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from 'react-native-paper';
 
 interface WeekSelectorProps {
   isNextWeek: boolean;
@@ -8,6 +9,7 @@ interface WeekSelectorProps {
 }
 
 export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekChange }) => {
+  const theme = useTheme();
   const [pressedButton, setPressedButton] = React.useState<'current' | 'next' | null>(null);
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
 
@@ -38,12 +40,15 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { 
+      backgroundColor: theme.colors.surface,
+      borderBottomColor: theme.colors.border 
+    }]}>
       <View style={styles.weekSelector}>
         <TouchableOpacity 
           style={[
             styles.weekButton, 
-            !isNextWeek && styles.weekButtonActive,
+            { backgroundColor: !isNextWeek ? theme.colors.primary : theme.colors.accent },
             pressedButton === 'current' && styles.weekButtonPressed
           ]}
           onPress={() => onWeekChange(false)}
@@ -56,11 +61,11 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
               <Ionicons 
                 name="today-outline" 
                 size={20} 
-                color={!isNextWeek ? '#ffffff' : '#64748b'} 
+                color={!isNextWeek ? theme.colors.surface : theme.colors.secondaryText} 
               />
               <Text style={[
                 styles.weekButtonText, 
-                !isNextWeek && styles.weekButtonTextActive
+                { color: !isNextWeek ? theme.colors.surface : theme.colors.secondaryText }
               ]}>
                 Текущая неделя
               </Text>
@@ -70,7 +75,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
         <TouchableOpacity 
           style={[
             styles.weekButton, 
-            isNextWeek && styles.weekButtonActive,
+            { backgroundColor: isNextWeek ? theme.colors.primary : theme.colors.accent },
             pressedButton === 'next' && styles.weekButtonPressed
           ]}
           onPress={() => onWeekChange(true)}
@@ -83,11 +88,11 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
               <Ionicons 
                 name="calendar-outline" 
                 size={20} 
-                color={isNextWeek ? '#ffffff' : '#64748b'} 
+                color={isNextWeek ? theme.colors.surface : theme.colors.secondaryText} 
               />
               <Text style={[
                 styles.weekButtonText, 
-                isNextWeek && styles.weekButtonTextActive
+                { color: isNextWeek ? theme.colors.surface : theme.colors.secondaryText }
               ]}>
                 Следующая неделя
               </Text>
@@ -95,7 +100,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
           </Animated.View>
         </TouchableOpacity>
       </View>
-      <Text style={styles.dateInfo}>
+      <Text style={[styles.dateInfo, { color: theme.colors.secondaryText }]}>
         Начало недели: {getStartDate()}
       </Text>
     </View>
@@ -104,10 +109,8 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#e2e8f0',
   },
   weekSelector: {
     flexDirection: 'row',
@@ -119,15 +122,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 12,
-    backgroundColor: '#f1f5f9',
     elevation: 1,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
-  },
-  weekButtonActive: {
-    backgroundColor: '#7f61dd',
   },
   weekButtonPressed: {
     opacity: 0.9,
@@ -141,16 +140,10 @@ const styles = StyleSheet.create({
   weekButtonText: {
     fontSize: 14,
     textAlign: 'center',
-    color: '#64748b',
     fontWeight: '500',
-  },
-  weekButtonTextActive: {
-    color: '#ffffff',
-    fontWeight: '600',
   },
   dateInfo: {
     fontSize: 13,
-    color: '#64748b',
     textAlign: 'center',
     marginTop: 8,
     fontWeight: '500',

@@ -10,9 +10,13 @@ import {
 import { useNavigation, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { useTheme } from 'react-native-paper';
+import { useThemeContext } from '@/app/contexts/ThemeContext';
 
 export default function InfoScreen() {
 	const navigation = useNavigation();
+	const theme = useTheme();
+	const { isDarkTheme } = useThemeContext();
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -31,64 +35,90 @@ export default function InfoScreen() {
 
 	return (
 		<>
-			<ExpoStatusBar style="dark" />			
+			<ExpoStatusBar style={isDarkTheme ? 'light' : 'dark'} />			
 			<Stack.Screen
 				options={{
-					headerTintColor: "#7f61dd",
+					headerTintColor: theme.colors.primary,
 					headerBackTitle: "Группы",
 					headerTitleStyle: {
-						color: "#1e293b",
+						color: theme.colors.text,
+					},
+					headerStyle: {
+						backgroundColor: theme.colors.surface,
 					},
 				}}
 			/>
-			<View style={styles.container}>
-				<View style={styles.header}>
-					<View style={styles.logoContainer}>
-						<Ionicons name="calendar" size={48} color="#7f61dd" />
+			<View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+				<View style={[styles.header, { 
+					backgroundColor: theme.colors.surface,
+					borderBottomColor: theme.colors.border 
+				}]}>
+					<View style={[styles.logoContainer, { backgroundColor: theme.colors.accent }]}>
+						<Ionicons name="calendar" size={48} color={theme.colors.primary} />
 					</View>
-					<Text style={styles.appName}>Расписание для Хекслет</Text>
-					<Text style={styles.version}>Версия 1.0.0</Text>
+					<Text style={[styles.appName, { color: theme.colors.text }]}>
+						Расписание для Хекслет
+					</Text>
+					<Text style={[styles.version, { color: theme.colors.secondaryText }]}>
+						Версия 1.0.0
+					</Text>
 				</View>
 
 				<View style={styles.content}>
-					<View style={styles.card}>
+					<View style={[styles.card, { 
+						backgroundColor: theme.colors.surface,
+						shadowColor: isDarkTheme ? '#000' : '#000',
+					}]}>
 						<View style={styles.cardHeader}>
 							<Ionicons
 								name="person-circle-outline"
 								size={24}
-								color="#7f61dd"
+								color={theme.colors.primary}
 							/>
-							<Text style={styles.cardTitle}>Разработчик</Text>
+							<Text style={[styles.cardTitle, { color: theme.colors.text }]}>
+								Разработчик
+							</Text>
 						</View>
-						<Text style={styles.developerName}>Новиков Никита</Text>
-						<Text style={styles.description}>
+						<Text style={[styles.developerName, { color: theme.colors.text }]}>
+							Новиков Никита
+						</Text>
+						<Text style={[styles.description, { color: theme.colors.secondaryText }]}>
 							Студент Хекслет Колледж{"\n"}
 							Группа 01-24.ИСИП.ОФ 9
 						</Text>
 					</View>
 
-					<View style={styles.card}>
+					<View style={[styles.card, { 
+						backgroundColor: theme.colors.surface,
+						shadowColor: isDarkTheme ? '#000' : '#000',
+					}]}>
 						<View style={styles.cardHeader}>
-							<Ionicons name="link-outline" size={24} color="#7f61dd" />
-							<Text style={styles.cardTitle}>Ссылки</Text>
+							<Ionicons name="link-outline" size={24} color={theme.colors.primary} />
+							<Text style={[styles.cardTitle, { color: theme.colors.text }]}>
+								Ссылки
+							</Text>
 						</View>
 						<View style={styles.linksContainer}>
 							<TouchableOpacity
-								style={styles.linkButton}
+								style={[styles.linkButton, { backgroundColor: theme.colors.accent }]}
 								onPress={openGithub}
 								activeOpacity={0.7}
 							>
-								<Ionicons name="logo-github" size={24} color="#7f61dd" />
-								<Text style={styles.linkText}>GitHub</Text>
+								<Ionicons name="logo-github" size={24} color={theme.colors.primary} />
+								<Text style={[styles.linkText, { color: theme.colors.primary }]}>
+									GitHub
+								</Text>
 							</TouchableOpacity>
 
 							<TouchableOpacity
-								style={styles.linkButton}
+								style={[styles.linkButton, { backgroundColor: theme.colors.accent }]}
 								onPress={openTelegram}
 								activeOpacity={0.7}
 							>
-								<Ionicons name="paper-plane" size={24} color="#7f61dd" />
-								<Text style={styles.linkText}>Telegram</Text>
+								<Ionicons name="paper-plane" size={24} color={theme.colors.primary} />
+								<Text style={[styles.linkText, { color: theme.colors.primary }]}>
+									Telegram
+								</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -101,7 +131,6 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#f8fafc",
 	},
 	header: {
 		alignItems: "center",
@@ -134,18 +163,17 @@ const styles = StyleSheet.create({
 		gap: 16,
 	},
 	card: {
-		backgroundColor: "#ffffff",
 		borderRadius: 16,
 		padding: 16,
 		...Platform.select({
 			ios: {
-				shadowColor: "#000",
+				shadowColor: '#000',
 				shadowOffset: { width: 0, height: 2 },
 				shadowOpacity: 0.1,
 				shadowRadius: 4,
 			},
 			android: {
-				elevation: 3,
+					elevation: 3,
 			},
 		}),
 	},

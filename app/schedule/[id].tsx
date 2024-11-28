@@ -5,10 +5,12 @@ import { ScheduleView } from '@/components/ScheduleView';
 import { useSchedule } from '@/app/hooks/useSchedule';
 import { GROUPS } from '@/constants/groups';
 import { WeekSelector } from '@/components/WeekSelector';
+import { useTheme } from 'react-native-paper';
 
 export default function SchedulePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const group = GROUPS.find(g => g.id === parseInt(id));
+  const theme = useTheme();
   
   const {
     schedule,
@@ -22,15 +24,18 @@ export default function SchedulePage() {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Stack.Screen 
         options={{
           title: group?.name || `Группа ${id}`,
-          headerTintColor: '#7f61dd',
+          headerTintColor: theme.colors.primary,
           headerTitleStyle: {
-            color: '#1e293b',
+            color: theme.colors.text,
             fontSize: 18,
             fontWeight: '600',
+          },
+          headerStyle: {
+            backgroundColor: theme.colors.surface,
           },
           headerBackTitle: 'Группы',
         }}
@@ -52,6 +57,5 @@ export default function SchedulePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
   },
 });
