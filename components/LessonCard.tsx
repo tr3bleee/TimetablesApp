@@ -6,6 +6,22 @@ import { useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 
+interface Subgroup {
+  group?: {
+    subgroup?: {
+      name: string;
+    };
+  };
+  teacher?: {
+    id: number;
+    fio: string;
+  };
+  subgroupNumber: string;
+  cabinet?: {
+    name: string;
+  };
+}
+
 interface Props {
   lesson: Lesson;
   isTeacherSchedule?: boolean;
@@ -99,63 +115,14 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
     }
 
     // Физкультура и спорт
-    if (subjectName.includes('физкультур') || 
-        subjectName.includes('спорт')) {
+    if (subjectName.includes('физическая культура')) {
       return 'basketball-outline';
-    }
-
-    // Музыка
-    if (subjectName.includes('музык')) {
-      return 'musical-notes-outline';
-    }
-
-    // Искусство
-    if (subjectName.includes('искусств') || 
-        subjectName.includes('рисован') ||
-        subjectName.includes('изо')) {
-      return 'color-palette-outline';
-    }
-
-    // Технология
-    if (subjectName.includes('технолог')) {
-      return 'construct-outline';
     }
 
     // ОБЖ
     if (subjectName.includes('обж') || 
         subjectName.includes('безопасност')) {
       return 'shield-checkmark-outline';
-    }
-
-    // Экономика
-    if (subjectName.includes('эконом')) {
-      return 'cash-outline';
-    }
-
-    // Право
-    if (subjectName.includes('право')) {
-      return 'receipt-outline';
-    }
-
-    // Психология
-    if (subjectName.includes('психолог')) {
-      return 'brain-outline';
-    }
-
-    // Философия
-    if (subjectName.includes('философ')) {
-      return 'prism-outline';
-    }
-
-    // Практика/лабораторные
-    if (subjectName.includes('практик') || 
-        subjectName.includes('лабораторн')) {
-      return 'flask-outline';
-    }
-
-    // Лекции
-    if (subjectName.includes('лекци')) {
-      return 'reader-outline';
     }
 
     return 'book-outline';
@@ -170,7 +137,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       return null;
     }
 
-    let subgroups = [];
+    let subgroups: Subgroup[] = [];
 
     // Если есть явные подгруппы, используем их
     if (hasExplicitSubgroups) {
@@ -201,16 +168,16 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       <View style={styles.subgroupsContainer}>
         {subgroups.map((subgroup, index) => (
           <View key={index} style={[styles.subgroupItem, { 
-            backgroundColor: theme.colors.accent 
+            backgroundColor: theme.colors.surfaceVariant 
           }]}>
             <Text style={[styles.subgroupTitle, { color: theme.colors.primary }]}>
               {subgroup.subgroupNumber}
             </Text>
             {subgroup.teacher && (
               <View style={styles.teachersContainer}>
-                <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
+                <Ionicons name="person-outline" size={14} color={theme.colors.onSurfaceVariant} />
                 <TouchableOpacity
-                  onPress={() => handleTeacherPress(subgroup.teacher.id)}
+                  onPress={() => subgroup.teacher && handleTeacherPress(subgroup.teacher.id)}
                   activeOpacity={0.7}
                 >
                   <Text style={[styles.teacherLink, { color: theme.colors.primary }]}>
@@ -221,8 +188,8 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
             )}
             {subgroup.cabinet && (
               <View style={styles.locationContainer}>
-                <Ionicons name="location-outline" size={14} color={theme.colors.secondaryText} />
-                <Text style={[styles.location, { color: theme.colors.secondaryText }]}>
+                <Ionicons name="location-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                <Text style={[styles.location, { color: theme.colors.onSurfaceVariant }]}>
                   {subgroup.cabinet.name}
                 </Text>
               </View>
@@ -238,13 +205,13 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       styles.container, 
       { 
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.border,
+        borderColor: theme.colors.outline,
         padding: settings.compactMode ? 8 : 12,
       }
     ]}>
       <View style={[styles.timeContainer, {
-        backgroundColor: theme.colors.accent,
-        borderBottomColor: theme.colors.border,
+        backgroundColor: theme.colors.surfaceVariant,
+        borderBottomColor: theme.colors.outline,
         padding: settings.compactMode ? 8 : 12,
       }]}>
         {settings.showLessonNumbers && (
@@ -253,17 +220,17 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
           </Text>
         )}
         <View style={styles.timeWrapper}>
-          <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
+          <Text style={[styles.time, { color: theme.colors.onSurface }]}>
             {lesson.startTime}
           </Text>
-          <Text style={[styles.timeDivider, { color: theme.colors.secondaryText }]}>
+          <Text style={[styles.timeDivider, { color: theme.colors.onSurface }]}>
             —
           </Text>
-          <Text style={[styles.time, { color: theme.colors.secondaryText }]}>
+          <Text style={[styles.time, { color: theme.colors.onSurface }]}>
             {lesson.endTime}
           </Text>
           {isCurrentLesson(lesson, isNextWeek) && (
-            <Text style={[styles.currentIndicator, { color: '#22c55e' }]}>
+            <Text style={[styles.currentIndicator, { color: theme.colors.primary }]}>
               Сейчас
             </Text>
           )}
@@ -271,7 +238,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       </View>
       
       <View style={styles.contentContainer}>
-        <View style={[styles.iconContainer, { backgroundColor: theme.colors.accent }]}>
+        <View style={[styles.iconContainer, { backgroundColor: theme.colors.surfaceVariant }]}>
           <Ionicons 
             name={getSubjectIcon()} 
             size={24} 
@@ -281,7 +248,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
         
         <View style={styles.infoContainer}>
           <Text style={[styles.subject, { 
-            color: theme.colors.text,
+            color: theme.colors.onSurface,
             fontSize: settings.compactMode ? 14 : 16,
           }]}>
             {lesson.subject?.name || 'Нет предмета'}
@@ -291,7 +258,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
             <>
               {!isTeacherSchedule && settings.showTeacherNames && lesson.teachers.length > 0 && (
                 <View style={styles.teachersContainer}>
-                  <Ionicons name="person-outline" size={14} color={theme.colors.secondaryText} />
+                  <Ionicons name="person-outline" size={14} color={theme.colors.onSurfaceVariant} />
                   <View style={styles.teachersWrapper}>
                     {lesson.teachers.map((teacher, index) => (
                       <React.Fragment key={teacher.id}>
@@ -304,7 +271,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
                           </Text>
                         </TouchableOpacity>
                         {index < lesson.teachers.length - 1 && (
-                          <Text style={{ color: theme.colors.secondaryText }}>, </Text>
+                          <Text style={{ color: theme.colors.onSurfaceVariant }}>, </Text>
                         )}
                       </React.Fragment>
                     ))}
@@ -314,8 +281,8 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
               
               {settings.showCabinetNumbers && lesson.cabinet && (
                 <View style={styles.locationContainer}>
-                  <Ionicons name="location-outline" size={14} color={theme.colors.secondaryText} />
-                  <Text style={[styles.location, { color: theme.colors.secondaryText }]}>
+                  <Ionicons name="location-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                  <Text style={[styles.location, { color: theme.colors.onSurfaceVariant }]}>
                     {lesson.cabinet.name}
                   </Text>
                 </View>
@@ -323,7 +290,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
 
               {isTeacherSchedule && lesson.unionGroups.length > 0 && (
                 <View style={styles.groupsContainer}>
-                  <Ionicons name="people-outline" size={14} color={theme.colors.secondaryText} />
+                  <Ionicons name="people-outline" size={14} color={theme.colors.onSurfaceVariant} />
                   <View style={styles.groupsWrapper}>
                     {lesson.unionGroups.map((group, index) => (
                       <React.Fragment key={group.group.id}>
@@ -336,7 +303,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
                           </Text>
                         </TouchableOpacity>
                         {index < lesson.unionGroups.length - 1 && (
-                          <Text style={{ color: theme.colors.secondaryText }}>, </Text>
+                          <Text style={{ color: theme.colors.onSurfaceVariant }}>, </Text>
                         )}
                       </React.Fragment>
                     ))}
