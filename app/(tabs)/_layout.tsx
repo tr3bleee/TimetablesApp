@@ -1,10 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { useTheme } from 'react-native-paper';
-import { Platform } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 
 export default function TabLayout() {
 	const theme = useTheme();
+	const router = useRouter();
 
 	return (
 		<Tabs
@@ -75,6 +76,18 @@ export default function TabLayout() {
 				name="settings"
 				options={{
 					title: "Настройки",
+					headerRight: () => (
+						<TouchableOpacity 
+							onPress={() => router.push('/info')}
+							style={{ marginRight: 15 }}
+						>
+							<Ionicons
+								name="information-circle"
+								size={24}
+								color={theme.colors.primary}
+							/>
+						</TouchableOpacity>
+					),
 					tabBarIcon: ({ color, size }) => (
 						<Ionicons name="settings" size={size} color={color} />
 					),

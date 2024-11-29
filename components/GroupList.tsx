@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingTop: 80,
+    paddingTop: 56,
     paddingBottom: 32,
   },
   sectionHeader: {

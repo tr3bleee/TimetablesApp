@@ -24,36 +24,15 @@ const RootLayoutNav = () => {
         <Stack.Screen 
           name="(tabs)" 
           options={{ 
-            title: Platform.select({
-              ios: 'Хекслет Колледж',
-              android: 'Хекслет Колледж'
-            }),
-            headerTitleStyle: {
-              color: theme.colors.text,
-            },
-            headerStyle: {
-              backgroundColor: theme.colors.surface,
-            },
-            headerRight: () => (
-              <TouchableOpacity 
-                onPress={() => router.push('/info')}
-                style={{ marginRight: 15 }}
-              >
-                <Ionicons
-                  name="information-circle"
-                  size={24}
-                  color={theme.colors.primary}
-                />
-              </TouchableOpacity>
-            ),
-            headerTintColor: theme.colors.primary,
+            headerShown: false,
           }} 
         />
         <Stack.Screen 
           name="info"
           options={{
             headerTintColor: theme.colors.primary,
-            headerBackTitle: "Расписание",
+            headerBackTitle: "Назад",
+            headerTitle: "О приложении",
             headerTitleStyle: {
               color: theme.colors.text,
             },
