@@ -16,7 +16,11 @@ const RootLayoutNav = () => {
   return (
     <PaperProvider theme={theme}>
       <ExpoStatusBar style={isDarkTheme ? 'light' : 'dark'} />
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerTintColor: theme.colors.primary,
+        }}
+      >
         <Stack.Screen 
           name="(tabs)" 
           options={{ 
@@ -42,6 +46,7 @@ const RootLayoutNav = () => {
                 />
               </TouchableOpacity>
             ),
+            headerTintColor: theme.colors.primary,
           }} 
         />
         <Stack.Screen 
