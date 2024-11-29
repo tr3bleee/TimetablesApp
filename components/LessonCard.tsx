@@ -63,67 +63,48 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
   };
 
   const getSubjectIcon = () => {
-    if (!lesson.subject) return 'help-circle-outline';
+    if (!lesson.subject) return 'help-circle';
 
     const subjectName = lesson.subject.name.toLowerCase();
 
-    // Математика и связанные предметы
     if (subjectName.includes('математик') || 
         subjectName.includes('алгебра') || 
         subjectName.includes('геометрия')) {
-      return 'calculator-outline';
+      return 'calculator';
     }
-
-    // Информатика и программирование
     if (subjectName.includes('информатик') || 
         subjectName.includes('программирован')) {
-      return 'code-slash-outline';
+      return 'code-slash';
     }
-
-    // Физика
     if (subjectName.includes('физик')) {
-      return 'flash-outline';
+      return 'flash';
     }
-
-    // Химия
     if (subjectName.includes('хими')) {
-      return 'flask-outline';
+      return 'flask';
     }
-
-    // Биология
     if (subjectName.includes('биолог')) {
-      return 'leaf-outline';
+      return 'leaf';
     }
-
-    // География
     if (subjectName.includes('географ')) {
-      return 'globe-outline';
+      return 'globe';
     }
-
-    // История
     if (subjectName.includes('истори')) {
-      return 'time-outline';
+      return 'time';
     }
-
-    // Языки
     if (subjectName.includes('язык') || 
         subjectName.includes('литератур')) {
-      return 'language-outline';
+      return 'language';
     }
-
-    // Физкультура
     if (subjectName.includes('физкультур') || 
         subjectName.includes('физическая культура')) {
-      return 'fitness-outline';
+      return 'fitness';
     }
-
-    // ОБЖ
     if (subjectName.includes('безопасност') || 
         subjectName.includes('обж')) {
-      return 'shield-checkmark-outline';
+      return 'shield-checkmark';
     }
 
-    return 'book-outline';
+    return 'book';
   };
 
   const hasMultipleTeachers = lesson.teachers.length > 1;
@@ -173,7 +154,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
             </Text>
             {subgroup.teacher && (
               <View style={styles.teachersContainer}>
-                <Ionicons name="person-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                <Ionicons name="person" size={14} color={theme.colors.onSurfaceVariant} />
                 <TouchableOpacity
                   onPress={() => subgroup.teacher && handleTeacherPress(subgroup.teacher.id)}
                   activeOpacity={0.7}
@@ -186,7 +167,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
             )}
             {subgroup.cabinet && (
               <View style={styles.locationContainer}>
-                <Ionicons name="location-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                <Ionicons name="location" size={14} color={theme.colors.onSurfaceVariant} />
                 <Text style={[styles.location, { color: theme.colors.onSurfaceVariant }]}>
                   {subgroup.cabinet.name}
                 </Text>
@@ -255,7 +236,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
             <>
               {!isTeacherSchedule && settings.showTeacherNames && lesson.teachers.length > 0 && (
                 <View style={styles.teachersContainer}>
-                  <Ionicons name="person-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                  <Ionicons name="person" size={14} color={theme.colors.onSurfaceVariant} />
                   <View style={styles.teachersWrapper}>
                     {lesson.teachers.map((teacher, index) => (
                       <React.Fragment key={teacher.id}>
@@ -278,7 +259,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
               
               {settings.showCabinetNumbers && lesson.cabinet && (
                 <View style={styles.locationContainer}>
-                  <Ionicons name="location-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                  <Ionicons name="location" size={14} color={theme.colors.onSurfaceVariant} />
                   <Text style={[styles.location, { color: theme.colors.onSurfaceVariant }]}>
                     {lesson.cabinet.name}
                   </Text>
@@ -287,7 +268,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
 
               {isTeacherSchedule && lesson.unionGroups.length > 0 && (
                 <View style={styles.groupsContainer}>
-                  <Ionicons name="people-outline" size={14} color={theme.colors.onSurfaceVariant} />
+                  <Ionicons name="people" size={14} color={theme.colors.onSurfaceVariant} />
                   <View style={styles.groupsWrapper}>
                     {lesson.unionGroups.map((group, index) => (
                       <React.Fragment key={group.group.id}>

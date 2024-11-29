@@ -19,7 +19,7 @@ export default function Settings() {
       <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Ionicons name="color-palette-outline" size={20} color={theme.colors.primary} />
+            <Ionicons name="color-palette" size={20} color={theme.colors.primary} />
             <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
               Внешний вид
             </Text>
@@ -29,7 +29,7 @@ export default function Settings() {
               title="Использовать системную тему"
               selected={useSystemTheme}
               onPress={toggleSystemTheme}
-              switchOnIcon="phone-portrait-outline"
+              switchOnIcon="phone-portrait"
             />
             <View style={[styles.divider, { backgroundColor: theme.colors.outline }]} />
             <MaterialSwitchListItem
@@ -37,14 +37,14 @@ export default function Settings() {
               selected={isDarkTheme}
               onPress={toggleTheme}
               disabled={useSystemTheme}
-              switchOnIcon="moon-outline"
+              switchOnIcon="moon"
             />
           </View>
         </View>
         
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Ionicons name="calendar-outline" size={20} color={theme.colors.primary} />
+            <Ionicons name="calendar" size={20} color={theme.colors.primary} />
             <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
               Расписание
             </Text>
@@ -54,28 +54,28 @@ export default function Settings() {
               title="Показывать номера кабинетов"
               selected={settings.showCabinetNumbers}
               onPress={() => updateSettings('showCabinetNumbers', !settings.showCabinetNumbers)}
-              switchOnIcon="location-outline"
+              switchOnIcon="location"
             />
             <View style={[styles.divider, { backgroundColor: theme.colors.outline }]} />
             <MaterialSwitchListItem
               title="Показывать имена преподавателей"
               selected={settings.showTeacherNames}
               onPress={() => updateSettings('showTeacherNames', !settings.showTeacherNames)}
-              switchOnIcon="people-outline"
+              switchOnIcon="people"
             />
             <View style={[styles.divider, { backgroundColor: theme.colors.outline }]} />
             <MaterialSwitchListItem
               title="Компактный режим"
               selected={settings.compactMode}
               onPress={() => updateSettings('compactMode', !settings.compactMode)}
-              switchOnIcon="contract-outline"
+              switchOnIcon="contract"
             />
             <View style={[styles.divider, { backgroundColor: theme.colors.outline }]} />
             <MaterialSwitchListItem
               title="Показывать номера уроков"
               selected={settings.showLessonNumbers}
               onPress={() => updateSettings('showLessonNumbers', !settings.showLessonNumbers)}
-              switchOnIcon="list-outline"
+              switchOnIcon="list"
             />
           </View>
         </View>

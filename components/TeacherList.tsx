@@ -44,7 +44,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
         backgroundColor: theme.colors.surface,
         borderColor: theme.colors.outline
       }]}>
-        <Ionicons name="search-outline" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
+        <Ionicons name="search" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput
           style={[styles.searchInput, { color: theme.colors.onSurface }]}
           placeholder="Поиск преподавателя..."
@@ -68,7 +68,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
         </View>
       ) : filteredTeachers.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="person-outline" size={48} color={theme.colors.onSurfaceVariant} />
+          <Ionicons name="person" size={48} color={theme.colors.onSurfaceVariant} />
           <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
             Преподаватели не найдены
           </Text>
@@ -88,7 +88,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
               <View style={styles.teacherInfo}>
                 <View style={[styles.avatarContainer, { backgroundColor: theme.colors.primaryContainer }]}>
                   <Ionicons 
-                    name="person-circle-outline" 
+                    name="person-circle" 
                     size={24} 
                     color={theme.colors.primary} 
                   />
@@ -97,7 +97,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
                   {teacher.fio}
                 </Text>
               </View>
-              <Ionicons name="chevron-forward-outline" size={20} color={theme.colors.onSurfaceVariant} />
+              <Ionicons name="chevron-forward" size={20} color={theme.colors.onSurfaceVariant} />
             </TouchableOpacity>
           ))}
         </ScrollView>

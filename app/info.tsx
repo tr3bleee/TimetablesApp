@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useTheme } from 'react-native-paper';
 import { useThemeContext } from '@/app/contexts/ThemeContext';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function InfoScreen() {
 	const navigation = useNavigation();
@@ -54,7 +55,7 @@ export default function InfoScreen() {
 					borderBottomColor: theme.colors.outline 
 				}]}>
 					<View style={[styles.logoContainer, { backgroundColor: theme.colors.primaryContainer }]}>
-						<Ionicons name="school-outline" size={48} color={theme.colors.primary} />
+						<Ionicons name="school" size={48} color={theme.colors.primary} />
 					</View>
 					<Text style={[styles.appName, { color: theme.colors.onSurface }]}>
 						Расписание для Хекслет
@@ -71,7 +72,7 @@ export default function InfoScreen() {
 					}]}>
 						<View style={styles.cardHeader}>
 							<Ionicons
-								name="person-circle-outline"
+								name="person-circle"
 								size={24}
 								color={theme.colors.primary}
 							/>
@@ -93,7 +94,7 @@ export default function InfoScreen() {
 						borderColor: theme.colors.outline,
 					}]}>
 						<View style={styles.cardHeader}>
-							<Ionicons name="link-outline" size={24} color={theme.colors.primary} />
+							<Ionicons name="link" size={24} color={theme.colors.primary} />
 							<Text style={[styles.cardTitle, { color: theme.colors.onSurface }]}>
 								Ссылки
 							</Text>
@@ -115,7 +116,7 @@ export default function InfoScreen() {
 								onPress={openTelegram}
 								activeOpacity={0.7}
 							>
-								<Ionicons name="paper-plane-outline" size={24} color={theme.colors.primary} />
+								<FontAwesome name="telegram" size={24} color={theme.colors.primary} />
 								<Text style={[styles.linkText, { color: theme.colors.primary }]}>
 									Telegram
 								</Text>

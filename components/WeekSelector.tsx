@@ -59,7 +59,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
           <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
             <View style={styles.buttonContent}>
               <Ionicons 
-                name="today-outline" 
+                name="today" 
                 size={20} 
                 color={!isNextWeek ? theme.colors.surface : theme.colors.secondary} 
               />
@@ -86,7 +86,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
           <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
             <View style={styles.buttonContent}>
               <Ionicons 
-                name="calendar-outline" 
+                name="calendar" 
                 size={20} 
                 color={isNextWeek ? theme.colors.surface : theme.colors.secondary} 
               />

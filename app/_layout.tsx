@@ -40,7 +40,7 @@ const RootLayoutNav = () => {
                 style={{ marginRight: 15 }}
               >
                 <Ionicons
-                  name="information-circle-outline"
+                  name="information-circle"
                   size={24}
                   color={theme.colors.primary}
                 />
