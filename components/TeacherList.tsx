@@ -329,18 +329,18 @@ const styles = StyleSheet.create({
   teacherInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    gap: 16,
+    padding: 12,
+    gap: 12,
   },
   avatarContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '600',
   },
   teacherDetails: {
@@ -348,12 +348,12 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   teacherName: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
     letterSpacing: -0.3,
   },
   teacherPosition: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
     opacity: 0.8,
   },
