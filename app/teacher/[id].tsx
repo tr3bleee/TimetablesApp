@@ -6,6 +6,7 @@ import { useSchedule } from '@/app/hooks/useSchedule';
 import { TEACHERS } from '@/constants/teachers';
 import { WeekSelector } from '@/components/WeekSelector';
 import { useTheme } from 'react-native-paper';
+import { GroupData } from '@/app/types/schedule';
 
 export default function TeacherSchedulePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -45,7 +46,7 @@ export default function TeacherSchedulePage() {
         onWeekChange={handleWeekChange}
       />
       <ScheduleView
-        data={schedule}
+        data={schedule as GroupData | null}
         loading={loading}
         error={error}
         isNextWeek={isNextWeek}
