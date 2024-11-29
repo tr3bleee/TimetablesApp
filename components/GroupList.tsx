@@ -7,10 +7,13 @@ import {
   ScrollView,
   TextInput,
   ActivityIndicator,
-  Platform
+  Platform,
+  Animated,
+  LayoutAnimation,
+  FlatList
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { GroupInfo } from '../app/constants/groups';
+import { GroupInfo } from '@/constants/groups';
 import { useTheme } from 'react-native-paper';
 
 interface GroupListProps {
@@ -18,26 +21,66 @@ interface GroupListProps {
   onSelectGroup: (group: GroupInfo) => void;
 }
 
+const getSpecializationLabel = (name: string): string => {
+  if (name.includes('ОДФ')) return '';
+  if (name.includes('ИСИП')) return 'Информационные системы и программирование';
+  if (name.includes('СИСА')) return 'Системное администрирование';
+  if (name.includes('Д')) return 'Дизайн';
+  if (name.includes('Р')) return 'Реклама';
+  return 'Специальность не указана';
+};
+
+const getSpecializationColor = (name: string): string => {
+  if (name.includes('ИСИП')) return '#7c4dff';
+  if (name.includes('СИСА')) return '#00bcd4';
+  if (name.includes('Д')) return '#ff4081';
+  if (name.includes('Р')) return '#ff9800';
+  if (name.includes('ОДФ')) return '#4caf50';
+  return '#9e9e9e';
+};
+
+const sortGroups = (groups: GroupInfo[]) => {
+  return groups.sort((a, b) => {
+    // Сначала сортируем по категории (преобразуем строки в числа)
+    const catA = parseInt(a.category);
+    const catB = parseInt(b.category);
+    if (catA !== catB) {
+      return catA - catB;
+    }
+    
+    // Остальная логика сортировки остается той же
+    const specA = a.name.split('-')[0];
+    const specB = b.name.split('-')[0];
+    if (specA !== specB) {
+      if (specA === 'ОДФ') return -1;
+      if (specB === 'ОДФ') return 1;
+      return specA.localeCompare(specB);
+    }
+    
+    const numA = parseInt(a.name.split('-')[1] || '0');
+    const numB = parseInt(b.name.split('-')[1] || '0');
+    return numA - numB;
+  });
+};
+
 export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const scrollY = React.useRef(new Animated.Value(0)).current;
 
   const groupedAndFilteredGroups = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     
-    if (!query) {
-      return groups.reduce((acc, group) => {
-        const category = `${group.category} группа`;
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(group);
-        return acc;
-      }, {} as Record<string, GroupInfo[]>);
-    }
+    const filterGroup = (group: GroupInfo) => {
+      if (!query) return true;
+      return (
+        group.name.toLowerCase().includes(query) ||
+        getSpecializationLabel(group.name).toLowerCase().includes(query)
+      );
+    };
 
-    const filtered = groups.filter(group => 
-      group.name.toLowerCase().includes(query)
-    );
+    const filtered = sortGroups(groups.filter(filterGroup));
 
     return filtered.reduce((acc, group) => {
       const category = `${group.category} группа`;
@@ -48,42 +91,136 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
   }, [groups, searchQuery]);
 
   const handleSearch = (text: string) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (isLoading) return;
     setIsLoading(true);
-    requestAnimationFrame(() => {
-      setSearchQuery(text);
-      setIsLoading(false);
-    });
+    setSearchQuery(text);
+    setTimeout(() => setIsLoading(false), 300);
   };
 
-  const clearSearch = () => {
-    setSearchQuery('');
-    setIsLoading(false);
+  const renderGroupItem = ({ item: group }: { item: GroupInfo }) => {
+    const scaleAnim = React.useRef(new Animated.Value(1)).current;
+
+    const handlePressIn = () => {
+      Animated.spring(scaleAnim, {
+        toValue: 0.97,
+        useNativeDriver: true,
+      }).start();
+    };
+
+    const handlePressOut = () => {
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
+    };
+
+    return (
+      <TouchableOpacity
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        onPress={() => onSelectGroup(group)}
+        activeOpacity={1}
+      >
+        <Animated.View style={[
+          styles.groupItem,
+          {
+            backgroundColor: theme.colors.surface,
+            borderColor: theme.colors.outline,
+            transform: [{ scale: scaleAnim }]
+          }
+        ]}>
+          <View style={styles.groupInfo}>
+            <View style={[styles.avatarContainer, { 
+              backgroundColor: theme.colors.primaryContainer,
+              borderLeftColor: getSpecializationColor(group.name),
+              borderLeftWidth: 3,
+            }]}>
+              <Text style={[styles.groupAvatar, { color: theme.colors.primary }]}>
+                {group.name.split('-')[0]}
+              </Text>
+            </View>
+            <View style={styles.groupDetails}>
+              <Text style={[styles.groupName, { color: theme.colors.onSurface }]}>
+                {group.name}
+              </Text>
+              {getSpecializationLabel(group.name) && (
+                <Text style={[styles.groupSubtitle, { color: theme.colors.onSurfaceVariant }]}>
+                  {getSpecializationLabel(group.name)}
+                </Text>
+              )}
+            </View>
+            <Ionicons 
+              name="chevron-forward" 
+              size={20} 
+              color={theme.colors.secondary} 
+            />
+          </View>
+        </Animated.View>
+      </TouchableOpacity>
+    );
   };
+
+  const renderSectionHeader = (title: string, count: number) => (
+    <View style={[styles.sectionHeader, { backgroundColor: theme.colors.background }]}>
+      <View style={styles.sectionTitleContainer}>
+        <Text style={[styles.sectionTitle, { color: theme.colors.primary }]}>
+          {title}
+        </Text>
+        <View style={[styles.groupCount, { backgroundColor: theme.colors.primaryContainer }]}>
+          <Text style={[styles.groupCountText, { color: theme.colors.primary }]}>
+            {count}
+          </Text>
+        </View>
+      </View>
+      <View style={[styles.sectionDivider, { backgroundColor: theme.colors.primary }]} />
+    </View>
+  );
+
+  const headerHeight = scrollY.interpolate({
+    inputRange: [0, 50],
+    outputRange: [0, -50],
+    extrapolate: 'clamp',
+  });
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <View style={[styles.searchContainer, { 
-        backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.outline,
+      <Animated.View style={[styles.searchWrapper, {
+        transform: [{ translateY: headerHeight }],
+        backgroundColor: theme.colors.background,
       }]}>
-        <Ionicons name="search" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
-        <TextInput
-          style={[styles.searchInput, { color: theme.colors.onSurface }]}
-          placeholder="Поиск группы..."
-          value={searchQuery}
-          onChangeText={handleSearch}
-          placeholderTextColor={theme.colors.onSurfaceVariant}
-        />
-        {searchQuery.length > 0 && (
-          <TouchableOpacity 
-            onPress={clearSearch}
-            style={styles.clearButton}
-          >
-            <Ionicons name="close-circle" size={20} color={theme.colors.onSurfaceVariant} />
-          </TouchableOpacity>
-        )}
-      </View>
+        <View style={[styles.searchContainer, { 
+          backgroundColor: theme.colors.surface,
+          borderColor: theme.colors.outline,
+        }]}>
+          <Ionicons 
+            name="search" 
+            size={20} 
+            color={theme.colors.secondary} 
+            style={styles.searchIcon} 
+          />
+          <TextInput
+            style={[styles.searchInput, { color: theme.colors.onSurface }]}
+            placeholder="Поиск группы..."
+            value={searchQuery}
+            onChangeText={handleSearch}
+            placeholderTextColor={theme.colors.onSurfaceVariant}
+          />
+          {searchQuery.length > 0 && (
+            <TouchableOpacity 
+              onPress={() => setSearchQuery('')}
+              style={styles.clearButton}
+              activeOpacity={0.7}
+            >
+              <Ionicons 
+                name="close-circle" 
+                size={20} 
+                color={theme.colors.onSurfaceVariant} 
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+      </Animated.View>
 
       {isLoading ? (
         <View style={styles.loadingContainer}>
@@ -91,54 +228,40 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
         </View>
       ) : Object.keys(groupedAndFilteredGroups).length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="school" size={48} color={theme.colors.onSurfaceVariant} />
+          <Ionicons 
+            name="school" 
+            size={48} 
+            color={theme.colors.onSurfaceVariant} 
+          />
           <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
             Группы не найдены
           </Text>
         </View>
       ) : (
-        <ScrollView 
-          style={styles.list} 
+        <Animated.ScrollView
+          style={styles.list}
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
         >
           {Object.entries(groupedAndFilteredGroups)
             .sort(([a], [b]) => parseInt(a) - parseInt(b))
             .map(([category, categoryGroups]) => (
-              <View key={category} style={styles.categoryContainer}>
-                <Text style={[styles.categoryTitle, { color: theme.colors.onSurface }]}>
-                  {category}
-                </Text>
-                <View style={styles.groupsContainer}>
+              <View key={category}>
+                {renderSectionHeader(category, categoryGroups.length)}
+                <View style={styles.groupsGrid}>
                   {categoryGroups.map((group) => (
-                    <TouchableOpacity
-                      key={group.id}
-                      style={[styles.groupItem, {
-                        backgroundColor: theme.colors.surface,
-                        borderColor: theme.colors.outline
-                      }]}
-                      onPress={() => onSelectGroup(group)}
-                      activeOpacity={0.7}
-                    >
-                      <View style={styles.groupInfo}>
-                        <View style={[styles.avatarContainer, { backgroundColor: theme.colors.primaryContainer }]}>
-                          <Ionicons 
-                            name="people-circle" 
-                            size={24} 
-                            color={theme.colors.primary} 
-                          />
-                        </View>
-                        <Text style={[styles.groupName, { color: theme.colors.onSurface }]}>
-                          {group.name}
-                        </Text>
-                      </View>
-                      <Ionicons name="chevron-forward" size={20} color={theme.colors.secondary} />
-                    </TouchableOpacity>
+                    <View key={group.id} style={styles.groupItemWrapper}>
+                      {renderGroupItem({ item: group })}
+                    </View>
                   ))}
                 </View>
               </View>
             ))}
-        </ScrollView>
+        </Animated.ScrollView>
       )}
     </View>
   );
@@ -148,38 +271,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  searchWrapper: {
+    position: 'absolute',
+    top: 8,
+    left: 0,
+    right: 0,
+    zIndex: 100,
+    padding: 12,
+    paddingTop: 4,
+  },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    margin: 16,
-    paddingHorizontal: 12,
+    padding: 10,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 3,
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
       },
       android: {
-        elevation: 2,
+        elevation: 3,
       },
     }),
   },
   searchIcon: {
-    marginRight: 8,
+    marginRight: 12,
   },
   searchInput: {
     flex: 1,
-    paddingVertical: 12,
     fontSize: 16,
-    color: '#1e293b',
+    fontWeight: '500',
   },
   clearButton: {
-    padding: 4,
+    padding: 8,
+    marginLeft: 8,
   },
   loadingContainer: {
     flex: 1,
@@ -190,68 +319,119 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 12,
+    gap: 16,
   },
   emptyText: {
     fontSize: 16,
-    color: '#64748b',
+    fontWeight: '600',
     textAlign: 'center',
   },
   list: {
     flex: 1,
   },
   listContent: {
-    paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 20,
+    paddingTop: 60,
+    paddingBottom: 32,
   },
-  categoryContainer: {
-    marginBottom: 24,
-  },
-  categoryTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 12,
-    paddingLeft: 4,
-  },
-  groupsContainer: {
+  sectionHeader: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    flexDirection: 'column',
     gap: 8,
   },
-  groupItem: {
+  sectionTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 12,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    letterSpacing: -0.5,
+  },
+  groupCount: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: 12,
+  },
+  groupCountText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  sectionDivider: {
+    height: 2,
+    flex: 1,
+    borderRadius: 1,
+    opacity: 0.2,
+  },
+  groupsGrid: {
+    paddingHorizontal: 16,
+    gap: 12,
+  },
+  groupItemWrapper: {
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  groupItem: {
+    borderRadius: 16,
     borderWidth: 1,
+    overflow: 'hidden',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 3,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 12,
       },
       android: {
-        elevation: 2,
+        elevation: 4,
       },
     }),
   },
   groupInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    flex: 1,
+    padding: 16,
+    gap: 16,
   },
   avatarContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    borderLeftWidth: 3,
+  },
+  groupAvatar: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  groupDetails: {
+    flex: 1,
+    gap: 4,
   },
   groupName: {
     fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: -0.3,
+  },
+  groupSubtitle: {
+    fontSize: 14,
     fontWeight: '500',
-    flex: 1,
+  },
+  groupMetaInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    flexWrap: 'wrap',
+  },
+  groupBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 8,
+  },
+  groupBadgeText: {
+    fontSize: 12,
+    fontWeight: '500',
   },
 }); 
