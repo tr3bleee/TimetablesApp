@@ -2,8 +2,8 @@ import axios from 'axios';
 import { API_CONFIG, headers } from './config';
 import { GroupData } from '../../types/schedule';
 import { TeacherSchedule } from '@/app/types/teacher';
-import { logNetworkRequest, logNetworkResponse, logNetworkError } from '../../utils/logger';
 import { getStartOfWeekDate } from '../../utils/dateUtils';
+import { logNetworkRequest, logNetworkResponse, logNetworkError } from '../../utils/logger';
 
 export const getGroupSchedule = async (groupId: number, nextWeek: boolean = false): Promise<GroupData> => {
   let startDate = getStartOfWeekDate();
@@ -25,11 +25,10 @@ export const getGroupSchedule = async (groupId: number, nextWeek: boolean = fals
     logNetworkRequest(url, 'POST', body);
     const response = await axios.post(url, body, { headers });
     logNetworkResponse(response);
-
+    
     if (!response.data) {
       throw new Error('No data received from server');
     }
-
     return response.data;
   } catch (error) {
     logNetworkError(error);
@@ -60,11 +59,10 @@ export const getTeacherSchedule = async (teacherId: number, isNextWeek: boolean 
     logNetworkRequest(url, 'POST', body);
     const response = await axios.post(url, body, { headers });
     logNetworkResponse(response);
-
+    
     if (!response.data) {
       throw new Error('No data received from server');
     }
-
     return response.data;
   } catch (error) {
     logNetworkError(error);

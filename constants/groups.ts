@@ -18,4 +18,8 @@ export const GROUPS: GroupInfo[] = [
   { id: 7, name: '04-24 ИСИП.ОФ 9', category: 4 },
   { id: 10, name: '05-24 ИСИП.ОФ 9', category: 5 },
   { id: 2, name: '06-24 ИСИП.ОФ 9', category: 6 },
-];
+].map(g => ({
+  id: g.id,
+  name: g.name,
+  category: g.category
+}));

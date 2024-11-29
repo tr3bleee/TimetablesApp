@@ -4,7 +4,7 @@ export interface Subject {
   id: string;
   name: string;
   infoUrl: string | null;
-  publication: null | object;
+  publication: Publication | null;
 }
 
 export interface Cabinet {
@@ -59,4 +59,10 @@ export interface GroupData extends BaseSchedule {
 
 export interface TeacherSchedule extends BaseSchedule {
   id: number;
+}
+
+// Add more specific types for publication
+interface Publication {
+  id: string;
+  // Add other publication properties
 }

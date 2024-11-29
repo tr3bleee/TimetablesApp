@@ -10,7 +10,7 @@ import {
   Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { GroupInfo } from '@/constants/groups';
+import { GroupInfo } from '../app/constants/groups';
 import { useTheme } from 'react-native-paper';
 
 interface GroupListProps {
@@ -24,25 +24,41 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
   const [isLoading, setIsLoading] = useState(false);
 
   const groupedAndFilteredGroups = useMemo(() => {
-    const query = searchQuery.toLowerCase();
-    const filtered = query
-      ? groups.filter(group => group.name.toLowerCase().includes(query))
-      : groups;
+    const query = searchQuery.toLowerCase().trim();
+    
+    if (!query) {
+      return groups.reduce((acc, group) => {
+        const category = `${group.category} группа`;
+        if (!acc[category]) acc[category] = [];
+        acc[category].push(group);
+        return acc;
+      }, {} as Record<string, GroupInfo[]>);
+    }
+
+    const filtered = groups.filter(group => 
+      group.name.toLowerCase().includes(query)
+    );
 
     return filtered.reduce((acc, group) => {
       const category = `${group.category} группа`;
-      if (!acc[category]) {
-        acc[category] = [];
-      }
+      if (!acc[category]) acc[category] = [];
       acc[category].push(group);
       return acc;
     }, {} as Record<string, GroupInfo[]>);
   }, [groups, searchQuery]);
 
   const handleSearch = (text: string) => {
+    if (isLoading) return;
     setIsLoading(true);
-    setSearchQuery(text);
-    setTimeout(() => setIsLoading(false), 300);
+    requestAnimationFrame(() => {
+      setSearchQuery(text);
+      setIsLoading(false);
+    });
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    setIsLoading(false);
   };
 
   return (
@@ -61,7 +77,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
         />
         {searchQuery.length > 0 && (
           <TouchableOpacity 
-            onPress={() => setSearchQuery('')}
+            onPress={clearSearch}
             style={styles.clearButton}
           >
             <Ionicons name="close-circle" size={20} color={theme.colors.onSurfaceVariant} />

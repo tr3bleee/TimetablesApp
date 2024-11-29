@@ -21,7 +21,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "dev.tr3ble.hexly"
+      "package": "dev.tr3ble.hexly",
+      "enableProguardInReleaseBuilds": true,
+      "enableShrinkResourcesInReleaseBuilds": true
     },
     "web": {
       "bundler": "metro",
@@ -36,7 +38,8 @@
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "treeShaking": true
     },
     "extra": {
       "router": {
