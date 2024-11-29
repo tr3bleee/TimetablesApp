@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
 import { getGroupSchedule, getTeacherSchedule } from '@/app/services/api/scheduleApi';
 import { GroupData } from '@/app/types/schedule';
 import { TeacherSchedule } from '@/app/types/teacher';
+import { useCallback, useEffect, useState } from 'react';
+import { LayoutAnimation } from 'react-native';
 
 type ScheduleType = GroupData | TeacherSchedule;
 
@@ -35,8 +36,34 @@ export function useSchedule({ type, id }: UseScheduleProps) {
   };
 
   const handleWeekChange = (isNext: boolean) => {
+    LayoutAnimation.configureNext({
+      duration: 300,
+      create: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+      update: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+      },
+      delete: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+    });
     setIsNextWeek(isNext);
   };
+
+  const refetch = useCallback(async () => {
+    try {
+      setLoading(true);
+      const newData = await getGroupSchedule(id, isNextWeek);
+      setSchedule(newData);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Произошла ошибка');
+    } finally {
+      setLoading(false);
+    }
+  }, [id, isNextWeek]);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -76,6 +103,7 @@ export function useSchedule({ type, id }: UseScheduleProps) {
     error,
     isNextWeek,
     fetchSchedule,
-    handleWeekChange
+    handleWeekChange,
+    refetch
   };
 } 

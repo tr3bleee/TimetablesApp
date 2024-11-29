@@ -185,10 +185,16 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       { 
         backgroundColor: theme.colors.surface,
         borderColor: theme.colors.outline,
+      },
+      isCurrentLesson(lesson, isNextWeek) && {
+        borderLeftWidth: 3,
+        borderLeftColor: theme.colors.primary,
       }
     ]}>
       <View style={[styles.timeContainer, {
-        backgroundColor: theme.colors.primaryContainer,
+        backgroundColor: isCurrentLesson(lesson, isNextWeek) 
+          ? theme.colors.primary 
+          : theme.colors.primaryContainer,
         borderBottomColor: theme.colors.outline,
         padding: settings.compactMode ? 8 : 12,
       }]}>

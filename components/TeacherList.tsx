@@ -117,6 +117,11 @@ export const TeacherList: React.FC<TeacherListProps> = ({
     extrapolate: 'clamp',
   });
 
+  const handleSearch = (text: string) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setSearchQuery(text);
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Animated.View style={[styles.searchWrapper, {
@@ -137,7 +142,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({
             style={[styles.searchInput, { color: theme.colors.onSurface }]}
             placeholder="Поиск преподавателя..."
             value={searchQuery}
-            onChangeText={setSearchQuery}
+            onChangeText={handleSearch}
             placeholderTextColor={theme.colors.onSurfaceVariant}
           />
           {searchQuery.length > 0 && (
@@ -255,9 +260,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingTop: 60,
+    paddingTop: 80,
     paddingBottom: 32,
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
     gap: 12,
   },
   teacherItemWrapper: {
@@ -268,6 +273,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     overflow: 'hidden',
+    backgroundColor: 'white',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -287,14 +293,14 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   avatarContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
   },
   teacherDetails: {
@@ -309,5 +315,6 @@ const styles = StyleSheet.create({
   teacherPosition: {
     fontSize: 14,
     fontWeight: '500',
+    opacity: 0.8,
   },
 }); 

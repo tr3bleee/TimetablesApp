@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
@@ -6,6 +6,7 @@ import { useTheme } from 'react-native-paper';
 interface WeekSelectorProps {
   isNextWeek: boolean;
   onWeekChange: (isNext: boolean) => void;
+  loading?: boolean;
 }
 
 const getWeekPeriod = (isNextWeek: boolean) => {
@@ -17,7 +18,7 @@ const getWeekPeriod = (isNextWeek: boolean) => {
   const startDate = new Date(now);
   startDate.setDate(now.getDate() - day + 1);
   const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 5); // До пятницы (5 дней)
+  endDate.setDate(startDate.getDate() + 4);
 
   return {
     start: startDate.toLocaleDateString('ru-RU', { 
@@ -31,10 +32,22 @@ const getWeekPeriod = (isNextWeek: boolean) => {
   };
 };
 
-export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekChange }) => {
+export const WeekSelector: React.FC<WeekSelectorProps> = ({ 
+  isNextWeek, 
+  onWeekChange,
+  loading = false
+}) => {
   const theme = useTheme();
   const [pressedButton, setPressedButton] = React.useState<'current' | 'next' | null>(null);
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
+  const slideAnim = React.useRef(new Animated.Value(isNextWeek ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.spring(slideAnim, {
+      toValue: isNextWeek ? 1 : 0,
+      useNativeDriver: true,
+    }).start();
+  }, [isNextWeek]);
 
   const handlePressIn = (button: 'current' | 'next') => {
     setPressedButton(button);
@@ -57,7 +70,8 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
   return (
     <View style={[styles.container, { 
       backgroundColor: theme.colors.surface,
-      borderBottomColor: theme.colors.outline 
+      borderBottomColor: theme.colors.outline,
+      opacity: loading ? 0.7 : 1
     }]}>
       <View style={styles.weekSelector}>
         <TouchableOpacity 

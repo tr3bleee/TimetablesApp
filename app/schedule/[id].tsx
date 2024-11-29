@@ -18,11 +18,16 @@ export default function SchedulePage() {
     loading,
     error,
     isNextWeek,
-    handleWeekChange
+    handleWeekChange,
+    refetch
   } = useSchedule({
     type: 'group',
     id: parseInt(id)
   });
+
+  const handleRefresh = () => {
+    refetch();
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -50,6 +55,7 @@ export default function SchedulePage() {
         loading={loading}
         error={error}
         isNextWeek={isNextWeek}
+        onRefresh={handleRefresh}
       />
     </View>
   );
