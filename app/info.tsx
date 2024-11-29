@@ -53,8 +53,8 @@ export default function InfoScreen() {
 					backgroundColor: theme.colors.surface,
 					borderBottomColor: theme.colors.border 
 				}]}>
-					<View style={[styles.logoContainer, { backgroundColor: theme.colors.accent }]}>
-						<Ionicons name="calendar" size={48} color={theme.colors.primary} />
+					<View style={[styles.logoContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+						<Ionicons name="school-outline" size={48} color={theme.colors.primary} />
 					</View>
 					<Text style={[styles.appName, { color: theme.colors.text }]}>
 						Расписание для Хекслет
@@ -100,7 +100,7 @@ export default function InfoScreen() {
 						</View>
 						<View style={styles.linksContainer}>
 							<TouchableOpacity
-								style={[styles.linkButton, { backgroundColor: theme.colors.accent }]}
+								style={[styles.linkButton, { backgroundColor: theme.colors.primaryContainer }]}
 								onPress={openGithub}
 								activeOpacity={0.7}
 							>
@@ -111,11 +111,11 @@ export default function InfoScreen() {
 							</TouchableOpacity>
 
 							<TouchableOpacity
-								style={[styles.linkButton, { backgroundColor: theme.colors.accent }]}
+								style={[styles.linkButton, { backgroundColor: theme.colors.primaryContainer }]}
 								onPress={openTelegram}
 								activeOpacity={0.7}
 							>
-								<Ionicons name="paper-plane" size={24} color={theme.colors.primary} />
+								<Ionicons name="paper-plane-outline" size={24} color={theme.colors.primary} />
 								<Text style={[styles.linkText, { color: theme.colors.primary }]}>
 									Telegram
 								</Text>

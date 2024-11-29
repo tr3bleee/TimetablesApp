@@ -24,29 +24,34 @@ export const ScheduleView: React.FC<Props> = ({
   const theme = useTheme();
 
   if (loading) return (
-    <View style={[styles.centerContainer, { backgroundColor: theme.colors.background }]}>
+    <View style={styles.centerContainer}>
       <ActivityIndicator size="large" color={theme.colors.primary} />
-      <Text style={[styles.loadingText, { color: theme.colors.secondaryText }]}>
+      <Text style={[styles.loadingText, { color: theme.colors.secondary }]}>
         Загрузка расписания...
       </Text>
     </View>
   );
 
   if (error) return (
-    <View style={[styles.centerContainer, { backgroundColor: theme.colors.background }]}>
-      <Ionicons name="alert-circle-outline" size={48} color="#ef4444" />
+    <View style={styles.centerContainer}>
+      <Ionicons 
+        name="alert-circle-outline" 
+        size={48} 
+        color={theme.colors.error} 
+      />
       <Text style={styles.errorText}>Ошибка: {error}</Text>
     </View>
   );
 
   if (!data?.lessons || data.lessons.length === 0) return (
-    <View style={[styles.centerContainer, { backgroundColor: theme.colors.background }]}>
-      <Ionicons name="calendar-outline" size={48} color={theme.colors.secondaryText} />
-      <Text style={[styles.emptyText, { color: theme.colors.secondaryText }]}>
+    <View style={styles.centerContainer}>
+      <Ionicons 
+        name="calendar-clear-outline" 
+        size={48} 
+        color={theme.colors.onSurfaceVariant} 
+      />
+      <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
         Расписание отсутствует
-      </Text>
-      <Text style={[styles.emptySubtext, { color: theme.colors.secondaryText }]}>
-        {isNextWeek ? 'На следующую неделю' : 'На текущую неделю'}
       </Text>
     </View>
   );
@@ -119,9 +124,13 @@ export const ScheduleView: React.FC<Props> = ({
       showsVerticalScrollIndicator={false}
       style={{ backgroundColor: theme.colors.background }}
       ListEmptyComponent={
-        <View style={[styles.centerContainer, { backgroundColor: theme.colors.background }]}>
-          <Ionicons name="calendar-outline" size={48} color={theme.colors.secondaryText} />
-          <Text style={[styles.emptyText, { color: theme.colors.secondaryText }]}>
+        <View style={styles.centerContainer}>
+          <Ionicons 
+            name="calendar-clear-outline" 
+            size={48} 
+            color={theme.colors.onSurfaceVariant} 
+          />
+          <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
             Нет занятий
           </Text>
         </View>

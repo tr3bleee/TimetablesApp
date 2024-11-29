@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface ScheduleHeaderProps {
   title: string;
@@ -24,7 +24,7 @@ export const ScheduleHeader: React.FC<ScheduleHeaderProps> = ({
           style={styles.backButton} 
           onPress={onBack}
         >
-          <Ionicons name="arrow-back" size={20} color="#7f61dd" />
+          <Ionicons name="chevron-back-outline" size={24} color="#7f61dd" />
         </TouchableOpacity>
       )}
       <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">

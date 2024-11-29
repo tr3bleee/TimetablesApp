@@ -44,7 +44,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
         backgroundColor: theme.colors.surface,
         borderColor: theme.colors.border
       }]}>
-        <Ionicons name="search" size={20} color={theme.colors.secondaryText} style={styles.searchIcon} />
+        <Ionicons name="search-outline" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput
           style={[styles.searchInput, { color: theme.colors.text }]}
           placeholder="Поиск преподавателя..."
@@ -68,7 +68,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
         </View>
       ) : filteredTeachers.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="people" size={48} color={theme.colors.secondaryText} />
+          <Ionicons name="person-outline" size={48} color={theme.colors.onSurfaceVariant} />
           <Text style={[styles.emptyText, { color: theme.colors.secondaryText }]}>
             Преподаватели не найдены
           </Text>
@@ -86,16 +86,18 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
               activeOpacity={0.7}
             >
               <View style={styles.teacherInfo}>
-                <View style={[styles.avatarContainer, { backgroundColor: theme.colors.accent }]}>
-                  <Text style={[styles.avatarText, { color: theme.colors.primary }]}>
-                    {teacher.fio.split(' ').map(word => word[0]).join('')}
-                  </Text>
+                <View style={[styles.avatarContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+                  <Ionicons 
+                    name="person-circle-outline" 
+                    size={24} 
+                    color={theme.colors.primary} 
+                  />
                 </View>
                 <Text style={[styles.teacherName, { color: theme.colors.text }]}>
                   {teacher.fio}
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={20} color={theme.colors.secondaryText} />
+              <Ionicons name="chevron-forward-outline" size={20} color={theme.colors.secondaryText} />
             </TouchableOpacity>
           ))}
         </ScrollView>

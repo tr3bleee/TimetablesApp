@@ -61,7 +61,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
               <Ionicons 
                 name="today-outline" 
                 size={20} 
-                color={!isNextWeek ? theme.colors.surface : theme.colors.secondaryText} 
+                color={!isNextWeek ? theme.colors.surface : theme.colors.secondary} 
               />
               <Text style={[
                 styles.weekButtonText, 
@@ -88,7 +88,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
               <Ionicons 
                 name="calendar-outline" 
                 size={20} 
-                color={isNextWeek ? theme.colors.surface : theme.colors.secondaryText} 
+                color={isNextWeek ? theme.colors.surface : theme.colors.secondary} 
               />
               <Text style={[
                 styles.weekButtonText, 

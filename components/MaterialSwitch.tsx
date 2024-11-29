@@ -54,7 +54,19 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
             backgroundColor: theme.colors.surface,
           },
         ]}>
-        {selected ? renderIcon(switchOnIcon) : renderIcon(switchOffIcon)}
+        {selected ? (
+          <Ionicons 
+            name="checkmark-outline" 
+            size={14} 
+            color={theme.colors.surface} 
+          />
+        ) : (
+          <Ionicons 
+            name="close-outline" 
+            size={14} 
+            color={theme.colors.onSurfaceVariant} 
+          />
+        )}
       </Animated.View>
     </Pressable>
   );

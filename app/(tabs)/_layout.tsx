@@ -48,7 +48,7 @@ export default function TabLayout() {
 					title: "Расписание",
 					headerTitle: "Группы",
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="calendar-outline" size={size} color={color} />
+						<Ionicons name="school-outline" size={size} color={color} />
 					),
 				}}
 			/>
@@ -58,7 +58,7 @@ export default function TabLayout() {
 					title: "Преподаватели",
 					headerTitle: "Преподаватели",
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="people-outline" size={size} color={color} />
+						<Ionicons name="person-outline" size={size} color={color} />
 					),
 				}}
 			/>
@@ -67,7 +67,7 @@ export default function TabLayout() {
 				options={{
 					title: "Настройки",
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="settings-outline" size={size} color={color} />
+						<Ionicons name="cog-outline" size={size} color={color} />
 					),
 				}}
 			/>

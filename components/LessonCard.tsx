@@ -76,9 +76,8 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
 
     // Информатика и программирование
     if (subjectName.includes('информатик') || 
-        subjectName.includes('программирован') ||
-        subjectName.includes('компьютер')) {
-      return 'desktop-outline';
+        subjectName.includes('программирован')) {
+      return 'code-slash-outline';
     }
 
     // Физика
@@ -98,30 +97,29 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
 
     // География
     if (subjectName.includes('географ')) {
-      return 'earth-outline';
+      return 'globe-outline';
     }
 
     // История
-    if (subjectName.includes('истори') || 
-        subjectName.includes('археолог')) {
+    if (subjectName.includes('истори')) {
       return 'time-outline';
     }
 
     // Языки
     if (subjectName.includes('язык') || 
-        subjectName.includes('литератур') ||
-        subjectName.includes('чтение')) {
+        subjectName.includes('литератур')) {
       return 'language-outline';
     }
 
-    // Физкультура и спорт
-    if (subjectName.includes('физическая культура')) {
-      return 'basketball-outline';
+    // Физкультура
+    if (subjectName.includes('физкультур') || 
+        subjectName.includes('физическая культура')) {
+      return 'fitness-outline';
     }
 
     // ОБЖ
-    if (subjectName.includes('обж') || 
-        subjectName.includes('безопасност')) {
+    if (subjectName.includes('безопасност') || 
+        subjectName.includes('обж')) {
       return 'shield-checkmark-outline';
     }
 

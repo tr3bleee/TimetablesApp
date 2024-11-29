@@ -51,7 +51,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
         backgroundColor: theme.colors.surface,
         borderColor: theme.colors.border,
       }]}>
-        <Ionicons name="search" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
+        <Ionicons name="search-outline" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput
           style={[styles.searchInput, { color: theme.colors.onSurface }]}
           placeholder="Поиск группы..."
@@ -75,7 +75,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
         </View>
       ) : Object.keys(groupedAndFilteredGroups).length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="school" size={48} color={theme.colors.onSurfaceVariant} />
+          <Ionicons name="school-outline" size={48} color={theme.colors.onSurfaceVariant} />
           <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
             Группы не найдены
           </Text>
@@ -107,7 +107,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
                       <View style={styles.groupInfo}>
                         <View style={[styles.avatarContainer, { backgroundColor: theme.colors.accent }]}>
                           <Ionicons 
-                            name="people" 
+                            name="people-circle-outline" 
                             size={24} 
                             color={theme.colors.primary} 
                           />
@@ -116,7 +116,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
                           {group.name}
                         </Text>
                       </View>
-                      <Ionicons name="chevron-forward" size={20} color={theme.colors.secondaryText} />
+                      <Ionicons name="chevron-forward-outline" size={20} color={theme.colors.secondary} />
                     </TouchableOpacity>
                   ))}
                 </View>
