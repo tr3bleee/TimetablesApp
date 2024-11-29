@@ -1,19 +1,21 @@
-import React, { useState, useMemo } from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
-  ScrollView,
-  TextInput,
-  ActivityIndicator,
-  Platform,
-  Animated,
-  LayoutAnimation,
-  FlatList
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { useFavorites } from '@/app/contexts/FavoritesContext';
 import { GroupInfo } from '@/constants/groups';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useMemo, useState } from 'react';
+import {
+    ActivityIndicator,
+    Animated,
+    FlatList,
+    GestureResponderEvent,
+    LayoutAnimation,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 interface GroupListProps {
@@ -51,6 +53,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollY = React.useRef(new Animated.Value(0)).current;
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const groupedAndFilteredGroups = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
@@ -81,8 +84,18 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
     setTimeout(() => setIsLoading(false), 300);
   };
 
+  const handleFavoritePress = async (group: GroupInfo, event: GestureResponderEvent) => {
+    event.stopPropagation(); // Предотвращаем переход на экран группы
+    if (isFavorite(group.id, 'group')) {
+      await removeFromFavorites(group.id, 'group');
+    } else {
+      await addToFavorites(group, 'group');
+    }
+  };
+
   const renderGroupItem = ({ item: group }: { item: GroupInfo }) => {
     const scaleAnim = React.useRef(new Animated.Value(1)).current;
+    const isGroupFavorite = isFavorite(group.id, 'group');
 
     const handlePressIn = () => {
       Animated.spring(scaleAnim, {
@@ -133,6 +146,17 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
                 </Text>
               )}
             </View>
+            <TouchableOpacity 
+              onPress={(e) => handleFavoritePress(group, e)}
+              style={styles.favoriteButton}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Ionicons 
+                name={isGroupFavorite ? "star" : "star-outline"} 
+                size={24} 
+                color={theme.colors.primary} 
+              />
+            </TouchableOpacity>
             <Ionicons 
               name="chevron-forward" 
               size={20} 
@@ -416,5 +440,9 @@ const styles = StyleSheet.create({
   groupBadgeText: {
     fontSize: 12,
     fontWeight: '500',
+  },
+  favoriteButton: {
+    padding: 8,
+    marginRight: 8,
   },
 }); 

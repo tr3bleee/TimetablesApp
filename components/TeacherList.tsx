@@ -9,10 +9,12 @@ import {
   Platform,
   Animated,
   LayoutAnimation,
+  GestureResponderEvent,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TeacherInfo } from '@/app/types/teacher';
 import { useTheme } from 'react-native-paper';
+import { useFavorites } from '@/app/contexts/FavoritesContext';
 
 interface TeacherListProps {
   teachers: TeacherInfo[];
@@ -31,6 +33,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollY = React.useRef(new Animated.Value(0)).current;
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const filteredTeachers = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
@@ -44,8 +47,18 @@ export const TeacherList: React.FC<TeacherListProps> = ({
     );
   }, [teachers, searchQuery]);
 
+  const handleFavoritePress = async (teacher: TeacherInfo, event: GestureResponderEvent) => {
+    event.stopPropagation();
+    if (isFavorite(teacher.id, 'teacher')) {
+      await removeFromFavorites(teacher.id, 'teacher');
+    } else {
+      await addToFavorites(teacher, 'teacher');
+    }
+  };
+
   const renderTeacherItem = ({ item: teacher }: { item: TeacherInfo }) => {
     const scaleAnim = React.useRef(new Animated.Value(1)).current;
+    const isTeacherFavorite = isFavorite(teacher.id, 'teacher');
 
     const handlePressIn = () => {
       Animated.spring(scaleAnim, {
@@ -100,6 +113,17 @@ export const TeacherList: React.FC<TeacherListProps> = ({
                 </Text>
               )}
             </View>
+            <TouchableOpacity 
+              onPress={(e) => handleFavoritePress(teacher, e)}
+              style={styles.favoriteButton}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Ionicons 
+                name={isTeacherFavorite ? "star" : "star-outline"} 
+                size={24} 
+                color={theme.colors.primary} 
+              />
+            </TouchableOpacity>
             <Ionicons 
               name="chevron-forward" 
               size={20} 
@@ -316,5 +340,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     opacity: 0.8,
+  },
+  favoriteButton: {
+    padding: 8,
+    marginRight: 8,
   },
 }); 

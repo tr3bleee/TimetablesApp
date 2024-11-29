@@ -55,10 +55,19 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="teacher"
 				options={{
-					title: "Преподаватели",
-					headerTitle: "Преподаватели",
+					title: "Педагоги",
+					headerTitle: "Педагоги",
 					tabBarIcon: ({ color, size }) => (
 						<Ionicons name="person" size={size} color={color} />
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name="favorites"
+				options={{
+					title: "Избранное",
+					tabBarIcon: ({ color, size }) => (
+						<Ionicons name="star" size={size} color={color} />
 					),
 				}}
 			/>
