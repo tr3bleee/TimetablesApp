@@ -55,6 +55,12 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
   const scrollY = React.useRef(new Animated.Value(0)).current;
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
+  const headerHeight = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -100],
+    extrapolate: 'clamp',
+  });
+
   const groupedAndFilteredGroups = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     
@@ -184,18 +190,28 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
     </View>
   );
 
-  const headerHeight = scrollY.interpolate({
-    inputRange: [0, 50],
-    outputRange: [0, -50],
-    extrapolate: 'clamp',
-  });
-
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <Animated.View style={[styles.searchWrapper, {
-        transform: [{ translateY: headerHeight }],
-        backgroundColor: theme.colors.background,
-      }]}>
+      <Animated.View 
+        style={[
+          styles.searchWrapper,
+          {
+            backgroundColor: theme.colors.background,
+            transform: [{ translateY: headerHeight }],
+            ...Platform.select({
+              ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 3,
+              },
+              android: {
+                elevation: 3,
+              },
+            }),
+          }
+        ]}
+      >
         <View style={[styles.searchContainer, { 
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.outline,
@@ -337,7 +353,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingTop: 60,
+    paddingTop: 80,
     paddingBottom: 32,
   },
   sectionHeader: {

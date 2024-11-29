@@ -35,6 +35,12 @@ export const TeacherList: React.FC<TeacherListProps> = ({
   const scrollY = React.useRef(new Animated.Value(0)).current;
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
+  const headerHeight = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -100],
+    extrapolate: 'clamp',
+  });
+
   const filteredTeachers = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     if (!query) return sortTeachers(teachers);
@@ -135,12 +141,6 @@ export const TeacherList: React.FC<TeacherListProps> = ({
     );
   };
 
-  const headerHeight = scrollY.interpolate({
-    inputRange: [0, 50],
-    outputRange: [0, -50],
-    extrapolate: 'clamp',
-  });
-
   const handleSearch = (text: string) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setSearchQuery(text);
@@ -148,10 +148,26 @@ export const TeacherList: React.FC<TeacherListProps> = ({
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <Animated.View style={[styles.searchWrapper, {
-        transform: [{ translateY: headerHeight }],
-        backgroundColor: theme.colors.background,
-      }]}>
+      <Animated.View 
+        style={[
+          styles.searchWrapper,
+          {
+            backgroundColor: theme.colors.background,
+            transform: [{ translateY: headerHeight }],
+            ...Platform.select({
+              ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 3,
+              },
+              android: {
+                elevation: 3,
+              },
+            }),
+          }
+        ]}
+      >
         <View style={[styles.searchContainer, { 
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.outline,

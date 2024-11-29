@@ -313,6 +313,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     zIndex: 2,
     marginBottom: 8,
+    marginHorizontal: -8,
     ...Platform.select({
       ios: {
         shadowColor: '#000',
