@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { 
   View, 
   Text, 
@@ -15,9 +15,10 @@ import { useTheme } from 'react-native-paper';
 interface TeacherListProps {
   teachers: TeacherInfo[];
   onSelectTeacher: (teacher: TeacherInfo) => void;
+  selectedTeacher?: TeacherInfo;
 }
 
-export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeacher }) => {
+export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeacher, selectedTeacher }) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,33 +32,32 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
     );
   }, [teachers, searchQuery]);
 
-  const handleSearch = (text: string) => {
+  const handleSearch = useCallback((text: string) => {
     setIsLoading(true);
     setSearchQuery(text);
-    // Имитация задержки поиска для лучшего UX
     setTimeout(() => setIsLoading(false), 300);
-  };
+  }, []);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.searchContainer, {
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.border
+        borderColor: theme.colors.outline
       }]}>
         <Ionicons name="search-outline" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput
-          style={[styles.searchInput, { color: theme.colors.text }]}
+          style={[styles.searchInput, { color: theme.colors.onSurface }]}
           placeholder="Поиск преподавателя..."
           value={searchQuery}
           onChangeText={handleSearch}
-          placeholderTextColor={theme.colors.secondaryText}
+          placeholderTextColor={theme.colors.onSurfaceVariant}
         />
         {searchQuery.length > 0 && (
           <TouchableOpacity 
             onPress={() => setSearchQuery('')}
             style={styles.clearButton}
           >
-            <Ionicons name="close-circle" size={20} color={theme.colors.secondaryText} />
+            <Ionicons name="close-circle" size={20} color={theme.colors.onSurfaceVariant} />
           </TouchableOpacity>
         )}
       </View>
@@ -69,7 +69,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
       ) : filteredTeachers.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Ionicons name="person-outline" size={48} color={theme.colors.onSurfaceVariant} />
-          <Text style={[styles.emptyText, { color: theme.colors.secondaryText }]}>
+          <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
             Преподаватели не найдены
           </Text>
         </View>
@@ -80,7 +80,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
               key={teacher.id}
               style={[styles.teacherItem, {
                 backgroundColor: theme.colors.surface,
-                borderColor: theme.colors.border
+                borderColor: theme.colors.outline
               }]}
               onPress={() => onSelectTeacher(teacher)}
               activeOpacity={0.7}
@@ -93,11 +93,11 @@ export const TeacherList: React.FC<TeacherListProps> = ({ teachers, onSelectTeac
                     color={theme.colors.primary} 
                   />
                 </View>
-                <Text style={[styles.teacherName, { color: theme.colors.text }]}>
+                <Text style={[styles.teacherName, { color: theme.colors.onSurface }]}>
                   {teacher.fio}
                 </Text>
               </View>
-              <Ionicons name="chevron-forward-outline" size={20} color={theme.colors.secondaryText} />
+              <Ionicons name="chevron-forward-outline" size={20} color={theme.colors.onSurfaceVariant} />
             </TouchableOpacity>
           ))}
         </ScrollView>

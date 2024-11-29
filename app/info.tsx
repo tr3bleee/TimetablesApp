@@ -35,13 +35,13 @@ export default function InfoScreen() {
 
 	return (
 		<>
-			<ExpoStatusBar style={isDarkTheme ? 'light' : 'dark'} />			
+			<ExpoStatusBar style={isDarkTheme ? 'light' : 'dark'} />
 			<Stack.Screen
 				options={{
 					headerTintColor: theme.colors.primary,
-					headerBackTitle: "Группы",
+					headerBackTitle: "Назад",
 					headerTitleStyle: {
-						color: theme.colors.text,
+						color: theme.colors.onSurface,
 					},
 					headerStyle: {
 						backgroundColor: theme.colors.surface,
@@ -51,15 +51,15 @@ export default function InfoScreen() {
 			<View style={[styles.container, { backgroundColor: theme.colors.background }]}>
 				<View style={[styles.header, { 
 					backgroundColor: theme.colors.surface,
-					borderBottomColor: theme.colors.border 
+					borderBottomColor: theme.colors.outline 
 				}]}>
 					<View style={[styles.logoContainer, { backgroundColor: theme.colors.primaryContainer }]}>
 						<Ionicons name="school-outline" size={48} color={theme.colors.primary} />
 					</View>
-					<Text style={[styles.appName, { color: theme.colors.text }]}>
+					<Text style={[styles.appName, { color: theme.colors.onSurface }]}>
 						Расписание для Хекслет
 					</Text>
-					<Text style={[styles.version, { color: theme.colors.secondaryText }]}>
+					<Text style={[styles.version, { color: theme.colors.onSurfaceVariant }]}>
 						Версия 1.0.0
 					</Text>
 				</View>
@@ -67,7 +67,7 @@ export default function InfoScreen() {
 				<View style={styles.content}>
 					<View style={[styles.card, { 
 						backgroundColor: theme.colors.surface,
-						shadowColor: isDarkTheme ? '#000' : '#000',
+						borderColor: theme.colors.outline,
 					}]}>
 						<View style={styles.cardHeader}>
 							<Ionicons
@@ -75,14 +75,14 @@ export default function InfoScreen() {
 								size={24}
 								color={theme.colors.primary}
 							/>
-							<Text style={[styles.cardTitle, { color: theme.colors.text }]}>
+							<Text style={[styles.cardTitle, { color: theme.colors.onSurface }]}>
 								Разработчик
 							</Text>
 						</View>
-						<Text style={[styles.developerName, { color: theme.colors.text }]}>
+						<Text style={[styles.developerName, { color: theme.colors.onSurface }]}>
 							Новиков Никита
 						</Text>
-						<Text style={[styles.description, { color: theme.colors.secondaryText }]}>
+						<Text style={[styles.description, { color: theme.colors.onSurfaceVariant }]}>
 							Студент Хекслет Колледж{"\n"}
 							Группа 01-24.ИСИП.ОФ 9
 						</Text>
@@ -90,11 +90,11 @@ export default function InfoScreen() {
 
 					<View style={[styles.card, { 
 						backgroundColor: theme.colors.surface,
-						shadowColor: isDarkTheme ? '#000' : '#000',
+						borderColor: theme.colors.outline,
 					}]}>
 						<View style={styles.cardHeader}>
 							<Ionicons name="link-outline" size={24} color={theme.colors.primary} />
-							<Text style={[styles.cardTitle, { color: theme.colors.text }]}>
+							<Text style={[styles.cardTitle, { color: theme.colors.onSurface }]}>
 								Ссылки
 							</Text>
 						</View>
@@ -135,15 +135,12 @@ const styles = StyleSheet.create({
 	header: {
 		alignItems: "center",
 		paddingVertical: 32,
-		backgroundColor: "#ffffff",
 		borderBottomWidth: 1,
-		borderBottomColor: "#e2e8f0",
 	},
 	logoContainer: {
 		width: 80,
 		height: 80,
 		borderRadius: 20,
-		backgroundColor: "#eff6ff",
 		justifyContent: "center",
 		alignItems: "center",
 		marginBottom: 16,
@@ -151,12 +148,10 @@ const styles = StyleSheet.create({
 	appName: {
 		fontSize: 24,
 		fontWeight: "700",
-		color: "#1e293b",
 		marginBottom: 4,
 	},
 	version: {
 		fontSize: 15,
-		color: "#64748b",
 	},
 	content: {
 		padding: 16,
@@ -165,6 +160,7 @@ const styles = StyleSheet.create({
 	card: {
 		borderRadius: 16,
 		padding: 16,
+		borderWidth: 1,
 		...Platform.select({
 			ios: {
 				shadowColor: '#000',
@@ -173,7 +169,7 @@ const styles = StyleSheet.create({
 				shadowRadius: 4,
 			},
 			android: {
-					elevation: 3,
+				elevation: 3,
 			},
 		}),
 	},
@@ -186,17 +182,14 @@ const styles = StyleSheet.create({
 	cardTitle: {
 		fontSize: 18,
 		fontWeight: "600",
-		color: "#1e293b",
 	},
 	developerName: {
 		fontSize: 17,
 		fontWeight: "500",
-		color: "#334155",
 		marginBottom: 4,
 	},
 	description: {
 		fontSize: 15,
-		color: "#64748b",
 		lineHeight: 20,
 	},
 	linksContainer: {
@@ -205,17 +198,15 @@ const styles = StyleSheet.create({
 	},
 	linkButton: {
 		flex: 1,
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
-		gap: 8,
-		backgroundColor: "#eff6ff",
-		padding: 12,
-		borderRadius: 12,
+			flexDirection: "row",
+			alignItems: "center",
+			justifyContent: "center",
+			gap: 8,
+			padding: 12,
+			borderRadius: 12,
 	},
 	linkText: {
 		fontSize: 16,
 		fontWeight: "500",
-		color: "#7f61dd",
 	},
 });

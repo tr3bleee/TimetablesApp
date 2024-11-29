@@ -203,7 +203,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       styles.container, 
       { 
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.border,
+        borderColor: theme.colors.outline,
       }
     ]}>
       <View style={[styles.timeContainer, {
@@ -227,7 +227,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
             {lesson.endTime}
           </Text>
           {isCurrentLesson(lesson, isNextWeek) && (
-            <Text style={[styles.currentIndicator, { color: '#22c55e' }]}>
+            <Text style={[styles.currentIndicator, { color: theme.colors.primary }]}>
               Сейчас
             </Text>
           )}

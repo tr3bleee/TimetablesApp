@@ -41,6 +41,9 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
     <Pressable
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: selected, disabled }}
+      accessibilityLabel={`Switch ${selected ? 'on' : 'off'}`}
       style={[
         styles.switch,
         selected ? { backgroundColor: theme.colors.primary } : { backgroundColor: theme.colors.border },

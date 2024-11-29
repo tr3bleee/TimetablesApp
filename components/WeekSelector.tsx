@@ -42,13 +42,13 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
   return (
     <View style={[styles.container, { 
       backgroundColor: theme.colors.surface,
-      borderBottomColor: theme.colors.border 
+      borderBottomColor: theme.colors.outline 
     }]}>
       <View style={styles.weekSelector}>
         <TouchableOpacity 
           style={[
             styles.weekButton, 
-            { backgroundColor: !isNextWeek ? theme.colors.primary : theme.colors.accent },
+            { backgroundColor: !isNextWeek ? theme.colors.primary : theme.colors.primaryContainer },
             pressedButton === 'current' && styles.weekButtonPressed
           ]}
           onPress={() => onWeekChange(false)}
@@ -65,7 +65,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
               />
               <Text style={[
                 styles.weekButtonText, 
-                { color: !isNextWeek ? theme.colors.surface : theme.colors.secondaryText }
+                { color: !isNextWeek ? theme.colors.surface : theme.colors.onSurfaceVariant }
               ]}>
                 Текущая неделя
               </Text>
@@ -75,7 +75,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
         <TouchableOpacity 
           style={[
             styles.weekButton, 
-            { backgroundColor: isNextWeek ? theme.colors.primary : theme.colors.accent },
+            { backgroundColor: isNextWeek ? theme.colors.primary : theme.colors.primaryContainer },
             pressedButton === 'next' && styles.weekButtonPressed
           ]}
           onPress={() => onWeekChange(true)}
@@ -92,7 +92,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
               />
               <Text style={[
                 styles.weekButtonText, 
-                { color: isNextWeek ? theme.colors.surface : theme.colors.secondaryText }
+                { color: isNextWeek ? theme.colors.surface : theme.colors.onSurfaceVariant }
               ]}>
                 Следующая неделя
               </Text>
@@ -100,7 +100,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
           </Animated.View>
         </TouchableOpacity>
       </View>
-      <Text style={[styles.dateInfo, { color: theme.colors.secondaryText }]}>
+      <Text style={[styles.dateInfo, { color: theme.colors.onSurfaceVariant }]}>
         Начало недели: {getStartDate()}
       </Text>
     </View>

@@ -1,11 +1,11 @@
-import { useNavigation } from 'expo-router';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
 import { ScheduleView } from '@/components/ScheduleView';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { getGroupSchedule } from '../services/api/scheduleApi';
 import { GroupData } from '../types/schedule';
-import { Ionicons } from '@expo/vector-icons';
-import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
 interface Props {
   groupId: number;

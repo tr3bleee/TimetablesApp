@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import scheduleApi from '@/app/services/api/scheduleApi';
+import { getGroupSchedule, getTeacherSchedule } from '@/app/services/api/scheduleApi';
 import { GroupData } from '@/app/types/schedule';
 import { TeacherSchedule } from '@/app/types/teacher';
 
@@ -23,8 +23,8 @@ export function useSchedule({ type, id }: UseScheduleProps) {
     setError(null);
     try {
       const data = type === 'group' 
-        ? await scheduleApi.getGroupSchedule(id, isNextWeek)
-        : await scheduleApi.getTeacherSchedule(id, isNextWeek);
+        ? await getGroupSchedule(id, isNextWeek)
+        : await getTeacherSchedule(id, isNextWeek);
       setSchedule(data);
     } catch (err) {
       setError('Не удалось загрузить расписание');
@@ -39,10 +39,36 @@ export function useSchedule({ type, id }: UseScheduleProps) {
   };
 
   useEffect(() => {
-    if (id) {
-      fetchSchedule();
-    }
-  }, [id, isNextWeek]);
+    let isSubscribed = true;
+
+    const fetchData = async () => {
+      if (!id) return;
+      setLoading(true);
+      try {
+        const data = type === 'group'
+          ? await getGroupSchedule(id, isNextWeek)
+          : await getTeacherSchedule(id, isNextWeek);
+        
+        if (isSubscribed) {
+          setSchedule(data);
+        }
+      } catch (err) {
+        if (isSubscribed) {
+          setError('Не удалось загрузить расписание');
+        }
+      } finally {
+        if (isSubscribed) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [id, type, isNextWeek]);
 
   return {
     schedule,

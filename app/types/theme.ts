@@ -1,18 +1,36 @@
 import { MD3Theme } from 'react-native-paper';
 
-interface CustomColors {
+// Определяем все цвета, которые используются в приложении
+interface AppColors {
+  // Основные цвета
+  primary: string;
+  secondary: string;
+  background: string;
+  surface: string;
+  error: string;
+  
+  // Текст
   text: string;
   secondaryText: string;
+  onSurface: string;
+  onSurfaceVariant: string;
+  
+  // Границы и разделители
   border: string;
-  accent: string;
+  outline: string;
+  
+  // Контейнеры
   card: string;
-  icon: string;
   primaryContainer: string;
   onPrimaryContainer: string;
+  
+  // Акценты
+  accent: string;
+  icon: string;
+  success: string;
 }
 
-export interface CustomMD3Theme extends MD3Theme {
-  colors: MD3Theme['colors'] & CustomColors;
-}
-
-export type AppTheme = CustomMD3Theme; 
+// Создаем свой тип темы, наследуя все кроме colors из MD3Theme
+export interface AppTheme extends Omit<MD3Theme, 'colors'> {
+  colors: AppColors;
+} 

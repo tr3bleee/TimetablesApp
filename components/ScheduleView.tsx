@@ -26,7 +26,7 @@ export const ScheduleView: React.FC<Props> = ({
   if (loading) return (
     <View style={styles.centerContainer}>
       <ActivityIndicator size="large" color={theme.colors.primary} />
-      <Text style={[styles.loadingText, { color: theme.colors.secondary }]}>
+      <Text style={[styles.loadingText, { color: theme.colors.onSurfaceVariant }]}>
         Загрузка расписания...
       </Text>
     </View>
@@ -58,7 +58,7 @@ export const ScheduleView: React.FC<Props> = ({
 
   const weekDates = data ? getWeekDates(data.startDate) : [];
   
-  const groupedLessons = data?.lessons?.reduce((acc: { [key: number]: Lesson[] }, lesson) => {
+  const groupedLessons = data?.lessons?.reduce((acc: { [key: number]: Lesson[] }, lesson: Lesson) => {
     if (!acc[lesson.weekday]) {
       acc[lesson.weekday] = [];
     }
@@ -91,7 +91,7 @@ export const ScheduleView: React.FC<Props> = ({
   const sortedSections = Object.keys(groupedLessons).map(day => ({
     title: DAYS_OF_WEEK[parseInt(day) - 1],
     date: weekDates[parseInt(day) - 1],
-    data: groupedLessons[parseInt(day)].sort((a, b) => a.lesson - b.lesson),
+    data: groupedLessons[parseInt(day)].sort((a: Lesson, b: Lesson) => a.lesson - b.lesson),
   }));
 
   return (
@@ -107,13 +107,13 @@ export const ScheduleView: React.FC<Props> = ({
       renderSectionHeader={({ section: { title, date } }) => (
         <View style={[styles.sectionHeader, {
           backgroundColor: theme.colors.background,
-          borderBottomColor: theme.colors.border
+          borderBottomColor: theme.colors.outline
         }]}>
           <View style={styles.dayHeader}>
             <Text style={[styles.dayTitle, { color: theme.colors.primary }]}>
               {title}
             </Text>
-            <Text style={[styles.dayDate, { color: theme.colors.secondaryText }]}>
+            <Text style={[styles.dayDate, { color: theme.colors.onSurfaceVariant }]}>
               {date}
             </Text>
           </View>

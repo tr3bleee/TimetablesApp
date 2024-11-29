@@ -1,8 +1,9 @@
 export const getStartOfWeekDate = (): string => {
   const currentDate = new Date();
-  const dayOfWeek = currentDate.getDay();
-  const startOfWeek = new Date(currentDate);
-  startOfWeek.setDate(currentDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+  const localDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
+  const dayOfWeek = localDate.getDay();
+  const startOfWeek = new Date(localDate);
+  startOfWeek.setDate(localDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
   return startOfWeek.toLocaleDateString('en-CA');
 };
 

@@ -1,3 +1,5 @@
+import { TeacherInfo } from './teacher';
+
 export interface Subject {
   id: string;
   name: string;
@@ -42,12 +44,19 @@ export interface Lesson {
   unionGroups: UnionGroup[];
 }
 
-export interface GroupData {
+// Базовый интерфейс для общих свойств
+export interface BaseSchedule {
   startDate: string;
-  endDate: string;
+  lessons: Lesson[] | null;
+}
+
+export interface GroupData extends BaseSchedule {
   group: {
     id: number;
     name: string;
   };
-  lessons: Lesson[] | null;
+}
+
+export interface TeacherSchedule extends BaseSchedule {
+  id: number;
 }

@@ -30,7 +30,7 @@ export default function SchedulePage() {
           title: group?.name || `Группа ${id}`,
           headerTintColor: theme.colors.primary,
           headerTitleStyle: {
-            color: theme.colors.text,
+            color: theme.colors.onSurface,
             fontSize: 18,
             fontWeight: '600',
           },

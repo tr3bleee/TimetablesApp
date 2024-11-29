@@ -43,7 +43,7 @@ export const MaterialSwitchListItem: React.FC<MaterialSwitchListItemProps> = ({
         <Text style={[
           styles.title, 
           { 
-            color: disabled ? theme.colors.secondary : theme.colors.text,
+            color: disabled ? theme.colors.secondary : theme.colors.onSurface,
             opacity: disabled ? 0.5 : 1,
           }
         ]}>

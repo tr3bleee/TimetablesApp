@@ -49,7 +49,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.searchContainer, { 
         backgroundColor: theme.colors.surface,
-        borderColor: theme.colors.border,
+        borderColor: theme.colors.outline,
       }]}>
         <Ionicons name="search-outline" size={20} color={theme.colors.secondary} style={styles.searchIcon} />
         <TextInput
@@ -99,20 +99,20 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
                       key={group.id}
                       style={[styles.groupItem, {
                         backgroundColor: theme.colors.surface,
-                        borderColor: theme.colors.border
+                        borderColor: theme.colors.outline
                       }]}
                       onPress={() => onSelectGroup(group)}
                       activeOpacity={0.7}
                     >
                       <View style={styles.groupInfo}>
-                        <View style={[styles.avatarContainer, { backgroundColor: theme.colors.accent }]}>
+                        <View style={[styles.avatarContainer, { backgroundColor: theme.colors.primaryContainer }]}>
                           <Ionicons 
                             name="people-circle-outline" 
                             size={24} 
                             color={theme.colors.primary} 
                           />
                         </View>
-                        <Text style={[styles.groupName, { color: theme.colors.text }]}>
+                        <Text style={[styles.groupName, { color: theme.colors.onSurface }]}>
                           {group.name}
                         </Text>
                       </View>

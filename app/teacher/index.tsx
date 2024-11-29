@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TeacherList } from '@/components/TeacherList';
 import { ScheduleView } from '@/components/ScheduleView';
-import { TeacherInfo, TeacherSchedule } from '@/app/types/teacher';
+import { TeacherInfo } from '@/app/types/teacher';
+import { TeacherSchedule } from '@/app/types/schedule';
 import { TEACHERS } from '@/constants/teachers';
 
 const SCHEDULE_API_URL = 'https://your-api-url/teacher-schedule';
@@ -49,6 +50,7 @@ export default function TeacherScreen() {
           loading={loading}
           error={error}
           isNextWeek={isNextWeek}
+          isTeacherSchedule={true}
         />
       )}
     </View>

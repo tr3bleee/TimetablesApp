@@ -8,6 +8,11 @@ import { TEACHERS } from '@/constants/teachers';
 export default function TeacherScreen() {
   const router = useRouter();
 
+  // Add type safety for navigation
+  type RouterNavigate = {
+    push: (path: string) => void;
+  };
+
   const handleTeacherSelect = (teacher: TeacherInfo) => {
     router.push(`/teacher/${teacher.id}`);
   };
