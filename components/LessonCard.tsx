@@ -300,9 +300,9 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
+    marginHorizontal: 8,
     marginTop: 12,
-    borderRadius: 12,
+    borderRadius: 16,
     borderWidth: 1,
     overflow: 'hidden',
     ...Platform.select({
@@ -320,12 +320,12 @@ const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 12,
+    padding: 16,
     borderBottomWidth: 1,
     gap: 8,
   },
   lessonNumber: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
     marginRight: 4,
   },
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   time: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
   },
   timeDivider: {
@@ -343,13 +343,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexDirection: 'row',
-    padding: 12,
-    gap: 12,
+    padding: 16,
+    gap: 16,
   },
   iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   subject: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
   },
   teachersContainer: {
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   teacherLink: {
-    fontSize: 14,
+    fontSize: 15,
     textDecorationLine: 'underline',
   },
   locationContainer: {
@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   location: {
-    fontSize: 14,
+    fontSize: 15,
   },
   groupsContainer: {
     flexDirection: 'row',
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   groupLink: {
-    fontSize: 14,
+    fontSize: 15,
     textDecorationLine: 'underline',
   },
   subgroupsContainer: {
@@ -402,12 +402,12 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   subgroupItem: {
-    borderRadius: 12,
-    padding: 12,
-    gap: 8,
+    borderRadius: 16,
+    padding: 16,
+    gap: 12,
   },
   subgroupTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
   },
   divider: {
@@ -415,8 +415,30 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   currentIndicator: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '600',
     marginLeft: 8,
+  },
+  groupInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+    gap: 20,
+  },
+  avatarContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  groupName: {
+    fontSize: 18,
+    fontWeight: '600',
+    letterSpacing: -0.3,
+  },
+  groupSubtitle: {
+    fontSize: 15,
+    fontWeight: '500',
   },
 });

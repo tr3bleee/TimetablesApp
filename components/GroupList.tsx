@@ -41,25 +41,8 @@ const getSpecializationColor = (name: string): string => {
 
 const sortGroups = (groups: GroupInfo[]) => {
   return groups.sort((a, b) => {
-    // Сначала сортируем по категории (преобразуем строки в числа)
-    const catA = parseInt(a.category);
-    const catB = parseInt(b.category);
-    if (catA !== catB) {
-      return catA - catB;
-    }
-    
-    // Остальная логика сортировки остается той же
-    const specA = a.name.split('-')[0];
-    const specB = b.name.split('-')[0];
-    if (specA !== specB) {
-      if (specA === 'ОДФ') return -1;
-      if (specB === 'ОДФ') return 1;
-      return specA.localeCompare(specB);
-    }
-    
-    const numA = parseInt(a.name.split('-')[1] || '0');
-    const numB = parseInt(b.name.split('-')[1] || '0');
-    return numA - numB;
+    // Преобразуем строки в числа для сравнения
+    return Number(a.category) - Number(b.category);
   });
 };
 

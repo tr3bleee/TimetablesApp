@@ -8,6 +8,29 @@ interface WeekSelectorProps {
   onWeekChange: (isNext: boolean) => void;
 }
 
+const getWeekPeriod = (isNextWeek: boolean) => {
+  const now = new Date();
+  if (isNextWeek) {
+    now.setDate(now.getDate() + 7);
+  }
+  const day = now.getDay() || 7;
+  const startDate = new Date(now);
+  startDate.setDate(now.getDate() - day + 1);
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 5); // До пятницы (5 дней)
+
+  return {
+    start: startDate.toLocaleDateString('ru-RU', { 
+      day: 'numeric',
+      month: 'long'
+    }),
+    end: endDate.toLocaleDateString('ru-RU', { 
+      day: 'numeric',
+      month: 'long'
+    })
+  };
+};
+
 export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekChange }) => {
   const theme = useTheme();
   const [pressedButton, setPressedButton] = React.useState<'current' | 'next' | null>(null);
@@ -29,15 +52,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
     }).start();
   };
 
-  const getStartDate = () => {
-    const now = new Date();
-    if (isNextWeek) {
-      now.setDate(now.getDate() + 7);
-    }
-    const day = now.getDay() || 7;
-    now.setDate(now.getDate() - day + 1);
-    return now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
-  };
+  const period = getWeekPeriod(isNextWeek);
 
   return (
     <View style={[styles.container, { 
@@ -101,7 +116,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({ isNextWeek, onWeekCh
         </TouchableOpacity>
       </View>
       <Text style={[styles.dateInfo, { color: theme.colors.onSurfaceVariant }]}>
-        Начало недели: {getStartDate()}
+        {period.start} — {period.end}
       </Text>
     </View>
   );
