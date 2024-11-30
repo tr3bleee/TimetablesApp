@@ -44,7 +44,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({
 
   const headerHeight = scrollY.interpolate({
     inputRange: [0, 100],
-    outputRange: [0, -50],
+    outputRange: [0, -64],
     extrapolate: 'clamp',
   });
 
@@ -179,12 +179,12 @@ const styles = StyleSheet.create({
   },
   searchWrapper: {
     position: 'absolute',
-    top: 8,
+    top: 4,
     left: 0,
     right: 0,
     zIndex: 100,
-    padding: 12,
-    paddingTop: 4,
+    padding: 8,
+    paddingTop: 8,
     height: 60,
   },
   searchContainer: {
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    marginTop: 60,
+    marginTop: 68,
   },
   listContent: {
     paddingTop: 16,

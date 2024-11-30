@@ -1,4 +1,6 @@
 import { useFavorites } from '@/app/contexts/FavoritesContext';
+import { useSearch } from '@/app/hooks/useSearch';
+import { getSpecializationColor, getSpecializationLabel } from '@/app/utils/groupUtils';
 import { GroupInfo } from '@/constants/groups';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useRef } from 'react';
@@ -12,8 +14,6 @@ import {
   View,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { useSearch } from '@/app/hooks/useSearch';
-import { getSpecializationColor, getSpecializationLabel } from '@/app/utils/groupUtils';
 
 interface GroupListProps {
   groups: GroupInfo[];
@@ -42,7 +42,7 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
 
   const headerHeight = scrollY.interpolate({
     inputRange: [0, 100],
-    outputRange: [0, -50],
+    outputRange: [0, -64],
     extrapolate: 'clamp',
   });
 
@@ -134,10 +134,16 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
                   <Text style={[styles.sectionTitle, { color: theme.colors.primary }]}>
                     {category}
                   </Text>
-                  <View style={[styles.groupCount, { backgroundColor: theme.colors.primaryContainer }]}>
-                    <Text style={[styles.groupCountText, { color: theme.colors.primary }]}>
-                      {categoryGroups.length}
-                    </Text>
+                  <View style={styles.titleCountDivider}>
+                    <View style={[styles.dividerLine, { 
+                      backgroundColor: theme.colors.primary,
+                      opacity: 0.2
+                    }]} />
+                    <View style={[styles.groupCount, { backgroundColor: theme.colors.primaryContainer }]}>
+                      <Text style={[styles.groupCountText, { color: theme.colors.primary }]}>
+                        {categoryGroups.length}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
@@ -260,12 +266,12 @@ const styles = StyleSheet.create({
   },
   searchWrapper: {
     position: 'absolute',
-    top: 8,
+    top: 4,
     left: 0,
     right: 0,
     zIndex: 100,
-    padding: 12,
-    paddingTop: 4,
+    padding: 8,
+    paddingTop: 8,
     height: 60,
   },
   searchContainer: {
@@ -326,7 +332,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingTop: 56,
+    paddingTop: 68,
     paddingBottom: 32,
   },
   sectionHeader: {
@@ -340,12 +346,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: 16,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '700',
     letterSpacing: -0.5,
+  },
+  titleCountDivider: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 2,
   },
   groupCount: {
     paddingHorizontal: 12,
