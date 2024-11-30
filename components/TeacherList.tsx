@@ -1,19 +1,17 @@
-import React, { useState, useMemo } from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
+import React, { useRef } from 'react';
+import {
+  View,
+  Text,
   TextInput,
-  ActivityIndicator,
-  Platform,
+  TouchableOpacity,
   Animated,
-  LayoutAnimation,
-  GestureResponderEvent,
+  StyleSheet,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TeacherInfo } from '@/app/types/teacher';
 import { useTheme } from 'react-native-paper';
+import { useSearch } from '@/app/hooks/useSearch';
+import { TeacherInfo } from '@/app/types/teacher';
 import { useFavorites } from '@/app/contexts/FavoritesContext';
 
 interface TeacherListProps {
@@ -21,130 +19,34 @@ interface TeacherListProps {
   onSelectTeacher: (teacher: TeacherInfo) => void;
 }
 
-const sortTeachers = (teachers: TeacherInfo[]) => {
-  return teachers.sort((a, b) => a.fio.localeCompare(b.fio));
-};
+const getSearchFields = (teacher: TeacherInfo) => [
+  teacher.fio,
+  teacher.position || ''
+];
+
+const sortTeachers = (a: TeacherInfo, b: TeacherInfo) => 
+  a.fio.localeCompare(b.fio);
 
 export const TeacherList: React.FC<TeacherListProps> = ({ 
   teachers, 
   onSelectTeacher 
 }) => {
   const theme = useTheme();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollY = React.useRef(new Animated.Value(0)).current;
+  const scrollY = useRef(new Animated.Value(0)).current;
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+
+  const {
+    query,
+    filteredItems,
+    handleSearch,
+    clearSearch
+  } = useSearch(teachers, getSearchFields, sortTeachers);
 
   const headerHeight = scrollY.interpolate({
     inputRange: [0, 100],
-    outputRange: [0, -100],
+    outputRange: [0, -50],
     extrapolate: 'clamp',
   });
-
-  const filteredTeachers = useMemo(() => {
-    const query = searchQuery.toLowerCase().trim();
-    if (!query) return sortTeachers(teachers);
-    
-    return sortTeachers(
-      teachers.filter(teacher => 
-        teacher.fio.toLowerCase().includes(query) ||
-        (teacher.position?.toLowerCase() || '').includes(query)
-      )
-    );
-  }, [teachers, searchQuery]);
-
-  const handleFavoritePress = async (teacher: TeacherInfo, event: GestureResponderEvent) => {
-    event.stopPropagation();
-    if (isFavorite(teacher.id, 'teacher')) {
-      await removeFromFavorites(teacher.id, 'teacher');
-    } else {
-      await addToFavorites(teacher, 'teacher');
-    }
-  };
-
-  const renderTeacherItem = ({ item: teacher }: { item: TeacherInfo }) => {
-    const scaleAnim = React.useRef(new Animated.Value(1)).current;
-    const isTeacherFavorite = isFavorite(teacher.id, 'teacher');
-
-    const handlePressIn = () => {
-      Animated.spring(scaleAnim, {
-        toValue: 0.97,
-        useNativeDriver: true,
-      }).start();
-    };
-
-    const handlePressOut = () => {
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    };
-
-    const initials = teacher.fio
-      .split(' ')
-      .map(part => part[0])
-      .join('')
-      .substring(0, 2);
-
-    return (
-      <TouchableOpacity
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        onPress={() => onSelectTeacher(teacher)}
-        activeOpacity={1}
-      >
-        <Animated.View style={[
-          styles.teacherItem,
-          {
-            backgroundColor: theme.colors.surface,
-            borderColor: theme.colors.outline,
-            transform: [{ scale: scaleAnim }]
-          }
-        ]}>
-          <View style={styles.teacherInfo}>
-            <View style={[styles.avatarContainer, { 
-              backgroundColor: theme.colors.primaryContainer 
-            }]}>
-              <Text style={[styles.avatarText, { color: theme.colors.primary }]}>
-                {initials}
-              </Text>
-            </View>
-            <View style={styles.teacherDetails}>
-              <Text style={[styles.teacherName, { color: theme.colors.onSurface }]}>
-                {teacher.fio}
-              </Text>
-              {teacher.position && (
-                <Text style={[styles.teacherPosition, { color: theme.colors.onSurfaceVariant }]}>
-                  {teacher.position}
-                </Text>
-              )}
-            </View>
-            <TouchableOpacity 
-              onPress={(e) => handleFavoritePress(teacher, e)}
-              style={styles.favoriteButton}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <Ionicons 
-                name={isTeacherFavorite ? "star" : "star-outline"} 
-                size={24} 
-                color={theme.colors.primary} 
-              />
-            </TouchableOpacity>
-            <Ionicons 
-              name="chevron-forward" 
-              size={20} 
-              color={theme.colors.secondary} 
-            />
-          </View>
-        </Animated.View>
-      </TouchableOpacity>
-    );
-  };
-
-  const handleSearch = (text: string) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setSearchQuery(text);
-  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -153,18 +55,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({
           styles.searchWrapper,
           {
             backgroundColor: theme.colors.background,
-            transform: [{ translateY: headerHeight }],
-            ...Platform.select({
-              ios: {
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 3,
-              },
-              android: {
-                elevation: 3,
-              },
-            }),
+            transform: [{ translateY: headerHeight }]
           }
         ]}
       >
@@ -181,13 +72,13 @@ export const TeacherList: React.FC<TeacherListProps> = ({
           <TextInput
             style={[styles.searchInput, { color: theme.colors.onSurface }]}
             placeholder="Поиск преподавателя..."
-            value={searchQuery}
+            value={query}
             onChangeText={handleSearch}
             placeholderTextColor={theme.colors.onSurfaceVariant}
           />
-          {searchQuery.length > 0 && (
+          {query.length > 0 && (
             <TouchableOpacity 
-              onPress={() => setSearchQuery('')}
+              onPress={clearSearch}
               style={styles.clearButton}
               activeOpacity={0.7}
             >
@@ -201,11 +92,7 @@ export const TeacherList: React.FC<TeacherListProps> = ({
         </View>
       </Animated.View>
 
-      {isLoading ? (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        </View>
-      ) : filteredTeachers.length === 0 ? (
+      {filteredItems.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Ionicons 
             name="person" 
@@ -226,10 +113,59 @@ export const TeacherList: React.FC<TeacherListProps> = ({
             { useNativeDriver: true }
           )}
         >
-          {filteredTeachers.map((teacher) => (
-            <View key={teacher.id} style={styles.teacherItemWrapper}>
-              {renderTeacherItem({ item: teacher })}
-            </View>
+          {filteredItems.map(teacher => (
+            <TouchableOpacity
+              key={teacher.id}
+              style={[styles.teacherItem, { 
+                backgroundColor: theme.colors.surface,
+                borderColor: theme.colors.outline 
+              }]}
+              onPress={() => onSelectTeacher(teacher)}
+            >
+              <View style={styles.teacherContent}>
+                <View style={[styles.avatarContainer, { 
+                  backgroundColor: theme.colors.primaryContainer 
+                }]}>
+                  <Ionicons
+                    name="person"
+                    size={24}
+                    color={theme.colors.primary}
+                  />
+                </View>
+                <View style={styles.teacherInfo}>
+                  <Text style={[styles.teacherName, { color: theme.colors.onSurface }]}>
+                    {teacher.fio}
+                  </Text>
+                  {teacher.position && (
+                    <Text style={[styles.teacherPosition, { color: theme.colors.onSurfaceVariant }]}>
+                      {teacher.position}
+                    </Text>
+                  )}
+                </View>
+                <TouchableOpacity 
+                  onPress={() => {
+                    if (isFavorite(teacher.id, 'teacher')) {
+                      removeFromFavorites(teacher.id, 'teacher');
+                    } else {
+                      addToFavorites(teacher, 'teacher');
+                    }
+                  }}
+                  style={styles.favoriteButton}
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                >
+                  <Ionicons 
+                    name={isFavorite(teacher.id, 'teacher') ? "star" : "star-outline"} 
+                    size={24} 
+                    color={theme.colors.primary} 
+                  />
+                </TouchableOpacity>
+                <Ionicons 
+                  name="chevron-forward" 
+                  size={20} 
+                  color={theme.colors.secondary} 
+                />
+              </View>
+            </TouchableOpacity>
           ))}
         </Animated.ScrollView>
       )}
@@ -249,13 +185,16 @@ const styles = StyleSheet.create({
     zIndex: 100,
     padding: 12,
     paddingTop: 4,
+    height: 60,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
+    paddingRight: 6,
     borderRadius: 12,
     borderWidth: 1,
+    height: 44,
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -275,45 +214,42 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontWeight: '500',
+    marginRight: 4,
   },
   clearButton: {
-    padding: 8,
-    marginLeft: 8,
-  },
-  loadingContainer: {
-    flex: 1,
+    padding: 6,
+    marginLeft: 4,
     justifyContent: 'center',
     alignItems: 'center',
+    width: 32,
+    height: 32,
+  },
+  list: {
+    flex: 1,
+    marginTop: 60,
+  },
+  listContent: {
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 32,
+    gap: 12,
   },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 16,
+    marginTop: -60,
   },
   emptyText: {
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
   },
-  list: {
-    flex: 1,
-  },
-  listContent: {
-    paddingTop: 80,
-    paddingBottom: 32,
-    paddingHorizontal: 8,
-    gap: 12,
-  },
-  teacherItemWrapper: {
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
   teacherItem: {
     borderRadius: 16,
     borderWidth: 1,
     overflow: 'hidden',
-    backgroundColor: 'white',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -326,11 +262,11 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  teacherInfo: {
+  teacherContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 12,
-    gap: 12,
+    padding: 16,
+    gap: 16,
   },
   avatarContainer: {
     width: 48,
@@ -339,23 +275,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  avatarText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  teacherDetails: {
+  teacherInfo: {
     flex: 1,
     gap: 4,
   },
   teacherName: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
     letterSpacing: -0.3,
   },
   teacherPosition: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
-    opacity: 0.8,
   },
   favoriteButton: {
     padding: 8,
