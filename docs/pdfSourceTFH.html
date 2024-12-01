@@ -1,0 +1,1721 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-none.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-ts.min.js"></script><style>
+        .article {
+            position: relative;
+            padding-bottom: 24px;
+        }
+        
+
+        .code-block {
+            overflow: hidden;
+            position: relative;
+            padding: 0;
+            border-radius: 8px;
+            font-variant-ligatures: none;
+            background-color: rgba(25, 25, 28, .05);
+            word-break: break-all;
+        }
+        
+
+        .control {
+            color: #19191c;
+            font-size: 16px;
+            font-weight: 670;
+        }
+        
+
+        .detached {
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin-bottom: 8px;
+        }
+        
+
+        .inline-code {
+            border-radius: 4px;
+            display: inline;
+            padding: 2px 1px;
+            font-family: JetBrains Sans,monospace;
+            background: #e6e6e6;
+        }
+        
+
+        .list {
+            list-style-type: disc;
+            padding-left: 0;
+            margin-left: 15px;
+        }
+        
+
+        .list-decimal {
+            list-style-type: decimal;
+        }
+        
+
+        .list-item {
+            margin-top: 6px;
+            margin-bottom: 6px;
+            margin-left: 4px;
+        }
+        
+
+        .main-title {
+            padding-bottom: 24px;
+            margin-top: 0;
+            font-size: 40px;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        
+
+        .mermaid {
+            page-break-inside: avoid;
+        }
+        
+        /* Light theme */
+/** Common */
+#mermaid .label, #mermaid {font-family:"trebuchet ms",arial,sans-serif; font-size:16px;fill:#333;}#mermaid .error-icon{fill:#552222;}#mermaid .error-text{fill:#552222;stroke:#552222;}#mermaid .edge-thickness-normal{stroke-width:2px;}#mermaid .edge-thickness-thick{stroke-width:3.5px;}#mermaid .edge-pattern-solid{stroke-dasharray:0;}#mermaid .edge-pattern-dashed{stroke-dasharray:3;}#mermaid .edge-pattern-dotted{stroke-dasharray:2;}#mermaid .marker{fill:#333333;stroke:#333333;}#mermaid .marker.cross{stroke:#333333;} #mermaid {max-width: 100%;}
+/** Flowchart */
+#mermaid .cluster-label text{fill:#333;}#mermaid .cluster-label span{color:#333;}#mermaid .label text,#mermaid span{fill:#333;color:#333;}#mermaid .node rect,#mermaid .node circle,#mermaid .node ellipse,#mermaid .node polygon,#mermaid .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid .node .label{text-align:center;}#mermaid .node.clickable{cursor:pointer;}#mermaid .arrowheadPath{fill:#333333;}#mermaid .edgePath .path{stroke:#333333;stroke-width:2.0px;}#mermaid .flowchart-link{stroke:#333333;fill:none;}#mermaid .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaid .cluster text{fill:#333;}#mermaid .cluster span{color:#333;}#mermaid div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}
+/** Sequence diagram */
+#mermaid .actor{stroke:hsl(259.6261682243, 59.7765363128%, 87.9019607843%);fill:#ECECFF;}#mermaid text.actor>tspan{fill:black;stroke:none;}#mermaid .actor-line{stroke:grey;}#mermaid .messageLine0{stroke-width:1.5;stroke-dasharray:none;stroke:#333;}#mermaid .messageLine1{stroke-width:1.5;stroke-dasharray:2,2;stroke:#333;}#mermaid #arrowhead path{fill:#333;stroke:#333;}#mermaid .sequenceNumber{fill:white;}#mermaid #sequencenumber{fill:#333;}#mermaid #crosshead path{fill:#333;stroke:#333;}#mermaid .messageText{fill:#333;stroke:none;}#mermaid .labelBox{stroke:hsl(259.6261682243, 59.7765363128%, 87.9019607843%);fill:#ECECFF;}#mermaid .labelText,#mermaid .labelText>tspan{fill:black;stroke:none;}#mermaid .loopText,#mermaid .loopText>tspan{fill:black;stroke:none;}#mermaid .loopLine{stroke-width:2px;stroke-dasharray:2,2;stroke:hsl(259.6261682243, 59.7765363128%, 87.9019607843%);fill:hsl(259.6261682243, 59.7765363128%, 87.9019607843%);}#mermaid .note{stroke:#aaaa33;fill:#fff5ad;}#mermaid .noteText,#mermaid .noteText>tspan{fill:black;stroke:none;}#mermaid .activation0{fill:#f4f4f4;stroke:#666;}#mermaid .activation1{fill:#f4f4f4;stroke:#666;}#mermaid .activation2{fill:#f4f4f4;stroke:#666;}#mermaid .actorPopupMenu{position:absolute;}#mermaid .actorPopupMenuPanel{position:absolute;fill:#ECECFF;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);filter:drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));}#mermaid .actor-man line{stroke:hsl(259.6261682243, 59.7765363128%, 87.9019607843%);fill:#ECECFF;}#mermaid .actor-man circle,#mermaid line{stroke:hsl(259.6261682243, 59.7765363128%, 87.9019607843%);fill:#ECECFF;stroke-width:2px;}
+/** Gantt */
+#mermaid .exclude-range{fill:#eeeeee;}#mermaid .section{stroke:none;opacity:0.2;}#mermaid .section0{fill:rgba(102, 102, 255, 0.49);}#mermaid .section2{fill:#fff400;}#mermaid .section1,#mermaid .section3{fill:white;opacity:0.2;}#mermaid .sectionTitle0{fill:#333;}#mermaid .sectionTitle1{fill:#333;}#mermaid .sectionTitle2{fill:#333;}#mermaid .sectionTitle3{fill:#333;}#mermaid .sectionTitle{text-anchor:start;}#mermaid .grid .tick{stroke:lightgrey;opacity:0.8;shape-rendering:crispEdges;}#mermaid .grid .tick text{fill:#333;}#mermaid .grid path{stroke-width:0;}#mermaid .today{fill:none;stroke:red;stroke-width:2px;}#mermaid .task{stroke-width:2;}#mermaid .taskText{text-anchor:middle;}#mermaid .taskTextOutsideRight{fill:black;text-anchor:start;}#mermaid .taskTextOutsideLeft{fill:black;text-anchor:end;}#mermaid .task.clickable{cursor:pointer;}#mermaid .taskText.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}#mermaid .taskTextOutsideLeft.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}#mermaid .taskTextOutsideRight.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}#mermaid .taskText0,#mermaid .taskText1,#mermaid .taskText2,#mermaid .taskText3{fill:white;}#mermaid .task0,#mermaid .task1,#mermaid .task2,#mermaid .task3{fill:#8a90dd;stroke:#534fbc;}#mermaid .taskTextOutside0,#mermaid .taskTextOutside2{fill:black;}#mermaid .taskTextOutside1,#mermaid .taskTextOutside3{fill:black;}#mermaid .active0,#mermaid .active1,#mermaid .active2,#mermaid .active3{fill:#bfc7ff;stroke:#534fbc;}#mermaid .activeText0,#mermaid .activeText1,#mermaid .activeText2,#mermaid .activeText3{fill:black!important;}#mermaid .done0,#mermaid .done1,#mermaid .done2,#mermaid .done3{stroke:grey;fill:lightgrey;stroke-width:2;}#mermaid .doneText0,#mermaid .doneText1,#mermaid .doneText2,#mermaid .doneText3{fill:black!important;}#mermaid .crit0,#mermaid .crit1,#mermaid .crit2,#mermaid .crit3{stroke:#ff8888;fill:red;stroke-width:2;}#mermaid .activeCrit0,#mermaid .activeCrit1,#mermaid .activeCrit2,#mermaid .activeCrit3{stroke:#ff8888;fill:#bfc7ff;stroke-width:2;}#mermaid .doneCrit0,#mermaid .doneCrit1,#mermaid .doneCrit2,#mermaid .doneCrit3{stroke:#ff8888;fill:lightgrey;stroke-width:2;cursor:pointer;shape-rendering:crispEdges;}#mermaid .milestone{transform:rotate(45deg) scale(0.8,0.8);}#mermaid .milestoneText{font-style:italic;}#mermaid .doneCritText0,#mermaid .doneCritText1,#mermaid .doneCritText2,#mermaid .doneCritText3{fill:black!important;}#mermaid .activeCritText0,#mermaid .activeCritText1,#mermaid .activeCritText2,#mermaid .activeCritText3{fill:black!important;}#mermaid .titleText{text-anchor:middle;font-size:18px;fill:#333;}
+/** Class diagram */
+#mermaid g.classGroup text{fill:#9370DB;fill:#131300;stroke:none;font-size:10px;}#mermaid g.classGroup text .title{font-weight:bolder;}#mermaid .nodeLabel,#mermaid .edgeLabel{color:#131300;}#mermaid .edgeLabel .label rect{fill:#ECECFF;}#mermaid .label text{fill:#131300;}#mermaid .edgeLabel .label span{background:#ECECFF;}#mermaid .classTitle{font-weight:bolder;}#mermaid .node rect,#mermaid .node circle,#mermaid .node ellipse,#mermaid .node polygon,#mermaid .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid .divider{stroke:#9370DB;stroke:1;}#mermaid g.clickable{cursor:pointer;}#mermaid g.classGroup rect{fill:#ECECFF;stroke:#9370DB;}#mermaid g.classGroup line{stroke:#9370DB;stroke-width:1;}#mermaid .classLabel .box{stroke:none;stroke-width:0;fill:#ECECFF;opacity:0.5;}#mermaid .classLabel .label{fill:#9370DB;font-size:10px;}#mermaid .relation{stroke:#333333;stroke-width:1;fill:none;}#mermaid .dashed-line{stroke-dasharray:3;}#mermaid #compositionStart,#mermaid .composition{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid #compositionEnd,#mermaid .composition{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid #dependencyStart,#mermaid .dependency{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid #dependencyStart,#mermaid .dependency{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid #extensionStart,#mermaid .extension{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid #extensionEnd,#mermaid .extension{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid #aggregationStart,#mermaid .aggregation{fill:#ECECFF!important;stroke:#333333!important;stroke-width:1;}#mermaid #aggregationEnd,#mermaid .aggregation{fill:#ECECFF!important;stroke:#333333!important;stroke-width:1;}#mermaid #lollipopStart,#mermaid .lollipop{fill:#ECECFF!important;stroke:#333333!important;stroke-width:1;}#mermaid #lollipopEnd,#mermaid .lollipop{fill:#ECECFF!important;stroke:#333333!important;stroke-width:1;}#mermaid .edgeTerminals{font-size:11px;}
+/** Git graph */
+#mermaid .commit-id,#mermaid .commit-msg{fill:lightgrey;}#mermaid .commit0{stroke:hsl(240, 100%, 46.2745098039%);fill:hsl(240, 100%, 46.2745098039%);}#mermaid .commit-highlight0{stroke:hsl(60, 100%, 3.7254901961%);fill:hsl(60, 100%, 3.7254901961%);}#mermaid .label0{fill:hsl(240, 100%, 46.2745098039%);}#mermaid .arrow0{stroke:hsl(240, 100%, 46.2745098039%);}#mermaid .branch-label1{fill:black;}#mermaid .commit1{stroke:hsl(60, 100%, 43.5294117647%);fill:hsl(60, 100%, 43.5294117647%);}#mermaid .commit-highlight1{stroke:rgb(0, 0, 160.5);fill:rgb(0, 0, 160.5);}#mermaid .label1{fill:hsl(60, 100%, 43.5294117647%);}#mermaid .arrow1{stroke:hsl(60, 100%, 43.5294117647%);}#mermaid .branch-label2{fill:black;}#mermaid .commit2{stroke:hsl(80, 100%, 46.2745098039%);fill:hsl(80, 100%, 46.2745098039%);}#mermaid .commit-highlight2{stroke:rgb(48.8333333334, 0, 146.5000000001);fill:rgb(48.8333333334, 0, 146.5000000001);}#mermaid .label2{fill:hsl(80, 100%, 46.2745098039%);}#mermaid .arrow2{stroke:hsl(80, 100%, 46.2745098039%);}#mermaid .branch-label3{fill:#ffffff;}#mermaid .commit3{stroke:hsl(210, 100%, 46.2745098039%);fill:hsl(210, 100%, 46.2745098039%);}#mermaid .commit-highlight3{stroke:rgb(146.5000000001, 73.2500000001, 0);fill:rgb(146.5000000001, 73.2500000001, 0);}#mermaid .label3{fill:hsl(210, 100%, 46.2745098039%);}#mermaid .arrow3{stroke:hsl(210, 100%, 46.2745098039%);}#mermaid .branch-label4{fill:black;}#mermaid .commit4{stroke:hsl(180, 100%, 46.2745098039%);fill:hsl(180, 100%, 46.2745098039%);}#mermaid .commit-highlight4{stroke:rgb(146.5000000001, 0, 0);fill:rgb(146.5000000001, 0, 0);}#mermaid .label4{fill:hsl(180, 100%, 46.2745098039%);}#mermaid .arrow4{stroke:hsl(180, 100%, 46.2745098039%);}#mermaid .branch-label5{fill:black;}#mermaid .commit5{stroke:hsl(150, 100%, 46.2745098039%);fill:hsl(150, 100%, 46.2745098039%);}#mermaid .commit-highlight5{stroke:rgb(146.5000000001, 0, 73.2500000001);fill:rgb(146.5000000001, 0, 73.2500000001);}#mermaid .label5{fill:hsl(150, 100%, 46.2745098039%);}#mermaid .arrow5{stroke:hsl(150, 100%, 46.2745098039%);}#mermaid .branch-label6{fill:black;}#mermaid .commit6{stroke:hsl(300, 100%, 46.2745098039%);fill:hsl(300, 100%, 46.2745098039%);}#mermaid .commit-highlight6{stroke:rgb(0, 146.5000000001, 0);fill:rgb(0, 146.5000000001, 0);}#mermaid .label6{fill:hsl(300, 100%, 46.2745098039%);}#mermaid .arrow6{stroke:hsl(300, 100%, 46.2745098039%);}#mermaid .branch-label7{fill:black;}#mermaid .commit7{stroke:hsl(0, 100%, 46.2745098039%);fill:hsl(0, 100%, 46.2745098039%);}#mermaid .commit-highlight7{stroke:rgb(0, 146.5000000001, 146.5000000001);fill:rgb(0, 146.5000000001, 146.5000000001);}#mermaid .label7{fill:hsl(0, 100%, 46.2745098039%);}#mermaid .arrow7{stroke:hsl(0, 100%, 46.2745098039%);}#mermaid .branch{stroke-width:1;stroke:#333333;stroke-dasharray:2;}#mermaid .commit-label{font-size:10px;fill:#000021;}#mermaid .commit-label-bkg{font-size:10px;fill:#ffffde;opacity:0.5;}#mermaid .tag-label{font-size:10px;fill:#131300;}#mermaid .tag-label-bkg{fill:#ECECFF;stroke:hsl(240, 60%, 86.2745098039%);}#mermaid .tag-hole{fill:#333;}#mermaid .commit-merge{stroke:#ECECFF;fill:#ECECFF;}#mermaid .commit-reverse{stroke:#ECECFF;fill:#ECECFF;stroke-width:3;}#mermaid .commit-highlight-inner{stroke:#ECECFF;fill:#ECECFF;}#mermaid .arrow{stroke-width:8;stroke-linecap:round;fill:none;}
+#mermaid .branchLabel .label {font-size:16px;} #mermaid g.label.branch-label0 text, #mermaid g.label.branch-label3 text { fill: #eee; }
+/** Entity relationship */
+#mermaid .entityBox{fill:#ECECFF;stroke:#9370DB;}#mermaid .attributeBoxOdd{fill:#ffffff;stroke:#9370DB;}#mermaid .attributeBoxEven{fill:#f2f2f2;stroke:#9370DB;}#mermaid .relationshipLabelBox{fill:hsl(80, 100%, 96.2745098039%);opacity:0.7;background-color:hsl(80, 100%, 96.2745098039%);}#mermaid .relationshipLabelBox rect{opacity:0.5;}#mermaid .relationshipLine{stroke:#333333;}
+/** Journey */
+#mermaid .label{color:#333;}#mermaid .mouth{stroke:#666;}#mermaid line{stroke:#333;}#mermaid .legend{fill:#333;}#mermaid .label text{fill:#333;}#mermaid .label{color:#333;}#mermaid .face{fill:#FFF8DC;stroke:#999;}#mermaid .node rect,#mermaid .node circle,#mermaid .node ellipse,#mermaid .node polygon,#mermaid .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid .node .label{text-align:center;}#mermaid .node.clickable{cursor:pointer;}#mermaid .arrowheadPath{fill:#333333;}#mermaid .edgePath .path{stroke:#333333;stroke-width:1.5px;}#mermaid .flowchart-link{stroke:#333333;fill:none;}#mermaid .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid .edgeLabel rect{opacity:0.5;}#mermaid .cluster text{fill:#333;}#mermaid div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaid .task-type-0,#mermaid .section-type-0{fill:#ECECFF;}#mermaid .task-type-1,#mermaid .section-type-1{fill:#ffffde;}#mermaid .task-type-2,#mermaid .section-type-2{fill:hsl(304, 100%, 96.2745098039%);}#mermaid .task-type-3,#mermaid .section-type-3{fill:hsl(124, 100%, 93.5294117647%);}#mermaid .task-type-4,#mermaid .section-type-4{fill:hsl(176, 100%, 96.2745098039%);}#mermaid .task-type-5,#mermaid .section-type-5{fill:hsl(-4, 100%, 93.5294117647%);}#mermaid .task-type-6,#mermaid .section-type-6{fill:hsl(8, 100%, 96.2745098039%);}#mermaid .task-type-7,#mermaid .section-type-7{fill:hsl(188, 100%, 93.5294117647%);}
+/** State diagram */
+#mermaid defs #statediagram-barbEnd{fill:#333333;stroke:#333333;}#mermaid g.stateGroup text{fill:#9370DB;stroke:none;font-size:10px;}#mermaid g.stateGroup text{fill:#333;stroke:none;font-size:10px;}#mermaid g.stateGroup .state-title{font-weight:bolder;fill:#131300;}#mermaid g.stateGroup rect{fill:#ECECFF;stroke:#9370DB;}#mermaid g.stateGroup line{stroke:#333333;stroke-width:1;}#mermaid .transition{stroke:#333333;stroke-width:1;fill:none;}#mermaid .stateGroup .composit{fill:white;border-bottom:1px;}#mermaid .stateGroup .alt-composit{fill:#e0e0e0;border-bottom:1px;}#mermaid .state-note{stroke:#aaaa33;fill:#fff5ad;}#mermaid .state-note text{fill:black;stroke:none;font-size:10px;}#mermaid .stateLabel .box{stroke:none;stroke-width:0;fill:#ECECFF;opacity:0.5;}#mermaid .edgeLabel .label rect{fill:#ECECFF;opacity:0.5;}#mermaid .edgeLabel .label text{fill:#333;}#mermaid .label div .edgeLabel{color:#333;}#mermaid .stateLabel text{fill:#131300;font-size:10px;font-weight:bold;}#mermaid .node circle.state-start{fill:#333333;stroke:#333333;}#mermaid .node .fork-join{fill:#333333;stroke:#333333;}#mermaid .node circle.state-end{fill:#9370DB;stroke:white;stroke-width:1.5;}#mermaid .end-state-inner{fill:white;stroke-width:1.5;}#mermaid .node rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid .node polygon{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid #statediagram-barbEnd{fill:#333333;}#mermaid .statediagram-cluster rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid .cluster-label,#mermaid .nodeLabel{color:#131300;}#mermaid .statediagram-cluster rect.outer{rx:5px;ry:5px;}#mermaid .statediagram-state .divider{stroke:#9370DB;}#mermaid .statediagram-state .title-state{rx:5px;ry:5px;}#mermaid .statediagram-cluster.statediagram-cluster .inner{fill:white;}#mermaid .statediagram-cluster.statediagram-cluster-alt .inner{fill:#f0f0f0;}#mermaid .statediagram-cluster .inner{rx:0;ry:0;}#mermaid .statediagram-state rect.basic{rx:5px;ry:5px;}#mermaid .statediagram-state rect.divider{stroke-dasharray:10,10;fill:#f0f0f0;}#mermaid .note-edge{stroke-dasharray:5;}#mermaid .statediagram-note rect{fill:#fff5ad;stroke:#aaaa33;stroke-width:1px;rx:0;ry:0;}#mermaid .statediagram-note rect{fill:#fff5ad;stroke:#aaaa33;stroke-width:1px;rx:0;ry:0;}#mermaid .statediagram-note text{fill:black;}#mermaid .statediagram-note .nodeLabel{color:black;}#mermaid .statediagram .edgeLabel{color:red;}#mermaid #dependencyStart,#mermaid #dependencyEnd{fill:#333333;stroke:#333333;stroke-width:1;}
+/** Pie chart */
+#mermaid .pieCircle{stroke:#222;stroke-width:1px;}#mermaid .pieTitleText{text-anchor:middle;font-size:25px;fill:black;}#mermaid .slice{fill:#333;font-size:17px;}#mermaid .legend text{fill:black;font-size:17px;}
+/** Requirements */
+#mermaid marker{fill:#333333;stroke:#333333;}#mermaid marker.cross{stroke:#333333;}#mermaid svg{font-size:16px;}#mermaid .reqBox{fill:#ECECFF;fill-opacity:100%;stroke:hsl(240, 60%, 86.2745098039%);stroke-width:hsl(240, 60%, 86.2745098039%);}#mermaid .reqTitle,#mermaid .reqLabel{fill:#131300;}#mermaid .reqLabelBox{fill:#e8e8e8;fill-opacity:100%;}#mermaid .req-title-line{stroke:hsl(240, 60%, 86.2745098039%);stroke-width:hsl(240, 60%, 86.2745098039%);}#mermaid .relationshipLine{stroke:#333333;stroke-width:1;}#mermaid .relationshipLabel{fill:black;}
+/** C4 system */
+#mermaid .person{stroke:calculated;fill:calculated;}
+/** Mind map */
+#mermaid .section-root.mindmap-node { fill: hsl(240, 100%, 50%); } #mermaid .section-root.mindmap-node text { fill: white; }
+#mermaid .mindmap-edges .edge-depth-0 { stroke-width: 14; }
+#mermaid .mindmap-edges .edge-depth-1 { stroke-width: 11; }
+#mermaid .mindmap-edges .edge-depth-2 { stroke-width: 8; }
+#mermaid .mindmap-edges .edge-depth-3 { stroke-width: 5; }
+#mermaid .mindmap-edges .edge-depth-4 { stroke-width: 3; }
+#mermaid .mindmap-edges .edge-depth-5 { stroke-width: 2; }
+#mermaid .mindmap-edges .edge-depth-6 { stroke-width: 1; }
+#mermaid .mindmap-edges .section-edge-0,  #mermaid .mindmap-node.section-0  path { fill: hsl(60, 100%, 70%); stroke: hsl(60, 100%, 70%); } #mermaid .mindmap-node.section-0  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-1,  #mermaid .mindmap-node.section-1  path { fill: hsl(170, 90%, 70%); stroke: hsl(170, 90%, 70%); } #mermaid .mindmap-node.section-1  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-2,  #mermaid .mindmap-node.section-2  path { fill: hsl(280, 90%, 70%); stroke: hsl(280, 90%, 70%); } #mermaid .mindmap-node.section-2  text { fill: white; }
+#mermaid .mindmap-edges .section-edge-3,  #mermaid .mindmap-node.section-3  path { fill: hsl(30, 90%, 70%);  stroke: hsl(30, 90%, 70%);  } #mermaid .mindmap-node.section-3  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-4,  #mermaid .mindmap-node.section-4  path { fill: hsl(140, 90%, 70%); stroke: hsl(140, 90%, 70%); } #mermaid .mindmap-node.section-4  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-5,  #mermaid .mindmap-node.section-5  path { fill: hsl(250, 90%, 70%); stroke: hsl(250, 90%, 70%); } #mermaid .mindmap-node.section-5  text { fill: white; }
+#mermaid .mindmap-edges .section-edge-6,  #mermaid .mindmap-node.section-6  path { fill: hsl(0, 90%, 70%);   stroke: hsl(0, 90%, 70%);   } #mermaid .mindmap-node.section-6  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-7,  #mermaid .mindmap-node.section-7  path { fill: hsl(110, 90%, 70%); stroke: hsl(110, 90%, 70%); } #mermaid .mindmap-node.section-7  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-8,  #mermaid .mindmap-node.section-8  path { fill: hsl(220, 90%, 70%); stroke: hsl(220, 90%, 70%); } #mermaid .mindmap-node.section-8  text { fill: white; }
+#mermaid .mindmap-edges .section-edge-9,  #mermaid .mindmap-node.section-9  path { fill: hsl(330, 90%, 70%); stroke: hsl(330, 90%, 70%); } #mermaid .mindmap-node.section-9  text { fill: black; }
+#mermaid .mindmap-edges .section-edge-10, #mermaid .mindmap-node.section-10 path { fill: hsl(80, 90%, 70%);  stroke: hsl(80, 90%, 70%);  } #mermaid .mindmap-node.section-10 text { fill: black; }
+#mermaid .mindmap-edges .section-edge-11, #mermaid .mindmap-node.section-11 path { fill: hsl(190, 90%, 70%); stroke: hsl(190, 90%, 70%); } #mermaid .mindmap-node.section-11 text { fill: black; }
+#mermaid .mindmap-edges .section-edge-12, #mermaid .mindmap-node.section-12 path { fill: hsl(300, 90%, 70%); stroke: hsl(300, 90%, 70%); } #mermaid .mindmap-node.section-12 text { fill: black; }
+/** Timeline */
+#mermaid .timeline text tspan { fill: #222; } #mermaid .timeline-node path { fill: #ccc; }
+
+/* Dark theme */
+/** Common */
+html.theme-dark #mermaid {fill:#ccc;}html.theme-dark #mermaid .error-icon{fill:#a44141;}html.theme-dark #mermaid .error-text{fill:#ddd;stroke:#ddd;}html.theme-dark #mermaid .edge-pattern-solid{stroke-dasharray:0;}html.theme-dark #mermaid .edge-pattern-dashed{stroke-dasharray:3;}html.theme-dark #mermaid .edge-pattern-dotted{stroke-dasharray:2;}html.theme-dark #mermaid .marker{fill:lightgrey;stroke:lightgrey;}html.theme-dark #mermaid .marker.cross{stroke:lightgrey;}
+/** Flowchart */
+html.theme-dark #mermaid .label{color:#ccc;}html.theme-dark #mermaid .cluster-label text{fill:#F9FFFE;}html.theme-dark #mermaid .cluster-label span{color:#F9FFFE;}html.theme-dark #mermaid .label text,html.theme-dark #mermaid span{fill:#ccc;color:#ccc;}html.theme-dark #mermaid .node rect,html.theme-dark #mermaid .node circle,html.theme-dark #mermaid .node ellipse,html.theme-dark #mermaid .node polygon,html.theme-dark #mermaid .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}html.theme-dark #mermaid .node .label{text-align:center;}html.theme-dark #mermaid .node.clickable{cursor:pointer;}html.theme-dark #mermaid .arrowheadPath{fill:lightgrey;}html.theme-dark #mermaid .edgePath .path{stroke:lightgrey;stroke-width:2.0px;}html.theme-dark #mermaid .flowchart-link{stroke:lightgrey;fill:none;}html.theme-dark #mermaid .edgeLabel{background-color:hsl(0, 0%, 34.4117647059%);text-align:center;}html.theme-dark #mermaid .edgeLabel rect{opacity:0.5;background-color:hsl(0, 0%, 34.4117647059%);fill:hsl(0, 0%, 34.4117647059%);}html.theme-dark #mermaid .cluster rect{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:rgba(255, 255, 255, 0.25);stroke-width:1px;}html.theme-dark #mermaid .cluster text{fill:#F9FFFE;}html.theme-dark #mermaid .cluster span{color:#F9FFFE;}html.theme-dark #mermaid div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;background:hsl(20, 1.5873015873%, 12.3529411765%);border:1px solid rgba(255, 255, 255, 0.25);border-radius:2px;pointer-events:none;z-index:100;}html.theme-dark #mermaid :root{--mermaid-}
+/** Sequence diagram */
+html.theme-dark #mermaid .actor{stroke:#81B1DB;fill:#1f2020;}html.theme-dark #mermaid text.actor>tspan{fill:lightgrey;stroke:none;}html.theme-dark #mermaid .actor-line{stroke:lightgrey;}html.theme-dark #mermaid .messageLine0{stroke-width:1.5;stroke-dasharray:none;stroke:lightgrey;}html.theme-dark #mermaid .messageLine1{stroke-width:1.5;stroke-dasharray:2,2;stroke:lightgrey;}html.theme-dark #mermaid #arrowhead path{fill:lightgrey;stroke:lightgrey;}html.theme-dark #mermaid .sequenceNumber{fill:black;}html.theme-dark #mermaid #sequencenumber{fill:lightgrey;}html.theme-dark #mermaid #crosshead path{fill:lightgrey;stroke:lightgrey;}html.theme-dark #mermaid .messageText{fill:lightgrey;stroke:none;}html.theme-dark #mermaid .labelBox{stroke:#81B1DB;fill:#1f2020;}html.theme-dark #mermaid .labelText,html.theme-dark #mermaid .labelText>tspan{fill:lightgrey;stroke:none;}html.theme-dark #mermaid .loopText,html.theme-dark #mermaid .loopText>tspan{fill:lightgrey;stroke:none;}html.theme-dark #mermaid .loopLine{stroke-width:2px;stroke-dasharray:2,2;stroke:#81B1DB;fill:#81B1DB;}html.theme-dark #mermaid .note{stroke:hsl(180, 0%, 18.3529411765%);fill:hsl(180, 1.5873015873%, 28.3529411765%);}html.theme-dark #mermaid .noteText,html.theme-dark #mermaid .noteText>tspan{fill:rgb(183.8476190475, 181.5523809523, 181.5523809523);stroke:none;}html.theme-dark #mermaid .activation0{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:#81B1DB;}html.theme-dark #mermaid .activation1{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:#81B1DB;}html.theme-dark #mermaid .activation2{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:#81B1DB;}html.theme-dark #mermaid .actorPopupMenu{position:absolute;}html.theme-dark #mermaid .actorPopupMenuPanel{position:absolute;fill:#1f2020;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);filter:drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));}html.theme-dark #mermaid .actor-man line{stroke:#81B1DB;fill:#1f2020;}html.theme-dark #mermaid .actor-man circle,html.theme-dark #mermaid line{stroke:#81B1DB;fill:#1f2020;stroke-width:2px;}html.theme-dark #mermaid :root{--mermaid-}
+/** Gantt */
+html.theme-dark #mermaid .exclude-range{fill:#444;}html.theme-dark #mermaid .section{stroke:none;opacity:0.2;}html.theme-dark #mermaid .section0{fill:hsl(52.9411764706, 28.813559322%, 58.431372549%);}html.theme-dark #mermaid .section2{fill:#EAE8D9;}html.theme-dark #mermaid .section1,html.theme-dark #mermaid .section3{fill:#333;opacity:0.2;}html.theme-dark #mermaid .sectionTitle0{fill:#F9FFFE;}html.theme-dark #mermaid .sectionTitle1{fill:#F9FFFE;}html.theme-dark #mermaid .sectionTitle2{fill:#F9FFFE;}html.theme-dark #mermaid .sectionTitle3{fill:#F9FFFE;}html.theme-dark #mermaid .sectionTitle{text-anchor:start;}html.theme-dark #mermaid .grid .tick{stroke:lightgrey;opacity:0.8;shape-rendering:crispEdges;}html.theme-dark #mermaid .grid .tick text{fill:#ccc;}html.theme-dark #mermaid .grid path{stroke-width:0;}html.theme-dark #mermaid .today{fill:none;stroke:#DB5757;stroke-width:2px;}html.theme-dark #mermaid .task{stroke-width:2;}html.theme-dark #mermaid .taskText{text-anchor:middle;}html.theme-dark #mermaid .taskTextOutsideRight{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%);text-anchor:start;}html.theme-dark #mermaid .taskTextOutsideLeft{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%);text-anchor:end;}html.theme-dark #mermaid .task.clickable{cursor:pointer;}html.theme-dark #mermaid .taskText.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}html.theme-dark #mermaid .taskTextOutsideLeft.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}html.theme-dark #mermaid .taskTextOutsideRight.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}html.theme-dark #mermaid .taskText0,html.theme-dark #mermaid .taskText1,html.theme-dark #mermaid .taskText2,html.theme-dark #mermaid .taskText3{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%);}html.theme-dark #mermaid .task0,html.theme-dark #mermaid .task1,html.theme-dark #mermaid .task2,html.theme-dark #mermaid .task3{fill:hsl(180, 1.5873015873%, 35.3529411765%);stroke:#ffffff;}html.theme-dark #mermaid .taskTextOutside0,html.theme-dark #mermaid .taskTextOutside2{fill:lightgrey;}html.theme-dark #mermaid .taskTextOutside1,html.theme-dark #mermaid .taskTextOutside3{fill:lightgrey;}html.theme-dark #mermaid .active0,html.theme-dark #mermaid .active1,html.theme-dark #mermaid .active2,html.theme-dark #mermaid .active3{fill:#81B1DB;stroke:#ffffff;}html.theme-dark #mermaid .activeText0,html.theme-dark #mermaid .activeText1,html.theme-dark #mermaid .activeText2,html.theme-dark #mermaid .activeText3{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%)!important;}html.theme-dark #mermaid .done0,html.theme-dark #mermaid .done1,html.theme-dark #mermaid .done2,html.theme-dark #mermaid .done3{stroke:grey;fill:lightgrey;stroke-width:2;}html.theme-dark #mermaid .doneText0,html.theme-dark #mermaid .doneText1,html.theme-dark #mermaid .doneText2,html.theme-dark #mermaid .doneText3{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%)!important;}html.theme-dark #mermaid .crit0,html.theme-dark #mermaid .crit1,html.theme-dark #mermaid .crit2,html.theme-dark #mermaid .crit3{stroke:#E83737;fill:#E83737;stroke-width:2;}html.theme-dark #mermaid .activeCrit0,html.theme-dark #mermaid .activeCrit1,html.theme-dark #mermaid .activeCrit2,html.theme-dark #mermaid .activeCrit3{stroke:#E83737;fill:#81B1DB;stroke-width:2;}html.theme-dark #mermaid .doneCrit0,html.theme-dark #mermaid .doneCrit1,html.theme-dark #mermaid .doneCrit2,html.theme-dark #mermaid .doneCrit3{stroke:#E83737;fill:lightgrey;stroke-width:2;cursor:pointer;shape-rendering:crispEdges;}html.theme-dark #mermaid .milestone{transform:rotate(45deg) scale(0.8,0.8);}html.theme-dark #mermaid .milestoneText{font-style:italic;}html.theme-dark #mermaid .doneCritText0,html.theme-dark #mermaid .doneCritText1,html.theme-dark #mermaid .doneCritText2,html.theme-dark #mermaid .doneCritText3{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%)!important;}html.theme-dark #mermaid .activeCritText0,html.theme-dark #mermaid .activeCritText1,html.theme-dark #mermaid .activeCritText2,html.theme-dark #mermaid .activeCritText3{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%)!important;}html.theme-dark #mermaid .titleText{text-anchor:middle;fill:#ccc;}html.theme-dark #mermaid :root{--mermaid-}
+/** Class diagram */
+html.theme-dark #mermaid g.classGroup text{fill:#e0dfdf;stroke:none;}html.theme-dark #mermaid g.classGroup text .title{font-weight:bolder;}html.theme-dark #mermaid .nodeLabel,html.theme-dark #mermaid .edgeLabel{color:#e0dfdf;}html.theme-dark #mermaid .edgeLabel .label rect{fill:#1f2020;}html.theme-dark #mermaid .label text{fill:#e0dfdf;}html.theme-dark #mermaid .edgeLabel .label span{background:#1f2020;}html.theme-dark #mermaid .classTitle{font-weight:bolder;}html.theme-dark #mermaid .node rect,html.theme-dark #mermaid .node circle,html.theme-dark #mermaid .node ellipse,html.theme-dark #mermaid .node polygon,html.theme-dark #mermaid .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}html.theme-dark #mermaid .divider{stroke:#81B1DB;stroke:1;}html.theme-dark #mermaid g.clickable{cursor:pointer;}html.theme-dark #mermaid g.classGroup rect{fill:#1f2020;stroke:#81B1DB;}html.theme-dark #mermaid g.classGroup line{stroke:#81B1DB;stroke-width:1;}html.theme-dark #mermaid .classLabel .box{stroke:none;stroke-width:0;fill:#1f2020;opacity:0.5;}html.theme-dark #mermaid .classLabel .label{fill:#81B1DB;}html.theme-dark #mermaid .relation{stroke:lightgrey;stroke-width:1;fill:none;}html.theme-dark #mermaid .dashed-line{stroke-dasharray:3;}html.theme-dark #mermaid #compositionStart,html.theme-dark #mermaid .composition{fill:lightgrey!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #compositionEnd,html.theme-dark #mermaid .composition{fill:lightgrey!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #dependencyStart,html.theme-dark #mermaid .dependency{fill:lightgrey!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #dependencyStart,html.theme-dark #mermaid .dependency{fill:lightgrey!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #extensionStart,html.theme-dark #mermaid .extension{fill:lightgrey!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #extensionEnd,html.theme-dark #mermaid .extension{fill:lightgrey!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #aggregationStart,html.theme-dark #mermaid .aggregation{fill:#1f2020!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #aggregationEnd,html.theme-dark #mermaid .aggregation{fill:#1f2020!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #lollipopStart,html.theme-dark #mermaid .lollipop{fill:#1f2020!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid #lollipopEnd,html.theme-dark #mermaid .lollipop{fill:#1f2020!important;stroke:lightgrey!important;stroke-width:1;}html.theme-dark #mermaid .edgeTerminals{}html.theme-dark #mermaid :root{--mermaid-}
+/** Git graph */
+html.theme-dark #mermaid .commit-id,html.theme-dark #mermaid .commit-msg,html.theme-dark #mermaid .branch-label{fill:lightgrey;color:lightgrey;}html.theme-dark #mermaid .branch-label0{fill:undefined;}html.theme-dark #mermaid .commit0{stroke:hsl(180, 1.5873015873%, 48.3529411765%);fill:hsl(180, 1.5873015873%, 48.3529411765%);}html.theme-dark #mermaid .commit-highlight0{stroke:rgb(133.6571428571, 129.7428571428, 129.7428571428);fill:rgb(133.6571428571, 129.7428571428, 129.7428571428);}html.theme-dark #mermaid .label0{fill:hsl(180, 1.5873015873%, 48.3529411765%);}html.theme-dark #mermaid .arrow0{stroke:hsl(180, 1.5873015873%, 48.3529411765%);}html.theme-dark #mermaid .branch-label1{fill:undefined;}html.theme-dark #mermaid .commit1{stroke:hsl(321.6393442623, 65.5913978495%, 38.2352941176%);fill:hsl(321.6393442623, 65.5913978495%, 38.2352941176%);}html.theme-dark #mermaid .commit-highlight1{stroke:rgb(93.5483870969, 221.4516129033, 139.677419355);fill:rgb(93.5483870969, 221.4516129033, 139.677419355);}html.theme-dark #mermaid .label1{fill:hsl(321.6393442623, 65.5913978495%, 38.2352941176%);}html.theme-dark #mermaid .arrow1{stroke:hsl(321.6393442623, 65.5913978495%, 38.2352941176%);}html.theme-dark #mermaid .branch-label2{fill:undefined;}html.theme-dark #mermaid .commit2{stroke:hsl(194.4, 16.5562913907%, 49.6078431373%);fill:hsl(194.4, 16.5562913907%, 49.6078431373%);}html.theme-dark #mermaid .commit-highlight2{stroke:rgb(149.4437086091, 117.6092715231, 107.5562913906);fill:rgb(149.4437086091, 117.6092715231, 107.5562913906);}html.theme-dark #mermaid .label2{fill:hsl(194.4, 16.5562913907%, 49.6078431373%);}html.theme-dark #mermaid .arrow2{stroke:hsl(194.4, 16.5562913907%, 49.6078431373%);}html.theme-dark #mermaid .branch-label3{fill:undefined;}html.theme-dark #mermaid .commit3{stroke:hsl(23.0769230769, 49.0566037736%, 40.7843137255%);fill:hsl(23.0769230769, 49.0566037736%, 40.7843137255%);}html.theme-dark #mermaid .commit-highlight3{stroke:rgb(99.9811320754, 162.7735849057, 202.0188679245);fill:rgb(99.9811320754, 162.7735849057, 202.0188679245);}html.theme-dark #mermaid .label3{fill:hsl(23.0769230769, 49.0566037736%, 40.7843137255%);}html.theme-dark #mermaid .arrow3{stroke:hsl(23.0769230769, 49.0566037736%, 40.7843137255%);}html.theme-dark #mermaid .branch-label4{fill:undefined;}html.theme-dark #mermaid .commit4{stroke:hsl(0, 83.3333333333%, 43.5294117647%);fill:hsl(0, 83.3333333333%, 43.5294117647%);}html.theme-dark #mermaid .commit-highlight4{stroke:rgb(51.5000000001, 236.5, 236.5);fill:rgb(51.5000000001, 236.5, 236.5);}html.theme-dark #mermaid .label4{fill:hsl(0, 83.3333333333%, 43.5294117647%);}html.theme-dark #mermaid .arrow4{stroke:hsl(0, 83.3333333333%, 43.5294117647%);}html.theme-dark #mermaid .branch-label5{fill:undefined;}html.theme-dark #mermaid .commit5{stroke:hsl(289.1666666667, 100%, 24.1176470588%);fill:hsl(289.1666666667, 100%, 24.1176470588%);}html.theme-dark #mermaid .commit-highlight5{stroke:rgb(154.2083333334, 255, 132.0000000001);fill:rgb(154.2083333334, 255, 132.0000000001);}html.theme-dark #mermaid .label5{fill:hsl(289.1666666667, 100%, 24.1176470588%);}html.theme-dark #mermaid .arrow5{stroke:hsl(289.1666666667, 100%, 24.1176470588%);}html.theme-dark #mermaid .branch-label6{fill:undefined;}html.theme-dark #mermaid .commit6{stroke:hsl(35.1315789474, 98.7012987013%, 40.1960784314%);fill:hsl(35.1315789474, 98.7012987013%, 40.1960784314%);}html.theme-dark #mermaid .commit-highlight6{stroke:rgb(51.331168831, 135.1948051946, 253.6688311688);fill:rgb(51.331168831, 135.1948051946, 253.6688311688);}html.theme-dark #mermaid .label6{fill:hsl(35.1315789474, 98.7012987013%, 40.1960784314%);}html.theme-dark #mermaid .arrow6{stroke:hsl(35.1315789474, 98.7012987013%, 40.1960784314%);}html.theme-dark #mermaid .branch-label7{fill:undefined;}html.theme-dark #mermaid .commit7{stroke:hsl(106.1538461538, 84.4155844156%, 35.0980392157%);fill:hsl(106.1538461538, 84.4155844156%, 35.0980392157%);}html.theme-dark #mermaid .commit-highlight7{stroke:rgb(206.1818181817, 89.948051948, 241.051948052);fill:rgb(206.1818181817, 89.948051948, 241.051948052);}html.theme-dark #mermaid .label7{fill:hsl(106.1538461538, 84.4155844156%, 35.0980392157%);}html.theme-dark #mermaid .arrow7{stroke:hsl(106.1538461538, 84.4155844156%, 35.0980392157%);}html.theme-dark #mermaid .branch{stroke-width:1;stroke:lightgrey;stroke-dasharray:2;}html.theme-dark #mermaid .commit-label{fill:rgb(183.8476190475, 181.5523809523, 181.5523809523);}html.theme-dark #mermaid .commit-label-bkg{fill:hsl(180, 1.5873015873%, 28.3529411765%);opacity:0.5;}html.theme-dark #mermaid .tag-label{fill:#e0dfdf;}html.theme-dark #mermaid .tag-label-bkg{fill:#1f2020;stroke:#cccccc;}html.theme-dark #mermaid .tag-hole{fill:#ccc;}html.theme-dark #mermaid .commit-merge{stroke:#1f2020;fill:#1f2020;}html.theme-dark #mermaid .commit-reverse{stroke:#1f2020;fill:#1f2020;stroke-width:3;}html.theme-dark #mermaid .commit-highlight-inner{stroke:#1f2020;fill:#1f2020;}html.theme-dark #mermaid .arrow{stroke-width:8;stroke-linecap:round;fill:none;}:root{--mermaid-}
+/** Entity relationship */
+html.theme-dark #mermaid .entityBox{fill:#1f2020;stroke:#81B1DB;}html.theme-dark #mermaid .attributeBoxOdd{fill:hsl(0, 0%, 32%);stroke:#81B1DB;}html.theme-dark #mermaid .attributeBoxEven{fill:hsl(0, 0%, 22%);stroke:#81B1DB;}html.theme-dark #mermaid .relationshipLabelBox{fill:hsl(20, 1.5873015873%, 12.3529411765%);opacity:0.7;background-color:hsl(20, 1.5873015873%, 12.3529411765%);}html.theme-dark #mermaid .relationshipLabelBox rect{opacity:0.5;}html.theme-dark #mermaid .relationshipLine{stroke:lightgrey;}html.theme-dark #mermaid :root{--mermaid-}
+/** Journey */
+html.theme-dark #mermaid .label{color:#ccc;}html.theme-dark #mermaid .mouth{stroke:#666;}html.theme-dark #mermaid line{stroke:#ccc;}html.theme-dark #mermaid .legend{fill:#ccc;}html.theme-dark #mermaid .label text{fill:#333;}html.theme-dark #mermaid .label{color:#ccc;}html.theme-dark #mermaid .face{fill:#FFF8DC;stroke:#999;}html.theme-dark #mermaid .node rect,html.theme-dark #mermaid .node circle,html.theme-dark #mermaid .node ellipse,html.theme-dark #mermaid .node polygon,html.theme-dark #mermaid .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}html.theme-dark #mermaid .node .label{text-align:center;}html.theme-dark #mermaid .node.clickable{cursor:pointer;}html.theme-dark #mermaid .arrowheadPath{fill:lightgrey;}html.theme-dark #mermaid .edgePath .path{stroke:lightgrey;stroke-width:1.5px;}html.theme-dark #mermaid .flowchart-link{stroke:lightgrey;fill:none;}html.theme-dark #mermaid .edgeLabel{background-color:hsl(0, 0%, 34.4117647059%);text-align:center;}html.theme-dark #mermaid .edgeLabel rect{opacity:0.5;}html.theme-dark #mermaid .cluster text{fill:#F9FFFE;}html.theme-dark #mermaid div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;background:hsl(20, 1.5873015873%, 12.3529411765%);border:1px solid rgba(255, 255, 255, 0.25);border-radius:2px;pointer-events:none;z-index:100;}html.theme-dark #mermaid .task-type-0,html.theme-dark #mermaid .section-type-0{fill:#1f2020;}html.theme-dark #mermaid .task-type-1,html.theme-dark #mermaid .section-type-1{fill:hsl(180, 1.5873015873%, 28.3529411765%);}html.theme-dark #mermaid .task-type-2,html.theme-dark #mermaid .section-type-2{fill:hsl(244, 1.5873015873%, 12.3529411765%);}html.theme-dark #mermaid .task-type-3,html.theme-dark #mermaid .section-type-3{fill:hsl(244, 1.5873015873%, 28.3529411765%);}html.theme-dark #mermaid .task-type-4,html.theme-dark #mermaid .section-type-4{fill:hsl(116, 1.5873015873%, 12.3529411765%);}html.theme-dark #mermaid .task-type-5,html.theme-dark #mermaid .section-type-5{fill:hsl(116, 1.5873015873%, 28.3529411765%);}html.theme-dark #mermaid .task-type-6,html.theme-dark #mermaid .section-type-6{fill:hsl(308, 1.5873015873%, 12.3529411765%);}html.theme-dark #mermaid .task-type-7,html.theme-dark #mermaid .section-type-7{fill:hsl(308, 1.5873015873%, 28.3529411765%);}html.theme-dark #mermaid :root{--mermaid-}
+/** State diagram */
+html.theme-dark #mermaid defs #statediagram-barbEnd{fill:lightgrey;stroke:lightgrey;}html.theme-dark #mermaid g.stateGroup text{fill:#81B1DB;stroke:none;}html.theme-dark #mermaid g.stateGroup text{fill:#ccc;stroke:none;}html.theme-dark #mermaid g.stateGroup .state-title{font-weight:bolder;fill:#e0dfdf;}html.theme-dark #mermaid g.stateGroup rect{fill:#1f2020;stroke:#81B1DB;}html.theme-dark #mermaid g.stateGroup line{stroke:lightgrey;stroke-width:1;}html.theme-dark #mermaid .transition{stroke:lightgrey;stroke-width:1;fill:none;}html.theme-dark #mermaid .stateGroup .composit{fill:#333;border-bottom:1px;}html.theme-dark #mermaid .stateGroup .alt-composit{fill:#e0e0e0;border-bottom:1px;}html.theme-dark #mermaid .state-note{stroke:hsl(180, 0%, 18.3529411765%);fill:hsl(180, 1.5873015873%, 28.3529411765%);}html.theme-dark #mermaid .state-note text{fill:rgb(183.8476190475, 181.5523809523, 181.5523809523);stroke:none;}html.theme-dark #mermaid .stateLabel .box{stroke:none;stroke-width:0;fill:#1f2020;opacity:0.5;}html.theme-dark #mermaid .edgeLabel .label rect{fill:#1f2020;opacity:0.5;}html.theme-dark #mermaid .edgeLabel .label text{fill:#ccc;}html.theme-dark #mermaid .label div .edgeLabel{color:#ccc;}html.theme-dark #mermaid .stateLabel text{fill:#e0dfdf;font-weight:bold;}html.theme-dark #mermaid .node circle.state-start{fill:#f4f4f4;stroke:#f4f4f4;}html.theme-dark #mermaid .node .fork-join{fill:#f4f4f4;stroke:#f4f4f4;}html.theme-dark #mermaid .node circle.state-end{fill:#cccccc;stroke:#333;stroke-width:1.5;}html.theme-dark #mermaid .end-state-inner{fill:#333;stroke-width:1.5;}html.theme-dark #mermaid .node rect{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}html.theme-dark #mermaid .node polygon{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}html.theme-dark #mermaid #statediagram-barbEnd{fill:lightgrey;}html.theme-dark #mermaid .statediagram-cluster rect{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}html.theme-dark #mermaid .cluster-label,html.theme-dark #mermaid .nodeLabel{color:#e0dfdf;}html.theme-dark #mermaid .statediagram-cluster rect.outer{rx:5px;ry:5px;}html.theme-dark #mermaid .statediagram-state .divider{stroke:#81B1DB;}html.theme-dark #mermaid .statediagram-state .title-state{rx:5px;ry:5px;}html.theme-dark #mermaid .statediagram-cluster.statediagram-cluster .inner{fill:#333;}html.theme-dark #mermaid .statediagram-cluster.statediagram-cluster-alt .inner{fill:#555;}html.theme-dark #mermaid .statediagram-cluster .inner{rx:0;ry:0;}html.theme-dark #mermaid .statediagram-state rect.basic{rx:5px;ry:5px;}html.theme-dark #mermaid .statediagram-state rect.divider{stroke-dasharray:10,10;fill:#555;}html.theme-dark #mermaid .note-edge{stroke-dasharray:5;}html.theme-dark #mermaid .statediagram-note rect{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:hsl(180, 0%, 18.3529411765%);stroke-width:1px;rx:0;ry:0;}html.theme-dark #mermaid .statediagram-note rect{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:hsl(180, 0%, 18.3529411765%);stroke-width:1px;rx:0;ry:0;}html.theme-dark #mermaid .statediagram-note text{fill:rgb(183.8476190475, 181.5523809523, 181.5523809523);}html.theme-dark #mermaid .statediagram-note .nodeLabel{color:rgb(183.8476190475, 181.5523809523, 181.5523809523);}html.theme-dark #mermaid .statediagram .edgeLabel{color:red;}html.theme-dark #mermaid #dependencyStart,html.theme-dark #mermaid #dependencyEnd{fill:lightgrey;stroke:lightgrey;stroke-width:1;}html.theme-dark #mermaid :root{--mermaid-}
+/** Pie chart */
+html.theme-dark #mermaid .pieCircle{filter: brightness(0.7);} html.theme-dark #mermaid[aria-roledescription=pie] .legend rect { filter: brightness(0.7); } html.theme-dark #mermaid .pieTitleText{text-anchor:middle;fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%);}html.theme-dark #mermaid .slice{fill:#222;}html.theme-dark #mermaid .legend text{fill:hsl(28.5714285714, 17.3553719008%, 86.2745098039%);}html.theme-dark #mermaid :root{--mermaid-}
+/** Requirements */
+html.theme-dark #mermaid marker{fill:lightgrey;stroke:lightgrey;}html.theme-dark #mermaid marker.cross{stroke:lightgrey;}html.theme-dark #mermaid svg{}html.theme-dark #mermaid .reqBox{fill:#1f2020;fill-opacity:100%;stroke:#cccccc;stroke-width:#cccccc;}html.theme-dark #mermaid .reqTitle,html.theme-dark #mermaid .reqLabel{fill:#e0dfdf;}html.theme-dark #mermaid .reqLabelBox{fill:hsl(180, 1.5873015873%, 28.3529411765%);fill-opacity:100%;}html.theme-dark #mermaid .req-title-line{stroke:#cccccc;stroke-width:#cccccc;}html.theme-dark #mermaid .relationshipLine{stroke:lightgrey;stroke-width:1;}html.theme-dark #mermaid .relationshipLabel{fill:lightgrey;}html.theme-dark #mermaid :root{--mermaid-}
+/** C4 system */
+html.theme-dark #mermaid .person{stroke:calculated;fill:calculated;} html.theme-dark #mermaid[aria-roledescription=c4] rect {stroke: #ddd;} html.theme-dark #mermaid[aria-roledescription=c4] text {fill:#eee;}
+/** Mind map */
+html.theme-dark #mermaid .section-root.mindmap-node { fill: #ccc; } html.theme-dark #mermaid .section-root.mindmap-node text { fill: black; }
+html.theme-dark #mermaid .mindmap-edges path, html.theme-dark #mermaid .mindmap-node { filter: hue-rotate(180deg) invert(0.9); }
+/** Timeline */
+html.theme-dark #mermaid .timeline text tspan { fill: #eee; } html.theme-dark #mermaid .timeline-node path { fill: #222; }
+
+        
+
+        .prism {
+            page-break-inside: avoid;
+        }
+        
+        /* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+abap+abnf+actionscript+ada+agda+al+antlr4+apacheconf+apex+apl+applescript+aql+arduino+arff+armasm+arturo+asciidoc+aspnet+asm6502+asmatmel+autohotkey+autoit+avisynth+avro-idl+awk+bash+basic+batch+bbcode+bbj+bicep+birb+bison+bnf+bqn+brainfuck+brightscript+bro+bsl+c+csharp+cpp+cfscript+chaiscript+cil+cilkc+cilkcpp+clojure+cmake+cobol+coffeescript+concurnas+csp+cooklang+coq+crystal+css-extras+csv+cue+cypher+d+dart+dataweave+dax+dhall+diff+django+dns-zone-file+docker+dot+ebnf+editorconfig+eiffel+ejs+elixir+elm+etlua+erb+erlang+excel-formula+fsharp+factor+false+firestore-security-rules+flow+fortran+ftl+gml+gap+gcode+gdscript+gedcom+gettext+gherkin+git+glsl+gn+linker-script+go+go-module+gradle+graphql+groovy+haml+handlebars+haskell+haxe+hcl+hlsl+hoon+http+hpkp+hsts+ichigojam+icon+icu-message-format+idris+ignore+inform7+ini+io+j+java+javadoc+javadoclike+javastacktrace+jexl+jolie+jq+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+julia+keepalived+keyman+kotlin+kumir+kusto+latex+latte+less+lilypond+liquid+lisp+livescript+llvm+log+lolcode+lua+magma+makefile+markdown+markup-templating+mata+matlab+maxscript+mel+mermaid+metafont+mizar+mongodb+monkey+moonscript+n1ql+n4js+nand2tetris-hdl+naniscript+nasm+neon+nevod+nginx+nim+nix+nsis+objectivec+ocaml+odin+opencl+openqasm+oz+parigp+parser+pascal+pascaligo+psl+pcaxis+peoplecode+perl+php+phpdoc+php-extras+plant-uml+plsql+powerquery+powershell+processing+prolog+promql+properties+protobuf+pug+puppet+pure+purebasic+purescript+python+qsharp+q+qml+qore+r+racket+cshtml+jsx+tsx+reason+regex+rego+renpy+rescript+rest+rip+roboconf+robotframework+ruby+rust+sas+sass+scss+scala+scheme+shell-session+smali+smalltalk+smarty+sml+solidity+solution-file+soy+sparql+splunk-spl+sqf+sql+squirrel+stan+stata+iecst+stylus+supercollider+swift+systemd+t4-templating+t4-cs+t4-vb+tap+tcl+tt2+textile+toml+tremor+turtle+twig+typescript+typoscript+unrealscript+uorazor+uri+v+vala+vbnet+velocity+verilog+vhdl+vim+visual-basic+warpscript+wasm+web-idl+wgsl+wiki+wolfram+wren+xeora+xml-doc+xojo+xquery+yaml+yang+zig&plugins=highlight-keywords */
+code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre-wrap;word-spacing:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:16px;margin:0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}
+
+        
+
+        :root {
+            width: 95%;
+            max-width: 95vw;
+            padding: 0 0 0 30px;
+        }
+        
+        body {
+            font-family: JetBrains Sans,serif;
+        }
+        
+        a {
+            overflow-wrap: anywhere;
+            width: 100vw;
+        }
+        
+        
+        @font-face {
+            font-family: JetBrains Sans;
+            src: url(https://resources.jetbrains.com/storage/jetbrains-sans/JetBrainsSans-Light.woff2) format("woff2"), url(https://resources.jetbrains.com/storage/jetbrains-sans/JetBrainsSans-Light.woff) format("woff");
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: JetBrains Sans;
+            src: url(https://resources.jetbrains.com/storage/jetbrains-sans/JetBrainsSans-Regular.woff2) format("woff2"), url(https://resources.jetbrains.com/storage/jetbrains-sans/JetBrainsSans-Regular.woff) format("woff");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: JetBrains Sans;
+            src: url(https://resources.jetbrains.com/storage/jetbrains-sans/JetBrainsSans-SemiBold.woff2) format("woff2"), url(https://resources.jetbrains.com/storage/jetbrains-sans/JetBrainsSans-SemiBold.woff) format("woff");
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        
+        code {
+            display: inline;
+            word-break: break-word;
+            font-size: 15px;
+            line-height: inherit;
+            font-variant-ligatures: none;
+            font-family: JetBrains Sans,monospace;
+            white-space: pre-line;
+            overflow-wrap: break-word;
+        }
+        
+        figcaption {
+            margin-top: 5px;
+        }
+        
+        h2 {
+            padding-top: 16px;
+            padding-bottom: 8px;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        
+        h3 {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        
+        h4 {
+            padding-top: 4px;
+            padding-bottom: 8px;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        
+        p {
+            padding: 0;
+            border: 0;
+            line-height: 25px;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            padding-bottom: 8px;
+        }
+        
+        div {
+            display: block;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            page-break-inside: avoid;
+        }
+        
+        th, td {
+            border: 1px solid #c4c4c4;
+            padding: 10px;
+            text-align: left;
+            word-break: break-all;
+        }
+        
+        .no-bold {
+            font-weight: normal; 
+        }
+        
+        .entry {
+            display: grid;
+            grid-template-columns: auto max-content;
+            grid-template-areas: "chapter page";
+            align-items: end;
+            gap: 0 .25rem;
+            line-height: 25px;
+        }
+        
+        .toc-link-container{
+            grid-area: chapter;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toc-link{
+            text-decoration: none;
+            color: black;
+        }
+        
+        .toc-link-container::after {
+            position: absolute;
+            padding-left: .25ch;
+            content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+            ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+            ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ";
+            text-align: right;
+        }
+        
+        .page {
+            grid-area: page;
+            width: 30px;
+            text-align: right;
+        }
+        
+
+        .topic {
+            page-break-before: always;
+        }
+        </style><title>pdfSourceTFH</title></head><body><div><section class="topic"><div><article class="article"><h1 class="main-title">Заголовки</h1><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#408681114">📚 Документация проекта &quot;Расписание для Хекслет&quot;</a></div><div class="page">2</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#637834440">📖 Общая информация</a></div><div class="page">9</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#-1138011821">🏗 Архитектура приложения</a></div><div class="page">15</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#1073245393">📊 Управление состоянием</a></div><div class="page">24</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#-1157226994">🎨 Стилизация</a></div><div class="page">32</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#-1017880417">📊 Модели данных</a></div><div class="page">40</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#6869748">🌐 Сетевой слой</a></div><div class="page">50</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#672572432">⚡ Оптимизация производительности</a></div><div class="page">59</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#1928147227">Руководство разработчика</a></div><div class="page">67</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#37646102">🧩 Компоненты</a></div><div class="page">74</div></div><div class="entry"><div class="toc-link-container"><a class="toc-link" href="#65018">API Документация</a></div><div class="page">80</div></div></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="408681114"><span class="no-bold">📚</span> Документация проекта &quot;Расписание для Хекслет&quot;</h1><section><h2 id="408681114#z950t64_3" data-toc="z950t64_3#DOCUMENTATION.md-z950t64_3"><span class="no-bold">📑</span> Содержание</h2><section><h3 id="408681114#z950t64_7" data-toc="z950t64_7#DOCUMENTATION.md-z950t64_7"><span class="no-bold">📖</span> Общая информация</h3><ul class="list" id="408681114#z950t64_15" start="1"><li class="list-item" id="408681114#z950t64_17"><p>Описание проекта </p><ul class="list" id="408681114#z950t64_20" start="1"><li class="list-item" id="408681114#z950t64_21"><p>Цели и задачи</p></li><li class="list-item" id="408681114#z950t64_22"><p>Целевая аудитория</p></li><li class="list-item" id="408681114#z950t64_23"><p>Ключевые особенности</p></li></ul></li><li class="list-item" id="408681114#z950t64_18"><p>Основные возможности </p><ul class="list" id="408681114#z950t64_24" start="1"><li class="list-item" id="408681114#z950t64_25"><p>Просмотр расписания</p></li><li class="list-item" id="408681114#z950t64_26"><p>Работа с избранным</p></li><li class="list-item" id="408681114#z950t64_27"><p>Поиск и фильтрация</p></li><li class="list-item" id="408681114#z950t64_28"><p>Настройка отображения</p></li></ul></li><li class="list-item" id="408681114#z950t64_19"><p>Архитектура приложения </p><ul class="list" id="408681114#z950t64_29" start="1"><li class="list-item" id="408681114#z950t64_30"><p>Общая структура</p></li><li class="list-item" id="408681114#z950t64_31"><p>Компонентный подход</p></li><li class="list-item" id="408681114#z950t64_32"><p>Управление состоянием</p></li><li class="list-item" id="408681114#z950t64_33"><p>Работа с данными</p></li></ul></li></ul></section><section><h3 id="408681114#z950t64_8" data-toc="z950t64_8#DOCUMENTATION.md-z950t64_8"><span class="no-bold">🏗</span> Архитектура</h3><ul class="list" id="408681114#z950t64_35" start="1"><li class="list-item" id="408681114#z950t64_37"><p>Общая структура</p></li><li class="list-item" id="408681114#z950t64_38"><p>Навигация</p></li><li class="list-item" id="408681114#z950t64_39"><p>Управление состоянием</p></li><li class="list-item" id="408681114#z950t64_40"><p>Потоки данных</p></li><li class="list-item" id="408681114#z950t64_41"><p>Компонентная архитектура</p></li><li class="list-item" id="408681114#z950t64_42"><p>Хранение данных</p></li><li class="list-item" id="408681114#z950t64_43"><p>Оптимизация</p></li><li class="list-item" id="408681114#z950t64_44"><p>Безопасность</p></li><li class="list-item" id="408681114#z950t64_45"><p>Масштабируемость</p></li></ul></section><section><h3 id="408681114#z950t64_9" data-toc="z950t64_9#DOCUMENTATION.md-z950t64_9"><span class="no-bold">📊</span> Модели данных</h3><ul class="list" id="408681114#z950t64_47" start="1"><li class="list-item" id="408681114#z950t64_49"><p>Основные типы </p><ul class="list" id="408681114#z950t64_58" start="1"><li class="list-item" id="408681114#z950t64_59"><p>Группа</p></li><li class="list-item" id="408681114#z950t64_60"><p>Преподаватель</p></li><li class="list-item" id="408681114#z950t64_61"><p>Расписание</p></li><li class="list-item" id="408681114#z950t64_62"><p>Занятия</p></li></ul></li><li class="list-item" id="408681114#z950t64_50"><p>Избранное</p></li><li class="list-item" id="408681114#z950t64_51"><p>Настройки </p><ul class="list" id="408681114#z950t64_63" start="1"><li class="list-item" id="408681114#z950t64_64"><p>Общие настройки</p></li><li class="list-item" id="408681114#z950t64_65"><p>Настройки темы</p></li><li class="list-item" id="408681114#z950t64_66"><p>Настройки расписания</p></li><li class="list-item" id="408681114#z950t64_67"><p>Настройки уведомлений</p></li></ul></li><li class="list-item" id="408681114#z950t64_52"><p>Состояния </p><ul class="list" id="408681114#z950t64_68" start="1"><li class="list-item" id="408681114#z950t64_69"><p>Состояния загрузки</p></li><li class="list-item" id="408681114#z950t64_70"><p>Состояние расписания</p></li><li class="list-item" id="408681114#z950t64_71"><p>Фильтры</p></li></ul></li><li class="list-item" id="408681114#z950t64_53"><p>Ответы API</p></li><li class="list-item" id="408681114#z950t64_54"><p>Преобразования данных</p></li><li class="list-item" id="408681114#z950t64_55"><p>Валидация</p></li><li class="list-item" id="408681114#z950t64_56"><p>Хранение</p></li><li class="list-item" id="408681114#z950t64_57"><p>Типы событий</p></li></ul></section><section><h3 id="408681114#z950t64_10" data-toc="z950t64_10#DOCUMENTATION.md-z950t64_10"><span class="no-bold">🌐</span> Сетевой слой</h3><ul class="list" id="408681114#z950t64_73" start="1"><li class="list-item" id="408681114#z950t64_75"><p>Конфигурация API</p></li><li class="list-item" id="408681114#z950t64_76"><p>API Сервисы</p></li><li class="list-item" id="408681114#z950t64_77"><p>Обработка ошибок</p></li><li class="list-item" id="408681114#z950t64_78"><p>Кэширование</p></li><li class="list-item" id="408681114#z950t64_79"><p>Retry механизм</p></li><li class="list-item" id="408681114#z950t64_80"><p>Мониторинг</p></li><li class="list-item" id="408681114#z950t64_81"><p>Оптимизация</p></li><li class="list-item" id="408681114#z950t64_82"><p>Безопасность</p></li></ul></section><section><h3 id="408681114#z950t64_11" data-toc="z950t64_11#DOCUMENTATION.md-z950t64_11"><span class="no-bold">⚡</span> Производительность</h3><ul class="list" id="408681114#z950t64_84" start="1"><li class="list-item" id="408681114#z950t64_86"><p>Метрики производительности</p></li><li class="list-item" id="408681114#z950t64_87"><p>Оптимизация рендеринга </p><ul class="list" id="408681114#z950t64_93" start="1"><li class="list-item" id="408681114#z950t64_94"><p>Мемоизация</p></li><li class="list-item" id="408681114#z950t64_95"><p>Виртуализация</p></li><li class="list-item" id="408681114#z950t64_96"><p>Ленивая загрузка</p></li></ul></li><li class="list-item" id="408681114#z950t64_88"><p>Оптимизация изображений</p></li><li class="list-item" id="408681114#z950t64_89"><p>Оптимизация состояния</p></li><li class="list-item" id="408681114#z950t64_90"><p>Оптимизация сети</p></li><li class="list-item" id="408681114#z950t64_91"><p>Профилирование</p></li><li class="list-item" id="408681114#z950t64_92"><p>Оптимизация памяти</p></li></ul></section><section><h3 id="408681114#z950t64_12" data-toc="z950t64_12#DOCUMENTATION.md-z950t64_12"><span class="no-bold">📊</span> Управление состоянием</h3><ul class="list" id="408681114#z950t64_98" start="1"><li class="list-item" id="408681114#z950t64_100"><p>Контексты </p><ul class="list" id="408681114#z950t64_105" start="1"><li class="list-item" id="408681114#z950t64_106"><p>FavoritesContext</p></li><li class="list-item" id="408681114#z950t64_107"><p>ThemeContext</p></li><li class="list-item" id="408681114#z950t64_108"><p>ScheduleSettingsContext</p></li></ul></li><li class="list-item" id="408681114#z950t64_101"><p>Локальное состояние</p></li><li class="list-item" id="408681114#z950t64_102"><p>Персистентность данных</p></li><li class="list-item" id="408681114#z950t64_103"><p>Оптимизация</p></li><li class="list-item" id="408681114#z950t64_104"><p>Обработка ошибок</p></li></ul></section><section><h3 id="408681114#z950t64_13" data-toc="z950t64_13#DOCUMENTATION.md-z950t64_13"><span class="no-bold">💻</span> Руководство разработчика</h3><ul class="list" id="408681114#z950t64_110" start="1"><li class="list-item" id="408681114#z950t64_112"><p>Настройка окружения</p></li><li class="list-item" id="408681114#z950t64_113"><p>Установка и запуск</p></li><li class="list-item" id="408681114#z950t64_114"><p>Структура проекта</p></li><li class="list-item" id="408681114#z950t64_115"><p>Разработка</p></li><li class="list-item" id="408681114#z950t64_116"><p>Тестирование</p></li><li class="list-item" id="408681114#z950t64_117"><p>Сборка и деплой</p></li><li class="list-item" id="408681114#z950t64_118"><p>Рекомендации</p></li><li class="list-item" id="408681114#z950t64_119"><p>Решение проблем</p></li></ul></section></section><section><h2 id="408681114#z950t64_4" data-toc="z950t64_4#DOCUMENTATION.md-z950t64_4"><span class="no-bold">🔍</span> Быстрые ссылки</h2><section><h3 id="408681114#z950t64_120" data-toc="z950t64_120#DOCUMENTATION.md-z950t64_120">Начало работы</h3><ul class="list" id="408681114#z950t64_123" start="1"><li class="list-item" id="408681114#z950t64_124"><p>Установка проекта (<a href="#1928147227#установка-и-запуск">Руководство разработчика</a>)</p></li><li class="list-item" id="408681114#z950t64_125"><p>Структура проекта (<a href="#637834440#архитектура">📖 Общая информация</a>)</p></li><li class="list-item" id="408681114#z950t64_126"><p>Модели данных (<a href="#-1017880417#основные-типы">📊 Модели данных</a>)</p></li><li class="list-item" id="408681114#z950t64_127"><p>Работа с API (<a href="#6869748#api-сервисы">🌐 Сетевой слой</a>)</p></li></ul></section><section><h3 id="408681114#z950t64_121" data-toc="z950t64_121#DOCUMENTATION.md-z950t64_121">Разработка</h3><ul class="list" id="408681114#z950t64_132" start="1"><li class="list-item" id="408681114#z950t64_133"><p>Создание компонентов (<a href="#1928147227#создание-компонентов">Руководство разработчика</a>)</p></li><li class="list-item" id="408681114#z950t64_134"><p>Управление состоянием (<a href="#1073245393#контексты">📊 Управление состоянием</a>)</p></li><li class="list-item" id="408681114#z950t64_135"><p>Оптимизация (<a href="#672572432#оптимизация-рендеринга">⚡ Оптимизация производительности</a>)</p></li><li class="list-item" id="408681114#z950t64_136"><p>Работа с данными (<a href="#-1017880417#преобразования-данных">📊 Модели данных</a>)</p></li></ul></section><section><h3 id="408681114#z950t64_122" data-toc="z950t64_122#DOCUMENTATION.md-z950t64_122">Архитектура</h3><ul class="list" id="408681114#z950t64_141" start="1"><li class="list-item" id="408681114#z950t64_142"><p>Общая структура (<a href="#-1138011821#общая-структура">🏗 Архитектура приложения</a>)</p></li><li class="list-item" id="408681114#z950t64_143"><p>Навигация (<a href="#-1138011821#навигация">🏗 Архитектура приложения</a>)</p></li><li class="list-item" id="408681114#z950t64_144"><p>Потоки данных (<a href="#-1138011821#потоки-данных">🏗 Архитектура приложения</a>)</p></li><li class="list-item" id="408681114#z950t64_145"><p>Безопасность (<a href="#-1138011821#безопасность">🏗 Архитектура приложения</a>)</p></li></ul></section></section><section><h2 id="408681114#z950t64_5" data-toc="z950t64_5#DOCUMENTATION.md-z950t64_5"><span class="no-bold">📱</span> Обновления и поддержка</h2><section><h3 id="408681114#z950t64_150" data-toc="z950t64_150#DOCUMENTATION.md-z950t64_150">Версионирование</h3><ul class="list" id="408681114#z950t64_152" start="1"><li class="list-item" id="408681114#z950t64_153"><p>Semantic Versioning</p></li><li class="list-item" id="408681114#z950t64_154"><p>Changelog</p></li><li class="list-item" id="408681114#z950t64_155"><p>Breaking Changes</p></li><li class="list-item" id="408681114#z950t64_156"><p>Миграции</p></li></ul></section><section><h3 id="408681114#z950t64_151" data-toc="z950t64_151#DOCUMENTATION.md-z950t64_151">Поддержка</h3><ul class="list" id="408681114#z950t64_157" start="1"><li class="list-item" id="408681114#z950t64_158"><p>Обновления</p></li><li class="list-item" id="408681114#z950t64_159"><p>Исправление ошибок</p></li><li class="list-item" id="408681114#z950t64_160"><p>Улучшение производительности</p></li><li class="list-item" id="408681114#z950t64_161"><p>Обновление документации</p></li></ul></section></section><section><h2 id="408681114#faq" data-toc="faq#DOCUMENTATION.md-faq"><span class="no-bold">❓</span> FAQ</h2><section><h3 id="408681114#z950t64_162" data-toc="z950t64_162#DOCUMENTATION.md-z950t64_162">Разработка</h3><ol class="list list-decimal" id="408681114#z950t64_164" type="1" start="1"><li class="list-item" id="408681114#z950t64_165"><p id="408681114#z950t64_168"><span class="control" id="408681114#z950t64_170">Как добавить новый компонент?</span></p><ul class="list" id="408681114#z950t64_169" start="1"><li class="list-item" id="408681114#z950t64_171"><p>Создание компонентов (<a href="#1928147227#создание-нового-компонента">Руководство разработчика</a>)</p></li><li class="list-item" id="408681114#z950t64_172"><p>Типизация (<a href="#-1017880417#основные-типы">📊 Модели данных</a>)</p></li><li class="list-item" id="408681114#z950t64_173"><p>Оптимизация (<a href="#672572432#оптимизация-рендеринга">⚡ Оптимизация производительности</a>)</p></li></ul></li><li class="list-item" id="408681114#z950t64_166"><p id="408681114#z950t64_177"><span class="control" id="408681114#z950t64_179">Как работать с данными?</span></p><ul class="list" id="408681114#z950t64_178" start="1"><li class="list-item" id="408681114#z950t64_180"><p>Модели данных (<a href="#-1017880417">📊 Модели данных</a>)</p></li><li class="list-item" id="408681114#z950t64_181"><p>API сервисы (<a href="#6869748#api-сервисы">🌐 Сетевой слой</a>)</p></li><li class="list-item" id="408681114#z950t64_182"><p>Кэширование (<a href="#6869748#кэширование">🌐 Сетевой слой</a>)</p></li></ul></li><li class="list-item" id="408681114#z950t64_167"><p id="408681114#z950t64_186"><span class="control" id="408681114#z950t64_188">Как оптимизировать производительность?</span></p><ul class="list" id="408681114#z950t64_187" start="1"><li class="list-item" id="408681114#z950t64_189"><p>Оптимизация рендеринга (<a href="#672572432#оптимизация-рендеринга">⚡ Оптимизация производительности</a>)</p></li><li class="list-item" id="408681114#z950t64_190"><p>Оптимизация состояния (<a href="#1073245393#оптимизация">📊 Управление состоянием</a>)</p></li><li class="list-item" id="408681114#z950t64_191"><p>Оптимизация сети (<a href="#6869748#оптимизация">🌐 Сетевой слой</a>)</p></li></ul></li></ol></section><section><h3 id="408681114#z950t64_163" data-toc="z950t64_163#DOCUMENTATION.md-z950t64_163">Архитектура</h3><ul class="list" id="408681114#z950t64_195" start="1"><li class="list-item" id="408681114#z950t64_196"><p>Структура проекта (<a href="#-1138011821#общая-структура">🏗 Архитектура приложения</a>)</p></li><li class="list-item" id="408681114#z950t64_197"><p>Управление состоянием (<a href="#1073245393">📊 Управление состоянием</a>)</p></li><li class="list-item" id="408681114#z950t64_198"><p>Работа с данными (<a href="#-1017880417">📊 Модели данных</a>)</p></li></ul></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="637834440"><span class="no-bold">📖</span> Общая информация</h1><section><h2 id="637834440#z75j81q_3" data-toc="z75j81q_3#GENERAL.md-z75j81q_3">Описание проекта</h2><p id="637834440#z75j81q_11">Мобильное приложение &quot;Расписание для Хекслет&quot; предназначено для просмотра расписания занятий студентами и преподавателями Хекслет Колледжа. Приложение разработано с использованием современных технологий React Native и Expo.</p><section><h3 id="637834440#z75j81q_12" data-toc="z75j81q_12#GENERAL.md-z75j81q_12">Основные возможности</h3><ul class="list" id="637834440#z75j81q_13" start="1"><li class="list-item" id="637834440#z75j81q_14"><p>Просмотр расписания групп и преподавателей</p></li><li class="list-item" id="637834440#z75j81q_15"><p>Переключение между текущей и следующей неделей</p></li><li class="list-item" id="637834440#z75j81q_16"><p>Добавление в избранное</p></li><li class="list-item" id="637834440#z75j81q_17"><p>Умный поиск</p></li><li class="list-item" id="637834440#z75j81q_18"><p>Темная и светлая тема</p></li><li class="list-item" id="637834440#z75j81q_19"><p>Настройка отображения информации</p></li></ul></section></section><section><h2 id="637834440#z75j81q_4" data-toc="z75j81q_4#GENERAL.md-z75j81q_4"><span class="no-bold">🏗</span> Архитектура</h2><section><h3 id="637834440#z75j81q_20" data-toc="z75j81q_20#GENERAL.md-z75j81q_20">Структура проекта</h3><div class="detached code-block" id="637834440#z75j81q_21"><pre><code class="language-none">app/
+├── _layout.tsx           # Корневой layout
+├── (tabs)/              # Основные экраны
+│   ├── _layout.tsx      # Навигация по вкладкам
+│   ├── index.tsx        # Список групп
+│   ├── teacher.tsx      # Список преподавателей
+│   ├── favorites.tsx    # Избранное
+│   └── settings.tsx     # Настройки
+├── schedule/            # Экраны расписания
+│   └── [id].tsx         # Расписание группы
+└── teacher/             # Экраны преподавателей
+    └── [id].tsx         # Расписание преподавателя
+
+components/             # Переиспользуемые компоненты
+├── GroupList.tsx       # Список групп
+├── TeacherList.tsx     # Список преподавателей
+├── ScheduleView.tsx    # Отображение расписания
+├── LessonCard.tsx      # Карточка занятия
+└── WeekSelector.tsx    # Выбор недели
+
+contexts/              # React контексты
+├── FavoritesContext.tsx    # Управление избранным
+├── ThemeContext.tsx        # Управление темой
+└── ScheduleSettingsContext.tsx # Настройки расписания
+
+constants/             # Константы приложения
+├── groups.ts          # Информация о группах
+├── teachers.ts        # Информация о преподавателях
+└── theme.ts           # Настройки тем</code></pre></div></section></section><section><h2 id="637834440#z75j81q_5" data-toc="z75j81q_5#GENERAL.md-z75j81q_5"><span class="no-bold">🔄</span> Жизненный цикл приложения</h2><section><h3 id="637834440#1" data-toc="1#GENERAL.md-1">1. Инициализация</h3><ul class="list" id="637834440#z75j81q_25" start="1"><li class="list-item" id="637834440#z75j81q_26"><p>Загрузка приложения</p></li><li class="list-item" id="637834440#z75j81q_27"><p>Инициализация контекстов</p></li><li class="list-item" id="637834440#z75j81q_28"><p>Загрузка сохраненных настроек</p></li><li class="list-item" id="637834440#z75j81q_29"><p>Проверка темы устройства</p></li></ul></section><section><h3 id="637834440#2" data-toc="2#GENERAL.md-2">2. Основной цикл</h3><ul class="list" id="637834440#z75j81q_30" start="1"><li class="list-item" id="637834440#z75j81q_31"><p>Рендеринг интерфейса</p></li><li class="list-item" id="637834440#z75j81q_32"><p>Обработка пользовательских действий</p></li><li class="list-item" id="637834440#z75j81q_33"><p>Управление состоянием</p></li><li class="list-item" id="637834440#z75j81q_34"><p>Кэширование данных</p></li></ul></section><section><h3 id="637834440#3" data-toc="3#GENERAL.md-3">3. Обновление данных</h3><ul class="list" id="637834440#z75j81q_35" start="1"><li class="list-item" id="637834440#z75j81q_36"><p>Загрузка расписания</p></li><li class="list-item" id="637834440#z75j81q_37"><p>Обновление избранного</p></li><li class="list-item" id="637834440#z75j81q_38"><p>Сохранение настроек</p></li><li class="list-item" id="637834440#z75j81q_39"><p>Обработка ошибок</p></li></ul></section></section><section><h2 id="637834440#z75j81q_6" data-toc="z75j81q_6#GENERAL.md-z75j81q_6"><span class="no-bold">🔐</span> Управление состоянием</h2><section><h3 id="637834440#favoritescontext" data-toc="favoritescontext#GENERAL.md-favoritescontext">FavoritesContext</h3><p id="637834440#z75j81q_43">Управление избранными группами и преподавателями.</p><div class="detached code-block" id="637834440#z75j81q_44"><pre><code class="language-ts">interface FavoritesContextType {
+  favorites: FavoriteItem[];
+  addToFavorites: (item: GroupInfo | TeacherInfo, type: 'group' | 'teacher') =&gt; Promise&lt;void&gt;;
+  removeFromFavorites: (id: number, type: 'group' | 'teacher') =&gt; Promise&lt;void&gt;;
+  isFavorite: (id: number, type: 'group' | 'teacher') =&gt; boolean;
+}</code></pre></div></section><section><h3 id="637834440#themecontext" data-toc="themecontext#GENERAL.md-themecontext">ThemeContext</h3><p id="637834440#z75j81q_45">Управление темой оформления.</p><div class="detached code-block" id="637834440#z75j81q_46"><pre><code class="language-ts">interface ThemeContextType {
+  isDarkTheme: boolean;
+  useSystemTheme: boolean;
+  toggleTheme: () =&gt; Promise&lt;void&gt;;
+  toggleSystemTheme: () =&gt; Promise&lt;void&gt;;
+}</code></pre></div></section><section><h3 id="637834440#schedulesettingscontext" data-toc="schedulesettingscontext#GENERAL.md-schedulesettingscontext">ScheduleSettingsContext</h3><p id="637834440#z75j81q_47">Настройки отображения расписания.</p><div class="detached code-block" id="637834440#z75j81q_48"><pre><code class="language-ts">interface ScheduleSettings {
+  showCabinetNumbers: boolean;
+  showTeacherNames: boolean;
+  compactMode: boolean;
+  showLessonNumbers: boolean;
+}</code></pre></div></section></section><section><h2 id="637834440#z75j81q_7" data-toc="z75j81q_7#GENERAL.md-z75j81q_7"><span class="no-bold">📱</span> Навигация</h2><section><h3 id="637834440#z75j81q_49" data-toc="z75j81q_49#GENERAL.md-z75j81q_49">Структура навигации</h3><ul class="list" id="637834440#z75j81q_51" start="1"><li class="list-item" id="637834440#z75j81q_52"><p>Вкладки (Tabs) </p><ul class="list" id="637834440#z75j81q_54" start="1"><li class="list-item" id="637834440#z75j81q_55"><p>Расписание (index)</p></li><li class="list-item" id="637834440#z75j81q_56"><p>Преподаватели (teacher)</p></li><li class="list-item" id="637834440#z75j81q_57"><p>Избранное (favorites)</p></li><li class="list-item" id="637834440#z75j81q_58"><p>Настройки (settings)</p></li></ul></li><li class="list-item" id="637834440#z75j81q_53"><p>Стек навигации </p><ul class="list" id="637834440#z75j81q_59" start="1"><li class="list-item" id="637834440#z75j81q_60"><p>Расписание группы (schedule/[id])</p></li><li class="list-item" id="637834440#z75j81q_61"><p>Расписание преподавателя (teacher/[id])</p></li><li class="list-item" id="637834440#z75j81q_62"><p>Информация (info)</p></li></ul></li></ul></section><section><h3 id="637834440#z75j81q_50" data-toc="z75j81q_50#GENERAL.md-z75j81q_50">Параметры навигации</h3><div class="detached code-block" id="637834440#z75j81q_63"><pre><code class="language-ts">type RootStackParamList = {
+  '(tabs)': undefined;
+  'info': undefined;
+  'schedule/[id]': { id: string };
+  'teacher/[id]': { id: string };
+};</code></pre></div></section></section><section><h2 id="637834440#z75j81q_8" data-toc="z75j81q_8#GENERAL.md-z75j81q_8"><span class="no-bold">🔄</span> Обработка данных</h2><section><h3 id="637834440#z75j81q_64" data-toc="z75j81q_64#GENERAL.md-z75j81q_64">Локальное хранение</h3><ul class="list" id="637834440#z75j81q_66" start="1"><li class="list-item" id="637834440#z75j81q_67"><p>AsyncStorage для настроек и избранного</p></li><li class="list-item" id="637834440#z75j81q_68"><p>Кэширование расписания</p></li><li class="list-item" id="637834440#z75j81q_69"><p>Управление состоянием приложения</p></li></ul></section><section><h3 id="637834440#z75j81q_65" data-toc="z75j81q_65#GENERAL.md-z75j81q_65">Сетевые запросы</h3><ul class="list" id="637834440#z75j81q_70" start="1"><li class="list-item" id="637834440#z75j81q_71"><p>Fetch API для получения данных</p></li><li class="list-item" id="637834440#z75j81q_72"><p>Обработка ошибок сети</p></li><li class="list-item" id="637834440#z75j81q_73"><p>Retry механизмы</p></li><li class="list-item" id="637834440#z75j81q_74"><p>Кэширование ответов</p></li></ul></section></section><section><h2 id="637834440#z75j81q_9" data-toc="z75j81q_9#GENERAL.md-z75j81q_9"><span class="no-bold">🎨</span> Стилизация</h2><section><h3 id="637834440#z75j81q_75" data-toc="z75j81q_75#GENERAL.md-z75j81q_75">Темы</h3><ul class="list" id="637834440#z75j81q_77" start="1"><li class="list-item" id="637834440#z75j81q_78"><p>Светлая тема</p></li><li class="list-item" id="637834440#z75j81q_79"><p>Темная тема</p></li><li class="list-item" id="637834440#z75j81q_80"><p>Системная тема</p></li></ul></section><section><h3 id="637834440#z75j81q_76" data-toc="z75j81q_76#GENERAL.md-z75j81q_76">Компоненты</h3><ul class="list" id="637834440#z75j81q_81" start="1"><li class="list-item" id="637834440#z75j81q_82"><p>Material Design</p></li><li class="list-item" id="637834440#z75j81q_83"><p>Адаптивный дизайн</p></li><li class="list-item" id="637834440#z75j81q_84"><p>Анимации</p></li><li class="list-item" id="637834440#z75j81q_85"><p>Кастомные компоненты</p></li></ul></section></section><section><h2 id="637834440#z75j81q_10" data-toc="z75j81q_10#GENERAL.md-z75j81q_10"><span class="no-bold">📱</span> Поддерживаемые платформы</h2><section><h3 id="637834440#ios" data-toc="ios#GENERAL.md-ios">iOS</h3><ul class="list" id="637834440#z75j81q_88" start="1"><li class="list-item" id="637834440#z75j81q_89"><p>iOS 13.0 и выше</p></li><li class="list-item" id="637834440#z75j81q_90"><p>Оптимизация для iPhone</p></li><li class="list-item" id="637834440#z75j81q_91"><p>Поддержка жестов iOS</p></li></ul></section><section><h3 id="637834440#android" data-toc="android#GENERAL.md-android">Android</h3><ul class="list" id="637834440#z75j81q_92" start="1"><li class="list-item" id="637834440#z75j81q_93"><p>Android 6.0 и выше</p></li><li class="list-item" id="637834440#z75j81q_94"><p>Material Design</p></li><li class="list-item" id="637834440#z75j81q_95"><p>Адаптация под разные устройства</p></li></ul></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="-1138011821"><span class="no-bold">🏗</span> Архитектура приложения</h1><section><h2 id="-1138011821#v3duwh_3" data-toc="v3duwh_3#ARCHITECTURE.md-v3duwh_3">Общая структура</h2><section><h3 id="-1138011821#v3duwh_13" data-toc="v3duwh_13#ARCHITECTURE.md-v3duwh_13">Файловая структура</h3><div class="detached code-block" id="-1138011821#v3duwh_14"><pre><code class="language-none">app/
+├── _layout.tsx              # Корневой layout с провайдерами
+├── (tabs)/                  # Основные экраны в табах
+│   ├── _layout.tsx         # Настройка навигации по табам
+│   ├── index.tsx           # Список групп
+│   ├── teacher.tsx         # Список преподавателей
+│   ├── favorites.tsx       # Избранное
+│   └── settings.tsx        # Настройки
+├── schedule/               # Экраны расписания
+│   └── [id].tsx           # Динамический роут расписания группы
+└── teacher/                # Экраны преподавателей
+    └── [id].tsx           # Динамический роут расписания преподавателя
+
+components/                 # Переиспользуемые компоненты
+├── GroupList.tsx          # Список групп
+├── TeacherList.tsx        # Список преподавателей
+├── ScheduleView.tsx       # Отображение расписания
+├── LessonCard.tsx         # Карточка занятия
+└── WeekSelector.tsx       # Выбор недели
+
+contexts/                  # React контексты
+├── FavoritesContext.tsx   # Управление избранным
+├── ThemeContext.tsx       # Управление темой
+└── ScheduleSettingsContext.tsx # Настройки расписания</code></pre></div></section></section><section><h2 id="-1138011821#v3duwh_4" data-toc="v3duwh_4#ARCHITECTURE.md-v3duwh_4">Навигация</h2><section><h3 id="-1138011821#v3duwh_15" data-toc="v3duwh_15#ARCHITECTURE.md-v3duwh_15">Структура роутинга</h3><div class="detached code-block" id="-1138011821#v3duwh_17"><pre><code class="language-ts">type RootStackParamList = {
+  '(tabs)': undefined;
+  'info': undefined;
+  'schedule/[id]': { id: string };
+  'teacher/[id]': { id: string };
+};</code></pre></div></section><section><h3 id="-1138011821#v3duwh_16" data-toc="v3duwh_16#ARCHITECTURE.md-v3duwh_16">Схема навигации</h3><div class="detached code-block" id="-1138011821#v3duwh_18"><pre><code class="language-none">Root
+├── (tabs)
+│   ├── index (Группы)
+│   ├── teacher (Преподаватели)
+│   ├── favorites (Избранное)
+│   └── settings (Настройки)
+├── schedule/[id] (Расписание группы)
+├── teacher/[id] (Расписание преподавателя)
+└── info (Информация)</code></pre></div></section></section><section><h2 id="-1138011821#v3duwh_5" data-toc="v3duwh_5#ARCHITECTURE.md-v3duwh_5">Управление состоянием</h2><section><h3 id="-1138011821#v3duwh_19" data-toc="v3duwh_19#ARCHITECTURE.md-v3duwh_19">Контексты</h3><section><h4 id="-1138011821#favoritescontext" data-toc="favoritescontext#ARCHITECTURE.md-favoritescontext">FavoritesContext</h4><p id="-1138011821#v3duwh_23">Управление избранными элементами:</p><div class="detached code-block" id="-1138011821#v3duwh_24"><pre><code class="language-ts">interface FavoritesContextType {
+  favorites: FavoriteItem[];
+  addToFavorites: (item: GroupInfo | TeacherInfo, type: 'group' | 'teacher') =&gt; Promise&lt;void&gt;;
+  removeFromFavorites: (id: number, type: 'group' | 'teacher') =&gt; Promise&lt;void&gt;;
+  isFavorite: (id: number, type: 'group' | 'teacher') =&gt; boolean;
+}</code></pre></div></section><section><h4 id="-1138011821#themecontext" data-toc="themecontext#ARCHITECTURE.md-themecontext">ThemeContext</h4><p id="-1138011821#v3duwh_25">Управление темой оформления:</p><div class="detached code-block" id="-1138011821#v3duwh_26"><pre><code class="language-ts">interface ThemeContextType {
+  isDarkTheme: boolean;
+  useSystemTheme: boolean;
+  toggleTheme: () =&gt; Promise&lt;void&gt;;
+  toggleSystemTheme: () =&gt; Promise&lt;void&gt;;
+}</code></pre></div></section><section><h4 id="-1138011821#schedulesettingscontext" data-toc="schedulesettingscontext#ARCHITECTURE.md-schedulesettingscontext">ScheduleSettingsContext</h4><p id="-1138011821#v3duwh_27">Настройки отображения расписания:</p><div class="detached code-block" id="-1138011821#v3duwh_28"><pre><code class="language-ts">interface ScheduleSettings {
+  showCabinetNumbers: boolean;
+  showTeacherNames: boolean;
+  compactMode: boolean;
+  showLessonNumbers: boolean;
+}</code></pre></div></section></section></section><section><h2 id="-1138011821#v3duwh_6" data-toc="v3duwh_6#ARCHITECTURE.md-v3duwh_6">Потоки данных</h2><section><h3 id="-1138011821#v3duwh_29" data-toc="v3duwh_29#ARCHITECTURE.md-v3duwh_29">Загрузка расписания</h3><div class="detached mermaid" id="-1138011821#v3duwh_31"><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 524.1875 773.734375" height="773.734375" class="flowchart" xmlns="http://www.w3.org/2000/svg" width="524.1875" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M247.574,86L247.574,90.167C247.574,94.333,247.574,102.667,247.574,108.917C247.574,115.167,247.574,119.333,247.574,122.833C247.574,126.333,247.574,129.167,247.574,130.583L247.574,132"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M247.574,190L247.574,194.167C247.574,198.333,247.574,206.667,247.616,212.958C247.658,219.25,247.741,223.5,247.811,227.083C247.881,230.667,247.939,233.584,247.967,235.042L247.996,236.501"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_D_2" d="M292.513,361.796L308.125,375.286C323.738,388.775,354.963,415.755,370.575,439.911C386.188,464.068,386.188,485.401,386.188,504.734C386.188,524.068,386.188,541.401,386.188,552.151C386.188,562.901,386.188,567.068,386.188,570.568C386.188,574.068,386.188,576.901,386.188,578.318L386.188,579.734"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_E_3" d="M203.636,361.796L187.857,375.286C172.077,388.775,140.519,415.755,124.74,432.328C108.961,448.901,108.961,455.068,108.961,460.568C108.961,466.068,108.961,470.901,108.961,473.318L108.961,475.734"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_E_F_4" d="M108.961,533.734L108.961,537.901C108.961,542.068,108.961,550.401,108.961,557.651C108.961,564.901,108.961,571.068,108.961,576.568C108.961,582.068,108.961,586.901,108.961,589.318L108.961,591.734"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_G_5" d="M108.961,649.734L108.961,655.901C108.961,662.068,108.961,674.401,114.514,682.651C120.068,690.901,131.175,695.068,141.657,699C152.14,702.933,161.998,706.631,166.928,708.48L171.857,710.329"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_G_6" d="M386.188,661.734L386.188,665.901C386.188,670.068,386.188,678.401,380.634,684.651C375.081,690.901,363.974,695.068,353.491,699C343.009,702.933,333.15,706.631,328.221,708.48L323.292,710.329"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g transform="translate(386.1875, 506.734375)" class="edgeLabel"><g transform="translate(-43.6171875, -12)" class="label"><foreignObject height="24" width="87.234375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Есть в кэше</p></span></div></foreignObject></g></g><g transform="translate(108.9609375, 442.734375)" class="edgeLabel"><g transform="translate(-40.84375, -12)" class="label"><foreignObject height="24" width="81.6875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Нет в кэше</p></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(247.57421875, 47)" id="flowchart-A-0" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Выбор группы/преподавателя</p></span></div></foreignObject></g></g><g transform="translate(247.57421875, 163)" id="flowchart-B-1" class="node default"><rect height="54" width="137.546875" y="-27" x="-68.7734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-38.7734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="77.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>API запрос</p></span></div></foreignObject></g></g><g transform="translate(247.57421875, 322.8671875)" id="flowchart-C-3" class="node default"><polygon transform="translate(-82.8671875,82.8671875)" class="label-container" points="82.8671875,0 165.734375,-82.8671875 82.8671875,-165.734375 0,-82.8671875"></polygon><g transform="translate(-55.8671875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="111.734375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Проверка кэша</p></span></div></foreignObject></g></g><g transform="translate(386.1875, 622.734375)" id="flowchart-D-5" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Возврат кэшированных данных</p></span></div></foreignObject></g></g><g transform="translate(108.9609375, 506.734375)" id="flowchart-E-7" class="node default"><rect height="54" width="201.921875" y="-27" x="-100.9609375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-70.9609375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="141.921875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Загрузка с сервера</p></span></div></foreignObject></g></g><g transform="translate(108.9609375, 622.734375)" id="flowchart-F-9" class="node default"><rect height="54" width="194.453125" y="-27" x="-97.2265625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-67.2265625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="134.453125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Сохранение в кэш</p></span></div></foreignObject></g></g><g transform="translate(247.57421875, 738.734375)" id="flowchart-G-11" class="node default"><rect height="54" width="219.65625" y="-27" x="-109.828125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-79.828125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="159.65625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Отображение данных</p></span></div></foreignObject></g></g></g></g></g></svg></div></section><section><h3 id="-1138011821#v3duwh_30" data-toc="v3duwh_30#ARCHITECTURE.md-v3duwh_30">Управление избранным</h3><div class="detached mermaid" id="-1138011821#v3duwh_32"><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 276 510"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="276" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M138,62L138,66.167C138,70.333,138,78.667,138,84.917C138,91.167,138,95.333,138,98.833C138,102.333,138,105.167,138,106.583L138,108"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M138,166L138,170.167C138,174.333,138,182.667,138,188.917C138,195.167,138,199.333,138,202.833C138,206.333,138,209.167,138,210.583L138,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_D_2" d="M138,270L138,274.167C138,278.333,138,286.667,138,292.917C138,299.167,138,303.333,138,306.833C138,310.333,138,313.167,138,314.583L138,316"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_E_3" d="M138,374L138,378.167C138,382.333,138,390.667,138,396.917C138,403.167,138,407.333,138,410.833C138,414.333,138,417.167,138,418.583L138,420"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(138, 35)" id="flowchart-A-14" class="node default"><rect height="54" width="245.546875" y="-27" x="-122.7734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-92.7734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="185.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Добавление в избранное</p></span></div></foreignObject></g></g><g transform="translate(138, 139)" id="flowchart-B-15" class="node default"><rect height="54" width="182.28125" y="-27" x="-91.140625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-61.140625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="122.28125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>FavoritesContext</p></span></div></foreignObject></g></g><g transform="translate(138, 243)" id="flowchart-C-17" class="node default"><rect height="54" width="154.765625" y="-27" x="-77.3828125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-47.3828125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="94.765625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>AsyncStorage</p></span></div></foreignObject></g></g><g transform="translate(138, 347)" id="flowchart-D-19" class="node default"><rect height="54" width="169.953125" y="-27" x="-84.9765625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-54.9765625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="109.953125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Обновление UI</p></span></div></foreignObject></g></g><g transform="translate(138, 463)" id="flowchart-E-21" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Обновление списка избранного</p></span></div></foreignObject></g></g></g></g></g></svg></div></section></section><section><h2 id="-1138011821#v3duwh_7" data-toc="v3duwh_7#ARCHITECTURE.md-v3duwh_7">Компонентная архитектура</h2><section><h3 id="-1138011821#v3duwh_33" data-toc="v3duwh_33#ARCHITECTURE.md-v3duwh_33">Основные компоненты</h3><section><h4 id="-1138011821#scheduleview" data-toc="scheduleview#ARCHITECTURE.md-scheduleview">ScheduleView</h4><ul class="list" id="-1138011821#v3duwh_37" start="1"><li class="list-item" id="-1138011821#v3duwh_38"><p>Отображение расписания</p></li><li class="list-item" id="-1138011821#v3duwh_39"><p>Обработка состояний загрузки</p></li><li class="list-item" id="-1138011821#v3duwh_40"><p>Группировка по дням</p></li><li class="list-item" id="-1138011821#v3duwh_41"><p>Интеграция с WeekSelector</p></li></ul></section><section><h4 id="-1138011821#grouplist-teacherlist" data-toc="grouplist-teacherlist#ARCHITECTURE.md-grouplist-teacherlist">GroupList/TeacherList</h4><ul class="list" id="-1138011821#v3duwh_42" start="1"><li class="list-item" id="-1138011821#v3duwh_43"><p>Отображение списков</p></li><li class="list-item" id="-1138011821#v3duwh_44"><p>Поиск и фильтрация</p></li><li class="list-item" id="-1138011821#v3duwh_45"><p>Оптимизация производительности</p></li><li class="list-item" id="-1138011821#v3duwh_46"><p>Интеграция с FavoritesContext</p></li></ul></section><section><h4 id="-1138011821#lessoncard" data-toc="lessoncard#ARCHITECTURE.md-lessoncard">LessonCard</h4><ul class="list" id="-1138011821#v3duwh_47" start="1"><li class="list-item" id="-1138011821#v3duwh_48"><p>Отображение информации о занятии</p></li><li class="list-item" id="-1138011821#v3duwh_49"><p>Адаптивный дизайн</p></li><li class="list-item" id="-1138011821#v3duwh_50"><p>Интеграция с ScheduleSettingsContext</p></li></ul></section></section></section><section><h2 id="-1138011821#v3duwh_8" data-toc="v3duwh_8#ARCHITECTURE.md-v3duwh_8">Взаимодействие компонентов</h2><div class="detached mermaid" id="-1138011821#v3duwh_51"><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 692.265625 486"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="692.265625" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M362.355,62L362.355,66.167C362.355,70.333,362.355,78.667,362.355,84.917C362.355,91.167,362.355,95.333,362.355,98.833C362.355,102.333,362.355,105.167,362.355,106.583L362.355,108"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M290.23,152.526L256.037,158.938C221.844,165.351,153.457,178.175,119.264,186.671C85.07,195.167,85.07,199.333,85.07,202.833C85.07,206.333,85.07,209.167,85.07,210.583L85.07,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_D_2" d="M314.641,166L307.278,170.167C299.914,174.333,285.188,182.667,277.824,188.917C270.461,195.167,270.461,199.333,270.461,202.833C270.461,206.333,270.461,209.167,270.461,210.583L270.461,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_E_3" d="M410.07,166L417.433,170.167C424.797,174.333,439.523,182.667,446.887,188.917C454.25,195.167,454.25,199.333,454.25,202.833C454.25,206.333,454.25,209.167,454.25,210.583L454.25,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_F_4" d="M434.48,153.242L466.351,159.535C498.221,165.828,561.962,178.414,593.833,186.79C625.703,195.167,625.703,199.333,625.703,202.833C625.703,206.333,625.703,209.167,625.703,210.583L625.703,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_G_5" d="M85.07,270L85.07,274.167C85.07,278.333,85.07,286.667,88.784,292.917C92.498,299.167,99.925,303.333,106.771,307.174C113.617,311.014,119.882,314.529,123.014,316.286L126.147,318.043"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_G_6" d="M270.461,270L270.461,274.167C270.461,278.333,270.461,286.667,266.747,292.917C263.033,299.167,255.606,303.333,248.76,307.174C241.914,311.014,235.649,314.529,232.517,316.286L229.384,318.043"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_G_H_7" d="M126.086,374L118.111,378.167C110.135,382.333,94.185,390.667,86.21,396.917C78.234,403.167,78.234,407.333,78.234,410.833C78.234,414.333,78.234,417.167,78.234,418.583L78.234,420"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_G_I_8" d="M229.445,374L237.421,378.167C245.396,382.333,261.346,390.667,269.322,396.917C277.297,403.167,277.297,407.333,277.297,410.833C277.297,414.333,277.297,417.167,277.297,418.583L277.297,420"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(362.35546875, 35)" id="flowchart-A-22" class="node default"><rect height="54" width="140.40625" y="-27" x="-70.203125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-40.203125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="80.40625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>App Layout</p></span></div></foreignObject></g></g><g transform="translate(362.35546875, 139)" id="flowchart-B-23" class="node default"><rect height="54" width="144.25" y="-27" x="-72.125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-42.125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="84.25"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Tabs Layout</p></span></div></foreignObject></g></g><g transform="translate(85.0703125, 243)" id="flowchart-C-25" class="node default"><rect height="54" width="128.984375" y="-27" x="-64.4921875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-34.4921875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="68.984375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>GroupList</p></span></div></foreignObject></g></g><g transform="translate(270.4609375, 243)" id="flowchart-D-27" class="node default"><rect height="54" width="141.796875" y="-27" x="-70.8984375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-40.8984375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="81.796875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TeacherList</p></span></div></foreignObject></g></g><g transform="translate(454.25, 243)" id="flowchart-E-29" class="node default"><rect height="54" width="125.78125" y="-27" x="-62.890625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.890625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="65.78125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Favorites</p></span></div></foreignObject></g></g><g transform="translate(625.703125, 243)" id="flowchart-F-31" class="node default"><rect height="54" width="117.125" y="-27" x="-58.5625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-28.5625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="57.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Settings</p></span></div></foreignObject></g></g><g transform="translate(177.765625, 347)" id="flowchart-G-33" class="node default"><rect height="54" width="158.78125" y="-27" x="-79.390625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-49.390625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="98.78125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ScheduleView</p></span></div></foreignObject></g></g><g transform="translate(78.234375, 451)" id="flowchart-H-37" class="node default"><rect height="54" width="140.46875" y="-27" x="-70.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-40.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="80.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>LessonCard</p></span></div></foreignObject></g></g><g transform="translate(277.296875, 451)" id="flowchart-I-39" class="node default"><rect height="54" width="157.65625" y="-27" x="-78.828125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-48.828125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="97.65625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>WeekSelector</p></span></div></foreignObject></g></g></g></g></g></svg></div></section><section><h2 id="-1138011821#v3duwh_9" data-toc="v3duwh_9#ARCHITECTURE.md-v3duwh_9">Хранение данных</h2><section><h3 id="-1138011821#asyncstorage" data-toc="asyncstorage#ARCHITECTURE.md-asyncstorage">AsyncStorage</h3><ul class="list" id="-1138011821#v3duwh_54" start="1"><li class="list-item" id="-1138011821#v3duwh_55"><p>Избранное</p></li><li class="list-item" id="-1138011821#v3duwh_56"><p>Настройки темы</p></li><li class="list-item" id="-1138011821#v3duwh_57"><p>Настройки отображения</p></li><li class="list-item" id="-1138011821#v3duwh_58"><p>Кэш расписания</p></li></ul></section><section><h3 id="-1138011821#v3duwh_53" data-toc="v3duwh_53#ARCHITECTURE.md-v3duwh_53">Кэширование</h3><div class="detached code-block" id="-1138011821#v3duwh_59"><pre><code class="language-ts">interface CacheItem&lt;T&gt; {
+  data: T;
+  timestamp: number;
+  expiry: number;
+}</code></pre></div></section></section><section><h2 id="-1138011821#v3duwh_10" data-toc="v3duwh_10#ARCHITECTURE.md-v3duwh_10">Оптимизация</h2><section><h3 id="-1138011821#v3duwh_60" data-toc="v3duwh_60#ARCHITECTURE.md-v3duwh_60">Стратегии</h3><ol class="list list-decimal" id="-1138011821#v3duwh_62" type="1" start="1"><li class="list-item" id="-1138011821#v3duwh_63"><p>Мемоизация компонентов</p></li><li class="list-item" id="-1138011821#v3duwh_64"><p>Виртуализация списков</p></li><li class="list-item" id="-1138011821#v3duwh_65"><p>Кэширование данных</p></li><li class="list-item" id="-1138011821#v3duwh_66"><p>Ленивая загрузка изображений</p></li></ol></section><section><h3 id="-1138011821#v3duwh_61" data-toc="v3duwh_61#ARCHITECTURE.md-v3duwh_61">Производительность</h3><div class="detached code-block" id="-1138011821#v3duwh_67"><pre><code class="language-ts">// Пример оптимизации списка
+const MemoizedItem = React.memo(({ item }) =&gt; (
+  &lt;View&gt;
+    &lt;Text&gt;{item.name}&lt;/Text&gt;
+  &lt;/View&gt;
+));
+
+const VirtualizedList = () =&gt; (
+  &lt;FlatList
+    data={items}
+    renderItem={({ item }) =&gt; &lt;MemoizedItem item={item} /&gt;}
+    getItemLayout={(data, index) =&gt; ({
+      length: ITEM_HEIGHT,
+      offset: ITEM_HEIGHT * index,
+      index,
+    })}
+  /&gt;
+);</code></pre></div></section></section><section><h2 id="-1138011821#v3duwh_11" data-toc="v3duwh_11#ARCHITECTURE.md-v3duwh_11">Безопасность</h2><section><h3 id="-1138011821#v3duwh_68" data-toc="v3duwh_68#ARCHITECTURE.md-v3duwh_68">Защита данных</h3><ul class="list" id="-1138011821#v3duwh_70" start="1"><li class="list-item" id="-1138011821#v3duwh_71"><p>Валидация входных данных</p></li><li class="list-item" id="-1138011821#v3duwh_72"><p>Санитизация данных</p></li><li class="list-item" id="-1138011821#v3duwh_73"><p>Безопасное хранение</p></li></ul></section><section><h3 id="-1138011821#v3duwh_69" data-toc="v3duwh_69#ARCHITECTURE.md-v3duwh_69">Обработка ошибок</h3><div class="detached code-block" id="-1138011821#v3duwh_74"><pre><code class="language-ts">try {
+  const data = await api.fetchSchedule();
+} catch (error) {
+  if (error instanceof NetworkError) {
+    // Обработка сетевых ошибок
+  } else if (error instanceof ValidationError) {
+    // Обработка ошибок валидации
+  }
+}</code></pre></div></section></section><section><h2 id="-1138011821#v3duwh_12" data-toc="v3duwh_12#ARCHITECTURE.md-v3duwh_12">Масштабируемость</h2><section><h3 id="-1138011821#v3duwh_75" data-toc="v3duwh_75#ARCHITECTURE.md-v3duwh_75">Добавление новых функций</h3><ol class="list list-decimal" id="-1138011821#v3duwh_77" type="1" start="1"><li class="list-item" id="-1138011821#v3duwh_78"><p>Создание нового компонента</p></li><li class="list-item" id="-1138011821#v3duwh_79"><p>Интеграция с существующими контекстами</p></li><li class="list-item" id="-1138011821#v3duwh_80"><p>Добавление новых роутов</p></li><li class="list-item" id="-1138011821#v3duwh_81"><p>Обновление типов</p></li></ol></section><section><h3 id="-1138011821#v3duwh_76" data-toc="v3duwh_76#ARCHITECTURE.md-v3duwh_76">Модификация существующего функционала</h3><ol class="list list-decimal" id="-1138011821#v3duwh_82" type="1" start="1"><li class="list-item" id="-1138011821#v3duwh_83"><p>Изменение интерфейсов</p></li><li class="list-item" id="-1138011821#v3duwh_84"><p>Обновление компонентов</p></li><li class="list-item" id="-1138011821#v3duwh_85"><p>Миграция данных</p></li><li class="list-item" id="-1138011821#v3duwh_86"><p>Обновление документации</p></li></ol></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="1073245393"><span class="no-bold">📊</span> Управление состоянием</h1><section><h2 id="1073245393#p9w2cz_3" data-toc="p9w2cz_3#STATE_MANAGEMENT.md-p9w2cz_3">Обзор</h2><p id="1073245393#p9w2cz_11">В приложении используется комбинация React Context API и локального состояния компонентов для эффективного управления данными.</p></section><section><h2 id="1073245393#p9w2cz_4" data-toc="p9w2cz_4#STATE_MANAGEMENT.md-p9w2cz_4">Контексты</h2><section><h3 id="1073245393#favoritescontext" data-toc="favoritescontext#STATE_MANAGEMENT.md-favoritescontext">FavoritesContext</h3><p id="1073245393#p9w2cz_15">Управление избранными группами и преподавателями.</p><div class="detached code-block" id="1073245393#p9w2cz_16"><pre><code class="language-ts">// contexts/FavoritesContext.tsx
+
+interface FavoritesContextType {
+  favorites: FavoriteItem[];
+  addToFavorites: (item: GroupInfo | TeacherInfo, type: 'group' | 'teacher') =&gt; Promise&lt;void&gt;;
+  removeFromFavorites: (id: number, type: 'group' | 'teacher') =&gt; Promise&lt;void&gt;;
+  isFavorite: (id: number, type: 'group' | 'teacher') =&gt; boolean;
+}
+
+const FavoritesContext = createContext&lt;FavoritesContextType | undefined&gt;(undefined);
+
+export const FavoritesProvider: React.FC = ({ children }) =&gt; {
+  const [favorites, setFavorites] = useState&lt;FavoriteItem[]&gt;([]);
+
+  // Загрузка избранного при монтировании
+  useEffect(() =&gt; {
+    loadFavorites();
+  }, []);
+
+  // Методы управления избранным
+  const addToFavorites = async (item, type) =&gt; {
+    // Реализация
+  };
+
+  const removeFromFavorites = async (id, type) =&gt; {
+    // Реализация
+  };
+
+  return (
+    &lt;FavoritesContext.Provider value={{
+      favorites,
+      addToFavorites,
+      removeFromFavorites,
+      isFavorite
+    }}&gt;
+      {children}
+    &lt;/FavoritesContext.Provider&gt;
+  );
+};</code></pre></div></section><section><h3 id="1073245393#themecontext" data-toc="themecontext#STATE_MANAGEMENT.md-themecontext">ThemeContext</h3><p id="1073245393#p9w2cz_17">Управление темой оформления приложения.</p><div class="detached code-block" id="1073245393#p9w2cz_18"><pre><code class="language-ts">// contexts/ThemeContext.tsx
+
+interface ThemeContextType {
+  isDarkTheme: boolean;
+  useSystemTheme: boolean;
+  toggleTheme: () =&gt; Promise&lt;void&gt;;
+  toggleSystemTheme: () =&gt; Promise&lt;void&gt;;
+}
+
+export const ThemeProvider: React.FC = ({ children }) =&gt; {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [useSystemTheme, setUseSystemTheme] = useState(true);
+
+  // Инициализация темы
+  useEffect(() =&gt; {
+    loadThemeSettings();
+  }, []);
+
+  // Методы управления темой
+  const toggleTheme = async () =&gt; {
+    // Реализация
+  };
+
+  const toggleSystemTheme = async () =&gt; {
+    // Реализация
+  };
+
+  return (
+    &lt;ThemeContext.Provider value={{
+      isDarkTheme,
+      useSystemTheme,
+      toggleTheme,
+      toggleSystemTheme
+    }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+};</code></pre></div></section><section><h3 id="1073245393#schedulesettingscontext" data-toc="schedulesettingscontext#STATE_MANAGEMENT.md-schedulesettingscontext">ScheduleSettingsContext</h3><p id="1073245393#p9w2cz_19">Настройки отображения расписания.</p><div class="detached code-block" id="1073245393#p9w2cz_20"><pre><code class="language-ts">// contexts/ScheduleSettingsContext.tsx
+
+interface ScheduleSettings {
+  showCabinetNumbers: boolean;
+  showTeacherNames: boolean;
+  compactMode: boolean;
+  showLessonNumbers: boolean;
+}
+
+export const ScheduleSettingsProvider: React.FC = ({ children }) =&gt; {
+  const [settings, setSettings] = useState&lt;ScheduleSettings&gt;(defaultSettings);
+
+  // Загрузка настроек
+  useEffect(() =&gt; {
+    loadSettings();
+  }, []);
+
+  // Методы управления настройками
+  const updateSettings = async (newSettings: Partial&lt;ScheduleSettings&gt;) =&gt; {
+    // Реализация
+  };
+
+  return (
+    &lt;ScheduleSettingsContext.Provider value={{
+      settings,
+      updateSettings
+    }}&gt;
+      {children}
+    &lt;/ScheduleSettingsContext.Provider&gt;
+  );
+};</code></pre></div></section></section><section><h2 id="1073245393#p9w2cz_5" data-toc="p9w2cz_5#STATE_MANAGEMENT.md-p9w2cz_5">Иерархия состояний</h2><div class="detached code-block" id="1073245393#p9w2cz_21"><pre><code class="language-none">App (_layout.tsx)
+├── ThemeProvider
+│   ├── FavoritesProvider
+│   │   └── ScheduleSettingsProvider
+│   │       └── RootLayoutNav
+│   │           ├── TabsNavigator
+│   │           │   ├── GroupList (использует FavoritesContext)
+│   │           │   ├── TeacherList (использует FavoritesContext)
+│   │           │   └── Settings (использует все контексты)
+│   │           └── ScheduleView (ис��ользует ScheduleSettingsContext)</code></pre></div></section><section><h2 id="1073245393#p9w2cz_6" data-toc="p9w2cz_6#STATE_MANAGEMENT.md-p9w2cz_6">Локальное состояние</h2><section><h3 id="1073245393#p9w2cz_22" data-toc="p9w2cz_22#STATE_MANAGEMENT.md-p9w2cz_22">Компоненты с локальным состоянием</h3><section><h4 id="1073245393#grouplist" data-toc="grouplist#STATE_MANAGEMENT.md-grouplist">GroupList</h4><div class="detached code-block" id="1073245393#p9w2cz_26"><pre><code class="language-ts">const GroupList: React.FC&lt;GroupListProps&gt; = () =&gt; {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredGroups, setFilteredGroups] = useState&lt;GroupInfo[]&gt;([]);
+  
+  // Логика фильтрации
+};</code></pre></div></section><section><h4 id="1073245393#weekselector" data-toc="weekselector#STATE_MANAGEMENT.md-weekselector">WeekSelector</h4><div class="detached code-block" id="1073245393#p9w2cz_27"><pre><code class="language-ts">const WeekSelector: React.FC&lt;WeekSelectorProps&gt; = () =&gt; {
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Логика переключения недель
+};</code></pre></div></section><section><h4 id="1073245393#scheduleview" data-toc="scheduleview#STATE_MANAGEMENT.md-scheduleview">ScheduleView</h4><div class="detached code-block" id="1073245393#p9w2cz_28"><pre><code class="language-ts">const ScheduleView: React.FC&lt;ScheduleViewProps&gt; = () =&gt; {
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState&lt;string | null&gt;(null);
+  
+  // Логика обновления данных
+};</code></pre></div></section></section></section><section><h2 id="1073245393#p9w2cz_7" data-toc="p9w2cz_7#STATE_MANAGEMENT.md-p9w2cz_7">Персистентность данных</h2><section><h3 id="1073245393#asyncstorage" data-toc="asyncstorage#STATE_MANAGEMENT.md-asyncstorage">AsyncStorage</h3><p id="1073245393#p9w2cz_30">Сохранение состояния в локальное хранилище:</p><div class="detached code-block" id="1073245393#p9w2cz_31"><pre><code class="language-ts">// Ключи для хранения
+const STORAGE_KEYS = {
+  FAVORITES: '@favorites',
+  THEME: '@theme',
+  SETTINGS: '@settings'
+};
+
+// Сохранение данных
+const saveData = async (key: string, data: any) =&gt; {
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    console.error('Error saving data:', error);
+  }
+};
+
+// Загрузка данных
+const loadData = async (key: string) =&gt; {
+  try {
+    const data = await AsyncStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  } catch (error) {
+    console.error('Error loading data:', error);
+    return null;
+  }
+};</code></pre></div></section></section><section><h2 id="1073245393#p9w2cz_8" data-toc="p9w2cz_8#STATE_MANAGEMENT.md-p9w2cz_8">Оптимизация состояния</h2><section><h3 id="1073245393#p9w2cz_32" data-toc="p9w2cz_32#STATE_MANAGEMENT.md-p9w2cz_32">Мемоизация</h3><div class="detached code-block" id="1073245393#p9w2cz_34"><pre><code class="language-ts">// Мемоизация вычисляемых значений
+const filteredGroups = useMemo(() =&gt; {
+  return groups.filter(group =&gt; 
+    group.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+}, [groups, searchQuery]);
+
+// Мемоизация колбэков
+const handleGroupSelect = useCallback((group: GroupInfo) =&gt; {
+  // Обработка выбора группы
+}, []);</code></pre></div></section><section><h3 id="1073245393#p9w2cz_33" data-toc="p9w2cz_33#STATE_MANAGEMENT.md-p9w2cz_33">Дебаунсинг</h3><div class="detached code-block" id="1073245393#p9w2cz_35"><pre><code class="language-ts">// Дебаунс поискового запроса
+const debouncedSearch = useCallback(
+  debounce((query: string) =&gt; {
+    setFilteredGroups(
+      groups.filter(group =&gt;
+        group.name.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+  }, 300),
+  [groups]
+);</code></pre></div></section></section><section><h2 id="1073245393#p9w2cz_9" data-toc="p9w2cz_9#STATE_MANAGEMENT.md-p9w2cz_9">Обработка ошибок</h2><div class="detached code-block" id="1073245393#p9w2cz_36"><pre><code class="language-ts">const ErrorBoundary: React.FC = ({ children }) =&gt; {
+  const [error, setError] = useState&lt;Error | null&gt;(null);
+
+  if (error) {
+    return (
+      &lt;View style={styles.errorContainer}&gt;
+        &lt;Text style={styles.errorText}&gt;
+          Произошла ошибка: {error.message}
+        &lt;/Text&gt;
+      &lt;/View&gt;
+    );
+  }
+
+  return children;
+};</code></pre></div></section><section><h2 id="1073245393#p9w2cz_10" data-toc="p9w2cz_10#STATE_MANAGEMENT.md-p9w2cz_10">Рекомендации</h2><ol class="list list-decimal" id="1073245393#p9w2cz_37" type="1" start="1"><li class="list-item" id="1073245393#p9w2cz_38"><p>Использовать контексты для глобального состояния</p></li><li class="list-item" id="1073245393#p9w2cz_39"><p>Держать локальное состояние максимально близко к компонентам</p></li><li class="list-item" id="1073245393#p9w2cz_40"><p>Применять мемоизацию для оптимизации</p></li><li class="list-item" id="1073245393#p9w2cz_41"><p>Использовать TypeScript для типизации состояния</p></li><li class="list-item" id="1073245393#p9w2cz_42"><p>Обрабатывать ошибки на всех уровнях</p></li></ol></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="-1157226994"><span class="no-bold">🎨</span> Стилизация</h1><section><h2 id="-1157226994#z6ja35k_3" data-toc="z6ja35k_3#STYLING.md-z6ja35k_3">Темы</h2><section><h3 id="-1157226994#z6ja35k_10" data-toc="z6ja35k_10#STYLING.md-z6ja35k_10">Светлая тема</h3><div class="detached code-block" id="-1157226994#z6ja35k_12"><pre><code class="language-ts">const lightTheme = {
+  colors: {
+    primary: '#7f61dd',
+    background: '#ffffff',
+    surface: '#ffffff',
+    text: '#000000',
+    onSurface: '#000000',
+    onSurfaceVariant: '#666666',
+    outline: '#e0e0e0',
+    primaryContainer: '#f4f0ff',
+    secondary: '#9e9e9e',
+    error: '#b00020',
+    errorContainer: '#fde7e9'
+  }
+};</code></pre></div></section><section><h3 id="-1157226994#z6ja35k_11" data-toc="z6ja35k_11#STYLING.md-z6ja35k_11">Темная тема</h3><div class="detached code-block" id="-1157226994#z6ja35k_13"><pre><code class="language-ts">const darkTheme = {
+  colors: {
+    primary: '#9f81fd',
+    background: '#121212',
+    surface: '#1e1e1e',
+    text: '#ffffff',
+    onSurface: '#ffffff',
+    onSurfaceVariant: '#cccccc',
+    outline: '#2c2c2c',
+    primaryContainer: '#2c2c2c',
+    secondary: '#757575',
+    error: '#cf6679',
+    errorContainer: '#340e0e'
+  }
+};</code></pre></div></section></section><section><h2 id="-1157226994#ui" data-toc="ui#STYLING.md-ui">Компоненты UI</h2><section><h3 id="-1157226994#z6ja35k_14" data-toc="z6ja35k_14#STYLING.md-z6ja35k_14">Карточки</h3><div class="detached code-block" id="-1157226994#z6ja35k_17"><pre><code class="language-ts">const cardStyles = StyleSheet.create({
+  container: {
+    borderRadius: 16,
+    borderWidth: 1,
+    overflow: 'hidden',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  content: {
+    padding: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: -0.3,
+  }
+});</code></pre></div></section><section><h3 id="-1157226994#z6ja35k_15" data-toc="z6ja35k_15#STYLING.md-z6ja35k_15">Кнопки</h3><div class="detached code-block" id="-1157226994#z6ja35k_18"><pre><code class="language-ts">const buttonStyles = StyleSheet.create({
+  primary: {
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: theme.colors.primary,
+  },
+  secondary: {
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: theme.colors.primaryContainer,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+  }
+});</code></pre></div></section><section><h3 id="-1157226994#z6ja35k_16" data-toc="z6ja35k_16#STYLING.md-z6ja35k_16">Поля ввода</h3><div class="detached code-block" id="-1157226994#z6ja35k_19"><pre><code class="language-ts">const inputStyles = StyleSheet.create({
+  container: {
+    borderRadius: 12,
+    borderWidth: 1,
+    paddingHorizontal: 16,
+    height: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  icon: {
+    marginRight: 12,
+  }
+});</code></pre></div></section></section><section><h2 id="-1157226994#z6ja35k_5" data-toc="z6ja35k_5#STYLING.md-z6ja35k_5">Типографика</h2><section><h3 id="-1157226994#z6ja35k_20" data-toc="z6ja35k_20#STYLING.md-z6ja35k_20">Заголовки</h3><div class="detached code-block" id="-1157226994#z6ja35k_21"><pre><code class="language-ts">const typography = StyleSheet.create({
+  h1: {
+    fontSize: 24,
+    fontWeight: '700',
+    letterSpacing: -0.5,
+  },
+  h2: {
+    fontSize: 20,
+    fontWeight: '600',
+    letterSpacing: -0.3,
+  },
+  h3: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  body: {
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  caption: {
+    fontSize: 14,
+    lineHeight: 20,
+  }
+});</code></pre></div></section></section><section><h2 id="-1157226994#z6ja35k_6" data-toc="z6ja35k_6#STYLING.md-z6ja35k_6">Анимации</h2><section><h3 id="-1157226994#z6ja35k_22" data-toc="z6ja35k_22#STYLING.md-z6ja35k_22">Переходы</h3><div class="detached code-block" id="-1157226994#z6ja35k_24"><pre><code class="language-ts">const fadeIn = {
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+};
+
+const slideIn = {
+  from: {
+    transform: [{ translateY: 20 }],
+    opacity: 0,
+  },
+  to: {
+    transform: [{ translateY: 0 }],
+    opacity: 1,
+  },
+};</code></pre></div></section><section><h3 id="-1157226994#z6ja35k_23" data-toc="z6ja35k_23#STYLING.md-z6ja35k_23">Интерактивные элементы</h3><div class="detached code-block" id="-1157226994#z6ja35k_25"><pre><code class="language-ts">const pressableStyles = (pressed: boolean) =&gt; ({
+  transform: [{ scale: pressed ? 0.98 : 1 }],
+  opacity: pressed ? 0.9 : 1,
+});</code></pre></div></section></section><section><h2 id="-1157226994#z6ja35k_7" data-toc="z6ja35k_7#STYLING.md-z6ja35k_7">Адаптивный дизайн</h2><section><h3 id="-1157226994#z6ja35k_26" data-toc="z6ja35k_26#STYLING.md-z6ja35k_26">Размеры экрана</h3><div class="detached code-block" id="-1157226994#z6ja35k_28"><pre><code class="language-ts">const { width, height } = Dimensions.get('window');
+
+const metrics = {
+  screenWidth: width,
+  screenHeight: height,
+  isSmallDevice: width &lt; 375,
+};</code></pre></div></section><section><h3 id="-1157226994#z6ja35k_27" data-toc="z6ja35k_27#STYLING.md-z6ja35k_27">Отступы</h3><div class="detached code-block" id="-1157226994#z6ja35k_29"><pre><code class="language-ts">const spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+};
+
+const layout = StyleSheet.create({
+  container: {
+    padding: spacing.md,
+  },
+  row: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  column: {
+    flexDirection: 'column',
+    gap: spacing.md,
+  }
+});</code></pre></div></section></section><section><h2 id="-1157226994#z6ja35k_8" data-toc="z6ja35k_8#STYLING.md-z6ja35k_8">Использование тем</h2><section><h3 id="-1157226994#usetheme" data-toc="usetheme#STYLING.md-usetheme">Хук useTheme</h3><div class="detached code-block" id="-1157226994#z6ja35k_32"><pre><code class="language-ts">const Component = () =&gt; {
+  const theme = useTheme();
+  
+  return (
+    &lt;View style={[
+      styles.container,
+      { backgroundColor: theme.colors.background }
+    ]}&gt;
+      &lt;Text style={[
+        styles.text,
+        { color: theme.colors.onSurface }
+      ]}&gt;
+        Контент
+      &lt;/Text&gt;
+    &lt;/View&gt;
+  );
+};</code></pre></div></section><section><h3 id="-1157226994#z6ja35k_31" data-toc="z6ja35k_31#STYLING.md-z6ja35k_31">Переключение тем</h3><div class="detached code-block" id="-1157226994#z6ja35k_33"><pre><code class="language-ts">const { isDarkTheme, toggleTheme } = useThemeContext();
+
+// Применение стилей в зависимости от темы
+const dynamicStyles = {
+  backgroundColor: isDarkTheme ? '#121212' : '#ffffff',
+  color: isDarkTheme ? '#ffffff' : '#000000',
+};</code></pre></div></section></section><section><h2 id="-1157226994#z6ja35k_9" data-toc="z6ja35k_9#STYLING.md-z6ja35k_9">Рекомендации по стилизации</h2><section><h3 id="-1157226994#z6ja35k_34" data-toc="z6ja35k_34#STYLING.md-z6ja35k_34">Лучшие практики</h3><ol class="list list-decimal" id="-1157226994#z6ja35k_37" type="1" start="1"><li class="list-item" id="-1157226994#z6ja35k_38"><p>Использовать StyleSheet.create для оптимизации</p></li><li class="list-item" id="-1157226994#z6ja35k_39"><p>Группировать стили по компонентам</p></li><li class="list-item" id="-1157226994#z6ja35k_40"><p>Использовать константы для повторяющихся значений</p></li><li class="list-item" id="-1157226994#z6ja35k_41"><p>Применять Platform.select для платформо-зависимых стилей</p></li></ol></section><section><h3 id="-1157226994#z6ja35k_35" data-toc="z6ja35k_35#STYLING.md-z6ja35k_35">Производительность</h3><ol class="list list-decimal" id="-1157226994#z6ja35k_42" type="1" start="1"><li class="list-item" id="-1157226994#z6ja35k_43"><p>Избегать инлайн стилей</p></li><li class="list-item" id="-1157226994#z6ja35k_44"><p>Мемоизировать динамические стили</p></li><li class="list-item" id="-1157226994#z6ja35k_45"><p>Использовать StyleSheet.flatten при необходимости</p></li><li class="list-item" id="-1157226994#z6ja35k_46"><p>Оптимизировать анимации</p></li></ol></section><section><h3 id="-1157226994#z6ja35k_36" data-toc="z6ja35k_36#STYLING.md-z6ja35k_36">Доступность</h3><ol class="list list-decimal" id="-1157226994#z6ja35k_47" type="1" start="1"><li class="list-item" id="-1157226994#z6ja35k_48"><p>Использовать достаточный контраст</p></li><li class="list-item" id="-1157226994#z6ja35k_49"><p>Обеспечивать читаемые размеры текста</p></li><li class="list-item" id="-1157226994#z6ja35k_50"><p>Поддерживать масштабирование</p></li><li class="list-item" id="-1157226994#z6ja35k_51"><p>Учитывать VoiceOver и TalkBack</p></li></ol></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="-1017880417"><span class="no-bold">📊</span> Модели данных</h1><section><h2 id="-1017880417#-jzsks9_3" data-toc="-jzsks9_3#DATA_MODELS.md--jzsks9_3">Основные типы</h2><section><h3 id="-1017880417#-jzsks9_13" data-toc="-jzsks9_13#DATA_MODELS.md--jzsks9_13">Группа</h3><div class="detached code-block" id="-1017880417#-jzsks9_16"><pre><code class="language-ts">// Базовая информация о группе
+interface GroupInfo {
+  id: number;          // Уникальный идентификатор группы
+  name: string;        // Название группы (например, &quot;П-1&quot;)
+  category: string;    // Категория группы (например, &quot;Программирование&quot;)
+  course?: number;     // Номер курса (опционально)
+  studentsCount?: number; // Количество студентов (опционально)
+}
+
+// Расписание группы
+interface GroupSchedule {
+  startDate: string;   // Дата начала недели в формате ISO
+  group: GroupInfo;    // Информация о группе
+  lessons: Lesson[];   // Массив занятий
+  weekType?: 'current' | 'next'; // Тип недели
+  lastUpdated: string; // Время последнего обновления
+}
+
+// Группировка групп
+interface GroupCategory {
+  id: string;         // Идентификатор категории
+  name: string;       // Название категории
+  groups: GroupInfo[]; // Группы в категории
+  description?: string; // Описание категории
+}</code></pre></div></section><section><h3 id="-1017880417#-jzsks9_14" data-toc="-jzsks9_14#DATA_MODELS.md--jzsks9_14">Преподаватель</h3><div class="detached code-block" id="-1017880417#-jzsks9_17"><pre><code class="language-ts">// Базовая информация о преподавателе
+interface TeacherInfo {
+  id: number;         // Уникальный идентификатор
+  fio: string;        // ФИО преподавателя
+  position: string;   // Должность
+  department?: string; // Кафедра
+  email?: string;     // Email (опционально)
+  photoUrl?: string;  // URL фотографии (опционально)
+  subjects?: Subject[]; // Преподаваемые предметы
+}
+
+// Расписание преподавателя
+interface TeacherSchedule {
+  startDate: string;   // Дата начала недели
+  teacher: TeacherInfo; // Информация о преподавателе
+  lessons: Lesson[];    // Массив занятий
+  weekType?: 'current' | 'next';
+  lastUpdated: string;
+  totalHours?: number;  // Общее количество часов
+}</code></pre></div></section><section><h3 id="-1017880417#-jzsks9_15" data-toc="-jzsks9_15#DATA_MODELS.md--jzsks9_15">Расписание</h3><div class="detached code-block" id="-1017880417#-jzsks9_18"><pre><code class="language-ts">// Занятие
+interface Lesson {
+  id: string;          // Уникальный идентификатор
+  weekday: number;     // День недели (1-7)
+  lesson: number;      // Номер пары
+  startTime: string;   // Время начала (HH:mm)
+  endTime: string;     // Время окончания (HH:mm)
+  teachers: Teacher[]; // Преподаватели
+  subject: Subject;    // Предмет
+  cabinet: Cabinet;    // Аудитория
+  unionGroups: UnionGroup[]; // Объединенные группы
+  type?: LessonType;   // Тип занятия
+  isOnline?: boolean;  // Онлайн занятие
+  meetingUrl?: string; // Ссылка на онлайн встречу
+  materials?: Material[]; // Учебные материалы
+}
+
+// Предмет
+interface Subject {
+  id: number;         // Идентификатор
+  name: string;       // Полное название
+  shortName?: string; // Сокращенное название
+  description?: string; // Описание
+  color?: string;     // Цвет для отображения
+  department?: string; // Кафедра
+}
+
+// Аудитория
+interface Cabinet {
+  id: number;         // Идентификатор
+  number: string;     // Номер аудитории
+  building?: string;  // Здание
+  floor?: number;     // Этаж
+  capacity?: number;  // Вместимость
+  type?: CabinetType; // Тип аудитории
+  equipment?: string[]; // Оборудование
+}
+
+// Объединенная группа
+interface UnionGroup {
+  id: number;         // Идентификатор
+  name: string;       // Название
+  groups: GroupInfo[]; // Входящие группы
+  type?: string;      // Тип объединения
+}
+
+// Тип занятия
+enum LessonType {
+  LECTURE = 'lecture',
+  PRACTICE = 'practice',
+  LAB = 'laboratory',
+  SEMINAR = 'seminar',
+  CONSULTATION = 'consultation'
+}
+
+// Тип аудитории
+enum CabinetType {
+  CLASSROOM = 'classroom',
+  LABORATORY = 'laboratory',
+  LECTURE_HALL = 'lecture_hall',
+  COMPUTER_CLASS = 'computer_class'
+}
+
+// Учебные материалы
+interface Material {
+  id: string;
+  title: string;
+  type: 'document' | 'presentation' | 'video' | 'link';
+  url: string;
+  uploadedAt: string;
+}</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_4" data-toc="-jzsks9_4#DATA_MODELS.md--jzsks9_4">Избранное</h2><section><h3 id="-1017880417#-jzsks9_19" data-toc="-jzsks9_19#DATA_MODELS.md--jzsks9_19">Модели избранного</h3><div class="detached code-block" id="-1017880417#-jzsks9_20"><pre><code class="language-ts">// Элемент избранного
+interface FavoriteItem {
+  id: number;         // Уникальный идентификатор
+  type: 'group' | 'teacher'; // Тип элемента
+  data: GroupInfo | TeacherInfo; // Данные элемента
+  addedAt: string;    // Дата добавления
+  order?: number;     // Порядок отображения
+  notes?: string;     // Заметки пользователя
+  customColor?: string; // Пользовательский цвет
+}
+
+// Состояние избранного
+interface FavoritesState {
+  items: FavoriteItem[]; // Элементы
+  lastUpdated: string;   // Последнее обновление
+  maxItems?: number;     // Максимальное количество
+  categories?: {         // Категории избранного
+    groups: FavoriteItem[];
+    teachers: FavoriteItem[];
+  };
+}</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_5" data-toc="-jzsks9_5#DATA_MODELS.md--jzsks9_5">Настройки</h2><section><h3 id="-1017880417#-jzsks9_21" data-toc="-jzsks9_21#DATA_MODELS.md--jzsks9_21">Настройки приложения</h3><div class="detached code-block" id="-1017880417#-jzsks9_22"><pre><code class="language-ts">// Общие настройки
+interface AppSettings {
+  theme: ThemeSettings;
+  schedule: ScheduleSettings;
+  notifications: NotificationSettings;
+  display: DisplaySettings;
+  sync: SyncSettings;
+}
+
+// Настройки темы
+interface ThemeSettings {
+  isDarkTheme: boolean;
+  useSystemTheme: boolean;
+  primaryColor?: string;
+  accentColor?: string;
+  fontSize?: 'small' | 'medium' | 'large';
+}
+
+// Настройки расписания
+interface ScheduleSettings {
+  showCabinetNumbers: boolean;
+  showTeacherNames: boolean;
+  compactMode: boolean;
+  showLessonNumbers: boolean;
+  defaultView: 'day' | 'week';
+  showWeekends: boolean;
+  highlightCurrentDay: boolean;
+  autoScrollToCurrent: boolean;
+}
+
+// Настройки уведомлений
+interface NotificationSettings {
+  enabled: boolean;
+  beforeLesson: number; // минуты
+  soundEnabled: boolean;
+  vibrationEnabled: boolean;
+  scheduleUpdates: boolean;
+}
+
+// Настройки отображения
+interface DisplaySettings {
+  language: string;
+  timeFormat: '12h' | '24h';
+  dateFormat: string;
+  listViewDensity: 'compact' | 'normal' | 'comfortable';
+}
+
+// Настройки синхронизации
+interface SyncSettings {
+  autoSync: boolean;
+  syncInterval: number;
+  syncOnWifiOnly: boolean;
+  lastSyncTime: string;
+}</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_6" data-toc="-jzsks9_6#DATA_MODELS.md--jzsks9_6">Состояния</h2><section><h3 id="-1017880417#-jzsks9_23" data-toc="-jzsks9_23#DATA_MODELS.md--jzsks9_23">Состояния загрузки</h3><div class="detached code-block" id="-1017880417#-jzsks9_24"><pre><code class="language-ts">// Базовое состояние загрузки
+interface LoadingState {
+  loading: boolean;    // Флаг загрузки
+  error: string | null; // Ошибка
+  lastUpdated?: string; // Последнее обновление
+  retryCount?: number;  // Количество попыток
+  status?: 'idle' | 'loading' | 'success' | 'error';
+}
+
+// Состояние расписания
+interface ScheduleState extends LoadingState {
+  data: GroupSchedule | TeacherSchedule | null;
+  isNextWeek: boolean;
+  cache?: {
+    [key: string]: CacheItem&lt;GroupSchedule | TeacherSchedule&gt;;
+  };
+  filters?: ScheduleFilters;
+}
+
+// Фильтры расписания
+interface ScheduleFilters {
+  days?: number[];
+  teachers?: number[];
+  subjects?: number[];
+  types?: LessonType[];
+}</code></pre></div><p id="-1017880417#-jzsks9_25">[Продолжение в следующем сообщении из-за ограничения длины]�</p></section></section><section><h2 id="-1017880417#api" data-toc="api#DATA_MODELS.md-api">Ответы API</h2><section><h3 id="-1017880417#-jzsks9_26" data-toc="-jzsks9_26#DATA_MODELS.md--jzsks9_26">Форматы ответов</h3><div class="detached code-block" id="-1017880417#-jzsks9_27"><pre><code class="language-ts">interface ApiResponse&lt;T&gt; {
+  success: boolean;
+  data: T;
+  error?: ApiError;
+}
+
+interface ApiError {
+  code: string;
+  message: string;
+  details?: Record&lt;string, any&gt;;
+}</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_8" data-toc="-jzsks9_8#DATA_MODELS.md--jzsks9_8">Преобразования данных</h2><section><h3 id="-1017880417#-jzsks9_28" data-toc="-jzsks9_28#DATA_MODELS.md--jzsks9_28">Маппинг данных</h3><div class="detached code-block" id="-1017880417#-jzsks9_29"><pre><code class="language-ts">// Преобразование сырых данных в модели
+const mapGroupSchedule = (raw: any): GroupSchedule =&gt; ({
+  startDate: raw.start_date,
+  group: {
+    id: raw.group.id,
+    name: raw.group.name,
+    category: raw.group.category
+  },
+  lessons: raw.lessons.map(mapLesson)
+});
+
+const mapLesson = (raw: any): Lesson =&gt; ({
+  id: raw.id,
+  weekday: raw.weekday,
+  lesson: raw.lesson,
+  startTime: raw.start_time,
+  endTime: raw.end_time,
+  teachers: raw.teachers.map(mapTeacher),
+  subject: mapSubject(raw.subject),
+  cabinet: mapCabinet(raw.cabinet),
+  unionGroups: raw.union_groups.map(mapUnionGroup)
+});</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_9" data-toc="-jzsks9_9#DATA_MODELS.md--jzsks9_9">Валидация</h2><section><h3 id="-1017880417#-jzsks9_30" data-toc="-jzsks9_30#DATA_MODELS.md--jzsks9_30">Схемы валидации</h3><div class="detached code-block" id="-1017880417#-jzsks9_31"><pre><code class="language-ts">const groupSchema = {
+  id: { type: 'number', required: true },
+  name: { type: 'string', required: true },
+  category: { type: 'string', required: true }
+};
+
+const lessonSchema = {
+  id: { type: 'string', required: true },
+  weekday: { type: 'number', min: 1, max: 7, required: true },
+  lesson: { type: 'number', min: 1, required: true },
+  startTime: { type: 'string', pattern: 'time', required: true },
+  endTime: { type: 'string', pattern: 'time', required: true }
+};</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_10" data-toc="-jzsks9_10#DATA_MODELS.md--jzsks9_10">Хранение</h2><section><h3 id="-1017880417#-jzsks9_32" data-toc="-jzsks9_32#DATA_MODELS.md--jzsks9_32">Структуры хранения</h3><div class="detached code-block" id="-1017880417#-jzsks9_33"><pre><code class="language-ts">// Ключи для AsyncStorage
+const STORAGE_KEYS = {
+  FAVORITES: '@favorites',
+  SETTINGS: '@settings',
+  SCHEDULE_CACHE: '@schedule_cache'
+};
+
+// Формат кэша
+interface CacheItem&lt;T&gt; {
+  data: T;
+  timestamp: number;
+  expiry: number;
+}</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_11" data-toc="-jzsks9_11#DATA_MODELS.md--jzsks9_11">Типы событий</h2><section><h3 id="-1017880417#-jzsks9_34" data-toc="-jzsks9_34#DATA_MODELS.md--jzsks9_34">События приложения</h3><div class="detached code-block" id="-1017880417#-jzsks9_35"><pre><code class="language-ts">type AppEvent = 
+  | { type: 'SCHEDULE_LOADED'; payload: ScheduleData }
+  | { type: 'FAVORITE_ADDED'; payload: FavoriteItem }
+  | { type: 'FAVORITE_REMOVED'; payload: { id: number; type: string } }
+  | { type: 'SETTINGS_UPDATED'; payload: Partial&lt;AppSettings&gt; };</code></pre></div></section></section><section><h2 id="-1017880417#-jzsks9_12" data-toc="-jzsks9_12#DATA_MODELS.md--jzsks9_12">Рекомендации</h2><section><h3 id="-1017880417#-jzsks9_36" data-toc="-jzsks9_36#DATA_MODELS.md--jzsks9_36">Лучшие практики</h3><ol class="list list-decimal" id="-1017880417#-jzsks9_38" type="1" start="2"><li class="list-item" id="-1017880417#-jzsks9_39"><p>Валидировать данные при получении</p></li><li class="list-item" id="-1017880417#-jzsks9_40"><p>Нормализовать данные перед сохранением</p></li><li class="list-item" id="-1017880417#-jzsks9_41"><p>Использовать иммутабельные обновления</p></li><li class="list-item" id="-1017880417#-jzsks9_42"><p>Документировать все интерфейсы</p></li></ol></section><section><h3 id="-1017880417#-jzsks9_37" data-toc="-jzsks9_37#DATA_MODELS.md--jzsks9_37">Обработка данных</h3><ol class="list list-decimal" id="-1017880417#-jzsks9_43" type="1" start="1"><li class="list-item" id="-1017880417#-jzsks9_44"><p>Проверять наличие обязательных полей</p></li><li class="list-item" id="-1017880417#-jzsks9_45"><p>Предоставлять значения по умолчанию</p></li><li class="list-item" id="-1017880417#-jzsks9_46"><p>Обрабатывать краевые случаи</p></li><li class="list-item" id="-1017880417#-jzsks9_47"><p>Логировать ошибки валидации</p></li><li class="list-item" id="-1017880417#-jzsks9_48"><p>Поддерживать обратную совместимость</p></li></ol></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="6869748"><span class="no-bold">🌐</span> Сетевой слой</h1><section><h2 id="6869748#-ou4vyo_3" data-toc="-ou4vyo_3#NETWORKING.md--ou4vyo_3">Конфигурация</h2><section><h3 id="6869748#-ou4vyo_11" data-toc="-ou4vyo_11#NETWORKING.md--ou4vyo_11">Базовая настройка</h3><div class="detached code-block" id="6869748#-ou4vyo_13"><pre><code class="language-ts">// services/api/config.ts
+export const API_CONFIG = {
+  BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL,
+  PUBLICATION_ID: process.env.EXPO_PUBLIC_PUBLICATION_ID,
+  TIMEOUT: 10000, // 10 секунд
+  RETRY_ATTEMPTS: 3,
+};</code></pre></div></section><section><h3 id="6869748#axios" data-toc="axios#NETWORKING.md-axios">Инстанс Axios</h3><div class="detached code-block" id="6869748#-ou4vyo_14"><pre><code class="language-ts">// services/api/instance.ts
+import axios from 'axios';
+
+export const apiInstance = axios.create({
+  baseURL: API_CONFIG.BASE_URL,
+  timeout: API_CONFIG.TIMEOUT,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+});
+
+// Интерцептор запросов
+apiInstance.interceptors.request.use(
+  (config) =&gt; {
+    // Добавление publication_id
+    config.params = {
+      ...config.params,
+      publication_id: API_CONFIG.PUBLICATION_ID,
+    };
+    return config;
+  },
+  (error) =&gt; Promise.reject(error)
+);
+
+// Интерцептор ответов
+apiInstance.interceptors.response.use(
+  (response) =&gt; response,
+  (error) =&gt; handleApiError(error)
+);</code></pre></div></section></section><section><h2 id="6869748#api" data-toc="api#NETWORKING.md-api">API Сервисы</h2><section><h3 id="6869748#-ou4vyo_15" data-toc="-ou4vyo_15#NETWORKING.md--ou4vyo_15">Расписание</h3><div class="detached code-block" id="6869748#-ou4vyo_16"><pre><code class="language-ts">// services/api/scheduleService.ts
+export class ScheduleService {
+  static async getGroupSchedule(groupId: number, nextWeek: boolean): Promise&lt;GroupSchedule&gt; {
+    try {
+      const response = await apiInstance.get(`/schedule/group/${groupId}`, {
+        params: { next_week: nextWeek }
+      });
+      return response.data;
+    } catch (error) {
+      throw handleScheduleError(error);
+    }
+  }
+
+  static async getTeacherSchedule(teacherId: number, nextWeek: boolean): Promise&lt;TeacherSchedule&gt; {
+    try {
+      const response = await apiInstance.get(`/schedule/teacher/${teacherId}`, {
+        params: { next_week: nextWeek }
+      });
+      return response.data;
+    } catch (error) {
+      throw handleScheduleError(error);
+    }
+  }
+}</code></pre></div></section></section><section><h2 id="6869748#-ou4vyo_5" data-toc="-ou4vyo_5#NETWORKING.md--ou4vyo_5">Обработка ошибок</h2><section><h3 id="6869748#-ou4vyo_17" data-toc="-ou4vyo_17#NETWORKING.md--ou4vyo_17">Типы ошибок</h3><div class="detached code-block" id="6869748#-ou4vyo_19"><pre><code class="language-ts">// types/api.ts
+export enum ApiErrorType {
+  NETWORK = 'NETWORK_ERROR',
+  TIMEOUT = 'TIMEOUT_ERROR',
+  SERVER = 'SERVER_ERROR',
+  NOT_FOUND = 'NOT_FOUND',
+  VALIDATION = 'VALIDATION_ERROR',
+}
+
+export class ApiError extends Error {
+  constructor(
+    public type: ApiErrorType,
+    public message: string,
+    public statusCode?: number,
+    public originalError?: any
+  ) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}</code></pre></div></section><section><h3 id="6869748#-ou4vyo_18" data-toc="-ou4vyo_18#NETWORKING.md--ou4vyo_18">Обработчик ошибок</h3><div class="detached code-block" id="6869748#-ou4vyo_20"><pre><code class="language-ts">// services/api/errorHandler.ts
+export const handleApiError = (error: any): never =&gt; {
+  if (axios.isAxiosError(error)) {
+    if (!error.response) {
+      throw new ApiError(
+        ApiErrorType.NETWORK,
+        'Ошибка сети. Проверьте подключение к интернету.'
+      );
+    }
+
+    const { response } = error;
+    switch (response.status) {
+      case 404:
+        throw new ApiError(
+          ApiErrorType.NOT_FOUND,
+          'Запрашиваемые данные не найдены.',
+          404
+        );
+      case 422:
+        throw new ApiError(
+          ApiErrorType.VALIDATION,
+          'Ошибка валидации данных.',
+          422,
+          response.data.errors
+        );
+      default:
+        throw new ApiError(
+          ApiErrorType.SERVER,
+          'Ошибка сервера.',
+          response.status
+        );
+    }
+  }
+
+  throw new ApiError(
+    ApiErrorType.NETWORK,
+    'Неизвестная ошибка сети.'
+  );
+};</code></pre></div></section></section><section><h2 id="6869748#-ou4vyo_6" data-toc="-ou4vyo_6#NETWORKING.md--ou4vyo_6">Кэширование</h2><section><h3 id="6869748#-ou4vyo_21" data-toc="-ou4vyo_21#NETWORKING.md--ou4vyo_21">Стратегия кэширования</h3><div class="detached code-block" id="6869748#-ou4vyo_22"><pre><code class="language-ts">// services/cache/scheduleCache.ts
+export class ScheduleCache {
+  private static CACHE_TTL = 5 * 60 * 1000; // 5 минут
+  private static cache = new Map&lt;string, CacheItem&gt;();
+
+  static async get(key: string): Promise&lt;any | null&gt; {
+    const item = this.cache.get(key);
+    
+    if (!item) return null;
+    
+    if (Date.now() - item.timestamp &gt; this.CACHE_TTL) {
+      this.cache.delete(key);
+      return null;
+    }
+    
+    return item.data;
+  }
+
+  static set(key: string, data: any): void {
+    this.cache.set(key, {
+      data,
+      timestamp: Date.now()
+    });
+  }
+
+  static clear(): void {
+    this.cache.clear();
+  }
+}</code></pre></div></section></section><section><h2 id="6869748#retry" data-toc="retry#NETWORKING.md-retry">Retry механизм</h2><section><h3 id="6869748#-ou4vyo_23" data-toc="-ou4vyo_23#NETWORKING.md--ou4vyo_23">Реализация повторных попыток</h3><div class="detached code-block" id="6869748#-ou4vyo_24"><pre><code class="language-ts">// services/api/retry.ts
+export const withRetry = async &lt;T&gt;(
+  operation: () =&gt; Promise&lt;T&gt;,
+  retryCount: number = API_CONFIG.RETRY_ATTEMPTS
+): Promise&lt;T&gt; =&gt; {
+  let lastError: Error;
+  
+  for (let i = 0; i &lt; retryCount; i++) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error;
+      
+      if (!isRetryableError(error)) {
+        throw error;
+      }
+      
+      await delay(getRetryDelay(i));
+    }
+  }
+  
+  throw lastError;
+};
+
+const isRetryableError = (error: any): boolean =&gt; {
+  if (error instanceof ApiError) {
+    return error.type === ApiErrorType.NETWORK || 
+           error.type === ApiErrorType.TIMEOUT;
+  }
+  return false;
+};
+
+const getRetryDelay = (attempt: number): number =&gt; {
+  return Math.min(1000 * Math.pow(2, attempt), 10000);
+};</code></pre></div></section></section><section><h2 id="6869748#-ou4vyo_8" data-toc="-ou4vyo_8#NETWORKING.md--ou4vyo_8">Мониторинг</h2><section><h3 id="6869748#-ou4vyo_25" data-toc="-ou4vyo_25#NETWORKING.md--ou4vyo_25">Логирование запросов</h3><div class="detached code-block" id="6869748#-ou4vyo_26"><pre><code class="language-ts">// services/api/logging.ts
+export const logApiRequest = (config: any) =&gt; {
+  if (__DEV__) {
+    console.log(`API Request: ${config.method.toUpperCase()} ${config.url}`);
+    console.log('Params:', config.params);
+    console.log('Data:', config.data);
+  }
+};
+
+export const logApiResponse = (response: any) =&gt; {
+  if (__DEV__) {
+    console.log(`API Response: ${response.status}`);
+    console.log('Data:', response.data);
+  }
+};</code></pre></div></section></section><section><h2 id="6869748#-ou4vyo_9" data-toc="-ou4vyo_9#NETWORKING.md--ou4vyo_9">Оптимизация</h2><section><h3 id="6869748#-ou4vyo_27" data-toc="-ou4vyo_27#NETWORKING.md--ou4vyo_27">Параллельные запросы</h3><div class="detached code-block" id="6869748#-ou4vyo_29"><pre><code class="language-ts">// services/api/parallel.ts
+export const fetchParallelData = async (groupIds: number[]): Promise&lt;GroupSchedule[]&gt; =&gt; {
+  const promises = groupIds.map(id =&gt; 
+    ScheduleService.getGroupSchedule(id, false)
+  );
+  
+  return Promise.all(promises);
+};</code></pre></div></section><section><h3 id="6869748#-ou4vyo_28" data-toc="-ou4vyo_28#NETWORKING.md--ou4vyo_28">Отмена запросов</h3><div class="detached code-block" id="6869748#-ou4vyo_30"><pre><code class="language-ts">// hooks/useSchedule.ts
+export const useSchedule = (groupId: number) =&gt; {
+  const abortController = useRef&lt;AbortController&gt;();
+
+  useEffect(() =&gt; {
+    abortController.current = new AbortController();
+
+    const fetchSchedule = async () =&gt; {
+      try {
+        const response = await apiInstance.get(`/schedule/group/${groupId}`, {
+          signal: abortController.current.signal
+        });
+        // Обработка ответа
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled');
+        }
+      }
+    };
+
+    fetchSchedule();
+
+    return () =&gt; {
+      abortController.current?.abort();
+    };
+  }, [groupId]);
+};</code></pre></div></section></section><section><h2 id="6869748#-ou4vyo_10" data-toc="-ou4vyo_10#NETWORKING.md--ou4vyo_10">Рекомендации</h2><section><h3 id="6869748#-ou4vyo_31" data-toc="-ou4vyo_31#NETWORKING.md--ou4vyo_31">Лучшие практики</h3><ol class="list list-decimal" id="6869748#-ou4vyo_33" type="1" start="1"><li class="list-item" id="6869748#-ou4vyo_34"><p>Использовать единый инстанс axios</p></li><li class="list-item" id="6869748#-ou4vyo_35"><p>Реализовать обработку ошибок</p></li><li class="list-item" id="6869748#-ou4vyo_36"><p>Внедрить кэширование</p></li><li class="list-item" id="6869748#-ou4vyo_37"><p>Добавить retry механизм</p></li><li class="list-item" id="6869748#-ou4vyo_38"><p>Логировать запросы в development</p></li></ol></section><section><h3 id="6869748#-ou4vyo_32" data-toc="-ou4vyo_32#NETWORKING.md--ou4vyo_32">Безопасность</h3><ol class="list list-decimal" id="6869748#-ou4vyo_39" type="1" start="1"><li class="list-item" id="6869748#-ou4vyo_40"><p>Валидация входных данных</p></li><li class="list-item" id="6869748#-ou4vyo_41"><p>Санитизация ответов</p></li><li class="list-item" id="6869748#-ou4vyo_42"><p>Защита от CSRF</p></li><li class="list-item" id="6869748#-ou4vyo_43"><p>Обработка чувствительных данных</p></li><li class="list-item" id="6869748#-ou4vyo_44"><p>Таймауты запросов</p></li></ol></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="672572432"><span class="no-bold">⚡</span> Оптимизация производительности</h1><section><h2 id="672572432#z9lhvp2_3" data-toc="z9lhvp2_3#PERFORMANCE.md-z9lhvp2_3">Общие принципы</h2><section><h3 id="672572432#z9lhvp2_11" data-toc="z9lhvp2_11#PERFORMANCE.md-z9lhvp2_11">Метрики производительности</h3><ul class="list" id="672572432#z9lhvp2_12" start="1"><li class="list-item" id="672572432#z9lhvp2_13"><p>Время до интерактивности (TTI)</p></li><li class="list-item" id="672572432#z9lhvp2_14"><p>Время первой отрисовки (FP)</p></li><li class="list-item" id="672572432#z9lhvp2_15"><p>Время блокировки основного потока</p></li><li class="list-item" id="672572432#z9lhvp2_16"><p>Частота кадров (FPS)</p></li><li class="list-item" id="672572432#z9lhvp2_17"><p>Потребление памяти</p></li></ul></section></section><section><h2 id="672572432#z9lhvp2_4" data-toc="z9lhvp2_4#PERFORMANCE.md-z9lhvp2_4">Оптимизация рендеринга</h2><section><h3 id="672572432#z9lhvp2_18" data-toc="z9lhvp2_18#PERFORMANCE.md-z9lhvp2_18">Мемоизация компонентов</h3><div class="detached code-block" id="672572432#z9lhvp2_21"><pre><code class="language-ts">// Мемоизация компонента GroupList
+const MemoizedGroupList = React.memo(GroupList, (prevProps, nextProps) =&gt; {
+  return prevProps.groups === nextProps.groups;
+});
+
+// Мемоизация хуков
+const filteredGroups = useMemo(() =&gt; {
+  return groups.filter(group =&gt; 
+    group.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+}, [groups, searchQuery]);</code></pre></div></section><section><h3 id="672572432#z9lhvp2_19" data-toc="z9lhvp2_19#PERFORMANCE.md-z9lhvp2_19">Виртуализация списков</h3><div class="detached code-block" id="672572432#z9lhvp2_22"><pre><code class="language-ts">// Оптимизация длинных списков
+const VirtualizedGroupList: React.FC&lt;GroupListProps&gt; = ({ groups }) =&gt; {
+  return (
+    &lt;VirtualizedList
+      data={groups}
+      renderItem={({ item }) =&gt; &lt;GroupItem group={item} /&gt;}
+      getItemCount={(data) =&gt; data.length}
+      getItem={(data, index) =&gt; data[index]}
+      initialNumToRender={10}
+      maxToRenderPerBatch={5}
+      windowSize={5}
+      updateCellsBatchingPeriod={50}
+    /&gt;
+  );
+};</code></pre></div></section><section><h3 id="672572432#z9lhvp2_20" data-toc="z9lhvp2_20#PERFORMANCE.md-z9lhvp2_20">Ленивая загрузка</h3><div class="detached code-block" id="672572432#z9lhvp2_23"><pre><code class="language-ts">// Ленивая загрузка компонентов
+const LazyScheduleView = React.lazy(() =&gt; import('./ScheduleView'));
+
+// Использование
+&lt;Suspense fallback={&lt;LoadingSpinner /&gt;}&gt;
+  &lt;LazyScheduleView /&gt;
+&lt;/Suspense&gt;</code></pre></div></section></section><section><h2 id="672572432#z9lhvp2_5" data-toc="z9lhvp2_5#PERFORMANCE.md-z9lhvp2_5">Оптимизация изображений</h2><section><h3 id="672572432#z9lhvp2_24" data-toc="z9lhvp2_24#PERFORMANCE.md-z9lhvp2_24">Кэширование изображений</h3><div class="detached code-block" id="672572432#z9lhvp2_26"><pre><code class="language-ts">// Использование expo-image
+import { Image } from 'expo-image';
+
+const CachedImage: React.FC&lt;ImageProps&gt; = ({ uri, ...props }) =&gt; {
+  return (
+    &lt;Image
+      source={uri}
+      cachePolicy=&quot;memory-disk&quot;
+      transition={200}
+      {...props}
+    /&gt;
+  );
+};</code></pre></div></section><section><h3 id="672572432#z9lhvp2_25" data-toc="z9lhvp2_25#PERFORMANCE.md-z9lhvp2_25">Предзагрузка ресурсов</h3><div class="detached code-block" id="672572432#z9lhvp2_27"><pre><code class="language-ts">import * as Font from 'expo-font';
+import { Asset } from 'expo-asset';
+
+const cacheResources = async () =&gt; {
+  const imageAssets = Assets.map((asset) =&gt; {
+    return Asset.fromModule(asset).downloadAsync();
+  });
+
+  const fontAssets = Font.loadAsync({
+    'custom-font': require('./assets/fonts/custom-font.ttf'),
+  });
+
+  await Promise.all([...imageAssets, fontAssets]);
+};</code></pre></div></section></section><section><h2 id="672572432#z9lhvp2_6" data-toc="z9lhvp2_6#PERFORMANCE.md-z9lhvp2_6">Оптимизация состояния</h2><section><h3 id="672572432#z9lhvp2_28" data-toc="z9lhvp2_28#PERFORMANCE.md-z9lhvp2_28">Управление обновлениями</h3><div class="detached code-block" id="672572432#z9lhvp2_30"><pre><code class="language-ts">// Предотвращение лишних обновлений
+const GroupItem: React.FC&lt;GroupItemProps&gt; = React.memo(({ group }) =&gt; {
+  const { isFavorite } = useFavoritesContext();
+  
+  const favoriteStatus = useMemo(() =&gt; 
+    isFavorite(group.id, 'group'),
+    [group.id, isFavorite]
+  );
+
+  return (
+    &lt;View&gt;
+      &lt;Text&gt;{group.name}&lt;/Text&gt;
+      &lt;FavoriteIcon active={favoriteStatus} /&gt;
+    &lt;/View&gt;
+  );
+});</code></pre></div></section><section><h3 id="672572432#z9lhvp2_29" data-toc="z9lhvp2_29#PERFORMANCE.md-z9lhvp2_29">Батчинг обновлений</h3><div class="detached code-block" id="672572432#z9lhvp2_31"><pre><code class="language-ts">// Группировка обновлений состояния
+const handleMultipleUpdates = () =&gt; {
+  batch(() =&gt; {
+    setLoading(false);
+    setData(newData);
+    setError(null);
+  });
+};</code></pre></div></section></section><section><h2 id="672572432#z9lhvp2_7" data-toc="z9lhvp2_7#PERFORMANCE.md-z9lhvp2_7">Оптимизация сети</h2><section><h3 id="672572432#z9lhvp2_32" data-toc="z9lhvp2_32#PERFORMANCE.md-z9lhvp2_32">Кэширование запросов</h3><div class="detached code-block" id="672572432#z9lhvp2_34"><pre><code class="language-ts">// Кэширование ответов API
+const scheduleCache = new Map&lt;string, {
+  data: ScheduleData;
+  timestamp: number;
+}&gt;();
+
+const getScheduleWithCache = async (groupId: number) =&gt; {
+  const cacheKey = `schedule_${groupId}`;
+  const cached = scheduleCache.get(cacheKey);
+  
+  if (cached &amp;&amp; Date.now() - cached.timestamp &lt; CACHE_TTL) {
+    return cached.data;
+  }
+  
+  const data = await fetchSchedule(groupId);
+  scheduleCache.set(cacheKey, {
+    data,
+    timestamp: Date.now()
+  });
+  
+  return data;
+};</code></pre></div></section><section><h3 id="672572432#z9lhvp2_33" data-toc="z9lhvp2_33#PERFORMANCE.md-z9lhvp2_33">Предзагрузка данных</h3><div class="detached code-block" id="672572432#z9lhvp2_35"><pre><code class="language-ts">// Предварительная загрузка данных
+const prefetchSchedule = async (groupId: number) =&gt; {
+  try {
+    const data = await fetchSchedule(groupId);
+    scheduleCache.set(`schedule_${groupId}`, {
+      data,
+      timestamp: Date.now()
+    });
+  } catch (error) {
+    console.error('Prefetch error:', error);
+  }
+};</code></pre></div></section></section><section><h2 id="672572432#z9lhvp2_8" data-toc="z9lhvp2_8#PERFORMANCE.md-z9lhvp2_8">Профилирование</h2><section><h3 id="672572432#react-native-profiler" data-toc="react-native-profiler#PERFORMANCE.md-react-native-profiler">React Native Profiler</h3><div class="detached code-block" id="672572432#z9lhvp2_38"><pre><code class="language-ts">// Использование Profiler
+&lt;Profiler id=&quot;GroupList&quot; onRender={(id, phase, actualDuration) =&gt; {
+  console.log(`Component ${id} took ${actualDuration}ms to ${phase}`);
+}}&gt;
+  &lt;GroupList /&gt;
+&lt;/Profiler&gt;</code></pre></div></section><section><h3 id="672572432#z9lhvp2_37" data-toc="z9lhvp2_37#PERFORMANCE.md-z9lhvp2_37">Метрики производительности</h3><div class="detached code-block" id="672572432#z9lhvp2_39"><pre><code class="language-ts">import { PerformanceObserver, performance } from 'react-native-performance';
+
+// Отслеживание производительности
+const observer = new PerformanceObserver((list) =&gt; {
+  const entries = list.getEntries();
+  entries.forEach((entry) =&gt; {
+    console.log(`${entry.name}: ${entry.duration}ms`);
+  });
+});
+
+observer.observe({ entryTypes: ['measure'] });
+
+// Измерение времени операции
+performance.mark('startOperation');
+// ... выполнение операции
+performance.mark('endOperation');
+performance.measure('operationDuration', 'startOperation', 'endOperation');</code></pre></div></section></section><section><h2 id="672572432#z9lhvp2_9" data-toc="z9lhvp2_9#PERFORMANCE.md-z9lhvp2_9">Оптимизация памяти</h2><section><h3 id="672572432#z9lhvp2_40" data-toc="z9lhvp2_40#PERFORMANCE.md-z9lhvp2_40">Очистка ресурсов</h3><div class="detached code-block" id="672572432#z9lhvp2_42"><pre><code class="language-ts">// Правильная очистка в useEffect
+useEffect(() =&gt; {
+  const subscription = eventEmitter.addListener('event', handler);
+  
+  return () =&gt; {
+    subscription.remove();
+  };
+}, []);</code></pre></div></section><section><h3 id="672572432#z9lhvp2_41" data-toc="z9lhvp2_41#PERFORMANCE.md-z9lhvp2_41">Управление размером списков</h3><div class="detached code-block" id="672572432#z9lhvp2_43"><pre><code class="language-ts">// Пагинация для длинных списков
+const PaginatedList: React.FC = () =&gt; {
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState&lt;Item[]&gt;([]);
+  
+  const loadMore = useCallback(() =&gt; {
+    setPage(prev =&gt; prev + 1);
+  }, []);
+  
+  return (
+    &lt;FlatList
+      data={data}
+      onEndReached={loadMore}
+      onEndReachedThreshold={0.5}
+      removeClippedSubviews={true}
+      maxToRenderPerBatch={10}
+    /&gt;
+  );
+};</code></pre></div></section></section><section><h2 id="672572432#z9lhvp2_10" data-toc="z9lhvp2_10#PERFORMANCE.md-z9lhvp2_10">Рекомендации</h2><section><h3 id="672572432#z9lhvp2_44" data-toc="z9lhvp2_44#PERFORMANCE.md-z9lhvp2_44">Лучшие практики</h3><ol class="list list-decimal" id="672572432#z9lhvp2_47" type="1" start="1"><li class="list-item" id="672572432#z9lhvp2_48"><p>Использовать мемоизацию для тяжелых вычислений</p></li><li class="list-item" id="672572432#z9lhvp2_49"><p>Применять виртуализацию для длинных списков</p></li><li class="list-item" id="672572432#z9lhvp2_50"><p>Кэшировать сетевые запросы</p></li><li class="list-item" id="672572432#z9lhvp2_51"><p>Оптимизировать изображения</p></li><li class="list-item" id="672572432#z9lhvp2_52"><p>Следить за утечками памяти</p></li></ol></section><section><h3 id="672572432#z9lhvp2_45" data-toc="z9lhvp2_45#PERFORMANCE.md-z9lhvp2_45">Инструменты разработчика</h3><ol class="list list-decimal" id="672572432#z9lhvp2_53" type="1" start="1"><li class="list-item" id="672572432#z9lhvp2_54"><p>React Native Debugger</p></li><li class="list-item" id="672572432#z9lhvp2_55"><p>Chrome Performance Tools</p></li><li class="list-item" id="672572432#z9lhvp2_56"><p>Expo Performance Monitor</p></li><li class="list-item" id="672572432#z9lhvp2_57"><p>React Profiler</p></li><li class="list-item" id="672572432#z9lhvp2_58"><p>Memory Profiler</p></li></ol></section><section><h3 id="672572432#z9lhvp2_46" data-toc="z9lhvp2_46#PERFORMANCE.md-z9lhvp2_46">Метрики для отслеживания</h3><ol class="list list-decimal" id="672572432#z9lhvp2_59" type="1" start="1"><li class="list-item" id="672572432#z9lhvp2_60"><p>Время запуска приложения</p></li><li class="list-item" id="672572432#z9lhvp2_61"><p>FPS в критичных компонентах</p></li><li class="list-item" id="672572432#z9lhvp2_62"><p>Потребление памяти</p></li><li class="list-item" id="672572432#z9lhvp2_63"><p>Время ответа сети</p></li><li class="list-item" id="672572432#z9lhvp2_64"><p>Размер бандла</p></li></ol></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="1928147227">Руководство разработчика</h1><section><h2 id="1928147227#z8wt6mj_3" data-toc="z8wt6mj_3#DEVELOPMENT.md-z8wt6mj_3">Настройка окружения</h2><section><h3 id="1928147227#z8wt6mj_12" data-toc="z8wt6mj_12#DEVELOPMENT.md-z8wt6mj_12">Установка зависимостей</h3><div class="detached code-block" id="1928147227#z8wt6mj_13"><pre><code class="language-bash"># Установка Expo CLI глобально
+npm install -g expo-cli
+
+# Клонирование репозитория
+git clone https://github.com/y9tr3ble/schedule-app.git
+
+# Переход в директорию проекта
+cd schedule-app
+
+# Установка зависимостей проекта
+npm install</code></pre></div></section></section><section><h2 id="1928147227#z8wt6mj_4" data-toc="z8wt6mj_4#DEVELOPMENT.md-z8wt6mj_4">Запуск проекта</h2><section><h3 id="1928147227#z8wt6mj_14" data-toc="z8wt6mj_14#DEVELOPMENT.md-z8wt6mj_14">Режим разработки</h3><div class="detached code-block" id="1928147227#z8wt6mj_16"><pre><code class="language-bash"># Запуск с Expo Go
+npx expo start
+
+# Запуск для Android
+npx expo start --android
+
+# Запуск для iOS
+npx expo start --ios</code></pre></div></section><section><h3 id="1928147227#z8wt6mj_15" data-toc="z8wt6mj_15#DEVELOPMENT.md-z8wt6mj_15">Горячая перезагрузка</h3><ul class="list" id="1928147227#z8wt6mj_17" start="1"><li class="list-item" id="1928147227#z8wt6mj_18"><p>Включена по умолчанию</p></li><li class="list-item" id="1928147227#z8wt6mj_19"><p>Двойное нажатие 'r' для ручной перезагрузки</p></li><li class="list-item" id="1928147227#z8wt6mj_20"><p>Shake устройства для меню разработчика</p></li></ul></section></section><section><h2 id="1928147227#z8wt6mj_5" data-toc="z8wt6mj_5#DEVELOPMENT.md-z8wt6mj_5">Структура проекта</h2><section><h3 id="1928147227#z8wt6mj_21" data-toc="z8wt6mj_21#DEVELOPMENT.md-z8wt6mj_21">Основные директории</h3><div class="detached code-block" id="1928147227#z8wt6mj_23"><pre><code class="language-none">app/                  # Основные экраны и навигация
+├── (tabs)/           # Вкладки приложения
+├── schedule/         # Экраны расписания
+└── teacher/          # Экраны преподавателей
+
+components/          # Переиспользуемые компоненты
+contexts/           # React контексты
+constants/          # Константы приложения</code></pre></div></section><section><h3 id="1928147227#z8wt6mj_22" data-toc="z8wt6mj_22#DEVELOPMENT.md-z8wt6mj_22">Ключевые файлы</h3><div class="detached code-block" id="1928147227#z8wt6mj_24"><pre><code class="language-none">app.json             # Конфигурация Expo
+babel.config.js      # Конфигурация Babel
+tsconfig.json        # Конфигурация TypeScript
+package.json         # Зависимости и скрипты</code></pre></div></section></section><section><h2 id="1928147227#z8wt6mj_6" data-toc="z8wt6mj_6#DEVELOPMENT.md-z8wt6mj_6">Разработка</h2><section><h3 id="1928147227#z8wt6mj_25" data-toc="z8wt6mj_25#DEVELOPMENT.md-z8wt6mj_25">Создание нового компонента</h3><div class="detached code-block" id="1928147227#z8wt6mj_27"><pre><code class="language-ts">import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+interface Props {
+  // Определение пропсов
+}
+
+export const NewComponent: React.FC&lt;Props&gt; = (props) =&gt; {
+  const theme = useTheme();
+  
+  return (
+    &lt;View style={styles.container}&gt;
+      {/* Контент компонента */}
+    &lt;/View&gt;
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    // Стили
+  }
+});</code></pre></div></section><section><h3 id="1928147227#z8wt6mj_26" data-toc="z8wt6mj_26#DEVELOPMENT.md-z8wt6mj_26">Работа с контекстами</h3><div class="detached code-block" id="1928147227#z8wt6mj_28"><pre><code class="language-ts">// Создание контекста
+const MyContext = createContext&lt;ContextType | undefined&gt;(undefined);
+
+// Провайдер
+export const MyProvider: React.FC = ({ children }) =&gt; {
+  // Логика провайдера
+  return (
+    &lt;MyContext.Provider value={value}&gt;
+      {children}
+    &lt;/MyContext.Provider&gt;
+  );
+};
+
+// Хук для использования
+export const useMyContext = () =&gt; {
+  const context = useContext(MyContext);
+  if (context === undefined) {
+    throw new Error('useMyContext must be used within a MyProvider');
+  }
+  return context;
+};</code></pre></div></section></section><section><h2 id="1928147227#z8wt6mj_7" data-toc="z8wt6mj_7#DEVELOPMENT.md-z8wt6mj_7">Тестирование</h2><section><h3 id="1928147227#z8wt6mj_29" data-toc="z8wt6mj_29#DEVELOPMENT.md-z8wt6mj_29">Модульные тесты</h3><div class="detached code-block" id="1928147227#z8wt6mj_31"><pre><code class="language-bash"># Запуск всех тестов
+npm test
+
+# Запуск с покрытием
+npm run test:coverage
+
+# Запуск конкретного теста
+npm test ComponentName.test.tsx</code></pre></div></section><section><h3 id="1928147227#e2e" data-toc="e2e#DEVELOPMENT.md-e2e">E2E тестирование</h3><div class="detached code-block" id="1928147227#z8wt6mj_32"><pre><code class="language-bash"># Установка Detox
+npm install -g detox-cli
+
+# Сборка для тестирования
+detox build
+
+# Запуск тестов
+detox test</code></pre></div></section></section><section><h2 id="1928147227#z8wt6mj_8" data-toc="z8wt6mj_8#DEVELOPMENT.md-z8wt6mj_8">Сборка приложения</h2><section><h3 id="1928147227#android" data-toc="android#DEVELOPMENT.md-android">Android</h3><div class="detached code-block" id="1928147227#z8wt6mj_35"><pre><code class="language-bash"># Создание релизной сборки
+eas build -p android --profile production
+
+# Локальная сборка APK
+npx expo run:android</code></pre></div></section><section><h3 id="1928147227#ios" data-toc="ios#DEVELOPMENT.md-ios">iOS</h3><div class="detached code-block" id="1928147227#z8wt6mj_36"><pre><code class="language-bash"># Создание релизной сборки
+eas build -p ios --profile production
+
+# Локальная сборка
+npx expo run:ios</code></pre></div></section></section><section><h2 id="1928147227#z8wt6mj_9" data-toc="z8wt6mj_9#DEVELOPMENT.md-z8wt6mj_9">Деплой</h2><section><h3 id="1928147227#expo" data-toc="expo#DEVELOPMENT.md-expo">Публикация в Expo</h3><div class="detached code-block" id="1928147227#z8wt6mj_39"><pre><code class="language-bash"># Публикация обновления
+expo publish
+
+# Публикация конкретного канала
+expo publish --release-channel production</code></pre></div></section><section><h3 id="1928147227#app-store-google-play" data-toc="app-store-google-play#DEVELOPMENT.md-app-store-google-play">App Store / Google Play</h3><ol class="list list-decimal" id="1928147227#z8wt6mj_40" type="1" start="1"><li class="list-item" id="1928147227#z8wt6mj_41"><p>Создание релизной сборки</p></li><li class="list-item" id="1928147227#z8wt6mj_42"><p>Тестирование сборки</p></li><li class="list-item" id="1928147227#z8wt6mj_43"><p>Подготовка материалов</p></li><li class="list-item" id="1928147227#z8wt6mj_44"><p>Публикация в магазинах</p></li></ol></section></section><section><h2 id="1928147227#z8wt6mj_10" data-toc="z8wt6mj_10#DEVELOPMENT.md-z8wt6mj_10">Рекомендации по разработке</h2><section><h3 id="1928147227#z8wt6mj_45" data-toc="z8wt6mj_45#DEVELOPMENT.md-z8wt6mj_45">Код стайл</h3><ul class="list" id="1928147227#z8wt6mj_48" start="1"><li class="list-item" id="1928147227#z8wt6mj_49"><p>Использовать TypeScript</p></li><li class="list-item" id="1928147227#z8wt6mj_50"><p>Следовать принципам Clean Code</p></li><li class="list-item" id="1928147227#z8wt6mj_51"><p>Документировать код</p></li><li class="list-item" id="1928147227#z8wt6mj_52"><p>Использовать ESLint и Prettier</p></li></ul></section><section><h3 id="1928147227#z8wt6mj_46" data-toc="z8wt6mj_46#DEVELOPMENT.md-z8wt6mj_46">Производительность</h3><ul class="list" id="1928147227#z8wt6mj_53" start="1"><li class="list-item" id="1928147227#z8wt6mj_54"><p>Мемоизация компонентов</p></li><li class="list-item" id="1928147227#z8wt6mj_55"><p>Оптимизация ререндеров</p></li><li class="list-item" id="1928147227#z8wt6mj_56"><p>Ленивая загрузка</p></li><li class="list-item" id="1928147227#z8wt6mj_57"><p>Кэширование данных</p></li></ul></section><section><h3 id="1928147227#z8wt6mj_47" data-toc="z8wt6mj_47#DEVELOPMENT.md-z8wt6mj_47">Безопасность</h3><ul class="list" id="1928147227#z8wt6mj_58" start="1"><li class="list-item" id="1928147227#z8wt6mj_59"><p>Проверка входных данных</p></li><li class="list-item" id="1928147227#z8wt6mj_60"><p>Безопасное хранение данных</p></li><li class="list-item" id="1928147227#z8wt6mj_61"><p>Обработка ошибок</p></li><li class="list-item" id="1928147227#z8wt6mj_62"><p>Защита API ключей</p></li></ul></section></section><section><h2 id="1928147227#z8wt6mj_11" data-toc="z8wt6mj_11#DEVELOPMENT.md-z8wt6mj_11">Решение проблем</h2><section><h3 id="1928147227#z8wt6mj_63" data-toc="z8wt6mj_63#DEVELOPMENT.md-z8wt6mj_63">Общие проблемы</h3><ol class="list list-decimal" id="1928147227#z8wt6mj_65" type="1" start="1"><li class="list-item" id="1928147227#z8wt6mj_71"><p>Очистка кэша</p></li></ol><div class="detached code-block" id="1928147227#z8wt6mj_66"><pre><code class="language-bash">npx expo start -c</code></pre></div><ol class="list list-decimal" id="1928147227#z8wt6mj_67" type="1" start="2"><li class="list-item" id="1928147227#z8wt6mj_72"><p>Пересборка проекта</p></li></ol><div class="detached code-block" id="1928147227#z8wt6mj_68"><pre><code class="language-bash">npm run clean
+npm install</code></pre></div><ol class="list list-decimal" id="1928147227#z8wt6mj_69" type="1" start="3"><li class="list-item" id="1928147227#z8wt6mj_73"><p>Обновление зависимостей</p></li></ol><div class="detached code-block" id="1928147227#z8wt6mj_70"><pre><code class="language-bash">npm update</code></pre></div></section><section><h3 id="1928147227#z8wt6mj_64" data-toc="z8wt6mj_64#DEVELOPMENT.md-z8wt6mj_64">Отладка</h3><ul class="list" id="1928147227#z8wt6mj_74" start="1"><li class="list-item" id="1928147227#z8wt6mj_75"><p>Использование React Native Debugger</p></li><li class="list-item" id="1928147227#z8wt6mj_76"><p>Console.log и отладочные точки</p></li><li class="list-item" id="1928147227#z8wt6mj_77"><p>Performance Monitor</p></li><li class="list-item" id="1928147227#z8wt6mj_78"><p>Network Inspector</p></li></ul></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="37646102"><span class="no-bold">🧩</span> Компоненты</h1><section><h2 id="37646102#z8qo34e_3" data-toc="z8qo34e_3#COMPONENTS.md-z8qo34e_3">Основные компоненты</h2><section><h3 id="37646102#grouplist" data-toc="grouplist#COMPONENTS.md-grouplist">GroupList</h3><p id="37646102#z8qo34e_12">Компонент для отображения списка групп с поиском и фильтрацией.</p><div class="detached code-block" id="37646102#z8qo34e_13"><pre><code class="language-ts">interface GroupListProps {
+  groups: GroupInfo[];
+  onSelectGroup: (group: GroupInfo) =&gt; void;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_14" data-toc="z8qo34e_14#COMPONENTS.md-z8qo34e_14">Особенности:</h4><ul class="list" id="37646102#z8qo34e_15" start="1"><li class="list-item" id="37646102#z8qo34e_16"><p>Поиск по названию группы</p></li><li class="list-item" id="37646102#z8qo34e_17"><p>Сортировка по категориям</p></li><li class="list-item" id="37646102#z8qo34e_18"><p>Добавление в избранное</p></li><li class="list-item" id="37646102#z8qo34e_19"><p>Анимированные карточки</p></li><li class="list-item" id="37646102#z8qo34e_20"><p>Оптимизированная производительность</p></li></ul></section></section><section><h3 id="37646102#teacherlist" data-toc="teacherlist#COMPONENTS.md-teacherlist">TeacherList</h3><p id="37646102#z8qo34e_21">Компонент для отображения списка преподавателей.</p><div class="detached code-block" id="37646102#z8qo34e_22"><pre><code class="language-ts">interface TeacherListProps {
+  teachers: TeacherInfo[];
+  onSelectTeacher: (teacher: TeacherInfo) =&gt; void;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_23" data-toc="z8qo34e_23#COMPONENTS.md-z8qo34e_23">Функционал:</h4><ul class="list" id="37646102#z8qo34e_24" start="1"><li class="list-item" id="37646102#z8qo34e_25"><p>Поиск по ФИО и должности</p></li><li class="list-item" id="37646102#z8qo34e_26"><p>Алфавитная сортировка</p></li><li class="list-item" id="37646102#z8qo34e_27"><p>Управление избранным</p></li><li class="list-item" id="37646102#z8qo34e_28"><p>Анимации при взаимодействии</p></li><li class="list-item" id="37646102#z8qo34e_29"><p>Оптимизированный рендеринг</p></li></ul></section></section><section><h3 id="37646102#scheduleview" data-toc="scheduleview#COMPONENTS.md-scheduleview">ScheduleView</h3><p id="37646102#z8qo34e_30">Основной компонент для отображения расписания.</p><div class="detached code-block" id="37646102#z8qo34e_31"><pre><code class="language-ts">interface ScheduleViewProps {
+  data: GroupData | TeacherSchedule | null;
+  loading: boolean;
+  error: string | null;
+  isNextWeek: boolean;
+  isTeacherSchedule?: boolean;
+  onRefresh?: () =&gt; void;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_32" data-toc="z8qo34e_32#COMPONENTS.md-z8qo34e_32">Возможности:</h4><ul class="list" id="37646102#z8qo34e_33" start="1"><li class="list-item" id="37646102#z8qo34e_34"><p>Группировка по дням недели</p></li><li class="list-item" id="37646102#z8qo34e_35"><p>Pull-to-refresh обновление</p></li><li class="list-item" id="37646102#z8qo34e_36"><p>Индикация текущего занятия</p></li><li class="list-item" id="37646102#z8qo34e_37"><p>Анимированные переходы между состояниями</p></li><li class="list-item" id="37646102#z8qo34e_38"><p>Обработка ошибок и состояния загрузки</p></li></ul></section></section><section><h3 id="37646102#lessoncard" data-toc="lessoncard#COMPONENTS.md-lessoncard">LessonCard</h3><p id="37646102#z8qo34e_39">Компонент карточки отдельного занятия.</p><div class="detached code-block" id="37646102#z8qo34e_40"><pre><code class="language-ts">interface LessonCardProps {
+  lesson: Lesson;
+  isTeacherSchedule?: boolean;
+  isNextWeek?: boolean;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_41" data-toc="z8qo34e_41#COMPONENTS.md-z8qo34e_41">Функционал:</h4><ul class="list" id="37646102#z8qo34e_42" start="1"><li class="list-item" id="37646102#z8qo34e_43"><p>Отображение информации о занятии </p><ul class="list" id="37646102#z8qo34e_48" start="1"><li class="list-item" id="37646102#z8qo34e_49"><p>Название предмета</p></li><li class="list-item" id="37646102#z8qo34e_50"><p>Время проведения</p></li><li class="list-item" id="37646102#z8qo34e_51"><p>Преподаватель</p></li><li class="list-item" id="37646102#z8qo34e_52"><p>Аудитория</p></li></ul></li><li class="list-item" id="37646102#z8qo34e_44"><p>Поддержка подгрупп</p></li><li class="list-item" id="37646102#z8qo34e_45"><p>Интерактивные элементы</p></li><li class="list-item" id="37646102#z8qo34e_46"><p>Индикация текущего занятия</p></li><li class="list-item" id="37646102#z8qo34e_47"><p>Адаптивный дизайн</p></li></ul></section></section><section><h3 id="37646102#weekselector" data-toc="weekselector#COMPONENTS.md-weekselector">WeekSelector</h3><p id="37646102#z8qo34e_53">Компонент выбора недели расписания.</p><div class="detached code-block" id="37646102#z8qo34e_54"><pre><code class="language-ts">interface WeekSelectorProps {
+  isNextWeek: boolean;
+  onWeekChange: (isNext: boolean) =&gt; void;
+  loading?: boolean;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_55" data-toc="z8qo34e_55#COMPONENTS.md-z8qo34e_55">Особенности:</h4><ul class="list" id="37646102#z8qo34e_56" start="1"><li class="list-item" id="37646102#z8qo34e_57"><p>Переключение между неделями</p></li><li class="list-item" id="37646102#z8qo34e_58"><p>Анимированные переходы</p></li><li class="list-item" id="37646102#z8qo34e_59"><p>Индикация загрузки</p></li><li class="list-item" id="37646102#z8qo34e_60"><p>Отображение дат недели</p></li></ul></section></section></section><section><h2 id="37646102#z8qo34e_4" data-toc="z8qo34e_4#COMPONENTS.md-z8qo34e_4">Вспомогательные компоненты</h2><section><h3 id="37646102#materialswitch" data-toc="materialswitch#COMPONENTS.md-materialswitch">MaterialSwitch</h3><p id="37646102#z8qo34e_63">Кастомный компонент переключателя.</p><div class="detached code-block" id="37646102#z8qo34e_64"><pre><code class="language-ts">interface MaterialSwitchProps {
+  selected: boolean;
+  onPress: () =&gt; void;
+  disabled?: boolean;
+  fluid?: boolean;
+  switchOnIcon?: string;
+  switchOffIcon?: string;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_65" data-toc="z8qo34e_65#COMPONENTS.md-z8qo34e_65">Функционал:</h4><ul class="list" id="37646102#z8qo34e_66" start="1"><li class="list-item" id="37646102#z8qo34e_67"><p>Анимированное переключение</p></li><li class="list-item" id="37646102#z8qo34e_68"><p>Поддержка иконок</p></li><li class="list-item" id="37646102#z8qo34e_69"><p>Поддержка отключенного состояния</p></li><li class="list-item" id="37646102#z8qo34e_70"><p>Настраиваемые стили</p></li></ul></section></section><section><h3 id="37646102#materialswitchlistitem" data-toc="materialswitchlistitem#COMPONENTS.md-materialswitchlistitem">MaterialSwitchListItem</h3><p id="37646102#z8qo34e_71">Элемент списка с переключателем.</p><div class="detached code-block" id="37646102#z8qo34e_72"><pre><code class="language-ts">interface MaterialSwitchListItemProps {
+  title: string;
+  selected: boolean;
+  onPress: () =&gt; void;
+  disabled?: boolean;
+  fluid?: boolean;
+  switchOnIcon?: string;
+  switchOffIcon?: string;
+}</code></pre></div><section><h4 id="37646102#z8qo34e_73" data-toc="z8qo34e_73#COMPONENTS.md-z8qo34e_73">Особенности:</h4><ul class="list" id="37646102#z8qo34e_74" start="1"><li class="list-item" id="37646102#z8qo34e_75"><p>Интеграция с MaterialSwitch</p></li><li class="list-item" id="37646102#z8qo34e_76"><p>Настраиваемый заголовок</p></li><li class="list-item" id="37646102#z8qo34e_77"><p>Поддержка иконок</p></li><li class="list-item" id="37646102#z8qo34e_78"><p>Адаптивный дизайн</p></li></ul></section></section></section><section><h2 id="37646102#z8qo34e_5" data-toc="z8qo34e_5#COMPONENTS.md-z8qo34e_5">Оптимизация производительности</h2><section><h3 id="37646102#z8qo34e_79" data-toc="z8qo34e_79#COMPONENTS.md-z8qo34e_79">Мемоизация</h3><div class="detached code-block" id="37646102#z8qo34e_82"><pre><code class="language-ts">// Пример использования React.memo
+const MemoizedComponent = React.memo(Component, (prevProps, nextProps) =&gt; {
+  // Логика сравнения props
+});
+
+// Пример использования useMemo
+const memoizedValue = useMemo(() =&gt; computeExpensiveValue(a, b), [a, b]);</code></pre></div></section><section><h3 id="37646102#z8qo34e_80" data-toc="z8qo34e_80#COMPONENTS.md-z8qo34e_80">Виртуализация списков</h3><div class="detached code-block" id="37646102#z8qo34e_83"><pre><code class="language-ts">// Пример использования VirtualizedList
+&lt;VirtualizedList
+  data={items}
+  renderItem={renderItem}
+  getItemCount={getItemCount}
+  getItem={getItem}
+  initialNumToRender={10}
+  maxToRenderPerBatch={10}
+  windowSize={5}
+/&gt;</code></pre></div></section><section><h3 id="37646102#z8qo34e_81" data-toc="z8qo34e_81#COMPONENTS.md-z8qo34e_81">Ленивая загрузка</h3><div class="detached code-block" id="37646102#z8qo34e_84"><pre><code class="language-ts">// Пример ленивой загрузки компонента
+const LazyComponent = React.lazy(() =&gt; import('./Component'));
+
+// Использование
+&lt;Suspense fallback={&lt;LoadingSpinner /&gt;}&gt;
+  &lt;LazyComponent /&gt;
+&lt;/Suspense&gt;</code></pre></div></section></section><section><h2 id="37646102#z8qo34e_6" data-toc="z8qo34e_6#COMPONENTS.md-z8qo34e_6">Стилизация компонентов</h2><section><h3 id="37646102#z8qo34e_85" data-toc="z8qo34e_85#COMPONENTS.md-z8qo34e_85">Использование тем</h3><div class="detached code-block" id="37646102#z8qo34e_87"><pre><code class="language-ts">const Component = () =&gt; {
+  const theme = useTheme();
+  
+  return (
+    &lt;View style={[styles.container, { backgroundColor: theme.colors.background }]}&gt;
+      {/* Контент компонента */}
+    &lt;/View&gt;
+  );
+};</code></pre></div></section><section><h3 id="37646102#z8qo34e_86" data-toc="z8qo34e_86#COMPONENTS.md-z8qo34e_86">Адаптивные стили</h3><div class="detached code-block" id="37646102#z8qo34e_88"><pre><code class="language-ts">const styles = StyleSheet.create({
+  container: {
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+});</code></pre></div></section></section></article></div></section><section class="topic"><div><article class="article"><h1 class="main-title" id="65018">API Документация</h1><section><h2 id="65018#bzpfnw_3" data-toc="bzpfnw_3#API.md-bzpfnw_3">Конфигурация</h2><div class="detached code-block" id="65018#bzpfnw_10"><pre><code class="language-ts">const API_CONFIG = {
+  BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL,
+  PUBLICATION_ID: process.env.EXPO_PUBLIC_PUBLICATION_ID
+};</code></pre></div></section><section><h2 id="65018#bzpfnw_4" data-toc="bzpfnw_4#API.md-bzpfnw_4">Основные методы</h2><section><h3 id="65018#bzpfnw_11" data-toc="bzpfnw_11#API.md-bzpfnw_11">Расписание группы</h3><div class="detached code-block" id="65018#bzpfnw_13"><pre><code class="language-ts">getGroupSchedule(groupId: number, nextWeek: boolean): Promise&lt;GroupData&gt;</code></pre></div><section><h4 id="65018#bzpfnw_14" data-toc="bzpfnw_14#API.md-bzpfnw_14">Параметры:</h4><ul class="list" id="65018#bzpfnw_16" start="1"><li class="list-item" id="65018#bzpfnw_17"><p><span class="inline-code" id="65018#bzpfnw_19">groupId</span>: ID группы</p></li><li class="list-item" id="65018#bzpfnw_18"><p><span class="inline-code" id="65018#bzpfnw_20">nextWeek</span>: флаг следующей недели</p></li></ul></section><section><h4 id="65018#bzpfnw_15" data-toc="bzpfnw_15#API.md-bzpfnw_15">Ответ:</h4><div class="detached code-block" id="65018#bzpfnw_21"><pre><code class="language-ts">interface GroupData {
+  startDate: string;
+  group: {
+    id: number;
+    name: string;
+  };
+  lessons: Lesson[];
+}</code></pre></div></section></section><section><h3 id="65018#bzpfnw_12" data-toc="bzpfnw_12#API.md-bzpfnw_12">Расписание преподавателя</h3><div class="detached code-block" id="65018#bzpfnw_22"><pre><code class="language-ts">getTeacherSchedule(teacherId: number, nextWeek: boolean): Promise&lt;TeacherSchedule&gt;</code></pre></div><section><h4 id="65018#bzpfnw_23" data-toc="bzpfnw_23#API.md-bzpfnw_23">Параметры:</h4><ul class="list" id="65018#bzpfnw_25" start="1"><li class="list-item" id="65018#bzpfnw_26"><p><span class="inline-code" id="65018#bzpfnw_28">teacherId</span>: ID преподавателя</p></li><li class="list-item" id="65018#bzpfnw_27"><p><span class="inline-code" id="65018#bzpfnw_29">nextWeek</span>: флаг следующей недели</p></li></ul></section><section><h4 id="65018#bzpfnw_24" data-toc="bzpfnw_24#API.md-bzpfnw_24">Ответ:</h4><div class="detached code-block" id="65018#bzpfnw_30"><pre><code class="language-ts">interface TeacherSchedule {
+  startDate: string;
+  teacher: TeacherInfo;
+  lessons: Lesson[];
+}</code></pre></div></section></section></section><section><h2 id="65018#bzpfnw_5" data-toc="bzpfnw_5#API.md-bzpfnw_5">Модели данных</h2><section><h3 id="65018#lesson" data-toc="lesson#API.md-lesson">Lesson</h3><div class="detached code-block" id="65018#bzpfnw_33"><pre><code class="language-ts">interface Lesson {
+  id: string;
+  weekday: number;
+  lesson: number;
+  startTime: string;
+  endTime: string;
+  teachers: Teacher[];
+  subject: Subject;
+  cabinet: Cabinet;
+  unionGroups: UnionGroup[];
+}</code></pre></div></section><section><h3 id="65018#teacher" data-toc="teacher#API.md-teacher">Teacher</h3><div class="detached code-block" id="65018#bzpfnw_34"><pre><code class="language-ts">interface Teacher {
+  id: number;
+  fio: string;
+  position: string;
+}</code></pre></div></section></section><section><h2 id="65018#bzpfnw_6" data-toc="bzpfnw_6#API.md-bzpfnw_6">Обработка ошибок</h2><section><h3 id="65018#bzpfnw_35" data-toc="bzpfnw_35#API.md-bzpfnw_35">Типы ошибок</h3><ul class="list" id="65018#bzpfnw_37" start="1"><li class="list-item" id="65018#bzpfnw_38"><p>Сетевые ошибки (NetworkError)</p></li><li class="list-item" id="65018#bzpfnw_39"><p>Ошибки сервера (ServerError)</p></li><li class="list-item" id="65018#bzpfnw_40"><p>Ошибки валидации (ValidationError)</p></li></ul></section><section><h3 id="65018#bzpfnw_36" data-toc="bzpfnw_36#API.md-bzpfnw_36">Обработка</h3><div class="detached code-block" id="65018#bzpfnw_41"><pre><code class="language-ts">try {
+  const data = await getGroupSchedule(groupId, false);
+} catch (error) {
+  if (error instanceof NetworkError) {
+    // Обработка сетевой ошибки
+  } else if (error instanceof ServerError) {
+    // Обработка серверной ошибки
+  }
+}</code></pre></div></section></section><section><h2 id="65018#bzpfnw_7" data-toc="bzpfnw_7#API.md-bzpfnw_7">Кэширование</h2><section><h3 id="65018#bzpfnw_42" data-toc="bzpfnw_42#API.md-bzpfnw_42">Стратегии кэширования</h3><ul class="list" id="65018#bzpfnw_44" start="1"><li class="list-item" id="65018#bzpfnw_45"><p>In-memory кэш для быстрого доступа</p></li><li class="list-item" id="65018#bzpfnw_46"><p>AsyncStorage для персистентного хранения</p></li><li class="list-item" id="65018#bzpfnw_47"><p>Stale-while-revalidate для оптимизации загрузки</p></li></ul></section><section><h3 id="65018#bzpfnw_43" data-toc="bzpfnw_43#API.md-bzpfnw_43">Пример реализации кэша</h3><div class="detached code-block" id="65018#bzpfnw_48"><pre><code class="language-ts">const CACHE_TTL = 5 * 60 * 1000; // 5 минут
+
+class ScheduleCache {
+  private cache: Map&lt;string, {
+    data: any;
+    timestamp: number;
+  }&gt;;
+
+  constructor() {
+    this.cache = new Map();
+  }
+
+  set(key: string, data: any) {
+    this.cache.set(key, {
+      data,
+      timestamp: Date.now()
+    });
+  }
+
+  get(key: string) {
+    const cached = this.cache.get(key);
+    if (!cached) return null;
+    
+    if (Date.now() - cached.timestamp &gt; CACHE_TTL) {
+      this.cache.delete(key);
+      return null;
+    }
+    
+    return cached.data;
+  }
+}</code></pre></div></section></section><section><h2 id="65018#api" data-toc="api#API.md-api">Утилиты API</h2><section><h3 id="65018#bzpfnw_49" data-toc="bzpfnw_49#API.md-bzpfnw_49">Форматирование данных</h3><div class="detached code-block" id="65018#bzpfnw_51"><pre><code class="language-ts">export const formatScheduleData = (data: RawScheduleData): FormattedSchedule =&gt; {
+  // Логика форматирования данных
+};</code></pre></div></section><section><h3 id="65018#bzpfnw_50" data-toc="bzpfnw_50#API.md-bzpfnw_50">Валидация</h3><div class="detached code-block" id="65018#bzpfnw_52"><pre><code class="language-ts">export const validateScheduleData = (data: any): boolean =&gt; {
+  // Логика валидации
+};</code></pre></div></section></section><section><h2 id="65018#bzpfnw_9" data-toc="bzpfnw_9#API.md-bzpfnw_9">Примеры использования</h2><section><h3 id="65018#bzpfnw_53" data-toc="bzpfnw_53#API.md-bzpfnw_53">Получение расписания группы</h3><div class="detached code-block" id="65018#bzpfnw_54"><pre><code class="language-ts">const getGroupScheduleWithCache = async (groupId: number, nextWeek: boolean) =&gt; {
+  const cacheKey = `group_${groupId}_${nextWeek}`;
+  const cached = scheduleCache.get(cacheKey);
+  
+  if (cached) {
+    return cached;
+  }
+  
+  const data = await getGroupSchedule(groupId, nextWeek);
+  scheduleCache.set(cacheKey, data);
+  return data;
+};</code></pre></div></section></section></article></div></section></div></body></html>
