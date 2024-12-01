@@ -1,51 +1,50 @@
-# Welcome to your Expo app 👋
+# 📱 Расписание для Хекслет
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Мобильное приложение для просмотра расписания занятий Хекслет Колледжа. Разработано с использованием React Native и Expo.
 
-## Get started
+## 🌟 Основные возможности
 
-1. Install dependencies
+- 📅 Просмотр расписания групп и преподавателей
+- 🔄 Переключение между текущей и следующей неделей
+- ⭐ Избранные группы и преподаватели
+- 🔍 Умный поиск
+- 🌓 Темная и светлая тема
+- 📱 Адаптивный дизайн
 
-   ```bash
-   npm install
-   ```
+## 🚀 Быстрый старт
 
-2. Start the app
+### Требования
+- Node.js >= 14.0.0
+- npm >= 6.0.0
+- Expo CLI
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### Установка и запуск
 
 ```bash
-npm run reset-project
+# Установка зависимостей
+npm install
+
+# Запуск проекта
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📚 Документация
 
-## Learn more
+Подробная документация доступна в [документации проекта](docs/DOCUMENTATION.md).
 
-To learn more about developing your project with Expo, look at the following resources:
+## 🛠 Технологии
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [React Navigation](https://reactnavigation.org/)
+- [React Native Paper](https://callstack.github.io/react-native-paper/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-## Join the community
+## 👥 Автор
 
-Join our community of developers creating universal apps.
+**Новиков Никита** - [GitHub](https://github.com/y9tr3ble)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# TimetablesApp
+## 📞 Контакты
+
+- Telegram: [@Tr3ble](https://t.me/Tr3ble)
+- GitHub: [y9tr3ble](https://github.com/y9tr3ble)
