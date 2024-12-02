@@ -341,9 +341,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.05,
         shadowRadius: 3,
       },
-      android: {
-        elevation: 2,
-      },
     }),
   },
   timeContainer: {

@@ -289,9 +289,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 8,
       },
-      android: {
-        elevation: 3,
-      },
     }),
   },
   searchIcon: {
@@ -390,9 +387,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.1,
         shadowRadius: 12,
-      },
-      android: {
-        elevation: 4,
       },
     }),
   },
