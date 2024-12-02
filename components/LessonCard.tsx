@@ -179,6 +179,57 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
     );
   };
 
+  const renderTimeContainer = () => (
+    <View style={[styles.timeContainer, {
+      backgroundColor: isCurrentLesson(lesson, isNextWeek) 
+        ? theme.colors.primary 
+        : theme.colors.primaryContainer,
+      borderBottomColor: theme.colors.outline,
+      padding: settings.compactMode ? 8 : 12,
+    }]}>
+      {settings.showLessonNumbers && (
+        <Text style={[styles.lessonNumber, { 
+          color: isCurrentLesson(lesson, isNextWeek)
+            ? theme.colors.surface  // Меняем на светлый цвет для текущего урока
+            : theme.colors.primary 
+        }]}>
+          №{lesson.lesson}
+        </Text>
+      )}
+      <View style={styles.timeWrapper}>
+        <Text style={[styles.time, { 
+          color: isCurrentLesson(lesson, isNextWeek)
+            ? theme.colors.surface  // Меняем на светлый цвет для текущего урока
+            : theme.colors.onSurfaceVariant 
+        }]}>
+          {lesson.startTime}
+        </Text>
+        <Text style={[styles.timeDivider, { 
+          color: isCurrentLesson(lesson, isNextWeek)
+            ? theme.colors.surface  // Меняем на светлый цвет для текущего урока
+            : theme.colors.onSurfaceVariant 
+        }]}>
+          —
+        </Text>
+        <Text style={[styles.time, { 
+          color: isCurrentLesson(lesson, isNextWeek)
+            ? theme.colors.surface  // Меняем на светлый цвет для текущего урока
+            : theme.colors.onSurfaceVariant 
+        }]}>
+          {lesson.endTime}
+        </Text>
+        {isCurrentLesson(lesson, isNextWeek) && (
+          <Text style={[styles.currentIndicator, { 
+            color: theme.colors.surface,  // Меняем на светлый цвет
+            fontWeight: '600'
+          }]}>
+            Сейчас
+          </Text>
+        )}
+      </View>
+    </View>
+  );
+
   return (
     <View style={[
       styles.container, 
@@ -191,35 +242,7 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
         borderLeftColor: theme.colors.primary,
       }
     ]}>
-      <View style={[styles.timeContainer, {
-        backgroundColor: isCurrentLesson(lesson, isNextWeek) 
-          ? theme.colors.primary 
-          : theme.colors.primaryContainer,
-        borderBottomColor: theme.colors.outline,
-        padding: settings.compactMode ? 8 : 12,
-      }]}>
-        {settings.showLessonNumbers && (
-          <Text style={[styles.lessonNumber, { color: theme.colors.primary }]}>
-            №{lesson.lesson}
-          </Text>
-        )}
-        <View style={styles.timeWrapper}>
-          <Text style={[styles.time, { color: theme.colors.onSurfaceVariant }]}>
-            {lesson.startTime}
-          </Text>
-          <Text style={[styles.timeDivider, { color: theme.colors.onSurfaceVariant }]}>
-            —
-          </Text>
-          <Text style={[styles.time, { color: theme.colors.onSurfaceVariant }]}>
-            {lesson.endTime}
-          </Text>
-          {isCurrentLesson(lesson, isNextWeek) && (
-            <Text style={[styles.currentIndicator, { color: theme.colors.primary }]}>
-              Сейчас
-            </Text>
-          )}
-        </View>
-      </View>
+      {renderTimeContainer()}
       
       <View style={styles.contentContainer}>
         <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
