@@ -5,8 +5,8 @@ import { darkTheme, lightTheme } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from "expo-router";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { Platform, TouchableOpacity } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+import { Platform, TouchableOpacity, View } from 'react-native';
+import { PaperProvider, useTheme } from 'react-native-paper';
 
 const RootLayoutNav = () => {
   const router = useRouter();
@@ -16,32 +16,41 @@ const RootLayoutNav = () => {
   return (
     <PaperProvider theme={theme}>
       <ExpoStatusBar style={isDarkTheme ? 'light' : 'dark'} />
-      <Stack
-        screenOptions={{
-          headerTintColor: theme.colors.primary,
-        }}
-      >
-        <Stack.Screen 
-          name="(tabs)" 
-          options={{ 
-            headerShown: false,
-          }} 
-        />
-        <Stack.Screen 
-          name="info"
-          options={{
+      <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+        <Stack
+          screenOptions={{
             headerTintColor: theme.colors.primary,
-            headerBackTitle: "Назад",
-            headerTitle: "О приложении",
-            headerTitleStyle: {
-              color: theme.colors.text,
+            contentStyle: { 
+              backgroundColor: theme.colors.background 
             },
-            headerStyle: {
-              backgroundColor: theme.colors.surface,
-            },
+            animation: Platform.select({
+              android: 'fade_from_bottom',
+              ios: 'default',
+            }),
           }}
-        />
-      </Stack>
+        >
+          <Stack.Screen 
+            name="(tabs)" 
+            options={{ 
+              headerShown: false,
+            }} 
+          />
+          <Stack.Screen 
+            name="info"
+            options={{
+              headerTintColor: theme.colors.primary,
+              headerBackTitle: "Назад",
+              headerTitle: "О приложении",
+              headerTitleStyle: {
+                color: theme.colors.text,
+              },
+              headerStyle: {
+                backgroundColor: theme.colors.surface,
+              },
+            }}
+          />
+        </Stack>
+      </View>
     </PaperProvider>
   );
 };
