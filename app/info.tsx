@@ -13,11 +13,14 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useTheme } from 'react-native-paper';
 import { useThemeContext } from '@/app/contexts/ThemeContext';
 import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
 
 export default function InfoScreen() {
 	const navigation = useNavigation();
 	const theme = useTheme();
 	const { isDarkTheme } = useThemeContext();
+	const [tapCount, setTapCount] = React.useState(0);
+	const router = useRouter();
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -32,6 +35,16 @@ export default function InfoScreen() {
 
 	const openTelegram = () => {
 		Linking.openURL("https://t.me/Tr3ble");
+	};
+
+	const handleNamePress = () => {
+		const newCount = tapCount + 1;
+		setTapCount(newCount);
+		
+		if (newCount === 15) {
+			router.push('/secret');
+			setTapCount(0);
+		}
 	};
 
 	return (
@@ -80,9 +93,11 @@ export default function InfoScreen() {
 								Разработчик
 							</Text>
 						</View>
-						<Text style={[styles.developerName, { color: theme.colors.onSurface }]}>
-							Новиков Никита
-						</Text>
+						<TouchableOpacity onPress={handleNamePress}>
+							<Text style={[styles.developerName, { color: theme.colors.onSurface }]}>
+								Новиков Никита
+							</Text>
+						</TouchableOpacity>
 						<Text style={[styles.description, { color: theme.colors.onSurfaceVariant }]}>
 							Студент Хекслет Колледж{"\n"}
 							Группа 01-24.ИСИП.ОФ 9

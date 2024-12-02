@@ -49,6 +49,20 @@ const RootLayoutNav = () => {
               },
             }}
           />
+          <Stack.Screen 
+            name="secret"
+            options={{
+              headerBackTitle: "Назад",
+              presentation: Platform.select({
+                ios: 'modal',
+                android: undefined
+              }),
+              animation: Platform.select({
+                ios: 'flip',
+                android: 'fade'
+              }),
+            }}
+          />
         </Stack>
       </View>
     </PaperProvider>
