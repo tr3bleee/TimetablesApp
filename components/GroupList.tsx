@@ -266,30 +266,24 @@ const styles = StyleSheet.create({
   },
   searchWrapper: {
     position: 'absolute',
-    top: 4,
+    top: 0,
     left: 0,
     right: 0,
     zIndex: 100,
-    padding: 8,
-    paddingTop: 8,
-    height: 60,
+    padding: 16,
+    paddingTop: 12,
+    height: 68,
+    backgroundColor: 'transparent',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
-    paddingRight: 6,
-    borderRadius: 12,
+    padding: 12,
+    paddingRight: 8,
+    borderRadius: 16,
     borderWidth: 1,
-    height: 44,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-      },
-    }),
+    height: 48,
+    backgroundColor: 'transparent',
   },
   searchIcon: {
     marginRight: 12,
@@ -301,12 +295,13 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   clearButton: {
-    padding: 6,
+    padding: 4,
     marginLeft: 4,
     justifyContent: 'center',
     alignItems: 'center',
     width: 32,
     height: 32,
+    borderRadius: 16,
   },
   loadingContainer: {
     flex: 1,
@@ -329,7 +324,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingTop: 68,
+    paddingTop: 76,
     paddingBottom: 32,
   },
   sectionHeader: {
@@ -337,7 +332,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingVertical: 12,
   },
   sectionTitleContainer: {
     flex: 1,
@@ -371,7 +366,7 @@ const styles = StyleSheet.create({
   },
   groupsGrid: {
     paddingHorizontal: 16,
-    gap: 12,
+    gap: 10,
   },
   groupItemWrapper: {
     borderRadius: 16,
