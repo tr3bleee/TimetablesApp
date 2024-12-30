@@ -1,14 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface ScheduleSettings {
+export interface ScheduleSettings {
   showCabinetNumbers: boolean;
   showTeacherNames: boolean;
   compactMode: boolean;
   showLessonNumbers: boolean;
+  showSnow: boolean;
 }
 
-interface ScheduleSettingsContextType {
+export interface ScheduleSettingsContextType {
   settings: ScheduleSettings;
   updateSettings: (key: keyof ScheduleSettings, value: boolean) => Promise<void>;
 }
@@ -21,6 +22,7 @@ export const ScheduleSettingsProvider: React.FC<{ children: React.ReactNode }> =
     showTeacherNames: true,
     compactMode: false,
     showLessonNumbers: true,
+    showSnow: true,
   });
 
   useEffect(() => {
@@ -65,4 +67,4 @@ export const useScheduleSettings = () => {
     throw new Error('useScheduleSettings must be used within a ScheduleSettingsProvider');
   }
   return context;
-}; 
+};

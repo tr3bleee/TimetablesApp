@@ -41,7 +41,24 @@ export default function Settings() {
             />
           </View>
         </View>
-        
+
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Ionicons name="snow" size={20} color={theme.colors.primary} />
+            <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
+              Эффекты
+            </Text>
+          </View>
+          <View style={[styles.card, { backgroundColor: theme.colors.surface }]}>
+            <MaterialSwitchListItem
+              title="Снег"
+              selected={settings.showSnow}
+              onPress={() => updateSettings('showSnow', !settings.showSnow)}
+              switchOnIcon="snow"
+            />
+          </View>
+        </View>
+
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Ionicons name="calendar" size={20} color={theme.colors.primary} />
