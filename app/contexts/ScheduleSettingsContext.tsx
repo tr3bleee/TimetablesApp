@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export interface ScheduleSettings {
   showCabinetNumbers: boolean;
@@ -21,8 +21,8 @@ export const ScheduleSettingsProvider: React.FC<{ children: React.ReactNode }> =
     showCabinetNumbers: true,
     showTeacherNames: true,
     compactMode: false,
-    showLessonNumbers: true,
-    showSnow: true,
+    showLessonNumbers: true, // Add this
+    showSnow: true, // Add this
   });
 
   useEffect(() => {

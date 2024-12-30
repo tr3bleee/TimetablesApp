@@ -1,13 +1,13 @@
 import { FavoritesProvider } from "@/app/contexts/FavoritesContext";
 import { ScheduleSettingsProvider } from "@/app/contexts/ScheduleSettingsContext";
 import { ThemeProvider, useThemeContext } from "@/app/contexts/ThemeContext";
+import { Snow } from '@/components/Snow';
 import { darkTheme, lightTheme } from "@/constants/theme";
 import { Stack, useRouter } from "expo-router";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import React, { useEffect } from 'react';
 import { Platform, TouchableOpacity, View } from "react-native";
 import { PaperProvider, useTheme } from "react-native-paper";
-import React, { useEffect } from 'react';
-import { Snow } from '@/components/Snow';
 
 const RootLayoutNav = () => {
 	const { isDarkTheme } = useThemeContext();

@@ -1,6 +1,6 @@
+import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 import React from 'react';
 import { Animated, Dimensions } from 'react-native';
-import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 
 const { width, height } = Dimensions.get('window');
 
