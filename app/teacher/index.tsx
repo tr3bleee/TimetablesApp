@@ -42,7 +42,6 @@ export default function TeacherScreen() {
         <TeacherList
           teachers={TEACHERS}
           onSelectTeacher={handleTeacherSelect}
-          selectedTeacher={selectedTeacher}
         />
       ) : (
         <ScheduleView
