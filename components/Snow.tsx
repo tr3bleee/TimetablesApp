@@ -5,11 +5,11 @@ import { Animated, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 const Snowflake = () => {
-  const startPositionX = Math.random() * width;
-  const animatedValue = new Animated.Value(-10);
+  const startPositionX = React.useMemo(() => Math.random() * width, []);
+  const animatedValue = React.useRef(new Animated.Value(-10)).current;
 
   React.useEffect(() => {
-    Animated.loop(
+    const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(animatedValue, {
           toValue: height + 10,
@@ -17,7 +17,14 @@ const Snowflake = () => {
           useNativeDriver: true,
         }),
       ])
-    ).start();
+    );
+    
+    animation.start();
+
+    return () => {
+      animation.stop();
+      animatedValue.setValue(-10);
+    };
   }, []);
 
   return (
@@ -36,8 +43,14 @@ const Snowflake = () => {
 
 export const Snow = () => {
   const { settings } = useScheduleSettings();
+  const [mounted, setMounted] = React.useState(false);
 
-  if (!settings.showSnow) return null;
+  React.useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!settings.showSnow || !mounted) return null;
 
   return (
     <>

@@ -21,8 +21,8 @@ export const ScheduleSettingsProvider: React.FC<{ children: React.ReactNode }> =
     showCabinetNumbers: true,
     showTeacherNames: true,
     compactMode: false,
-    showLessonNumbers: true, // Add this
-    showSnow: true, // Add this
+    showLessonNumbers: true,
+    showSnow: true,
   });
 
   useEffect(() => {
