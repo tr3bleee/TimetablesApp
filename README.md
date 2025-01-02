@@ -40,10 +40,6 @@ npx expo start
 - [React Native Paper](https://callstack.github.io/react-native-paper/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## 👥 Автор
-
-**Новиков Никита** - [GitHub](https://github.com/y9tr3ble)
-
 ## 📞 Контакты
 
 - Telegram: [@Tr3ble](https://t.me/Tr3ble)
