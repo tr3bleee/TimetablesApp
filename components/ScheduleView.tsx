@@ -1,20 +1,20 @@
-import React from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  ActivityIndicator, 
-  Platform, 
-  Animated,
-  SectionList,
-  SectionListProps,
-  TouchableOpacity,
-  RefreshControl
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from 'react-native-paper';
 import { GroupData, Lesson, TeacherSchedule } from '@/app/types/schedule';
 import { DAYS_OF_WEEK, getWeekDates } from '@/app/utils/dateUtils';
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import {
+  ActivityIndicator,
+  Animated,
+  Platform,
+  RefreshControl,
+  SectionList,
+  SectionListProps,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { LessonCard } from './LessonCard';
 
 interface Props {
@@ -53,29 +53,6 @@ export const ScheduleView: React.FC<Props> = ({
   const theme = useTheme();
   const scrollY = React.useRef(new Animated.Value(0)).current;
   const sectionListRef = React.useRef<SectionList<Lesson, ScheduleSection>>(null);
-
-  const hasCurrentLesson = (sections: ScheduleSection[]): boolean => {
-    if (isNextWeek) return false;
-    
-    const now = new Date();
-    const currentWeekday = now.getDay() || 7;
-    const currentTime = now.getHours() * 60 + now.getMinutes();
-
-    const todaySection = sections.find(
-      section => DAYS_OF_WEEK.indexOf(section.title) + 1 === currentWeekday
-    );
-
-    if (!todaySection) return false;
-
-    return todaySection.data.some(lesson => {
-      const [startHour, startMinute] = lesson.startTime.split(':').map(Number);
-      const [endHour, endMinute] = lesson.endTime.split(':').map(Number);
-      const lessonStartTime = startHour * 60 + startMinute;
-      const lessonEndTime = endHour * 60 + endMinute;
-      
-      return currentTime >= lessonStartTime && currentTime <= lessonEndTime;
-    });
-  };
 
   if (loading) return (
     <View style={styles.centerContainer}>
@@ -242,25 +219,6 @@ export const ScheduleView: React.FC<Props> = ({
           />
         }
       />
-      {hasCurrentLesson(sortedSections) && (
-        <TouchableOpacity 
-          style={[styles.floatingButton, { backgroundColor: theme.colors.primary }]}
-          onPress={() => {
-            const currentDay = new Date().getDay() || 7;
-            const sectionIndex = sortedSections.findIndex(
-              section => DAYS_OF_WEEK.indexOf(section.title) + 1 === currentDay
-            );
-            if (sectionIndex !== -1) {
-              sectionListRef.current?.scrollToLocation({
-                sectionIndex,
-                itemIndex: 0,
-              });
-            }
-          }}
-        >
-          <Ionicons name="time" size={24} color="white" />
-        </TouchableOpacity>
-      )}
     </View>
   );
 };
@@ -365,15 +323,5 @@ const styles = StyleSheet.create({
   emptyDayText: {
     fontSize: 16,
     flex: 1,
-  },
-  floatingButton: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
