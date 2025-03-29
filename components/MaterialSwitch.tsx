@@ -46,7 +46,7 @@ export const MaterialSwitch: React.FC<MaterialSwitchProps> = ({
       accessibilityLabel={`Switch ${selected ? 'on' : 'off'}`}
       style={[
         styles.switch,
-        selected ? { backgroundColor: theme.colors.primary } : { backgroundColor: theme.colors.border },
+        selected ? { backgroundColor: theme.colors.primary } : { backgroundColor: theme.colors.outline },
         disabled && styles.disabled,
       ]}>
       <Animated.View

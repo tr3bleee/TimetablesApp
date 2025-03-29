@@ -22,7 +22,7 @@ export const ScheduleSettingsProvider: React.FC<{ children: React.ReactNode }> =
     showTeacherNames: true,
     compactMode: false,
     showLessonNumbers: true,
-    showSnow: true,
+    showSnow: false,
   });
 
   useEffect(() => {

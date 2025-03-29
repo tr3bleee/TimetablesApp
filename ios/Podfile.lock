@@ -6,7 +6,7 @@ PODS:
   - EXJSONUtils (0.13.1)
   - EXManifests (0.14.3):
     - ExpoModulesCore
-  - Expo (51.0.38):
+  - Expo (51.0.39):
     - ExpoModulesCore
   - expo-dev-client (4.0.29):
     - EXManifests
@@ -1441,7 +1441,7 @@ PODS:
     - React-logger (= 0.74.5)
     - React-perflogger (= 0.74.5)
     - React-utils (= 0.74.5)
-  - RNCAsyncStorage (2.1.0):
+  - RNCAsyncStorage (2.1.2):
     - React-Core
   - RNGestureHandler (2.16.2):
     - DoubleConversion
@@ -1502,6 +1502,27 @@ PODS:
     - React-NativeModulesApple
     - React-RCTFabric
     - React-RCTImage
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNVectorIcons (10.2.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
     - React-rendererdebug
     - React-utils
     - ReactCommon/turbomodule/bridging
@@ -1589,6 +1610,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1749,6 +1771,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1758,7 +1782,7 @@ SPEC CHECKSUMS:
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
   EXJSONUtils: 30c17fd9cc364d722c0946a550dfbf1be92ef6a4
   EXManifests: c1fab4c3237675e7b0299ea8df0bcb14baca4f42
-  Expo: 9b6666ef2fedcfc89c5b9be2aa1ce12b81f9e7f5
+  Expo: 8c995afb875c15bf8439af0b20bcb9ed8f90d0bd
   expo-dev-client: 0cec8ec81fd01c10d9afcd9f6de3768b10644aee
   expo-dev-launcher: c510982f3437742353389750748520580af0ee43
   expo-dev-menu: 12b319a9bc73d76a1ed47ce52055b5356edb971d
@@ -1825,10 +1849,11 @@ SPEC CHECKSUMS:
   React-runtimescheduler: cfbe85c3510c541ec6dc815c7729b41304b67961
   React-utils: f242eb7e7889419d979ca0e1c02ccc0ea6e43b29
   ReactCommon: f7da14a8827b72704169a48c929bcde802698361
-  RNCAsyncStorage: cc6479c4acd84cc7004946946c8afe30b018184d
+  RNCAsyncStorage: addfc2cb6511dbe199c56c6b26ede383b6c38919
   RNGestureHandler: 2282cfbcf86c360d29f44ace393203afd5c6cff7
   RNReanimated: 35f9ac9c3ac42d0497ebd1cce5c39d7687a8493e
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
+  RNVectorIcons: 845eda5c7819bd29699cafd0fc98c9d4afe28c96
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 2246eea72aaf1b816a68a35e6e4b74563653ae09
 
