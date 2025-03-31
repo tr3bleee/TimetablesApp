@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Tabs, useRouter } from "expo-router";
 import { useTheme } from 'react-native-paper';
 import { Platform, TouchableOpacity } from 'react-native';
@@ -11,35 +11,39 @@ export default function TabLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarActiveTintColor: theme.colors.primary,
-				tabBarInactiveTintColor: theme.colors.secondary,
+				tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
 				headerTintColor: theme.colors.primary,
 				headerTitleStyle: {
 					color: theme.colors.onSurface,
-					fontSize: 18,
-					fontWeight: "600",
+					fontSize: 20,
+					fontWeight: "500",
 				},
 				headerStyle: {
 					backgroundColor: theme.colors.surface,
+					elevation: 0,
+					shadowOpacity: 0,
 				},
 				tabBarStyle: {
 					backgroundColor: theme.colors.surface,
-					borderTopColor: theme.colors.outline,
+					borderTopColor: theme.colors.outlineVariant,
 					height: Platform.select({
-						ios: 80,
-						android: 60,
+						ios: 90,
+						android: 65,
 					}),
 					paddingBottom: Platform.select({
-						ios: 25,
-						android: 10,
+						ios: 35,
+						android: 12,
 					}),
 					paddingTop: Platform.select({
-						ios: 8,
-						android: 5,
+						ios: 10,
+						android: 8,
 					}),
+					elevation: 0,
+					shadowOpacity: 0,
 				},
 				tabBarLabelStyle: {
 					fontSize: 12,
-					fontWeight: "600",
+					fontWeight: "500",
 				},
 			}}
 		>
@@ -48,8 +52,12 @@ export default function TabLayout() {
 				options={{
 					title: "Расписание",
 					headerTitle: "Группы",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="school" size={size} color={color} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<MaterialCommunityIcons 
+							name={focused ? "school" : "school-outline"} 
+							size={size} 
+							color={color} 
+						/>
 					),
 				}}
 			/>
@@ -58,8 +66,12 @@ export default function TabLayout() {
 				options={{
 					title: "Педагоги",
 					headerTitle: "Педагоги",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="person" size={size} color={color} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<MaterialCommunityIcons 
+							name={focused ? "account" : "account-outline"} 
+							size={size} 
+							color={color} 
+						/>
 					),
 				}}
 			/>
@@ -67,8 +79,12 @@ export default function TabLayout() {
 				name="favorites"
 				options={{
 					title: "Избранное",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="star" size={size} color={color} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<MaterialCommunityIcons 
+							name={focused ? "star" : "star-outline"} 
+							size={size} 
+							color={color} 
+						/>
 					),
 				}}
 			/>
@@ -81,15 +97,19 @@ export default function TabLayout() {
 							onPress={() => router.push('/info')}
 							style={{ marginRight: 15 }}
 						>
-							<Ionicons
-								name="information-circle"
+							<MaterialCommunityIcons
+								name="information-outline"
 								size={24}
 								color={theme.colors.primary}
 							/>
 						</TouchableOpacity>
 					),
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="settings" size={size} color={color} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<MaterialCommunityIcons 
+							name={focused ? "cog" : "cog-outline"} 
+							size={size} 
+							color={color} 
+						/>
 					),
 				}}
 			/>
