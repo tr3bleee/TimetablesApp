@@ -81,15 +81,36 @@ export const ScheduleView: React.FC<Props> = ({
   if (!data?.lessons || data.lessons.length === 0) return (
     <View style={styles.centerContainer}>
       <View style={[styles.emptyContainer, { backgroundColor: theme.colors.surfaceVariant }]}>
-        <Ionicons 
-          name="calendar-clear-outline" 
-          size={32} 
-          color={theme.colors.onSurfaceVariant} 
-        />
+        <View style={styles.emptyIconContainer}>
+          <Ionicons 
+            name="calendar-clear-outline" 
+            size={40} 
+            color={theme.colors.onSurfaceVariant} 
+          />
+        </View>
         <Text style={[styles.emptyText, { color: theme.colors.onSurfaceVariant }]}>
           Расписание отсутствует
         </Text>
       </View>
+      <Text style={[styles.emptyDescription, { color: theme.colors.onSurfaceVariant }]}>
+        На данный момент нет данных о расписании
+      </Text>
+      {onRefresh && (
+        <TouchableOpacity 
+          style={[styles.refreshButton, { backgroundColor: theme.colors.primaryContainer }]}
+          onPress={onRefresh}
+          activeOpacity={0.7}
+        >
+          <Ionicons 
+            name="refresh-outline" 
+            size={18} 
+            color={theme.colors.primary} 
+          />
+          <Text style={[styles.refreshButtonText, { color: theme.colors.primary }]}>
+            Обновить
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 
@@ -232,7 +253,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 12,
+    gap: 16,
     paddingHorizontal: 32,
   },
   errorContainer: {
@@ -241,6 +262,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
+    width: '100%',
+    maxWidth: 400,
+    elevation: 1,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+      },
+    }),
   },
   loadingText: {
     fontSize: 16,
@@ -251,15 +283,64 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   emptyContainer: {
-    padding: 16,
-    borderRadius: 12,
+    padding: 24,
+    borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 16,
+    width: '100%',
+    maxWidth: 400,
+    elevation: 1,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+      },
+    }),
+  },
+  emptyIconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
   },
   emptyText: {
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight: '600',
     flex: 1,
+  },
+  emptyDescription: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginVertical: 8,
+    opacity: 0.8,
+    maxWidth: 300,
+  },
+  refreshButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    marginTop: 8,
+    gap: 8,
+    elevation: 1,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+      },
+    }),
+  },
+  refreshButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
   },
   listContent: {
     paddingBottom: 20,
