@@ -51,6 +51,6 @@ export const getTeacherSchedule = async (teacherId: number, isNextWeek: boolean 
         teacherId,
         date: calculateStartDate(isNextWeek),
         publicationId: API_CONFIG.PUBLICATION_ID
-    };
+    }
     return fetchSchedule(url, body);
 };
