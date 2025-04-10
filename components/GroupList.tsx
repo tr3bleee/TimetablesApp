@@ -1,22 +1,22 @@
 import { useFavorites } from '@/app/contexts/FavoritesContext';
 import { useSearch } from '@/app/hooks/useSearch';
+import { GroupInfo, getGroups } from '@/app/services/api/scheduleApi';
 import { getSpecializationColor, getSpecializationLabel } from '@/app/utils/groupUtils';
-import { GroupInfo } from '@/constants/groups';
 import { Ionicons } from '@expo/vector-icons';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  Animated,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    ActivityIndicator,
+    Animated,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 interface GroupListProps {
-  groups: GroupInfo[];
   onSelectGroup: (group: GroupInfo) => void;
 }
 
@@ -28,10 +28,31 @@ const getSearchFields = (group: GroupInfo) => [
   `${group.category} группа`
 ];
 
-export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) => {
+export const GroupList: React.FC<GroupListProps> = ({ onSelectGroup }) => {
   const theme = useTheme();
   const scrollY = useRef(new Animated.Value(0)).current;
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  const [groups, setGroups] = useState<GroupInfo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchGroupsData = async () => {
+      try {
+        setLoading(true);
+        const data = await getGroups();
+        setGroups(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching groups:', err);
+        setError('Failed to load groups');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGroupsData();
+  }, []);
 
   const {
     query,
@@ -106,7 +127,22 @@ export const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) =
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {renderSearchField()}
       
-      {filteredItems.length === 0 ? (
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        </View>
+      ) : error ? (
+        <View style={styles.emptyContainer}>
+          <Ionicons 
+            name="alert-circle" 
+            size={48} 
+            color={theme.colors.error} 
+          />
+          <Text style={[styles.emptyText, { color: theme.colors.error }]}>
+            {error}
+          </Text>
+        </View>
+      ) : filteredItems.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Ionicons 
             name="school" 
@@ -435,4 +471,4 @@ const styles = StyleSheet.create({
     padding: 8,
     marginRight: 8,
   },
-}); 
+});

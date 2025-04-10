@@ -1,17 +1,33 @@
-import { useLocalSearchParams, Stack } from 'expo-router';
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ScheduleView } from '@/components/ScheduleView';
 import { useSchedule } from '@/app/hooks/useSchedule';
-import { GROUPS } from '@/constants/groups';
-import { WeekSelector } from '@/components/WeekSelector';
-import { useTheme } from 'react-native-paper';
+import { GroupInfo, getGroups } from '@/app/services/api/scheduleApi';
 import { GroupData } from '@/app/types/schedule';
+import { ScheduleView } from '@/components/ScheduleView';
+import { WeekSelector } from '@/components/WeekSelector';
+import { Stack, useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 export default function SchedulePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const group = GROUPS.find(g => g.id === parseInt(id));
+  const [group, setGroup] = useState<GroupInfo | null>(null);
   const theme = useTheme();
+  
+  useEffect(() => {
+    const fetchGroup = async () => {
+      try {
+        const groups = await getGroups();
+        const foundGroup = groups.find(g => g.id === parseInt(id));
+        if (foundGroup) {
+          setGroup(foundGroup);
+        }
+      } catch (error) {
+        console.error('Error fetching group info:', error);
+      }
+    };
+    
+    fetchGroup();
+  }, [id]);
   
   const {
     schedule,

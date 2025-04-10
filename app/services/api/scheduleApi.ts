@@ -1,9 +1,15 @@
+import { TeacherSchedule } from '@/app/types/teacher';
 import axios from 'axios';
-import {API_CONFIG, headers} from './config';
-import {GroupData} from '../../types/schedule';
-import {TeacherSchedule} from '@/app/types/teacher';
-import {getStartOfWeekDate} from '../../utils/dateUtils';
-import {logNetworkRequest, logNetworkResponse, logNetworkError} from '../../utils/logger';
+import { GroupData } from '../../types/schedule';
+import { getStartOfWeekDate } from '../../utils/dateUtils';
+import { logNetworkError, logNetworkRequest, logNetworkResponse } from '../../utils/logger';
+import { API_CONFIG, headers } from './config';
+
+export interface GroupInfo {
+  id: number;
+  name: string;
+  category?: number;
+}
 
 const fetchSchedule = async (
     url: string,
@@ -53,4 +59,45 @@ export const getTeacherSchedule = async (teacherId: number, isNextWeek: boolean 
         publicationId: API_CONFIG.PUBLICATION_ID
     }
     return fetchSchedule(url, body);
+};
+
+export const getGroups = async (): Promise<GroupInfo[]> => {
+    try {
+        const url = `${API_CONFIG.BASE_URL}/publications/${API_CONFIG.PUBLICATION_ID}/groups`;
+        logNetworkRequest(url, 'GET', null);
+        const response = await axios.get(url, {headers});
+        logNetworkResponse(response);
+
+        if (!response.data) {
+            return Promise.reject(new Error('No data received from server'));
+        }
+        
+        // Classify groups based on their names
+        return response.data.map((group: GroupInfo) => {
+            let category = 0;
+            
+            // Extract the first two digits at the beginning of the group name
+            // This pattern looks for 2 digits at the start of the name or after a space
+            const matches = group.name.match(/^(\d{2})|[\s-](\d{2})/);
+            if (matches) {
+                // Find which capturing group matched (either the first or second set of parentheses)
+                const groupNumber = matches[1] || matches[2];
+                if (groupNumber) {
+                    // Convert string like "01" to number 1, "08" to 8, etc.
+                    category = parseInt(groupNumber, 10);
+                }
+            }
+            
+            return {
+                ...group,
+                category
+            };
+        });
+    } catch (error) {
+        logNetworkError(error);
+        if (axios.isAxiosError(error)) {
+            throw new Error(`Network error: ${error.message}`);
+        }
+        throw error;
+    }
 };
