@@ -1,21 +1,21 @@
-import React, { useRef } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from 'react-native-paper';
-import { useSearch } from '@/app/hooks/useSearch';
-import { TeacherInfo } from '@/app/types/teacher';
 import { useFavorites } from '@/app/contexts/FavoritesContext';
+import { useSearch } from '@/app/hooks/useSearch';
+import { TeacherInfo, getTeachers } from '@/app/services/api/scheduleApi';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+    ActivityIndicator,
+    Animated,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 interface TeacherListProps {
-  teachers: TeacherInfo[];
   onSelectTeacher: (teacher: TeacherInfo) => void;
 }
 
@@ -27,13 +27,31 @@ const getSearchFields = (teacher: TeacherInfo) => [
 const sortTeachers = (a: TeacherInfo, b: TeacherInfo) => 
   a.fio.localeCompare(b.fio);
 
-export const TeacherList: React.FC<TeacherListProps> = ({ 
-  teachers, 
-  onSelectTeacher 
-}) => {
+export const TeacherList: React.FC<TeacherListProps> = ({ onSelectTeacher }) => {
   const theme = useTheme();
   const scrollY = useRef(new Animated.Value(0)).current;
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  const [teachers, setTeachers] = useState<TeacherInfo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTeachersData = async () => {
+      try {
+        setLoading(true);
+        const data = await getTeachers();
+        setTeachers(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching teachers:', err);
+        setError('Failed to load teachers');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeachersData();
+  }, []);
 
   const {
     query,
@@ -92,7 +110,22 @@ export const TeacherList: React.FC<TeacherListProps> = ({
         </View>
       </Animated.View>
 
-      {filteredItems.length === 0 ? (
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        </View>
+      ) : error ? (
+        <View style={styles.errorContainer}>
+          <Ionicons 
+            name="alert-circle" 
+            size={48} 
+            color={theme.colors.error} 
+          />
+          <Text style={[styles.errorText, { color: theme.colors.error }]}>
+            {error}
+          </Text>
+        </View>
+      ) : filteredItems.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Ionicons 
             name="person" 
@@ -225,6 +258,23 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
     gap: 10,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 16,
+    marginTop: -60,
+  },
+  errorText: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -280,4 +330,4 @@ const styles = StyleSheet.create({
     padding: 8,
     marginRight: 8,
   },
-}); 
+});

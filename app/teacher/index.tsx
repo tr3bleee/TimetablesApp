@@ -1,57 +1,21 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { TeacherInfo } from '@/app/services/api/scheduleApi';
 import { TeacherList } from '@/components/TeacherList';
-import { ScheduleView } from '@/components/ScheduleView';
-import { TeacherInfo } from '@/app/types/teacher';
-import { TeacherSchedule } from '@/app/types/schedule';
-import { TEACHERS } from '@/constants/teachers';
-
-const SCHEDULE_API_URL = 'https://your-api-url/teacher-schedule';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 export default function TeacherScreen() {
-  const [selectedTeacher, setSelectedTeacher] = useState<TeacherInfo>();
-  const [schedule, setSchedule] = useState<TeacherSchedule | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isNextWeek, setIsNextWeek] = useState(false);
-
-  const fetchTeacherSchedule = async (teacherId: number) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        `${SCHEDULE_API_URL}/${teacherId}?next=${isNextWeek ? '1' : '0'}`
-      );
-      const data = await response.json();
-      setSchedule(data);
-    } catch (err) {
-      setError('Не удалось загрузить расписание');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const router = useRouter();
+  const theme = useTheme();
 
   const handleTeacherSelect = (teacher: TeacherInfo) => {
-    setSelectedTeacher(teacher);
-    fetchTeacherSchedule(teacher.id);
+    router.push(`/teacher/${teacher.id}`);
   };
 
   return (
-    <View style={styles.container}>
-      {!selectedTeacher ? (
-        <TeacherList
-          teachers={TEACHERS}
-          onSelectTeacher={handleTeacherSelect}
-        />
-      ) : (
-        <ScheduleView
-          data={schedule}
-          loading={loading}
-          error={error}
-          isNextWeek={isNextWeek}
-          isTeacherSchedule={true}
-        />
-      )}
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <TeacherList onSelectTeacher={handleTeacherSelect} />
     </View>
   );
 }
@@ -59,6 +23,5 @@ export default function TeacherScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
   },
-}); 
+});

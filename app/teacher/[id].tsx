@@ -1,28 +1,49 @@
-import { useLocalSearchParams, Stack } from 'expo-router';
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ScheduleView } from '@/components/ScheduleView';
 import { useSchedule } from '@/app/hooks/useSchedule';
-import { TEACHERS } from '@/constants/teachers';
-import { WeekSelector } from '@/components/WeekSelector';
-import { useTheme } from 'react-native-paper';
+import { TeacherInfo, getTeachers } from '@/app/services/api/scheduleApi';
 import { GroupData } from '@/app/types/schedule';
+import { ScheduleView } from '@/components/ScheduleView';
+import { WeekSelector } from '@/components/WeekSelector';
+import { Stack, useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 export default function TeacherSchedulePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const teacher = TEACHERS.find(t => t.id === parseInt(id));
+  const [teacher, setTeacher] = useState<TeacherInfo | null>(null);
   const theme = useTheme();
+  
+  useEffect(() => {
+    const fetchTeacher = async () => {
+      try {
+        const teachers = await getTeachers();
+        const foundTeacher = teachers.find(t => t.id === parseInt(id));
+        if (foundTeacher) {
+          setTeacher(foundTeacher);
+        }
+      } catch (error) {
+        console.error('Error fetching teacher info:', error);
+      }
+    };
+    
+    fetchTeacher();
+  }, [id]);
   
   const {
     schedule,
     loading,
     error,
     isNextWeek,
-    handleWeekChange
+    handleWeekChange,
+    refetch
   } = useSchedule({
     type: 'teacher',
     id: parseInt(id)
   });
+
+  const handleRefresh = () => {
+    refetch();
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -51,6 +72,7 @@ export default function TeacherSchedulePage() {
         error={error}
         isNextWeek={isNextWeek}
         isTeacherSchedule
+        onRefresh={handleRefresh}
       />
     </View>
   );
@@ -60,4 +82,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-}); 
+});

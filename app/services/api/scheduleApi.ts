@@ -11,6 +11,12 @@ export interface GroupInfo {
   category?: number;
 }
 
+export interface TeacherInfo {
+  id: number;
+  fio: string;
+  position: string | null;
+}
+
 const fetchSchedule = async (
     url: string,
     body: Record<string, any>
@@ -93,6 +99,27 @@ export const getGroups = async (): Promise<GroupInfo[]> => {
                 category
             };
         });
+    } catch (error) {
+        logNetworkError(error);
+        if (axios.isAxiosError(error)) {
+            throw new Error(`Network error: ${error.message}`);
+        }
+        throw error;
+    }
+};
+
+export const getTeachers = async (): Promise<TeacherInfo[]> => {
+    try {
+        const url = `${API_CONFIG.BASE_URL}/publications/${API_CONFIG.PUBLICATION_ID}/teachers`;
+        logNetworkRequest(url, 'GET', null);
+        const response = await axios.get(url, {headers});
+        logNetworkResponse(response);
+
+        if (!response.data) {
+            return Promise.reject(new Error('No data received from server'));
+        }
+        
+        return response.data;
     } catch (error) {
         logNetworkError(error);
         if (axios.isAxiosError(error)) {
