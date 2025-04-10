@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { GroupInfo, TeacherInfo } from '@/app/services/api/scheduleApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GroupInfo } from '@/constants/groups';
-import { TeacherInfo } from '@/app/types/teacher';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface FavoriteItem {
   id: number;
@@ -87,4 +86,4 @@ export const useFavorites = () => {
     throw new Error('useFavorites must be used within a FavoritesProvider');
   }
   return context;
-}; 
+};
