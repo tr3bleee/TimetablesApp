@@ -2,7 +2,6 @@ import { useScheduleSettings } from '@/app/contexts/ScheduleSettingsContext';
 import { useThemeContext } from '@/app/contexts/ThemeContext';
 import { MaterialSwitchListItem } from '@/components/MaterialSwitchListItem';
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';

@@ -1,7 +1,7 @@
 import { useFavorites } from '@/app/contexts/FavoritesContext';
 import { useSearch } from '@/app/hooks/useSearch';
 import { GroupInfo, getGroups } from '@/app/services/api/scheduleApi';
-import { getSpecializationColor, getSpecializationLabel } from '@/app/utils/groupUtils';
+import { getGroupLogo, getSpecializationColor, getSpecializationLabel } from '@/app/utils/groupUtils';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -25,7 +25,7 @@ const sortGroups = (a: GroupInfo, b: GroupInfo) =>
 
 const getSearchFields = (group: GroupInfo) => [
   group.name,
-  `${group.category} группа`
+  group.category === 0 ? 'Другие группы' : `${group.category} группа`
 ];
 
 export const GroupList: React.FC<GroupListProps> = ({ onSelectGroup }) => {
@@ -69,7 +69,7 @@ export const GroupList: React.FC<GroupListProps> = ({ onSelectGroup }) => {
 
   const groupedItems = React.useMemo(() => {
     return filteredItems.reduce((acc, group) => {
-      const category = `${group.category} группа`;
+      const category = group.category === 0 ? 'Другие группы' : `${group.category} группа`;
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -163,7 +163,17 @@ export const GroupList: React.FC<GroupListProps> = ({ onSelectGroup }) => {
             { useNativeDriver: true }
           )}
         >
-          {Object.entries(groupedItems).map(([category, categoryGroups]) => (
+          {Object.entries(groupedItems)
+            .sort(([a], [b]) => {
+              // "Другие группы" всегда в конце
+              if (a === 'Другие группы') return 1;
+              if (b === 'Другие группы') return -1;
+              // Остальные сортируем по номеру
+              const numA = parseInt(a.split(' ')[0]);
+              const numB = parseInt(b.split(' ')[0]);
+              return numA - numB;
+            })
+            .map(([category, categoryGroups]) => (
             <View key={category}>
               <View style={[styles.sectionHeader, { backgroundColor: theme.colors.background }]}>
                 <View style={styles.sectionTitleContainer}>
@@ -261,7 +271,7 @@ const GroupItem = React.memo(({
             borderLeftWidth: 3,
           }]}>
             <Text style={[styles.groupAvatar, { color: theme.colors.primary }]}>
-              {group.name.split('-')[0]}
+              {getGroupLogo(group.name)}
             </Text>
           </View>
           <View style={styles.groupDetails}>

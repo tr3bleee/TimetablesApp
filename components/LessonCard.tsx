@@ -67,15 +67,68 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
 
     const subjectName = lesson.subject.name.toLowerCase();
 
+    // Математика и точные науки
     if (subjectName.includes('математик') || 
         subjectName.includes('алгебра') || 
-        subjectName.includes('геометрия')) {
+        subjectName.includes('геометрия') ||
+        subjectName.includes('численные методы')) {
       return 'calculator';
     }
+
+    // Программирование и разработка
     if (subjectName.includes('информатик') || 
-        subjectName.includes('программирован')) {
+        subjectName.includes('программирован') ||
+        subjectName.includes('разработка программных модулей') ||
+        subjectName.includes('основы алгоритмизации') ||
+        subjectName.includes('технология разработки программного обеспечения') ||
+        subjectName.includes('поддержка и тестирование программных модулей') ||
+        subjectName.includes('разработка информационных ресурсов')) {
       return 'code-slash';
     }
+
+    // Базы данных
+    if (subjectName.includes('основы проектирования баз данных') ||
+        subjectName.includes('баз данных')) {
+      return 'server';
+    }
+
+    // Компьютерные сети и IT
+    if (subjectName.includes('компьютерные сети') ||
+        subjectName.includes('организация, принципы построения и функционирования компьютерных сетей') ||
+        subjectName.includes('информационные технологии')) {
+      return 'wifi';
+    }
+
+    // Motion дизайн и видео
+    if (subjectName.includes('motion дизайн') ||
+        subjectName.includes('технические регламенты для видео') ||
+        subjectName.includes('видео дизайн-проектов')) {
+      return 'videocam';
+    }
+
+    // Web дизайн
+    if (subjectName.includes('web дизайн') ||
+        subjectName.includes('веб дизайн')) {
+      return 'globe';
+    }
+
+    // Проектная работа и фриланс
+    if (subjectName.includes('основы проектой работы') ||
+        subjectName.includes('фриланс работы') ||
+        subjectName.includes('проектной работы')) {
+      return 'briefcase';
+    }
+
+    // Изобразительное искусство
+    if (subjectName.includes('живопись') ||
+        subjectName.includes('цветоведения') ||
+        subjectName.includes('рисунок') ||
+        subjectName.includes('перспективы') ||
+        subjectName.includes('фото дизайн-проектов')) {
+      return 'brush';
+    }
+
+    // Естественные науки
     if (subjectName.includes('физик')) {
       return 'flash';
     }
@@ -86,8 +139,10 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
       return 'leaf';
     }
     if (subjectName.includes('географ')) {
-      return 'globe';
+      return 'map';
     }
+
+    // Гуманитарные науки
     if (subjectName.includes('истори')) {
       return 'time';
     }
@@ -95,10 +150,14 @@ export const LessonCard: React.FC<Props> = ({ lesson, isTeacherSchedule, isNextW
         subjectName.includes('литератур')) {
       return 'language';
     }
+
+    // Физкультура и спорт
     if (subjectName.includes('физкультур') || 
         subjectName.includes('физическая культура')) {
       return 'fitness';
     }
+
+    // Безопасность
     if (subjectName.includes('безопасност') || 
         subjectName.includes('обж')) {
       return 'shield-checkmark';

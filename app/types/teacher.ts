@@ -1,4 +1,3 @@
-import { Lesson } from './schedule';
 
 export interface TeacherInfo {
   id: number;

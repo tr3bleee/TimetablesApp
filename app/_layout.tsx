@@ -3,11 +3,11 @@ import { ScheduleSettingsProvider } from "@/app/contexts/ScheduleSettingsContext
 import { ThemeProvider, useThemeContext } from "@/app/contexts/ThemeContext";
 import { Snow } from '@/components/Snow';
 import { darkTheme, lightTheme } from "@/constants/theme";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import React, { useEffect } from 'react';
-import { Platform, TouchableOpacity, View } from "react-native";
-import { PaperProvider, useTheme } from "react-native-paper";
+import React from 'react';
+import { Platform, View } from "react-native";
+import { PaperProvider } from "react-native-paper";
 
 const RootLayoutNav = () => {
 	const { isDarkTheme } = useThemeContext();

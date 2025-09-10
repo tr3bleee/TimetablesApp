@@ -1,4 +1,3 @@
-import { TeacherInfo } from './teacher';
 
 export interface Subject {
   id: string;
